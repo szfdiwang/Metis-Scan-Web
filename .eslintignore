@@ -1,0 +1,7 @@
+*.scss
+*.less
+build/*.js
+src/assets
+src/config/*.js
+public
+dist
