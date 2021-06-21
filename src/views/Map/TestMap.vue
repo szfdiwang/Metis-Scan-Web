@@ -7,7 +7,10 @@
 <script>
 // import world from '../../config/map/world'
 // eslint-disable-next-line no-unused-vars
-import world from '../../../public/map/world'
+// import world from '../../../public/map/world3'
+import 'echarts-gl'
+import worldImg from '../../../public/img/8.png'
+// import worldImg from '../../../public/map/world.topo.bathy.200401.jpg'
 export default {
   name: 'TestMap',
   data() {
@@ -73,20 +76,20 @@ export default {
             nameMap: {
               China: '中国' // 变成中文
             },
-            regions: [
-              {
-                name: '中国',
-                itemStyle: {
-                  areaColor: 'red',
-                  color: 'red'
-                }
-              }
-            ],
-            blur: {
-              label: {
-                show: false
-              }
-            },
+            // regions: [
+            //   {
+            //     name: '中国',
+            //     itemStyle: {
+            //       areaColor: 'red',
+            //       color: 'red'
+            //     }
+            //   }
+            // ],
+            // blur: {
+            //   label: {
+            //     show: false
+            //   }
+            // },
             itemStyle: {
               borderColor: '#000d2d',
               areaColor: '#2455ad' // 地图区块颜色
@@ -143,7 +146,7 @@ export default {
     },
     initChart() {
       this.chart = this.$echarts.init(document.getElementById('earth'))
-      this.initMap()
+      // this.initMap()
       const option = {
         backgroundColor: '',
         tooltip: {
@@ -152,7 +155,7 @@ export default {
         globe: {
           roam: false,
           environment: 'none',
-          baseTexture: this.mapChart, //
+          baseTexture: worldImg, // this.mapChart, //
           shading: 'lambert',
           light: {
             main: {
@@ -232,42 +235,35 @@ export default {
             },
 
             //		        showEffectOn: 'hover',
-            hoverAnimation: true,
             label: {
-              normal: {
-                show: true,
-                position: 'right',
-                //			                formatter: '{b}',
-                formatter: function(params) {
-                  if (params.dataIndex === 1) {
-                    return '南京'
-                  } else if (params.dataIndex === 2) {
-                    return '沈阳'
-                  } else if (params.dataIndex === 3) {
-                    return '太原'
-                  } else if (params.dataIndex === 4) {
-                    return '日本'
-                  } else if (params.dataIndex === 5) {
-                    return '雅加达'
-                  } else if (params.dataIndex === 0) {
-                    return '徐州'
-                  } else if (params.dataIndex === 6) {
-                    return '昆明'
-                  }
-                },
-                textStyle: {
-                  fontSize: 18,
-                  color: '#f5d909',
-                  fontWeight: 'bold',
-                  //			                    backgroundColor:'rgba(255,255,255,0.2)'
-                  backgroundColor: 'transparent'
+              show: true,
+              position: 'right',
+              //			                formatter: '{b}',
+              formatter: function(params) {
+                if (params.dataIndex === 1) {
+                  return '南京'
+                } else if (params.dataIndex === 2) {
+                  return '沈阳'
+                } else if (params.dataIndex === 3) {
+                  return '太原'
+                } else if (params.dataIndex === 4) {
+                  return '日本'
+                } else if (params.dataIndex === 5) {
+                  return '雅加达'
+                } else if (params.dataIndex === 0) {
+                  return '徐州'
+                } else if (params.dataIndex === 6) {
+                  return '昆明'
                 }
-              }
+              },
+              fontSize: 18,
+              color: '#f5d909',
+              fontWeight: 'bold',
+              //			                    backgroundColor:'rgba(255,255,255,0.2)'
+              backgroundColor: 'transparent'
             },
             itemStyle: {
-              normal: {
-                color: 'rgb(29,183,255)'
-              }
+              color: 'rgb(29,183,255)'
             },
             //		        data: [{
             //		            'name': 'A',
@@ -309,8 +305,8 @@ export default {
   #earth {
     overflow: hidden;
     margin: 0 auto;
-    width: 500px;
-    height: 500px;
+    width: 680px;
+    height: 680px;
     // width: 300px;
     // height: 300px;
     border: 1px solid #6495ed;
