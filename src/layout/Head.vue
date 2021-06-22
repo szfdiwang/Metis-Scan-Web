@@ -1,5 +1,36 @@
 <template>
-  <div class="">
-    <h1>This is an Head page</h1>
+  <div class="header-box">
+    <div class="logo">
+      <img src="@/assets/img/home/logo.svg" alt="" />
+      <Menu />
+    </div>
+    <Lang />
   </div>
 </template>
+<script>
+import Menu from './components/Menu'
+import Lang from './components/Lang'
+export default {
+  name: '',
+  components: {
+    Menu,
+    Lang
+  }
+}
+</script>
+<style lang="scss" scoped>
+.header-box {
+  height: 80px;
+  width: 100vw;
+  background: #05052e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1%;
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+}
+</style>

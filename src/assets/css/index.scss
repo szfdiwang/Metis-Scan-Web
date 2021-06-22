@@ -3,12 +3,14 @@
 @import './reset.scss';
 
 body {
+  font-size: 16px;
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
   font-family: 'PingFangSC-Regular';
+  color: #fff;
 }
 
 label {
@@ -109,7 +111,6 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   vertical-align: baseline;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -151,4 +152,12 @@ div:focus {
     clear: both;
     height: 0;
   }
+}
+
+li {
+  list-style-type: none;
+}
+
+.pointer {
+  cursor: pointer;
 }

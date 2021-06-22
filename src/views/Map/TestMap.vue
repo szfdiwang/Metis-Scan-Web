@@ -1,7 +1,7 @@
 <template>
-  <div class="home">oh u r in map
-    <div id="earth">
-    </div>
+  <div class="home">
+    oh u r in map
+    <div id="earth"></div>
   </div>
 </template>
 <script>
@@ -9,7 +9,8 @@
 // eslint-disable-next-line no-unused-vars
 // import world from '../../../public/map/world3'
 import 'echarts-gl'
-import worldImg from '../../../public/img/8.png'
+import worldImg from '../../../public/img/earthDark.png'
+// import worldImg from '../../../public/img/world.svg'
 // import worldImg from '../../../public/map/world.topo.bathy.200401.jpg'
 export default {
   name: 'TestMap',
@@ -305,8 +306,8 @@ export default {
   #earth {
     overflow: hidden;
     margin: 0 auto;
-    width: 680px;
-    height: 680px;
+    width: 38rem;
+    height: 38rem;
     // width: 300px;
     // height: 300px;
     border: 1px solid #6495ed;
