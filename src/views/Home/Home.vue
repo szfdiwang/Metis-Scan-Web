@@ -1,6 +1,24 @@
 <template>
   <div class="home-box">
     <Performance />
+    <div class="welcome">
+      <img src="../../assets/img/home/WelcometoRosetta.svg" alt="" />
+    </div>
+    <div class="search-bar">
+      <el-input v-model="input2" placeholder="请输入内容" class="search-box">
+        <template slot="suffix">
+          <div class="search-btn pointer">{{ $t('common.search') }}</div>
+        </template>
+      </el-input>
+    </div>
+    <Card />
+    <div class="card-box">
+      <el-row :gutter="20">
+        <el-col :span="8"><div class="grid-content bg-purple">1</div></el-col>
+        <el-col :span="8"><div class="grid-content bg-purple">2</div></el-col>
+        <el-col :span="8"><div class="grid-content bg-purple">3</div></el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
@@ -10,6 +28,11 @@ export default {
   name: 'Home',
   components: {
     Performance
+  },
+  data() {
+    return {
+      input2: '111111111'
+    }
   }
 }
 </script>
@@ -17,5 +40,57 @@ export default {
 .home-box {
   height: 1000px;
   background: url('../../assets/img/home/bj1.png');
+  .welcome {
+    text-align: center;
+    margin: 60px 0;
+  }
+  .search-bar {
+    width: 100%;
+    height: 1rem;
+    text-align: center;
+    .search-box {
+      width: 15rem;
+      height: 1rem;
+      ::v-deep .el-input__inner {
+        height: 100% !important;
+        font-family: PingFangSC-Semibold;
+        font-size: 20px;
+        color: #dee9ff;
+        background: linear-gradient(180deg, rgba(22, 72, 174, 0.1) 0%, rgba(19, 62, 148, 0.31) 100%);
+        letter-spacing: 0;
+        text-align: left;
+        font-weight: 600;
+        border: 1px solid #0a54ea;
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
+      }
+      ::v-deep .el-input__inner::placeholder {
+        opacity: 0.5;
+      }
+      ::v-deep .el-input__suffix {
+        display: flex;
+      }
+      .search-btn {
+        width: 2.56rem;
+        height: 0.8rem;
+        background: #3954ff;
+        border-radius: 8px;
+        margin-top: 0.1rem;
+        font-family: BebasNeueBold;
+        font-size: 0.4rem;
+        color: #dee9ff;
+        letter-spacing: 0;
+        text-align: center;
+        line-height: 0.4rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+          background: #4a5fec;
+        }
+      }
+    }
+  }
 }
 </style>

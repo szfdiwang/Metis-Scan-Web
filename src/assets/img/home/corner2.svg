@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1875px" height="174px" viewBox="0 0 1875 174" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>数字底纹</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="0%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#81AAFF" stop-opacity="0.1" offset="0%"></stop>
+            <stop stop-color="#021D53" stop-opacity="0.2" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01首页" transform="translate(-19.000000, -80.000000)">
+            <g id="2" transform="translate(20.000000, 81.000000)">
+                <g id="数字底纹" transform="translate(0.000000, -0.000000)">
+                    <path d="M5,0 L1868,0 C1870.76142,-5.07265313e-16 1873,2.23857625 1873,5 L1873,167 C1873,169.761424 1870.76142,172 1868,172 L5,172 C2.23857625,172 3.38176876e-16,169.761424 0,167 L0,5 C-3.38176876e-16,2.23857625 2.23857625,5.07265313e-16 5,0 Z" id="Rectangle-5-Copy-12" stroke-opacity="0.3" stroke="#0A54EA" fill="url(#linearGradient-1)"></path>
+                    <path d="M874,0.716981132 L999,0.716981132 C999.276142,0.716981132 999.5,0.940838757 999.5,1.21698113 C999.5,1.49312351 999.276142,1.71698113 999,1.71698113 L874,1.71698113 C873.723858,1.71698113 873.5,1.49312351 873.5,1.21698113 C873.5,0.940838757 873.723858,0.716981132 874,0.716981132 Z" id="Rectangle-5-Copy-12" fill="#B2CBFF" opacity="0.1"></path>
+                    <path d="M0,11 L0,5 C0,2.23857625 2.23857625,0 5,0 L11,0" id="Rectangle-5-Copy-12" stroke="#0A54EA"></path>
+                    <path d="M0,172 L0,166 C0,163.238576 2.23857625,161 5,161 L11,161" id="Rectangle-5-Copy-12" stroke="#0A54EA" transform="translate(5.500000, 166.500000) scale(1, -1) translate(-5.500000, -166.500000) "></path>
+                    <path d="M1862,11 L1862,5 C1862,2.23857625 1864.23858,0 1867,0 L1873,0" id="Rectangle-5-Copy-12" stroke="#0A54EA" transform="translate(1867.500000, 5.500000) scale(-1, 1) translate(-1867.500000, -5.500000) "></path>
+                    <path d="M1862,172 L1862,166 C1862,163.238576 1864.23858,161 1867,161 L1873,161" id="Rectangle-5-Copy-12" stroke="#0A54EA" transform="translate(1867.500000, 166.500000) scale(-1, -1) translate(-1867.500000, -166.500000) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

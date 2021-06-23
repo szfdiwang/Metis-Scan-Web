@@ -5,7 +5,14 @@ export default {
     data: 'DATA',
     task: 'TASK'
   },
+  common: {
+    cpu: 'CPU CORE',
+    memory: 'MEMORY',
+    bandWidth: 'BANDWIDTH',
+    search: 'SEARCH'
+  },
   home: {
-    hello: 'Hello'
+    hello: 'Hello',
+    searchPlaceholder: 'SEARCH BY ID OR KEY WORDS'
   }
 }
