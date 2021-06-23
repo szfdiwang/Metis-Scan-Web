@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "dayjs": "^1.10.5",
     "echarts": "^5.1.2",
     "echarts-gl": "^2.0.5",
     "element-ui": "^2.15.2",

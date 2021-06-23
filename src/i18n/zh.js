@@ -13,6 +13,12 @@ export default {
   },
   home: {
     hello: '你好',
-    searchPlaceholder: 'SEARCH BY ID OR KEY WORDS'
+    searchPlaceholder: '请输入ID或关键字在全网搜索',
+    nodeNum: '参与方节点个数',
+    uploadData: '上传数据量',
+    completedTask: '已完成任务总数',
+    computingExecutors: '算力提供方个数',
+    transactionData: '交易数据量',
+    totalTask: '参与任务总人次'
   }
 }

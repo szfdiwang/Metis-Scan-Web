@@ -12,22 +12,17 @@
       </el-input>
     </div>
     <Card />
-    <div class="card-box">
-      <el-row :gutter="20">
-        <el-col :span="8"><div class="grid-content bg-purple">1</div></el-col>
-        <el-col :span="8"><div class="grid-content bg-purple">2</div></el-col>
-        <el-col :span="8"><div class="grid-content bg-purple">3</div></el-col>
-      </el-row>
-    </div>
   </div>
 </template>
 
 <script>
 import Performance from './components/Performance'
+import Card from './components/Card'
 export default {
   name: 'Home',
   components: {
-    Performance
+    Performance,
+    Card
   },
   data() {
     return {
@@ -86,6 +81,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-right: 10px;
         &:hover {
           background: #4a5fec;
         }

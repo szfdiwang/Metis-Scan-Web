@@ -13,6 +13,12 @@ export default {
   },
   home: {
     hello: 'Hello',
-    searchPlaceholder: 'SEARCH BY ID OR KEY WORDS'
+    searchPlaceholder: 'SEARCH BY ID OR KEY WORDS',
+    nodeNum: 'Participant Nodes',
+    uploadData: 'Uploaded Data',
+    completedTask: 'Completed Tasks',
+    computingExecutors: 'Computing Executors',
+    transactionData: 'Transaction Data',
+    totalTask: 'Participants of Total Tasks'
   }
 }
