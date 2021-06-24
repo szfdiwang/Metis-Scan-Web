@@ -6,6 +6,7 @@
           <p class="label">{{ card.label }}</p>
           <p class="desc">{{ card.desc }}</p>
           <p class="value">{{ card.value }}</p>
+          <img src="../../../assets/img/home/person.svg" alt="" class="personIcon" />
         </div>
       </el-col>
     </el-row>
@@ -15,6 +16,7 @@
           <p class="label">{{ card.label }}</p>
           <p class="desc">{{ card.desc }}</p>
           <p class="value">{{ card.value }}</p>
+          <img src="../../../assets/img/home/person.svg" alt="" class="personIcon" />
         </div>
       </el-col>
     </el-row>
@@ -98,6 +100,13 @@ export default {
     background-image: linear-gradient(180deg, rgba(129, 170, 255, 0.1) 0%, rgba(2, 29, 83, 0.2) 100%);
     border: 1px solid #0a54ea;
     border-radius: 0.08rem;
+    position: relative;
+    .personIcon {
+      position: absolute;
+      width: 0.24rem;
+      top: 0.2rem;
+      right: 0.2rem;
+    }
     .label {
       font-family: PingFangSC-Medium;
       font-size: 0.2rem;
