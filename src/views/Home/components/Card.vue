@@ -5,7 +5,7 @@
         <div class="card-mini-box">
           <p class="label">{{ card.label }}</p>
           <p class="desc">{{ card.desc }}</p>
-          <p class="value">{{ card.value }}</p>
+          <p class="value">{{ card.value | numFormat }}</p>
           <img src="../../../assets/img/home/person.svg" alt="" class="personIcon" />
         </div>
       </el-col>
@@ -15,7 +15,7 @@
         <div class="card-mini-box">
           <p class="label">{{ card.label }}</p>
           <p class="desc">{{ card.desc }}</p>
-          <p class="value">{{ card.value }}</p>
+          <p class="value">{{ card.value | numFormat }}</p>
           <img src="../../../assets/img/home/person.svg" alt="" class="personIcon" />
         </div>
       </el-col>
@@ -37,21 +37,21 @@ export default {
           name: 'nodeNum',
           label: this.$t('home.nodeNum'),
           desc: this.$t('home.nodeNumDesc'),
-          value: '1222'
+          value: 1222
         },
         {
           id: 2,
           name: 'uploadData',
           label: this.$t('home.uploadData'),
           desc: this.$t('home.uploadDataDesc'),
-          value: '2,000.00'
+          value: 2000
         },
         {
           id: 3,
           name: 'completedTask',
           label: this.$t('home.completedTask'),
           desc: this.$t('home.completedTaskDesc'),
-          value: '100,000'
+          value: 100000
         }
       ]
     },
@@ -62,21 +62,21 @@ export default {
           name: 'computingExecutors',
           label: this.$t('home.computingExecutors'),
           desc: this.$t('home.computingExecutorsDesc'),
-          value: '888'
+          value: 888
         },
         {
           id: 2,
           name: 'transactionData',
           label: this.$t('home.transactionData'),
           desc: this.$t('home.transactionDataDesc'),
-          value: '2,000.00'
+          value: 200000
         },
         {
           id: 3,
           name: 'totalTask',
           label: this.$t('home.totalTask'),
           desc: this.$t('home.totalTaskDesc'),
-          value: '100,000'
+          value: 100000
         }
       ]
     }
