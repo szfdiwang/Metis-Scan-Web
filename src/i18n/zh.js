@@ -25,6 +25,7 @@ export default {
     completedTaskDesc: '全网中已完成的任务的总数量',
     computingExecutorsDesc: '全网的参与方节点中算力提供方的个数',
     transactionDataDesc: '全网中已完成的任务所用的数据量的总和',
-    totalTaskDesc: '全网中每个已完成任务的参与人数的总和'
+    totalTaskDesc: '全网中每个已完成任务的参与人数的总和',
+    center: '计算中心与数据中心'
   }
 }

@@ -1,21 +1,17 @@
 <template>
-  <div class="home">
-    <div id="earth"></div>
+  <div class="earth-box">
+    <div id="earth-map"></div>
   </div>
 </template>
+
 <script>
-// import world from '../../config/map/world'
-// eslint-disable-next-line no-unused-vars
-// import world from '../../../public/map/world3'
 import 'echarts-gl'
-import worldImg from '../../assets/img/home/earthDark.png'
-// import worldImg from '../../../public/img/world.svg'
-// import worldImg from '../../../public/map/world.topo.bathy.200401.jpg'
+import worldImg from '../../../../assets/img/home/earthDark.png'
 export default {
-  name: 'TestMap',
+  name: 'EarthMap',
+  components: {},
   data() {
     return {
-      // mapChart: '',
       chart: '',
       geoCoordMap: {
         南宁: [108.479, 23.1152],
@@ -34,119 +30,13 @@ export default {
       }
     }
   },
+  computed: {},
   mounted() {
     this.initChart()
   },
   methods: {
-    initMap() {
-      const canvas = document.createElement('canvas')
-      // eslint-disable-next-line no-unused-vars
-      const context = canvas.getContext('2d')
-      this.mapChart = this.$echarts.init(canvas, null, {
-        width: 4096, // 调整后 与精细度有关
-        height: 2048
-      })
-      this.mapChart.setOption(
-        {
-          // id:"" 默认不指定
-          // 外层的舞台
-          backgroundColor: '#000',
-          tooltip: {
-            show: true,
-            trigger: 'item',
-            formatter: function(params) {
-              console.log(params)
-              return params
-            }
-          },
-          geo: {
-            type: 'map',
-            z: 1,
-            map: 'world',
-            top: 10,
-            left: 10,
-            right: 10,
-            bottom: 10,
-            zoom: 0,
-            roam: false,
-            boundingCoords: [
-              [-180, 90],
-              [180, -90]
-            ], // 设置为一张完整经纬度的世界地图
-            nameMap: {
-              China: '中国' // 变成中文
-            },
-            // regions: [
-            //   {
-            //     name: '中国',
-            //     itemStyle: {
-            //       areaColor: 'red',
-            //       color: 'red'
-            //     }
-            //   }
-            // ],
-            // blur: {
-            //   label: {
-            //     show: false
-            //   }
-            // },
-            itemStyle: {
-              borderColor: '#000d2d',
-              areaColor: '#2455ad' // 地图区块颜色
-            },
-            emphasis: {
-              itemStyle: {
-                areaColor: '#2455ad' // 地图区块选中的颜色
-              },
-              label: {
-                show: false
-              }
-            },
-            label: {
-              fontSize: 24,
-              show: false, // 是否显示文本 TODO 显示 但是只显示需要的城市
-              color: '#DB7093'
-            }
-          }
-          // series: [
-          //   {
-          //     type: 'effectScatter',
-          //     coordinateSystem: 'geo',
-          //     zlevel: 10,
-          //     z: 10,
-          //     showEffectOn: 'emphasis',
-          //     rippleEffect: {
-          //       brushType: 'stroke'
-          //     },
-          //     label: {
-          //       fontSize: 24,
-          //       show: true,
-          //       position: 'right',
-          //       formatter: '{b}'
-          //     },
-          //     itemStyle: {
-          //       color: '#f5f802'
-          //     },
-          //     tooltip: {
-          //       trigger: 'item',
-          //       position: [10, 10],
-          //       backgroundColor: 'red',
-          //       formatter: '{b0}: {c0}<br />{b1}: {c1}',
-          //       padding: 5
-          //     },
-          //     data: [
-          //       { name: '巴基斯坦', value: [-102.646409, 59.994255], symbolSize: 60 },
-          //       { name: '加拿大', value: [-100.696295, 33.679979], symbolSize: 20 }
-          //     ]
-          //   }
-          // ]
-        },
-        true
-      )
-    },
     initChart() {
-      this.chart = this.$echarts.init(document.getElementById('earth'))
-      // this.initMap()
+      this.chart = this.$echarts.init(document.getElementById('earth-map'))
       const option = {
         backgroundColor: '',
         tooltip: {
@@ -154,12 +44,12 @@ export default {
         },
         globe: {
           roam: false,
-          environment: 'none',
+          environment: 'auto',
           baseTexture: worldImg, // this.mapChart, //
-          shading: 'lambert',
+          shading: 'color',
           light: {
             main: {
-              color: '#fff',
+              color: '',
               intensity: 1,
               shadow: false
             },
@@ -171,7 +61,8 @@ export default {
           },
           viewControl: {
             autoRotate: false,
-            animation: true
+            animation: true,
+            zoomSensitivity: 0
           },
           postEffect: {
             enable: true
@@ -288,29 +179,23 @@ export default {
         ]
       }
       this.chart.setOption(option, true)
-      // window.addEventListener('resize', function(this.chart) {
-      //   this.chart.resize()
-      // })
+      //   window.addEventListener('resize', function(this.chart) {
+      //     this.chart.resize()
+      //   })
     }
   }
 }
 </script>
-<style lang="scss" scoped>
-.home {
-  width: 100vw;
-  height: 100vh;
+
+<style lang='scss' scoped>
+.earth-box {
   display: flex;
-  margin: 0 auto;
-  margin-top: 200px;
-  #earth {
-    overflow: hidden;
-    margin: 0 auto;
-    width: 38rem;
-    height: 38rem;
-    // width: 300px;
-    // height: 300px;
-    border: 1px solid #6495ed;
-    background-color: #1e90ff;
+  align-items: center;
+  justify-content: center;
+  #earth-map {
+    width: 6.8rem;
+    height: 6.8rem;
+    border: 1px solid yellow;
   }
 }
 </style>

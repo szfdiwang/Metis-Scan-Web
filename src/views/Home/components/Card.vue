@@ -97,8 +97,7 @@ export default {
     align-items: center;
     justify-content: center;
     height: 1.76rem;
-    background-image: linear-gradient(180deg, rgba(129, 170, 255, 0.1) 0%, rgba(2, 29, 83, 0.2) 100%);
-    border: 1px solid #0a54ea;
+    background: url('../../../assets/img/home/border.png') no-repeat 100% 100%; //linear-gradient(180deg, rgba(129, 170, 255, 0.1) 0%, rgba(2, 29, 83, 0.2) 100%);
     border-radius: 0.08rem;
     position: relative;
     .personIcon {

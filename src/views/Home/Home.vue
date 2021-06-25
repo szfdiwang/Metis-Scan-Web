@@ -14,17 +14,20 @@
       </el-input>
     </div>
     <Card />
+    <Map />
   </div>
 </template>
 
 <script>
 import Performance from './components/Performance'
 import Card from './components/Card'
+import Map from './components/Map'
 export default {
   name: 'Home',
   components: {
     Performance,
-    Card
+    Card,
+    Map
   },
   data() {
     return {
@@ -35,9 +38,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home-box {
-  height: 1000px;
-  background: url('../../assets/img/home/bj1.png');
+  height: auto;
+  background: url('../../assets/img/home/bj1.png') repeat;
   position: relative;
+  margin: 0 0.2rem;
   .bg-blue {
     position: absolute;
     top: 0;
