@@ -1,12 +1,14 @@
 <template>
   <div class="earth-box">
     <div id="earth-map"></div>
+    <img src="../../../../assets/img/home/out-earth.svg" alt="" class="out-earth" />
   </div>
 </template>
 
 <script>
 import 'echarts-gl'
-import worldImg from '../../../../assets/img/home/earthDark.png'
+// import worldImg from '../../../../assets/img/home/earthDark.png'
+import worldImg from '../../../../assets/img/home/earth1.jpg'
 export default {
   name: 'EarthMap',
   components: {},
@@ -33,8 +35,12 @@ export default {
   computed: {},
   mounted() {
     this.initChart()
+    window.addEventListener('resize', this.resizeFn)
   },
   methods: {
+    resizeFn() {
+      this.chart.resize()
+    },
     initChart() {
       this.chart = this.$echarts.init(document.getElementById('earth-map'))
       const option = {
@@ -179,9 +185,6 @@ export default {
         ]
       }
       this.chart.setOption(option, true)
-      //   window.addEventListener('resize', function(this.chart) {
-      //     this.chart.resize()
-      //   })
     }
   }
 }
@@ -195,7 +198,12 @@ export default {
   #earth-map {
     width: 6.8rem;
     height: 6.8rem;
-    border: 1px solid yellow;
+    z-index: 100;
+    position: relative;
+  }
+  .out-earth {
+    position: absolute;
+    z-index: 10;
   }
 }
 </style>
