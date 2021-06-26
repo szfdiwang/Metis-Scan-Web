@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    oh u r in map
     <div id="earth"></div>
   </div>
 </template>
 <script>
 // import world from '../../config/map/world'
 // eslint-disable-next-line no-unused-vars
-// import world from '../../../public/map/world3'
+import world from '../../../public/map/world'
 import 'echarts-gl'
-import worldImg from '../../../public/img/earthDark.png'
+// import worldImg from '../../assets/img/home/earthDark.png'
+import worldImg from '../../assets/img/home/earth1.jpg'
 // import worldImg from '../../../public/img/world.svg'
 // import worldImg from '../../../public/map/world.topo.bathy.200401.jpg'
 export default {
@@ -51,7 +51,7 @@ export default {
         {
           // id:"" 默认不指定
           // 外层的舞台
-          backgroundColor: '#000',
+          backgroundColor: 'rgba(3,28,72,0.3)',
           tooltip: {
             show: true,
             trigger: 'item',
@@ -147,7 +147,77 @@ export default {
     },
     initChart() {
       this.chart = this.$echarts.init(document.getElementById('earth'))
-      // this.initMap()
+      this.initMap()
+
+      const canvas = document.createElement('canvas')
+      // eslint-disable-next-line no-unused-vars
+      const context = canvas.getContext('2d')
+      this.mapChart = this.$echarts.init(canvas, null, {
+        width: 4096, // 调整后 与精细度有关
+        height: 2048
+      })
+      this.mapChart.setOption({
+        // id:"" 默认不指定
+        // 外层的舞台
+        backgroundColor: '#fff',
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          formatter: function(params) {
+            console.log(params)
+            return params
+          }
+        },
+        geo: {
+          type: 'map',
+          z: 1,
+          map: 'world',
+          top: 10,
+          left: 10,
+          right: 10,
+          bottom: 10,
+          zoom: 0,
+          roam: false,
+          boundingCoords: [
+            [-180, 90],
+            [180, -90]
+          ], // 设置为一张完整经纬度的世界地图
+          nameMap: {
+            China: '中国' // 变成中文
+          },
+          // regions: [
+          //   {
+          //     name: '中国',
+          //     itemStyle: {
+          //       areaColor: 'red',
+          //       color: 'red'
+          //     }
+          //   }
+          // ],
+          // blur: {
+          //   label: {
+          //     show: false
+          //   }
+          // },
+          itemStyle: {
+            borderColor: '#000d2d',
+            areaColor: '#2455ad' // 地图区块颜色
+          },
+          emphasis: {
+            itemStyle: {
+              areaColor: '#2455ad' // 地图区块选中的颜色
+            },
+            label: {
+              show: false
+            }
+          },
+          label: {
+            fontSize: 24,
+            show: false, // 是否显示文本 TODO 显示 但是只显示需要的城市
+            color: '#DB7093'
+          }
+        }
+      })
       const option = {
         backgroundColor: '',
         tooltip: {
@@ -306,8 +376,8 @@ export default {
   #earth {
     overflow: hidden;
     margin: 0 auto;
-    width: 38rem;
-    height: 38rem;
+    width: 6.8rem;
+    height: 6.8rem;
     // width: 300px;
     // height: 300px;
     border: 1px solid #6495ed;

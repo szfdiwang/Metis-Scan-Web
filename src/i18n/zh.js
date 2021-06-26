@@ -62,6 +62,8 @@ export default {
     PTASKSINTHEWHOLENETWORK: '全网共122,222项任务',
     StatusItem: '任务状态',
     TimeSpan: '时间范围',
-    to: '至'
+    to: '至',
+    totalTaskDesc: '全网中每个已完成任务的参与人数的总和',
+    center: '计算中心与数据中心'
   }
 }

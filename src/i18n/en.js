@@ -61,6 +61,8 @@ export default {
     PTASKSINTHEWHOLENETWORK: 'PTASKS IN THE WHOLE NETWORK',
     StatusItem: 'Status',
     TimeSpan: 'Time span',
-    to: 'to'
+    to: 'to',
+    totalTaskDesc: 'The sum of the participants number of each completed taks in the whole network',
+    center: 'Computing Center & Data Center'
   }
 }

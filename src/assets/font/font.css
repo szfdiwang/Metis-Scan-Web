@@ -1,0 +1,20 @@
+@font-face {
+    font-family: "BebasNeueBold";
+    src: url("./BebasNeueBold.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "BebasNeueRegular";
+    src: url("./BebasNeueRegular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "DINEngschrift";
+    src: url("./DINEngschrift.otf");
+    font-weight: normal;
+    font-style: normal;
+}

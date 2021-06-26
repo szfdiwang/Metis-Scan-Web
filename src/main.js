@@ -8,8 +8,12 @@ import i18n from './i18n'
 import mixin from '@/mixin/mixin'
 import './vonder'
 import 'element-ui/lib/theme-chalk/index.css'
-// eslint-disable-next-line no-unused-vars
-// import world from '../public/map/world1'
+import * as filters from './filters'
+
+Object.keys(filters).map(key => {
+  console.log('key', key)
+  Vue.filter(key, filters[key])
+})
 
 Vue.mixin(mixin)
 Vue.config.productionTip = false

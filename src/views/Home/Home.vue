@@ -1,6 +1,8 @@
 <template>
   <div class="home-box">
     <Performance />
+    <img src="../../assets/img/home/bj4.png" alt="" class="bg-blue" />
+    <img src="../../assets/img/home/bj5.png" alt="" class="bg-stripe" />
     <div class="welcome">
       <img src="../../assets/img/home/WelcometoRosetta.svg" alt="" />
     </div>
@@ -12,17 +14,20 @@
       </el-input>
     </div>
     <Card />
+    <Map />
   </div>
 </template>
 
 <script>
 import Performance from './components/Performance'
 import Card from './components/Card'
+import Map from './components/Map'
 export default {
   name: 'Home',
   components: {
     Performance,
-    Card
+    Card,
+    Map
   },
   data() {
     return {
@@ -33,8 +38,29 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home-box {
-  height: 1000px;
-  background: url('../../assets/img/home/bj1.png');
+  height: auto;
+  background: url('../../assets/img/home/bj1.png') repeat;
+  position: relative;
+  margin: 0 0.2rem;
+  .bg-blue {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .bg-stripe {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    margin-top: 100px;
+  }
   .welcome {
     text-align: center;
     margin: 60px 0;
