@@ -27,7 +27,10 @@ export default {
     transactionDataDesc: '全网中已完成的任务所用的数据量的总和',
     totalTaskDesc: '全网中每个已完成任务的参与人数的总和',
     powerTrend: '全网算力总量走势',
-    dataTrend: '全网数据总量走势'
+    dataTrend: '全网数据总量走势',
+    center: '计算中心与数据中心',
+    growth: '增长算力',
+    global: '全网算力'
   },
   node: {
     No: '序号',

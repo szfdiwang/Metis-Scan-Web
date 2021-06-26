@@ -27,7 +27,10 @@ export default {
     transactionDataDesc: 'The total amount of the data which is applied in the completed tasks in the whole network',
     totalTaskDesc: 'The sum of the participants number of each completed taks in the whole network',
     powerTrend: 'Computing Power Growth Trend',
-    dataTrend: 'Data Amount Growth Trend'
+    dataTrend: 'Data Amount Growth Trend',
+    center: 'Computing Center & Data Center',
+    growth: '增长算力',
+    global: '全网算力'
   },
   node: {
     No: 'NO.',

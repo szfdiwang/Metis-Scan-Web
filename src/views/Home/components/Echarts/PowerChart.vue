@@ -31,6 +31,9 @@ export default {
           itemGap: 40,
           itemHeight: 5,
           itemWidth: 30,
+          formatter: params => {
+            return this.$t(`home.${params}`)
+          },
           data: [
             {
               name: 'growth',
@@ -46,7 +49,7 @@ export default {
               }
             },
             {
-              name: 'all',
+              name: 'global',
               icon: 'rect',
               itemStyle: {
                 borderWidth: 100
@@ -112,10 +115,17 @@ export default {
               opacity: 0.4
             },
             smooth: true,
-            name: 'growth'
+            name: 'growth',
+            label: {
+              normal: {
+                formatter: params => {
+                  return this.$t(`home.${params}`)
+                }
+              }
+            }
           },
           {
-            name: 'all',
+            name: 'global',
             data: [120, 200, 150, 80, 70, 110, 130, 12, 33, 32],
             type: 'bar',
             itemStyle: {
@@ -130,6 +140,13 @@ export default {
                     color: '#03042F'
                   }
                 ])
+              }
+            },
+            label: {
+              normal: {
+                formatter: params => {
+                  return this.$t(params.name)
+                }
               }
             }
           }

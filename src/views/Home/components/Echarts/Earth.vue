@@ -195,6 +195,7 @@ export default {
 
 <style lang='scss' scoped>
 .earth-box {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,6 +206,7 @@ export default {
     position: relative;
   }
   .out-earth {
+    width: 9.1rem;
     position: absolute;
     z-index: 10;
   }
