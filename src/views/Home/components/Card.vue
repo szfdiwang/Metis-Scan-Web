@@ -89,7 +89,7 @@ export default {
 
 <style lang="scss" scoped>
 .card-box {
-  margin: 55px 0.2rem 20px;
+  margin: 55px 0 20px;
   .card-mini-box {
     // width: 6.13rem;
     display: flex;
@@ -97,7 +97,8 @@ export default {
     align-items: center;
     justify-content: center;
     height: 1.76rem;
-    background: url('../../../assets/img/home/border.png') no-repeat 100% 100%; //linear-gradient(180deg, rgba(129, 170, 255, 0.1) 0%, rgba(2, 29, 83, 0.2) 100%);
+    background: url('../../../assets/img/home/border.png') no-repeat; //linear-gradient(180deg, rgba(129, 170, 255, 0.1) 0%, rgba(2, 29, 83, 0.2) 100%);
+    background-size: 100% 100%;
     border-radius: 0.08rem;
     position: relative;
     .personIcon {

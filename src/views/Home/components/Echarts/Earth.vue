@@ -7,8 +7,8 @@
 
 <script>
 import 'echarts-gl'
-// import worldImg from '../../../../assets/img/home/earthDark.png'
-import worldImg from '../../../../assets/img/home/earth1.jpg'
+import worldImg from '../../../../assets/img/home/earthDark.png'
+// import worldImg from '../../../../assets/img/home/earth1.jpg'
 export default {
   name: 'EarthMap',
   components: {},
@@ -37,6 +37,9 @@ export default {
     this.initChart()
     window.addEventListener('resize', this.resizeFn)
   },
+  beforeDestroy() {
+    window.removeEventListener('resize')
+  },
   methods: {
     resizeFn() {
       this.chart.resize()
@@ -44,7 +47,7 @@ export default {
     initChart() {
       this.chart = this.$echarts.init(document.getElementById('earth-map'))
       const option = {
-        backgroundColor: '',
+        backgroundColor: 'transport',
         tooltip: {
           trigger: 'item'
         },

@@ -1,8 +1,11 @@
 <template>
   <div class="map-box">
+    <!-- left -->
     <div class="left">
-      <div id="compute-center-echart"></div>
-      <div id="top-echart-data"></div>
+      <div class="compute-center-echart"></div>
+      <div class="top-echart-data">
+        <PowerChart />
+      </div>
       <div class="left-cell">
         <img src="../../../assets/img/home/left-round.svg" alt="" />
         <img src="../../../assets/img/home/left-cell.svg" alt="" />
@@ -11,6 +14,7 @@
         <img src="../../../assets/img/home/left-bottom-map.svg" alt="" />
       </div>
     </div>
+    <!-- mid -->
     <div class="mid">
       <div class="title">
         <img src="../../../assets/img/home/round-single-left.svg" alt="" />
@@ -27,6 +31,7 @@
         <img src="../../../assets/img/home/bottom-line2.png" alt="" />
       </div>
     </div>
+    <!-- right -->
     <div class="right">
       <div class="top-map">
         <img src="../../../assets/img/home/right-top-map.svg" alt="" />
@@ -35,7 +40,9 @@
         <img src="../../../assets/img/home/wave3.svg" alt="" />
         <img src="../../../assets/img/home/wave4.svg" alt="" />
       </div>
-      <div id="right-data-echarts"></div>
+      <div class="right-data-echarts">
+        <DataChart />
+      </div>
       <div class="gap right-strip">
         <img src="../../../assets/img/home/wave5.png" alt="" />
       </div>
@@ -44,9 +51,13 @@
   </div>
 </template>
 <script>
+import DataChart from './Echarts/DataChart.vue'
+import PowerChart from './Echarts/PowerChart.vue'
 import EarthChart from './Echarts/Earth.vue'
 export default {
   components: {
+    DataChart,
+    PowerChart,
     EarthChart
   },
   data() {
@@ -71,11 +82,11 @@ export default {
     flex: 1;
     width: 4.96rem;
     border: 1px solid red;
-    #compute-center-echart {
+    .compute-center-echart {
       height: 3.96rem;
       border: 1px solid yellow;
     }
-    #top-echart-data {
+    .top-echart-data {
       height: 5.05rem;
       border: 1px solid yellow;
     }
@@ -136,7 +147,7 @@ export default {
     .right-strip {
       margin: 0.15rem 0;
     }
-    #right-data-echarts {
+    .right-data-echarts {
       width: 100%;
       height: 5.18rem;
       border: 1px solid yellow;

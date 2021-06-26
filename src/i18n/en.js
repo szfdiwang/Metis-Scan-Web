@@ -25,7 +25,9 @@ export default {
     completedTaskDesc: 'The number of the completed tasks in the whole network',
     computingExecutorsDesc: 'The number of the computing executors in the whole network',
     transactionDataDesc: 'The total amount of the data which is applied in the completed tasks in the whole network',
-    totalTaskDesc: 'The sum of the participants number of each completed taks in the whole network'
+    totalTaskDesc: 'The sum of the participants number of each completed taks in the whole network',
+    powerTrend: 'Computing Power Growth Trend',
+    dataTrend: 'Data Amount Growth Trend'
   },
   node: {
     No: 'NO.',
