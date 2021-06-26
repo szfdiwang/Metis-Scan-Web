@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="258px" height="53px" viewBox="0 0 258 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>3.标题2</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="05详情-任务" transform="translate(-858.000000, -161.000000)">
+            <g id="3.标题2" transform="translate(859.000000, 162.000000)">
+                <polygon id="矩形" fill="#182D98" points="7 9 250 9 250 41 7 41"></polygon>
+                <polyline id="路径" stroke="#9A9AAE" stroke-width="0.5" points="0 12 0 0 12 0"></polyline>
+                <polyline id="路径备份-2" stroke="#9A9AAE" stroke-width="0.5" transform="translate(250.000000, 6.000000) scale(-1, 1) translate(-250.000000, -6.000000) " points="244 12 244 0 256 0"></polyline>
+                <polyline id="路径备份" stroke="#9A9AAE" stroke-width="0.5" transform="translate(6.000000, 45.000000) scale(1, -1) translate(-6.000000, -45.000000) " points="0 51 0 39 12 39"></polyline>
+                <polyline id="路径备份-3" stroke="#9A9AAE" stroke-width="0.5" transform="translate(250.000000, 45.000000) scale(-1, -1) translate(-250.000000, -45.000000) " points="244 51 244 39 256 39"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

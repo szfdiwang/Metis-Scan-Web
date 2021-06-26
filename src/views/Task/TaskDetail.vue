@@ -1,5 +1,3 @@
 <template>
-  <div class="">
-    <h1>This is an Task page</h1>
-  </div>
+  <div class="TakDetail"></div>
 </template>

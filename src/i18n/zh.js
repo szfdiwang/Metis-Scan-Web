@@ -26,5 +26,42 @@ export default {
     computingExecutorsDesc: '全网的参与方节点中算力提供方的个数',
     transactionDataDesc: '全网中已完成的任务所用的数据量的总和',
     totalTaskDesc: '全网中每个已完成任务的参与人数的总和'
+  },
+  node: {
+    No: '序号',
+    NameIdentifier: '名称与身份标识',
+    Identifier: '查看详情',
+    ComputingPower: '算力信息',
+    Metadata: '元数据数量',
+    ParticipatedTasks: '任务数量',
+    ActiveDegree: '热度',
+    NODE: '节点',
+    PARTICIPATINGNODESINTHEWHOLENETWORK: '全网共1,222个参与方节点'
+  },
+  data: {
+    No: '序号',
+    NameIdentifier: '名称与ID',
+    Identifier: '查看详情',
+    DataProvider: '数据提供方',
+    Size: '',
+    Status: '数据大小',
+    ParticipatedTasks: '参与任务次数',
+    DATA: '数据',
+    PIECESOFMETADATAINTHEWHOLENETWORK: '全网共122,222条元数据'
+
+  },
+  task: {
+    No: '序号',
+    NameIdentifier: '名称与ID',
+    Identifier: '查看详情',
+    Sponsor: '任务发起方',
+    Status: '状态',
+    StartTime: '发起时间',
+    TimeSpent: '用时',
+    TASK: '任务',
+    PTASKSINTHEWHOLENETWORK: '全网共122,222项任务',
+    StatusItem: '任务状态',
+    TimeSpan: '时间范围',
+    to: '至'
   }
 }
