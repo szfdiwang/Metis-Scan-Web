@@ -30,7 +30,9 @@ export default {
     dataTrend: '全网数据总量走势',
     center: '计算中心与数据中心',
     growth: '增长算力',
-    global: '全网算力'
+    global: '全网算力',
+    computeCenter: '算力中心',
+    dataCenter: '数据中心'
   },
   node: {
     No: '序号',

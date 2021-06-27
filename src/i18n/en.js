@@ -30,7 +30,9 @@ export default {
     dataTrend: 'Data Amount Growth Trend',
     center: 'Computing Center & Data Center',
     growth: '增长算力',
-    global: '全网算力'
+    global: '全网算力',
+    computeCenter: 'Computing center',
+    dataCenter: 'Data center'
   },
   node: {
     No: 'NO.',

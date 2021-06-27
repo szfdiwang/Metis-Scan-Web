@@ -15,6 +15,7 @@
     </div>
     <Card />
     <Map />
+    <BottomTable />
   </div>
 </template>
 
@@ -22,12 +23,14 @@
 import Performance from './components/Performance'
 import Card from './components/Card'
 import Map from './components/Map'
+import BottomTable from './components/BottomTable'
 export default {
   name: 'Home',
   components: {
     Performance,
     Card,
-    Map
+    Map,
+    BottomTable
   },
   data() {
     return {

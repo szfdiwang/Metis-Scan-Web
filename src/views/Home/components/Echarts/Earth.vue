@@ -7,8 +7,8 @@
 
 <script>
 import 'echarts-gl'
-import worldImg from '../../../../assets/img/home/earthDark.png'
-// import worldImg from '../../../../assets/img/home/earth1.jpg'
+// import worldImg from '../../../../assets/img/home/earthDark.png'
+import worldImg from '../../../../assets/img/home/earth1.jpg'
 export default {
   name: 'EarthMap',
   components: {},
@@ -38,7 +38,7 @@ export default {
     window.addEventListener('resize', this.resizeFn)
   },
   beforeDestroy() {
-    window.removeEventListener('resize')
+    window.removeEventListener('resize', this.resizeFn)
   },
   methods: {
     resizeFn() {

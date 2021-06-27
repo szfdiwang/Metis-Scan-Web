@@ -60,10 +60,8 @@ export default {
 
 <style lang="scss" scoped>
 .performance-box {
-  width: calc(100vw - 40px);
   display: flex;
   height: 172px;
-  margin: 0 0.2rem;
   // background: linear-gradient(180deg, rgba(129, 170, 255, 0.1) 0%, rgba(2, 29, 83, 0.2) 100%);
   // background: url('../../../assets/img/home/corner1.svg') no-repeat; //;
   // background-size: cover;
