@@ -7,18 +7,15 @@ import Map from '@/views/Map/TestMap'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     component: Layout,
     redirect: '/home',
-    children: [
-      {
-        path: '/home',
-        name: 'home',
-        component: Home
-      }
-    ]
+    children: [{
+      path: '/home',
+      name: 'home',
+      component: Home
+    }]
   },
   {
     path: '/map',
@@ -28,8 +25,7 @@ const routes = [
   {
     path: '/node',
     component: Layout,
-    children: [
-      {
+    children: [{
         path: '/node/index',
         name: 'node',
         component: () => import(/* webpackChunkName: "node" */ '../views/Node/Node.vue')
@@ -38,14 +34,18 @@ const routes = [
         path: '/node/NodeDetail',
         name: 'nodeDetail',
         component: () => import(/* webpackChunkName: "NodeDetail" */ '../views/Node/NodeDetail.vue')
+      },
+      {
+        path: '/node/MetaData',
+        name: 'MetaData',
+        component: () => import(/* webpackChunkName: "MetaData" */ '../views/Node/MetaData.vue')
       }
     ]
   },
   {
     path: '/data',
     component: Layout,
-    children: [
-      {
+    children: [{
         path: '/data/index',
         name: 'data',
         component: () => import(/* webpackChunkName: "data" */ '../views/Data/Data.vue')
@@ -60,8 +60,7 @@ const routes = [
   {
     path: '/task',
     component: Layout,
-    children: [
-      {
+    children: [{
         path: '/task/index',
         name: 'task',
         component: () => import(/* webpackChunkName: "TaskHome" */ '../views/Task/Task.vue')
@@ -70,6 +69,11 @@ const routes = [
         path: '/task/TaskDetail',
         name: 'taskDetail',
         component: () => import(/* webpackChunkName: "TaskDetail" */ '../views/Task/TaskDetail.vue')
+      },
+      {
+        path: '/task/Tasks',
+        name: 'Tasks',
+        component: () => import(/* webpackChunkName: "Tasks" */ '../views/Task/Tasks.vue')
       }
     ]
   }
