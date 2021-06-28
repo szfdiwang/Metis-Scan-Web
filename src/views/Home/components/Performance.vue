@@ -38,7 +38,7 @@ export default {
         {
           id: 2,
           name: 'cpu',
-          label: this.$t('common.cpu'),
+          label: this.$t('common.cpuCore'),
           value: '12888',
           unit: ''
         },

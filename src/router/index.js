@@ -38,6 +38,16 @@ const routes = [
         path: '/node/NodeDetail',
         name: 'nodeDetail',
         component: () => import(/* webpackChunkName: "NodeDetail" */ '../views/Node/NodeDetail.vue')
+      },
+      {
+        path: '/node/MetaDetail',
+        name: 'nodeDetail',
+        component: () => import(/* webpackChunkName: "NodeDetail" */ '../views/Node/NodeDetail.vue')
+      },
+      {
+        path: '/node/TaskDetail',
+        name: 'nodeDetail',
+        component: () => import(/* webpackChunkName: "NodeDetail" */ '../views/Node/NodeDetail.vue')
       }
     ]
   },

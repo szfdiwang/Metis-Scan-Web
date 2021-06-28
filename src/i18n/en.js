@@ -6,10 +6,12 @@ export default {
     task: 'TASK'
   },
   common: {
-    cpu: 'CPU CORE',
+    cpuCore: 'CPU CORE',
+    cpu: 'CPU',
     memory: 'MEMORY',
     bandWidth: 'BANDWIDTH',
-    search: 'SEARCH'
+    search: 'SEARCH',
+    rank: 'No.'
   },
   home: {
     hello: 'Hello',
@@ -32,7 +34,14 @@ export default {
     growth: '增长算力',
     global: '全网算力',
     computeCenter: 'Computing center',
-    dataCenter: 'Data center'
+    dataCenter: 'Data center',
+    name: 'Name',
+    identifier: 'Identifier',
+    power: 'Power',
+    powerRatio: 'Power ratio',
+    activeDegree: 'Active degree',
+    powerRank: 'Computing power ranking',
+    activeRank: 'Active degree ranking'
   },
   node: {
     No: 'NO.',
