@@ -6,10 +6,12 @@ export default {
     task: '任务'
   },
   common: {
-    cpu: 'CPU 内核',
+    cpuCore: 'CPU 内核',
+    cpu: 'CPU',
     memory: '内存',
     bandWidth: '带宽',
-    search: '搜索'
+    search: '搜索',
+    rank: 'No.'
   },
   home: {
     hello: '你好',
@@ -30,7 +32,16 @@ export default {
     dataTrend: '全网数据总量走势',
     center: '计算中心与数据中心',
     growth: '增长算力',
-    global: '全网算力'
+    global: '全网算力',
+    computeCenter: '算力中心',
+    dataCenter: '数据中心',
+    name: '姓名',
+    identifier: '身份标识',
+    power: '算力',
+    powerRatio: '算力占比',
+    activeDegree: '活跃度',
+    powerRank: '节点算力总量排行',
+    activeRank: '节点活跃度排行'
   },
   node: {
     No: '序号',

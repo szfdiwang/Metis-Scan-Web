@@ -12,25 +12,35 @@ export default {
   components: {},
   data() {
     return {
-      dataChart: ''
+      dataChart: '',
+      option: {}
     }
   },
   computed: {},
   watch: {
     '$i18n.locale'(newValue) {
+      console.log('语言改变', newValue)
       // 不需要重新设置配置项，只需要手动触发一下setOption()
       this.dataChart.setOption(this.option)
     }
   },
+
   mounted() {
     this.initChart()
+    window.addEventListener('resize', this.resizeFn)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeFn)
   },
   methods: {
+    resizeFn() {
+      this.dataChart.resize()
+    },
     initChart() {
       const chartDom = document.getElementById('dataEchart')
       this.dataChart = this.$echarts.init(chartDom)
-      const option = {
-        color: ['#AE0BFF', 'red'],
+      this.option = {
+        color: ['#2A6EE6', 'red'],
         legend: {
           bottom: 20,
           itemGap: 40,
@@ -95,26 +105,27 @@ export default {
             data: [220, 132, 91, 34, 290, 133, 320, 10, 22, 99],
             type: 'line',
             lineStyle: {
-              color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: '#9C2ED3'
-                },
-                {
-                  offset: 1,
-                  color: '#AE0BFF'
-                }
-              ])
+              color: '#2A6EE6'
+              //  new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              //   {
+              //     offset: 0,
+              //     color: '#9C2ED3'
+              //   },
+              //   {
+              //     offset: 1,
+              //     color: '#AE0BFF'
+              //   }
+              // ])
             },
             areaStyle: {
               color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
-                  color: '#9C2ED3'
+                  color: 'rgba(156,46,211,0.16)'
                 },
                 {
                   offset: 1,
-                  color: '#AE0BFF'
+                  color: '#0B22FF'
                 }
               ]),
               opacity: 0.4
@@ -138,11 +149,11 @@ export default {
                 color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: '#2529E9'
+                    color: ' #FF6600'
                   },
                   {
                     offset: 1,
-                    color: '#03042F'
+                    color: 'rgba(4,4,42,0.30)'
                   }
                 ])
               }
@@ -158,7 +169,7 @@ export default {
         ]
       }
 
-      option && this.dataChart.setOption(option)
+      this.option && this.dataChart.setOption(this.option)
     }
   }
 }
@@ -178,7 +189,7 @@ export default {
   }
   #dataEchart {
     width: 4.3rem;
-    height: 4.3rem;
+    height: 4.1rem;
     margin: 0 auto;
   }
 }

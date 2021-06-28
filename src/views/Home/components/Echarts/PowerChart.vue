@@ -12,19 +12,27 @@ export default {
   components: {},
   data() {
     return {
-      powerChart: ''
+      powerChart: '',
+      option: {}
     }
   },
   computed: {},
   watch: {},
   mounted() {
     this.initChart()
+    window.addEventListener('resize', this.resizeFn)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeFn)
   },
   methods: {
+    resizeFn() {
+      this.powerChart.resize()
+    },
     initChart() {
       const chartDom = document.getElementById('powerEchart')
       this.powerChart = this.$echarts.init(chartDom)
-      const option = {
+      this.option = {
         color: ['#AE0BFF', 'red'],
         legend: {
           bottom: 20,
@@ -119,6 +127,7 @@ export default {
             label: {
               normal: {
                 formatter: params => {
+                  console.log(params)
                   return this.$t(`home.${params}`)
                 }
               }
@@ -153,7 +162,7 @@ export default {
         ]
       }
 
-      option && this.powerChart.setOption(option)
+      this.option && this.powerChart.setOption(this.option)
     }
   }
 }
@@ -173,7 +182,7 @@ export default {
   }
   #powerEchart {
     width: 4.3rem;
-    height: 4.3rem;
+    height: 4.1rem;
     margin: 0 auto;
   }
 }

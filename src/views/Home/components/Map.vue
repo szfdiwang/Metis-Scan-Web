@@ -2,13 +2,39 @@
   <div class="map-box">
     <!-- left -->
     <div class="left">
-      <div class="compute-center-echart"></div>
+      <div class="compute-center-echart">
+        <div class="top">
+          <p class="round"></p>
+          <img src="../../../assets/img/home/wave6.svg" alt="" class="wave" />
+        </div>
+        <div class="compute-mid">
+          <p class="computeCenterTitle">
+            {{ $t('home.computeCenter') }}
+          </p>
+          <div class="compute-img-box">
+            <el-row :gutter="40">
+              <el-col :span="8">
+                <img src="../../../assets/img/home/left-round1.svg" alt="" />
+              </el-col>
+              <el-col :span="8">
+                <img src="../../../assets/img/home/left-round2.svg" alt="" />
+              </el-col>
+              <el-col :span="8">
+                <img src="../../../assets/img/home/left-round3.svg" alt="" />
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+        <div class="compute-bottom">
+          <img src="../../../assets/img/home/point.svg" alt="" />
+        </div>
+      </div>
       <div class="top-echart-data">
         <PowerChart />
       </div>
       <div class="left-cell">
-        <img src="../../../assets/img/home/left-round.svg" alt="" />
         <img src="../../../assets/img/home/left-cell.svg" alt="" />
+        <img src="../../../assets/img/home/left-round.svg" alt="" />
       </div>
       <div class="bottom-map">
         <img src="../../../assets/img/home/left-bottom-map.svg" alt="" />
@@ -46,7 +72,33 @@
       <div class="gap right-strip">
         <img src="../../../assets/img/home/wave5.png" alt="" />
       </div>
-      <div id="data-center-charts"></div>
+      <div class="data-center-charts">
+        <div class="top">
+          <p class="round" style="background: #0053fc"></p>
+          <img src="../../../assets/img/home/wave6.svg" alt="" class="wave" />
+        </div>
+        <div class="compute-mid">
+          <p class="computeCenterTitle">
+            {{ $t('home.computeCenter') }}
+          </p>
+          <div class="compute-img-box">
+            <el-row :gutter="40">
+              <el-col :span="8">
+                <img src="../../../assets/img/home/right-round1.svg" alt="" />
+              </el-col>
+              <el-col :span="8">
+                <img src="../../../assets/img/home/right-round2.svg" alt="" />
+              </el-col>
+              <el-col :span="8">
+                <img src="../../../assets/img/home/right-round3.svg" alt="" />
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+        <div class="compute-bottom">
+          <img src="../../../assets/img/home/point.svg" alt="" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -78,17 +130,52 @@ export default {
   .gap > img {
     width: 100%;
   }
+  .compute-center-echart,
+  .data-center-charts {
+    border: 1px solid #333352;
+    height: 3.96rem;
+    .top {
+      display: flex;
+      justify-content: center;
+      margin: 0.2rem 0 0.3rem;
+      .round {
+        width: 0.33rem;
+        height: 0.33rem;
+        background: #dd181f;
+        border-radius: 50%;
+      }
+      .wave {
+        width: 3.5rem;
+        margin-left: 0.2rem;
+      }
+    }
+    .compute-mid {
+      width: 100%;
+      .computeCenterTitle {
+        font-family: BebasNeueBold;
+        font-size: 0.32rem;
+        color: #dee9ff;
+        letter-spacing: 0;
+        text-align: center;
+        line-height: 0.48rem;
+        font-weight: 700;
+      }
+      .compute-img-box {
+        display: flex;
+        justify-content: center;
+        margin: 0.35rem 0;
+      }
+    }
+    .compute-bottom {
+      width: 4.7rem;
+      margin: 0 auto;
+    }
+  }
   .left {
     flex: 1;
     width: 4.96rem;
-    border: 1px solid red;
-    .compute-center-echart {
-      height: 3.96rem;
-      border: 1px solid yellow;
-    }
     .top-echart-data {
-      height: 5.05rem;
-      border: 1px solid yellow;
+      height: 4.6rem;
     }
     .left-cell,
     .bottom-map {
@@ -96,19 +183,17 @@ export default {
         width: 100%;
       }
     }
-    .left-cell {
+    .left-cell img:not(:first-child) {
       margin: 0.33rem 0;
     }
   }
   .mid {
     width: 9.1rem;
-    border: 1px solid red;
     .title {
       display: flex;
       height: 2rem;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid yellow;
       padding: 0 0.3rem;
       .text {
         height: 0.48rem;
@@ -124,9 +209,9 @@ export default {
     .earth-box {
       width: 100%;
       height: 8.87rem;
-      border: 1px solid yellow;
     }
     .footer {
+      margin: 0 0.3rem;
       margin-top: 0.6rem;
       img {
         width: 100%;
@@ -136,26 +221,18 @@ export default {
   .right {
     flex: 1;
     width: 4.96rem;
-    border: 1px solid red;
     .top-map {
       height: 2rem;
-      border: 1px solid red;
       img {
         width: 100%;
       }
     }
     .right-strip {
-      margin: 0.15rem 0;
+      margin: 0.25rem 0;
     }
     .right-data-echarts {
       width: 100%;
-      height: 5.18rem;
-      border: 1px solid yellow;
-    }
-    #data-center-charts {
-      width: 100%;
-      height: 3.96rem;
-      border: 1px solid yellow;
+      height: 4.58rem;
     }
   }
 }

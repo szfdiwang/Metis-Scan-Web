@@ -1,3 +1,30 @@
 .el-scrollbar__wrap {
   overflow-x: hidden !important;
 }
+
+.el-table::before,
+.el-table::after {
+  z-index: inherit;
+  height: 0px !important;
+}
+
+.el-table,
+.el-table thead {
+  color: #fff !important;
+}
+
+.el-table td,
+.el-table th.is-leaf,
+.el-table--border,
+.el-table--group {
+  border: none !important;
+}
+
+.el-table__header {
+  border: none !important;
+  border-collapse: collapse !important;
+}
+.el-table,
+.el-table__expanded-cell {
+  background: #05052e;
+}
