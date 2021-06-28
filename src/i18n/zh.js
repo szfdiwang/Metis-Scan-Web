@@ -1,3 +1,4 @@
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 export default {
   menu: {
     home: '首页',
@@ -81,5 +82,6 @@ export default {
     to: '至',
     totalTaskDesc: '全网中每个已完成任务的参与人数的总和',
     center: '计算中心与数据中心'
-  }
+  },
+  ...zhLocale
 }

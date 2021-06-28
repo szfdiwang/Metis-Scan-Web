@@ -17,7 +17,13 @@
         style="width: 100%"
         :row-style="{ height: '.4rem' }"
         :cell-style="{ padding: 0 }"
-        :header-cell-style="{ backgroundColor: '#05052E', color: '#fff', border: 'none' }"
+        :header-cell-style="{
+          backgroundColor: '#05052E',
+          height: '0.3rem',
+          lineHeight: '0.1rem',
+          color: '#fff',
+          border: 'none'
+        }"
       >
         <el-table-column prop="rank" :label="$t('common.rank')" width="100">
           <template slot-scope="scope">
@@ -62,6 +68,19 @@
           <!-- <template slot-scope="scope"> </template> -->
         </el-table-column>
       </el-table>
+      <div class="page-box">
+        <p></p>
+        <el-Pagination
+          background
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="curPage"
+          :page-sizes="[10, 20, 50]"
+          :page-size="pageSize"
+          layout="total, sizes, prev, pager, next"
+          :total="totalNum"
+        ></el-Pagination>
+      </div>
     </div>
 
     <img src="../../../assets/img/home/table-bg.svg" alt="" class="bg-img" />
@@ -73,6 +92,9 @@ export default {
   components: {},
   data() {
     return {
+      curPage: 1,
+      totalNum: 10,
+      pageSize: 10,
       curTab: 'power',
       tableData: [
         {
@@ -217,6 +239,8 @@ export default {
   watch: {},
   mounted() {},
   methods: {
+    handleCurrentChange() {},
+    handleSizeChange() {},
     selectRank(type) {
       console.log(type)
       this.curTab = type
@@ -235,9 +259,26 @@ export default {
     position: relative;
     z-index: 100;
   }
+  .page-box {
+    display: flex;
+    justify-content: space-between;
+    .el-pagination {
+      margin-top: 0.1rem;
+      ::v-deep .el-input__inner {
+        background: #303047;
+        border-color: #303047;
+        color: #fff;
+      }
+      ::v-deep .btn-prev,
+      ::v-deep .btn-next {
+        background: #303047;
+        border-color: #303047;
+        color: #fff;
+      }
+    }
+  }
   .tabs-box {
     display: flex;
-    margin-bottom: 0.1rem;
     margin-left: 0.1rem;
     .tabs-item-box {
       position: relative;
@@ -269,15 +310,21 @@ export default {
     }
   }
   ::v-deep .el-table__body,
-  .el-table {
-    border-spacing: 0 8px;
+  ::v-deep .el-table {
+    border-spacing: 0 0.08rem;
     border-collapse: separate;
     table-layout: fixed;
-    background: #05052e;
+    background: #05052e; // 行背景部分颜色
     border: none !important;
   }
+
+  ::v-deep .el-table__header-wrapper,
+  ::v-deep .el-table__header {
+    height: 0.3rem;
+    line-height: 0.1rem;
+  }
   ::v-deep .el-table tr {
-    background: #080c3d !important;
+    background: #080c3d !important; // 行内容部分颜色
     border: none !important;
   }
   ::v-deep .el-table__row {

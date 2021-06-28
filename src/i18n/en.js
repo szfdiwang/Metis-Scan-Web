@@ -1,3 +1,4 @@
+import enLocale from 'element-ui/lib/locale/lang/en'
 export default {
   menu: {
     home: 'HOME',
@@ -80,5 +81,6 @@ export default {
     to: 'to',
     totalTaskDesc: 'The sum of the participants number of each completed taks in the whole network',
     center: 'Computing Center & Data Center'
-  }
+  },
+  ...enLocale
 }
