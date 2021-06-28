@@ -19,8 +19,7 @@ import {
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
 locale.use(lang)
-const ary = [Menu, Submenu, MenuItem, MenuItemGroup, Scrollbar, Input, Row, Col, Pagination, Select, Steps, step]
-const ary = [Menu, Submenu, MenuItem, MenuItemGroup, Scrollbar, Input, Row, Col, Pagination, Select, Table,
+const ary = [Menu, Submenu, MenuItem, MenuItemGroup, Scrollbar, Input, Row, Col, Pagination, Select, Table, Steps, step,
     TableColumn
 ]
 ary.forEach(component => Vue.use(component))
