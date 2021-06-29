@@ -14,13 +14,13 @@
           <div class="compute-img-box">
             <el-row :gutter="40">
               <el-col :span="8">
-                <img src="../../../assets/img/home/left-round1.svg" alt="" />
+                <img src="../../../assets/img/home/left-round1.svg" alt="" class="left-round1" />
               </el-col>
               <el-col :span="8">
-                <img src="../../../assets/img/home/left-round2.svg" alt="" />
+                <img src="../../../assets/img/home/left-round2.svg" alt="" class="left-round2" />
               </el-col>
               <el-col :span="8">
-                <img src="../../../assets/img/home/left-round3.svg" alt="" />
+                <img src="../../../assets/img/home/left-round3.svg" alt="" class="left-round3" />
               </el-col>
             </el-row>
           </div>
@@ -49,11 +49,14 @@
         </p>
         <img src="../../../assets/img/home/round-single-right.svg" alt="" />
       </div>
-      <div class="earth-box">
+      <div class="earth-wrapper">
         <EarthChart />
       </div>
       <div class="footer">
-        <img src="../../../assets/img/home/bottom-line1.svg" alt="" />
+        <div class="infinite-img-box">
+          <img src="../../../assets/img/home/bottom-line1.svg" alt="" />
+          <img src="../../../assets/img/home/bottom-line1.svg" alt="" />
+        </div>
         <img src="../../../assets/img/home/bottom-line2.png" alt="" />
       </div>
     </div>
@@ -84,13 +87,13 @@
           <div class="compute-img-box">
             <el-row :gutter="40">
               <el-col :span="8">
-                <img src="../../../assets/img/home/right-round1.svg" alt="" />
+                <img src="../../../assets/img/home/right-round1.svg" alt="" class="right-round1" />
               </el-col>
               <el-col :span="8">
-                <img src="../../../assets/img/home/right-round2.svg" alt="" />
+                <img src="../../../assets/img/home/right-round2.svg" alt="" class="right-round2" />
               </el-col>
               <el-col :span="8">
-                <img src="../../../assets/img/home/right-round3.svg" alt="" />
+                <img src="../../../assets/img/home/right-round3.svg" alt="" class="right-round3" />
               </el-col>
             </el-row>
           </div>
@@ -164,6 +167,28 @@ export default {
         display: flex;
         justify-content: center;
         margin: 0.35rem 0;
+        .left-round1 {
+          animation: rotate 1.5s linear infinite;
+        }
+        .left-round2 {
+          animation: rotate 5s linear infinite;
+          animation-delay: 0.2s;
+        }
+        .left-round3 {
+          animation: rotate 2s linear infinite;
+          animation-delay: 0.4s;
+        }
+        .right-round1 {
+          animation: rotate-reverse 1.5s linear infinite;
+        }
+        .right-round2 {
+          animation: rotate-reverse 5s linear infinite;
+          animation-delay: 0.2s;
+        }
+        .right-round3 {
+          animation: rotate-reverse 2s linear infinite;
+          animation-delay: 0.4s;
+        }
       }
     }
     .compute-bottom {
@@ -206,13 +231,20 @@ export default {
         font-weight: 700;
       }
     }
-    .earth-box {
+    .earth-wrapper {
       width: 100%;
       height: 8.87rem;
     }
     .footer {
       margin: 0 0.3rem;
       margin-top: 0.6rem;
+      overflow: hidden;
+      .infinite-img-box {
+        display: flex;
+        img {
+          animation: scroll-left 5s linear infinite normal;
+        }
+      }
       img {
         width: 100%;
       }

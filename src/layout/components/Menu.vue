@@ -1,7 +1,7 @@
 <template>
   <ul class="menu-box">
     <li v-for="menu in menuList" :key="menu.name" class="menu-item-box pointer" @click="link(menu)">
-      <div class="menu-wrapper-box pointer" :class="{ active: activeIndex === menu.menuIndex }"></div>
+      <div class="menu-wrapper-box pointer" :class="{ active: $route.path.includes(menu.path) }"></div>
       <p class="menu-text-box pointer">{{ menu.label }}</p>
     </li>
   </ul>
@@ -15,6 +15,9 @@ export default {
     }
   },
   computed: {
+    // currentUrl() {
+    //   return this.$route
+    // },
     menuList() {
       return [
         {
@@ -38,6 +41,9 @@ export default {
         { menuIndex: 4, name: 'task', label: this.$t('menu.task'), path: '/task' }
       ]
     }
+  },
+  mounted() {
+    console.log(this.$route.path)
   },
   methods: {
     link(item) {

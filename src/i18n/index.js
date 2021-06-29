@@ -18,7 +18,7 @@ const identifyLanguage = function () {
 }
 identifyLanguage()
 const i18n = new VueI18n({
-  locale: sessionStorage.getItem('lang') || browserLanguage,
+  locale: localStorage.getItem('lang') || browserLanguage,
   messages: {
     zh,
     en

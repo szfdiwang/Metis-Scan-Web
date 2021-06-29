@@ -10,7 +10,7 @@ module.exports = {
     open: true,
     proxy: {
       '/apis': {
-        target: 'http://10.10.8.183:8787/',
+        target: 'http://10.10.8.183:8787/', // 代理接口位置
         changeOrigin: true,
         pathRewrite: {
           '^/apis': ''

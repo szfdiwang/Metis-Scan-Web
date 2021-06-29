@@ -18,7 +18,6 @@
         :row-style="{ height: '.4rem' }"
         :cell-style="{ padding: 0 }"
         :header-cell-style="{
-          backgroundColor: '#05052E',
           height: '0.3rem',
           lineHeight: '0.1rem',
           color: '#fff',
@@ -82,7 +81,6 @@
         ></el-Pagination>
       </div>
     </div>
-
     <img src="../../../assets/img/home/table-bg.svg" alt="" class="bg-img" />
   </div>
 </template>
@@ -309,21 +307,28 @@ export default {
       }
     }
   }
-  ::v-deep .el-table__body,
-  ::v-deep .el-table {
+  ::v-deep .el-table__body {
     border-spacing: 0 0.08rem;
     border-collapse: separate;
     table-layout: fixed;
-    background: #05052e; // 行背景部分颜色
     border: none !important;
+  }
+  ::v-deep .el-table {
+    background: transparent !important; // 整体背景色
+  }
+  ::v-deep .el-table th,
+  ::v-deep .el-table__header tr {
+    background: transparent !important; // 使头部透明
   }
 
   ::v-deep .el-table__header-wrapper,
   ::v-deep .el-table__header {
     height: 0.3rem;
     line-height: 0.1rem;
+    background-color: transparent;
   }
-  ::v-deep .el-table tr {
+
+  ::v-deep .el-table .el-table__body tr {
     background: #080c3d !important; // 行内容部分颜色
     border: none !important;
   }
@@ -341,10 +346,6 @@ export default {
     left: 0;
     z-index: 10;
   }
-  // ::v-deep .el-table td,
-  // .el-table th {
-  //   padding: 0.08rem 0 !important;
-  // }
 
   .power-box {
     display: flex;

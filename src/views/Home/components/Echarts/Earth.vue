@@ -14,22 +14,22 @@ export default {
   components: {},
   data() {
     return {
-      chart: '',
-      geoCoordMap: {
-        南宁: [108.479, 23.1152],
-        广州: [113.5107, 23.2196],
-        重庆: [107.7539, 30.1904],
-        芬兰: [24.909912, 60.169095],
-        美国: [-100.696295, 33.679979],
-        日本: [139.710164, 35.706962],
-        韩国: [126.979208, 37.53875],
-        瑞士: [7.445147, 46.956241],
-        东南亚: [117.53244, 5.300343],
-        澳大利亚: [135.193845, -25.304039],
-        德国: [13.402393, 52.518569],
-        英国: [-0.126608, 51.208425],
-        加拿大: [-102.646409, 59.994255]
-      }
+      chart: ''
+      // geoCoordMap: {
+      //   // 南宁: [108.479, 23.1152],
+      //   // 广州: [113.5107, 23.2196],
+      //   重庆: [107.7539, 30.1904]
+      //   // 芬兰: [24.909912, 60.169095],
+      //   // 美国: [-100.696295, 33.679979],
+      //   // 日本: [139.710164, 35.706962],
+      //   // 韩国: [126.979208, 37.53875],
+      //   // 瑞士: [7.445147, 46.956241],
+      //   // 东南亚: [117.53244, 5.300343],
+      //   // 澳大利亚: [135.193845, -25.304039],
+      //   // 德国: [13.402393, 52.518569],
+      //   // 英国: [-0.126608, 51.208425],
+      //   // 加拿大: [-102.646409, 59.994255]
+      // }
     }
   },
   computed: {},
@@ -47,78 +47,47 @@ export default {
     initChart() {
       this.chart = this.$echarts.init(document.getElementById('earth-map'))
       const option = {
-        backgroundColor: 'transport',
+        backgroundColor: 'rgb(0 0 0 / 0%)',
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
+          transitionDuration: 0
         },
+        dataZoom: [
+          {
+            moveOnMouseWheel: false,
+            moveOnMouseMove: true,
+            preventDefaultMouseMove: true
+          }
+        ],
         globe: {
-          roam: false,
           environment: 'auto',
           baseTexture: worldImg, // this.mapChart, //
+          baseColor: '#fff',
           shading: 'color',
-          light: {
-            main: {
-              color: '',
-              intensity: 1,
-              shadow: false
-            },
-            ambientCubemap: {
-              exposure: 2,
-              diffuseIntensity: 2,
-              specularIntensity: 2
-            }
-          },
+          // light: {
+          //   main: {
+          //     color: '',
+          //     intensity: 1,
+          //     shadow: false
+          //   },
+          //   ambientCubemap: {
+          //     exposure: 2,
+          //     diffuseIntensity: 2,
+          //     specularIntensity: 2
+          //   }
+          // },
           viewControl: {
-            autoRotate: false,
+            autoRotateSpeed: 10,
+            autoRotate: true,
             animation: true,
-            zoomSensitivity: 0
-          },
-          postEffect: {
-            enable: true
+            zoomSensitivity: 0,
+            autoRotateDirection: 5
           }
         },
         series: [
           {
-            name: 'lines3D',
-            type: 'lines3D',
-            coordinateSystem: 'globe',
-            effect: {
-              show: true,
-              period: 2,
-              trailWidth: 3,
-              trailLength: 0.5,
-              trailOpacity: 1,
-              trailColor: '#0087f4'
-            },
-            blendMode: 'lighter',
-            lineStyle: {
-              width: 1,
-              color: '#0087f4',
-              opacity: 0.2
-            },
-            data: [],
-            //		        data: [{
-            //		            from: 'A',
-            //		            to: 'B',
-            //		            coords: [
-            //		                [-83.69501541554166, -75.76453333240994],
-            //						[105.18, 37.51]
-            //		            ],
-            //		            value:"2013.48"
-            //		        }, {
-            //		            from: 'A',
-            //		            to: 'C',
-            //		            coords: [
-            //		                [118.377173, 31.337123],
-            //		                [105.18, 37.51]
-            //		            ],
-            //		            value:"2013.48"
-            //		        }],
-            silent: false
-          },
-          {
             // 点
-            name: '景区',
+            name: '数据中心',
             //		        type: 'effectScatter',
             //		        coordinateSystem: 'bmap',
             type: 'scatter3D',
@@ -165,16 +134,6 @@ export default {
             itemStyle: {
               color: 'rgb(29,183,255)'
             },
-            //		        data: [{
-            //		            'name': 'A',
-            //		            'value': [105.18, 37.51, 1500]
-            //		        }, {
-            //		            'name': 'B',
-            //		            'value': [118.393252, 31.15576, 1500]
-            //		        }, {
-            //		            'name': 'C',
-            //		            'value': [117.989662, 31.293115, 1500]
-            //		        }]
             data: [
               [117.11, 34.15],
               [118.58, 32.01],
@@ -197,13 +156,16 @@ export default {
 .earth-box {
   width: 100%;
   display: flex;
+  background: transparent;
+  border-radius: 50%;
   align-items: center;
   justify-content: center;
   #earth-map {
     width: 6.8rem;
     height: 6.8rem;
-    z-index: 100;
     position: relative;
+    background: transparent;
+    z-index: 100;
   }
   .out-earth {
     width: 9.1rem;
