@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { homeApi } from '@/api/index'
+console.log('homeApi', homeApi)
 export default {
   components: {},
   data() {
@@ -53,8 +55,16 @@ export default {
     }
   },
   watch: {},
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.initGlobalData()
+  },
+  methods: {
+    initGlobalData() {
+      homeApi.getGlobalState({}).then(res => {
+        console.log(res)
+      })
+    }
+  }
 }
 </script>
 

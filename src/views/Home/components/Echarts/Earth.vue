@@ -80,8 +80,7 @@ export default {
             autoRotateSpeed: 10,
             autoRotate: true,
             animation: true,
-            zoomSensitivity: 0,
-            autoRotateDirection: 5
+            zoomSensitivity: 0
           }
         },
         series: [
