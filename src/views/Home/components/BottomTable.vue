@@ -86,6 +86,7 @@
 </template>
 
 <script>
+import { homeApi } from '@/api/index'
 export default {
   components: {},
   data() {
@@ -235,13 +236,35 @@ export default {
     }
   },
   watch: {},
-  mounted() {},
+  mounted() {
+    this.curTab === 'power' ? this.initPowerRank() : this.initActivityRank()
+  },
   methods: {
     handleCurrentChange() {},
     handleSizeChange() {},
     selectRank(type) {
-      console.log(type)
       this.curTab = type
+      this.type === 'power' ? this.initPowerRank() : this.initActivityRank()
+    },
+    initActivityRank() {
+      homeApi
+        .getActivityRanking({
+          pageNo: this.curPage,
+          pageSize: this.pageSize
+        })
+        .then(res => {
+          console.log(res)
+        })
+    },
+    initPowerRank() {
+      homeApi
+        .getPowerRanking({
+          pageNo: this.curPage,
+          pageSize: this.pageSize
+        })
+        .then(res => {
+          console.log(res)
+        })
     }
   }
 }

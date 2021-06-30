@@ -8,11 +8,13 @@
 </template>
 
 <script>
+import { homeApi } from '@/api/index'
 export default {
   components: {},
   data() {
     return {
       powerChart: '',
+      powerData: [],
       option: {}
     }
   },
@@ -29,9 +31,12 @@ export default {
     resizeFn() {
       this.powerChart.resize()
     },
-    initChart() {
+    async initChart() {
       const chartDom = document.getElementById('powerEchart')
       this.powerChart = this.$echarts.init(chartDom)
+      const res = await homeApi.getPowerTrend({ startDate: '2021-6-30', days: 1 })
+      console.log('dataCahrtData:', res)
+      this.powerData = res.code === 0 ? res.data : []
       this.option = {
         color: ['#AE0BFF', 'red'],
         legend: {
@@ -95,7 +100,7 @@ export default {
         },
         series: [
           {
-            data: [220, 132, 91, 34, 290, 133, 320, 10, 22, 99],
+            data: this.powerData,
             type: 'line',
             lineStyle: {
               color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
