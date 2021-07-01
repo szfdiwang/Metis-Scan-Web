@@ -31,17 +31,19 @@
           <div>xxxxxxxxx银行</div>
           <div>xxxxxxxxxxxxxxxxxxxx</div>
         </div>
-        <div style="width: 1.99rem; color: #fec43e" @click="$router.push('/node/NodeDetail')">detail</div>
+        <div style="width: 1.99rem; color: #fec43e" @click="$router.push('/node/NodeDetail')">
+          {{ $t('node.Detail') }}
+        </div>
         <div style="width: 4.18rem" class="power">
           <div>
-            <div>CPU:xxx</div>
-            <div>Memory:xxx</div>
-            <div>Bandwidth:xxx</div>
+            <div>CPU: xxx</div>
+            <div>{{ $t('node.Memory') }}: xxx</div>
+            <div>{{ $t('node.Bandwidth') }}: xxx</div>
           </div>
           <div>
-            <div>Remaining:xxx%</div>
-            <div>Remaining:xxx%</div>
-            <div>Remaining:xxx%</div>
+            <div>{{ $t('node.Remaining') }}: xxx%</div>
+            <div>{{ $t('node.Remaining') }}: xxx%</div>
+            <div>{{ $t('node.Remaining') }}: xxx%</div>
           </div>
         </div>
         <div style="width: 2.04rem">100</div>
@@ -50,10 +52,6 @@
           <div>
             <img src="../../assets/img/excel/hot.svg" alt="" />
             <img src="../../assets/img/excel/hot.svg" alt="" />
-            <img src="../../assets/img/excel/hot.svg" alt="" />
-            <img src="../../assets/img/excel/hot.svg" alt="" />
-          </div>
-          <div>
             <img src="../../assets/img/excel/hot.svg" alt="" />
             <img src="../../assets/img/excel/hot.svg" alt="" />
             <img src="../../assets/img/excel/hot.svg" alt="" />
@@ -67,7 +65,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage4"
-        :page-sizes="[100, 200, 300, 400]"
+        :page-sizes="[4,100, 200, 300, 400]"
         :page-size="100"
         layout="total, sizes, prev, pager, next, jumper"
         :total="400"
@@ -141,7 +139,7 @@ export default {
     width: 18.4rem;
     height: 0.94rem;
     background: #080c3d;
-    border-radius: 4px;
+    border-radius: 0.04rem;
     display: flex;
     align-items: center;
     .rankingTdImg {
@@ -163,7 +161,8 @@ export default {
     width: 18.4rem;
     height: 0.4rem;
     background: #080c3d;
-    border-radius: 4px;
+    border-radius: 0.04rem;
+    margin-left: 0.1rem;
   }
   /deep/ .el-select el-select--mini {
     margin-left: 16rem;

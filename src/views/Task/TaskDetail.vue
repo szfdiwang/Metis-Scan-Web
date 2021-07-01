@@ -15,34 +15,34 @@
           <el-step title="2020-03-13 10:01:23" description="Computation failed"></el-step>
         </el-steps>
       </div>
-      <div class="btn">VIEW THE TASK EVENTS</div>
+      <div class="btn" @click="TaskLog">{{ $t('task.VIEWTHETASKEVENTS') }}</div>
     </div>
     <div class="participants">
       <img src="../../assets/img/node/3.button.svg" alt="" />
-      <span class="text">PARTICIPANTS INFORMATION</span>
+      <span class="text">{{ $t('task.PARTICIPANTSINFORMATION') }}</span>
     </div>
     <div class="participantsData">
       <table>
         <tbody>
           <tr>
-            <td>Sponsor:</td>
+            <td>{{ $t('task.sponsor') }} :</td>
             <td>XXXXXXXXXXXX</td>
-            <td>Identifier：XXXXXXXXXXXXXXXXXXXXX</td>
+            <td>{{ $t('task.Id') }} ：XXXXXXXXXXXXXXXXXXXXX</td>
           </tr>
           <tr>
-            <td>Result receiver:</td>
+            <td>{{ $t('task.ResultReceiver') }} :</td>
             <td>1.XXXX</td>
-            <td>Identifier：XXXXXXXXXXXXXXXXXXXXX</td>
+            <td>{{ $t('task.Id') }} ：XXXXXXXXXXXXXXXXXXXXX</td>
           </tr>
           <tr>
             <td></td>
             <td>2.XXXX</td>
-            <td>Identifier：XXXXXXXXXXXXXXXXXXXXX</td>
+            <td>{{ $t('task.Id') }} ：XXXXXXXXXXXXXXXXXXXXX</td>
           </tr>
           <tr>
-            <td>Algorithm provider:</td>
+            <td>{{ $t('task.AlgorithmProvider') }} :</td>
             <td>XXXXXXXXXXXX</td>
-            <td>Identifier：XXXXXXXXXXXXXXXXXXXXX</td>
+            <td>{{ $t('task.Id') }} ：XXXXXXXXXXXXXXXXXXXXX</td>
           </tr>
         </tbody>
       </table>
@@ -50,13 +50,13 @@
     <div class="Data">
       <div class="dataPic">
         <img src="../../assets/img/node/3.button.svg" alt="" />
-        <span class="text">DATA PROVIDERS</span>
+        <span class="text">{{ $t('task.DATAPROVIDERS') }}</span>
       </div>
       <div class="precedence">
-        <div style="width: 1.2rem">NO.</div>
-        <div style="width: 3.12rem">Name</div>
-        <div style="width: 5.21rem">Identifier</div>
-        <div style="width: 3rem">Metadata name & ID</div>
+        <div style="width: 1.2rem">{{ $t('node.No') }}</div>
+        <div style="width: 3.12rem">{{ $t('task.Name') }}</div>
+        <div style="width: 5.21rem">{{ $t('task.Id') }}</div>
+        <div style="width: 3rem">{{ $t('task.MetadataNameID') }}</div>
       </div>
       <div class="precedence precedenceData" v-for="(item, index) in 5" :key="index">
         <div style="width: 1.24rem">
@@ -75,13 +75,13 @@
     <div class="Data">
       <div class="dataPic">
         <img src="../../assets/img/node/3.button.svg" alt="" />
-        <span class="text">DATA PROVIDERS</span>
+        <span class="text">{{ $t('task.PROVIDERS') }}</span>
       </div>
       <div class="precedence pres">
-        <div style="width: 1.24rem">NO.</div>
-        <div style="width: 3.12rem">Name</div>
-        <div style="width: 5.21rem">Identifier</div>
-        <div style="width: 3rem">Occupied resources</div>
+        <div style="width: 1.24rem">{{ $t('node.No') }}</div>
+        <div style="width: 3.12rem">{{ $t('task.Name') }}</div>
+        <div style="width: 5.21rem">{{ $t('task.Id') }}</div>
+        <div style="width: 3rem">{{ $t('task.OccupiedResources') }}</div>
       </div>
       <div class="precedence precedenceData" v-for="(item, index) in 5" :key="index">
         <div style="width: 1.24rem">
@@ -95,15 +95,49 @@
         <div style="width: 5.21rem">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
         <div style="width: 7rem" class="data">
           <span>CPU：xxxx</span>
-          <span style="margin: 0px 0.5rem">Memory： xxxx</span>
-          <span>Bandwidth:xxxx</span>
+          <span style="margin: 0px 0.5rem">{{ $t('node.Memory') }}：xxxx</span>
+          <span>{{ $t('node.Bandwidth') }}: xxxx</span>
         </div>
+      </div>
+    </div>
+    <!-- 日志板块 -->
+    <div class="TaskLog" v-if="show">
+      <div class="TaskLogTh">
+        <div style="width: 1.24rem">NO.</div>
+        <div style="width: 3.12rem">Event type</div>
+        <div style="width: 4.19rem">EVent maker</div>
+        <div style="width: 3.7rem">Generation time</div>
+        <div>Event failed</div>
+      </div>
+      <div class="TaskLogTd" v-for="(item, index) in 5" :key="index">
+        <div style="width: 1.24rem">
+          <img src="../../assets/img/excel/1.svg" alt="" style="margin: 0.05rem" /><img
+            src="../../assets/img/node/2.icon3.svg"
+            alt=""
+            style="margin: 0.05rem"
+          />
+        </div>
+        <div style="width: 3.12rem">xxxxxxxxxxx</div>
+        <div style="width: 4.19rem">xxxxxxxxxxxxxxx</div>
+        <div style="width: 3.7rem">2021-2-2 12:23:59</div>
+        <div>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      show: false
+    }
+  },
+  methods: {
+    TaskLog() {
+      this.show = !this.show
+    }
+  }
+}
 </script>
 <style  lang='scss' scoped>
 .TakDetail {
@@ -155,7 +189,7 @@ export default {}
     }
   }
   .participants {
-    margin-left: 0.18rem;
+    margin-left: 0.28rem;
     position: relative;
     .text {
       position: absolute;
@@ -178,21 +212,13 @@ export default {}
     background-size: 100%;
     margin-bottom: 0.5rem;
     .dataPic {
-      margin-left: 0.08rem;
+      margin-left: 0.04rem;
       position: relative;
       .text {
         position: absolute;
         left: 0.5rem;
       }
     }
-    // tbody {
-    //   tr {
-    //     width: 1840px;
-    //     height: 40px;
-    //     background: #080c3d;
-    //     border-radius: 4px;
-    //   }
-    // }
     .precedence {
       display: flex;
       padding: 0px 0.15rem;
@@ -205,6 +231,22 @@ export default {}
       border-radius: 0.04rem;
       line-height: 0.4rem;
       margin: 0.1rem 0;
+    }
+  }
+  // 日志模块
+  .TaskLog {
+    padding: 0.4rem;
+    .TaskLogTh {
+      display: flex;
+    }
+    .TaskLogTd {
+      display: flex;
+      width: 18.4rem;
+      height: 0.4rem;
+      background: #080c3d;
+      border-radius: 0.04rem;
+      margin: 0.1rem 0px;
+      align-items: center;
     }
   }
 }

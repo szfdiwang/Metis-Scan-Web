@@ -71,9 +71,9 @@ const routes = [{
         component: () => import(/* webpackChunkName: "TaskDetail" */ '../views/Task/TaskDetail.vue')
       },
       {
-        path: '/task/Tasks',
-        name: 'Tasks',
-        component: () => import(/* webpackChunkName: "Tasks" */ '../views/Task/Tasks.vue')
+        path: '/task/TaskLog',
+        name: 'TaskLog',
+        component: () => import(/* webpackChunkName: "TaskLog" */ '../views/Task/TaskLog.vue')
       }
     ]
   }

@@ -11,35 +11,35 @@
       <table>
         <tbody>
           <tr>
-            <td>Data provider</td>
+            <td>{{ $t('data.Dataprovide') }}</td>
             <td>xxxxxxxxxxx</td>
-            <td>Number of fields(columns)</td>
-            <td>20</td>
+            <td>{{ $t('data.INFORMATIONOFFIFLDS') }}:</td>
+            <td>13,000</td>
           </tr>
           <tr>
-            <td>Size of data</td>
+            <td>{{ $t('data.Size0fData') }}</td>
             <td>2.0 GB</td>
-            <td>Number of data(rows)</td>
-            <td>3,000</td>
+            <td>{{ $t('data.NumberOfData') }}</td>
+            <td>20</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="Description">
-      <div>Description</div>
+      <div>{{ $t('data.Description') }}</div>
       <div class="ipt">xxxxxxxxx</div>
     </div>
     <div class="rankingListTop">
       <div><img src="../../assets/img/node/3.button.svg" alt="" /></div>
-      <div class="text">INFORMATION OF FIFLDS</div>
+      <div class="text">{{ $t('data.INFO') }}</div>
     </div>
     <div class="rankingTh">
-      <div style="width: 1.27rem">NO.</div>
-      <div style="width: 5.1rem">Field name</div>
-      <div style="width: 1.27rem">NO.</div>
-      <div style="width: 5.06rem">Field name</div>
-      <div style="width: 1.27rem">NO.</div>
-      <div style="width: 4.03rem">Field name</div>
+      <div style="width: 1.27rem">{{ $t('node.No') }}</div>
+      <div style="width: 5.1rem">{{ $t('data.FieldName') }}</div>
+      <div style="width: 1.27rem">{{ $t('node.No') }}</div>
+      <div style="width: 5.06rem">{{ $t('data.FieldName') }}</div>
+      <div style="width: 1.27rem">{{ $t('node.No') }}</div>
+      <div style="width: 4.03rem">{{ $t('data.FieldName') }}</div>
     </div>
     <div class="rankingList">
       <div class="rankingTd" v-for="(item, index) in 24" :key="index">
@@ -107,7 +107,7 @@ export default {}
     .text {
       position: absolute;
       top: 0.5rem;
-      left: 0.5rem;
+      left: 0.7rem;
     }
   }
   .rankingTh {

@@ -52,6 +52,15 @@ export default {
     ParticipatedTasks: 'Participated tasks',
     ActiveDegree: 'Active degree',
     NODE: 'NODE',
+    Memory: 'Memory',
+    Bandwidth: 'Bandwidth',
+    Remaining: 'Remaining',
+    Detail: 'detail',
+    metadata: 'Metadata',
+    Tasks: 'Tasks',
+    Size: ' Size',
+    Columns: 'Columns',
+    Rows: 'Rows',
     PARTICIPATINGNODESINTHEWHOLENETWORK: 'PARTICIPATING NODES IN THE WHOLE NETWORK'
   },
   data: {
@@ -63,7 +72,14 @@ export default {
     Status: 'Status',
     ParticipatedTasks: 'Participated tasks',
     DATA: 'DATA',
-    PIECESOFMETADATAINTHEWHOLENETWORK: 'PIECES OF METADATA IN THE WHOLE NETWORK'
+    PIECESOFMETADATAINTHEWHOLENETWORK: 'PIECES OF METADATA IN THE WHOLE NETWORK',
+    Dataprovide: 'Data provider',
+    INFORMATIONOFFIFLDS: 'INFORMATION OF FIFLDS',
+    Size0fData: 'Size of data',
+    NumberOfData: 'Number of data',
+    Description: 'Description',
+    INFO: 'INFORMATION OF FIFLDS',
+    FieldName: 'Field name'
   },
   task: {
     No: 'NO.',
@@ -78,7 +94,21 @@ export default {
     StatusItem: 'Status',
     TimeSpan: 'Time span',
     to: 'to',
+    Succeeded: 'Succeeded',
     totalTaskDesc: 'The sum of the participants number of each completed taks in the whole network',
-    center: 'Computing Center & Data Center'
+    center: 'Computing Center & Data Center',
+    PARTICIPANTSINFORMATION: 'PARTICIPANTS INFORMATION',
+    sponsor: 'Sponsor',
+    ResultReceiver: 'Result receiver',
+    AlgorithmProvider: 'Algorithm provider',
+    Id: 'Identifier',
+    DATAPROVIDERS: 'DATA PROVIDERS',
+    VIEWTHETASKEVENTS: 'VIEW THE TASK EVENTS',
+    Name: 'Name',
+    MetadataNameID: 'Metadata name & ID',
+    PROVIDERS: 'DATA PROVIDERS',
+    OccupiedResources: 'Occupied resources',
+    Capacity: 'Capacity'
+
   }
 }

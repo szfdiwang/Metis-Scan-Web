@@ -52,9 +52,11 @@
         <div>xxxxxxxxx任务</div>
         <div>xxxxxxxxxxxxxxxxxxxx</div>
       </div>
-      <div style="width: 1.99rem; color: #fec43e" @click="$router.push('/task/TaskDetail')">detail</div>
+      <div style="width: 1.99rem; color: #fec43e" @click="$router.push('/task/TaskDetail')">
+        {{ $t('node.Detail') }}
+      </div>
       <div style="width: 4.18rem">XXX BANK</div>
-      <div style="width: 2.04rem">Succeeded</div>
+      <div style="width: 2.04rem">{{ $t('task.Succeeded') }}</div>
       <div style="width: 2.62rem">2021-1-22 13:00:00</div>
       <div>12:22:59</div>
     </div>
@@ -63,13 +65,30 @@
 <script>
 export default {
   data() {
-    return {}
-  },
-  methods: {
-    imgEvent() {
-      this.imgList++
-      this.imgUrl = '../../assets/img/excel/1.svg'
-      console.log(this.imgUrl)
+    return {
+      options: [
+        {
+          value: '选项1',
+          label: '黄金糕'
+        },
+        {
+          value: '选项2',
+          label: '双皮奶'
+        },
+        {
+          value: '选项3',
+          label: '蚵仔煎'
+        },
+        {
+          value: '选项4',
+          label: '龙须面'
+        },
+        {
+          value: '选项5',
+          label: '北京烤鸭'
+        }
+      ],
+      value: ''
     }
   }
 }

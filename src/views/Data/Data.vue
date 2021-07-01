@@ -12,9 +12,9 @@
       <div class="rankingTh">
         <div style="width: 1.24rem">{{ $t('data.No') }}</div>
         <div style="width: 3.8rem">{{ $t('data.NameIdentifier') }}</div>
-        <div style="width: 1.99rem">{{ $t('data.Identifier') }}</div>
-        <div style="width: 4.18rem">{{ $t('data.DataProvider') }}</div>
-        <div style="width: 2.04rem">Size</div>
+        <div style="width: 2.1rem">{{ $t('data.Identifier') }}</div>
+        <div style="width: 2.9rem">{{ $t('data.DataProvider') }}</div>
+        <div style="width: 2.04rem">{{$t('node.Size')}}</div>
         <div style="width: 2.62rem">{{ $t('data.Status') }}</div>
         <div>{{ $t('data.ParticipatedTasks') }}</div>
       </div>
@@ -32,8 +32,8 @@
         <div>xxxxxxxxx任务</div>
         <div>xxxxxxxxxxxxxxxxxxxx</div>
       </div>
-      <div style="width: 1.99rem; color: #fec43e" @click="$router.push('/node/metaData')">detail</div>
-      <div style="width: 4.18rem">XXX BANK</div>
+      <div style="width: 2.1rem; color: #fec43e" @click="$router.push('/node/metaData')">{{ $t('node.Detail') }}</div>
+      <div style="width: 2.9rem">XXX BANK</div>
       <div style="width: 2.04rem">10</div>
       <div style="width: 2.62rem">200.0MB</div>
       <div>22</div>

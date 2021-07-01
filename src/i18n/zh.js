@@ -52,6 +52,15 @@ export default {
     ParticipatedTasks: '任务数量',
     ActiveDegree: '热度',
     NODE: '节点',
+    Memory: '内存',
+    Bandwidth: '带宽',
+    Remaining: '剩余',
+    Detail: '查看详情',
+    metadata: '元数据',
+    Tasks: '任务',
+    Size: '数据大小',
+    Columns: '字段数量',
+    Rows: '条数',
     PARTICIPATINGNODESINTHEWHOLENETWORK: '全网共1,222个参与方节点'
   },
   data: {
@@ -59,18 +68,23 @@ export default {
     NameIdentifier: '名称与ID',
     Identifier: '查看详情',
     DataProvider: '数据提供方',
-    Size: '',
     Status: '数据大小',
     ParticipatedTasks: '参与任务次数',
     DATA: '数据',
-    PIECESOFMETADATAINTHEWHOLENETWORK: '全网共122,222条元数据'
-
+    PIECESOFMETADATAINTHEWHOLENETWORK: '全网共122,222条元数据',
+    Dataprovide: '数据方',
+    INFORMATIONOFFIFLDS: '数据条数',
+    Size0fData: '数据大小',
+    NumberOfData: '字段数',
+    Description: '数据描述',
+    INFO: '字段信息',
+    FieldName: '字段名称'
   },
   task: {
     No: '序号',
     NameIdentifier: '名称与ID',
     Identifier: '查看详情',
-    Sponsor: '任务发起方',
+    Sponsor: '任务中的角色',
     Status: '状态',
     StartTime: '发起时间',
     TimeSpent: '用时',
@@ -79,7 +93,20 @@ export default {
     StatusItem: '任务状态',
     TimeSpan: '时间范围',
     to: '至',
+    Succeeded: '成功',
     totalTaskDesc: '全网中每个已完成任务的参与人数的总和',
-    center: '计算中心与数据中心'
+    center: '计算中心与数据中心',
+    PARTICIPANTSINFORMATION: '参与方信息',
+    sponsor: '发起方',
+    ResultReceiver: '结果方',
+    AlgorithmProvider: '算法提供方',
+    Id: '身份标识',
+    DATAPROVIDERS: '数据提供方',
+    VIEWTHETASKEVENTS: '查看任务日志',
+    Name: '名称',
+    MetadataNameID: '元数据名称 与 ID',
+    PROVIDERS: '算力提供方',
+    OccupiedResources: '算力占用信息',
+    Capacity: '任务中的角色'
   }
 }
