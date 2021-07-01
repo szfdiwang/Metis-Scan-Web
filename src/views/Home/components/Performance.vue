@@ -61,7 +61,7 @@ export default {
   methods: {
     initGlobalData() {
       homeApi.getGlobalState({}).then(res => {
-        console.log(res)
+        console.log('Performance', res)
       })
     }
   }

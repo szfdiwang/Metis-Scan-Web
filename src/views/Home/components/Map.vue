@@ -194,6 +194,9 @@ export default {
     .compute-bottom {
       width: 4.7rem;
       margin: 0 auto;
+      img {
+        width: 100%;
+      }
     }
   }
   .left {
@@ -233,11 +236,11 @@ export default {
     }
     .earth-wrapper {
       width: 100%;
-      height: 8.87rem;
+      height: 8.5rem;
+      margin-top: 1.12rem;
     }
     .footer {
       margin: 0 0.3rem;
-      margin-top: 0.6rem;
       overflow: hidden;
       .infinite-img-box {
         display: flex;

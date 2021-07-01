@@ -21,7 +21,7 @@ export default {
   computed: {},
   watch: {
     '$i18n.locale'(newValue) {
-      console.log('语言改变', newValue)
+      console.log('语言改变============>', newValue)
       // 不需要重新设置配置项，只需要手动触发一下setOption()
       this.dataChart.setOption(this.option)
     }
@@ -141,6 +141,7 @@ export default {
             label: {
               normal: {
                 formatter: params => {
+                  console.log('params========>', params)
                   return this.$t(`home.${params}`)
                 }
               }
