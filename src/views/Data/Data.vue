@@ -14,7 +14,7 @@
         <div style="width: 3.8rem">{{ $t('data.NameIdentifier') }}</div>
         <div style="width: 2.1rem">{{ $t('data.Identifier') }}</div>
         <div style="width: 2.9rem">{{ $t('data.DataProvider') }}</div>
-        <div style="width: 2.04rem">{{$t('node.Size')}}</div>
+        <div style="width: 2.04rem">{{ $t('node.Size') }}</div>
         <div style="width: 2.62rem">{{ $t('data.Status') }}</div>
         <div>{{ $t('data.ParticipatedTasks') }}</div>
       </div>
@@ -38,10 +38,13 @@
       <div style="width: 2.62rem">200.0MB</div>
       <div>22</div>
     </div>
+    <Pagination class="Pagination"></Pagination>
   </div>
 </template>
 <script>
+import Pagination from '../../components/Pagination.vue'
 export default {
+  components: { Pagination },
   data() {
     return {}
   },
@@ -114,6 +117,9 @@ export default {
         margin-right: 0.2rem;
       }
     }
+  }
+  .Pagination{
+    margin: 0.2rem 0.09rem;
   }
 }
 </style>

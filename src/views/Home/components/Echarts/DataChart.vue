@@ -8,11 +8,13 @@
 </template>
 
 <script>
+import { homeApi } from '@/api/index'
 export default {
   components: {},
   data() {
     return {
       dataChart: '',
+      dataCahrtData: [],
       option: {}
     }
   },
@@ -36,9 +38,13 @@ export default {
     resizeFn() {
       this.dataChart.resize()
     },
-    initChart() {
+    getData() {},
+    async initChart() {
       const chartDom = document.getElementById('dataEchart')
       this.dataChart = this.$echarts.init(chartDom)
+      const res = await homeApi.getDataTrend({ startDate: '2021-6-30', days: 1 })
+      console.log('dataCahrtData:', res)
+      this.dataCahrtData = res.code === 0 ? res.data : []
       this.option = {
         color: ['#2A6EE6', 'red'],
         legend: {
@@ -102,7 +108,7 @@ export default {
         },
         series: [
           {
-            data: [220, 132, 91, 34, 290, 133, 320, 10, 22, 99],
+            data: this.dataCahrtData,
             type: 'line',
             lineStyle: {
               color: '#2A6EE6'

@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home/Home.vue'
 /* Layout */
 import Layout from '@/layout'
-import Map from '@/views/Map/TestMap'
 
 Vue.use(VueRouter)
 
@@ -18,27 +17,22 @@ const routes = [{
     }]
   },
   {
-    path: '/map',
-    name: 'map',
-    component: Map // () => import(/* webpackChunkName: "map" */ '../views/Map/TestMap.vue')
-  },
-  {
     path: '/node',
     component: Layout,
     children: [{
         path: '/node/index',
         name: 'node',
-        component: () => import(/* webpackChunkName: "node" */ '../views/Node/Node.vue')
+        component: () => import( /* webpackChunkName: "node" */ '../views/Node/Node.vue')
       },
       {
         path: '/node/NodeDetail',
         name: 'nodeDetail',
-        component: () => import(/* webpackChunkName: "NodeDetail" */ '../views/Node/NodeDetail.vue')
+        component: () => import( /* webpackChunkName: "NodeDetail" */ '../views/Node/NodeDetail.vue')
       },
       {
         path: '/node/MetaData',
         name: 'MetaData',
-        component: () => import(/* webpackChunkName: "MetaData" */ '../views/Node/MetaData.vue')
+        component: () => import( /* webpackChunkName: "MetaData" */ '../views/Node/MetaData.vue')
       }
     ]
   },
@@ -48,12 +42,12 @@ const routes = [{
     children: [{
         path: '/data/index',
         name: 'data',
-        component: () => import(/* webpackChunkName: "data" */ '../views/Data/Data.vue')
+        component: () => import( /* webpackChunkName: "data" */ '../views/Data/Data.vue')
       },
       {
         path: '/data/DataDetail',
         name: 'dataDetail',
-        component: () => import(/* webpackChunkName: "DataDetail" */ '../views/Data/DataDetail.vue')
+        component: () => import( /* webpackChunkName: "DataDetail" */ '../views/Data/DataDetail.vue')
       }
     ]
   },
@@ -63,21 +57,25 @@ const routes = [{
     children: [{
         path: '/task/index',
         name: 'task',
-        component: () => import(/* webpackChunkName: "TaskHome" */ '../views/Task/Task.vue')
+        component: () => import( /* webpackChunkName: "TaskHome" */ '../views/Task/Task.vue')
       },
+
       {
         path: '/task/TaskDetail',
         name: 'taskDetail',
-        component: () => import(/* webpackChunkName: "TaskDetail" */ '../views/Task/TaskDetail.vue')
+        component: () => import( /* webpackChunkName: "TaskDetail" */ '../views/Task/TaskDetail.vue')
       },
       {
         path: '/task/TaskLog',
         name: 'TaskLog',
-        component: () => import(/* webpackChunkName: "TaskLog" */ '../views/Task/TaskLog.vue')
+        component: () => import( /* webpackChunkName: "TaskLog" */ '../views/Task/TaskLog.vue')
       }
     ]
+
   }
 ]
+
+
 
 const router = new VueRouter({
   mode: 'history',

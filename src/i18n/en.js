@@ -1,3 +1,4 @@
+import enLocale from 'element-ui/lib/locale/lang/en'
 export default {
   menu: {
     home: 'HOME',
@@ -110,5 +111,6 @@ export default {
     OccupiedResources: 'Occupied resources',
     Capacity: 'Capacity'
 
-  }
+  },
+  ...enLocale
 }

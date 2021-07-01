@@ -15,41 +15,9 @@
     </div>
     <div class="conent">
       <div class="conentTop">
-        <!-- <div @click="$router.push('/node/metaData')"><img src="../../assets/img/node/3.button.svg" alt="" /></div>
-        <div @click="$router.push('/task/TaskDetail')"><img src="../../assets/img/node/3.button2.svg" alt="" /></div> -->
         <div class="Metadata" :class="{ active: index === '0' }">{{ $t('node.metadata') }}：100</div>
         <div class="Tasks" :class="{ active: index === '1' }">{{ $t('node.Tasks') }}：200</div>
       </div>
-      <!-- <div class="ranking">
-        <div class="rankingTh">
-          <div style="width: 1.24rem">{{ $t('data.No') }}</div>
-          <div style="width: 3.8rem">{{ $t('data.NameIdentifier') }}</div>
-          <div style="width: 2.5rem">{{ $t('data.Identifier') }}</div>
-          <div style="width: 2.9rem">{{ $t('node.Size') }}</div>
-          <div style="width: 2.54rem">{{ $t('node.Columns') }}</div>
-          <div style="width: 2.62rem">{{ $t('node.Rows') }}</div>
-          <div>{{ $t('data.ParticipatedTasks') }}</div>
-        </div>
-      </div>
-      <div class="rankingTd" v-for="(item, index) in 5" :key="index">
-        <div style="width: 1.24rem" class="rankingTdImg">
-          <div>
-            <img src="../../assets/img/excel/1.svg" alt="" />
-          </div>
-          <div>
-            <img src="../../assets/img/node/2.icon3.svg" alt="" />
-          </div>
-        </div>
-        <div style="width: 3.8rem">
-          <div>xxxxxxxxx银行</div>
-          <div>xxxxxxxxxxxxxxxxxxxx</div>
-        </div>
-        <div style="width: 2.5rem; color: #fec43e">{{ $t('node.Detail') }}</div>
-        <div style="width: 2.9rem">10.0MB</div>
-        <div style="width: 2.54rem">10</div>
-        <div style="width: 2.62rem">5000</div>
-        <div>22</div>
-      </div> -->
     </div>
     <div class="tab">
       <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -80,7 +48,9 @@
                 <div>xxxxxxxxx银行</div>
                 <div>xxxxxxxxxxxxxxxxxxxx</div>
               </div>
-              <div style="width: 2.5rem; color: #fec43e">{{ $t('node.Detail') }}</div>
+              <div style="width: 2.5rem; color: #fec43e" @click="$router.push('/node/metaData')">
+                {{ $t('node.Detail') }}
+              </div>
               <div style="width: 2.9rem">10.0MB</div>
               <div style="width: 2.54rem">10</div>
               <div style="width: 2.62rem">5000</div>
@@ -127,13 +97,15 @@
           </div>
         </el-tab-pane>
       </el-tabs>
+      <Pagination class="Pagination"></Pagination>
     </div>
   </div>
 </template>
 <script>
-import BasicAreaChart from '../Home/components/Echarts/BasicAreaChart.vue'
+import BasicAreaChart from './components/BasicAreaChart.vue'
+import Pagination from '../../components/Pagination.vue'
 export default {
-  components: { BasicAreaChart },
+  components: { BasicAreaChart, Pagination },
   data() {
     return {
       index: '0',
@@ -242,8 +214,14 @@ export default {
   /deep/ #tab-second {
     width: 2.41rem;
     height: 0.4rem;
-    background: url('../../assets/img/node/3.button2.svg');
-    background-size: 100%;
+    // background: url('../../assets/img/node/3.button2.svg');
+    padding: 0.14rem 0.3rem;
+    background: #11175d;
+    transform: rotateZ(10deg) skew(-10deg, -10deg);
+    margin-left: 10px;
+  }
+  .Pagination {
+    margin: 0.1rem 0.3rem;
   }
 }
 </style>

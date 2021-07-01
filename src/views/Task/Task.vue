@@ -60,10 +60,13 @@
       <div style="width: 2.62rem">2021-1-22 13:00:00</div>
       <div>12:22:59</div>
     </div>
+    <Pagination class="pagination"></Pagination>
   </div>
 </template>
 <script>
+import Pagination from '../../components/Pagination.vue'
 export default {
+  components: { Pagination },
   data() {
     return {
       options: [
@@ -164,6 +167,9 @@ export default {
     div {
       margin-right: 0.7rem;
     }
+  }
+  .pagination{
+    margin: 0.2rem 0.1rem;
   }
 }
 </style>

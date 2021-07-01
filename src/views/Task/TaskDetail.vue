@@ -1,7 +1,7 @@
 <template>
   <div class="TakDetail">
     <div class="TakDetailTop">
-      <div class="pic" @click="$router.push('/node/index')">
+      <div class="pic" @click="$router.push('/node/NodeDetail')">
         <img src="../../assets/img/node/3.icon1.svg" alt="" style="line-height: 0.42rem" />
       </div>
       <div class="bank">XXXBANK</div>
@@ -15,7 +15,7 @@
           <el-step title="2020-03-13 10:01:23" description="Computation failed"></el-step>
         </el-steps>
       </div>
-      <div class="btn" @click="TaskLog">{{ $t('task.VIEWTHETASKEVENTS') }}</div>
+      <div class="btn" @click="$router.push('/task/TaskLog')">{{ $t('task.VIEWTHETASKEVENTS') }}</div>
     </div>
     <div class="participants">
       <img src="../../assets/img/node/3.button.svg" alt="" />

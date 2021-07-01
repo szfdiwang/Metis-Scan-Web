@@ -1,3 +1,4 @@
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 export default {
   menu: {
     home: '首页',
@@ -108,5 +109,6 @@ export default {
     PROVIDERS: '算力提供方',
     OccupiedResources: '算力占用信息',
     Capacity: '任务中的角色'
-  }
+  },
+  ...zhLocale
 }
