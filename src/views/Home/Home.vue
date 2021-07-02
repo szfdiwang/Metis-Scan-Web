@@ -1,6 +1,6 @@
 <template>
   <div class="home-box">
-    <Performance />
+    <Performance :cpu="cpu" :memory="memory" :bandWidth="bandWidth" />
     <img src="../../assets/img/home/bj4.png" alt="" class="bg-blue" />
     <img src="../../assets/img/home/bj5.png" alt="" class="bg-stripe" />
     <div class="welcome">
@@ -13,9 +13,16 @@
         </template>
       </el-input>
     </div>
-    <Card />
+    <Card
+      :partnerCount="partnerCount"
+      :dataFileSize="dataFileSize"
+      :taskCount="taskCount"
+      :usedDataFileSize="usedDataFileSize"
+      :powerServerCount="powerServerCount"
+      :dataServerCount="dataServerCount"
+    />
     <Map />
-    <BottomTable />
+    <BottomTable :totalBandWidth="bandWidth" />
   </div>
 </template>
 
@@ -24,6 +31,7 @@ import Performance from './components/Performance'
 import Card from './components/Card'
 import Map from './components/Map'
 import BottomTable from './components/BottomTable'
+import { homeApi } from '@/api/index'
 export default {
   name: 'Home',
   components: {
@@ -34,7 +42,37 @@ export default {
   },
   data() {
     return {
-      input2: '111111111'
+      cpu: 0,
+      memory: 0,
+      bandWidth: 0,
+      partnerCount: 0,
+      dataFileSize: 0,
+      taskCount: 0,
+      usedDataFileSize: 0,
+      powerServerCount: 0,
+      dataServerCount: 0,
+      input2: ''
+    }
+  },
+  mounted() {
+    this.initGlobalData()
+  },
+  methods: {
+    initGlobalData() {
+      homeApi.getGlobalState({}).then(res => {
+        if (res.code === 0) {
+          this.memory = res.data.totalMemory || 0
+          this.cpu = res.data.totalCore || 0
+          this.bandWidth = res.data.totalBandwidth || 0
+
+          this.partnerCount = res.data.partnerCount || 0
+          this.dataFileSize = res.data.dataFileSize || 0
+          this.taskCount = res.data.taskCount || 0
+          this.usedDataFileSize = res.data.usedDataFileSize || 0
+          this.powerServerCount = res.data.powerServerCount || 0
+          this.dataServerCount = res.data.dataServerCount || 0
+        }
+      })
     }
   }
 }

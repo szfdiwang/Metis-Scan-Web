@@ -2,6 +2,9 @@
   <div class="earth-box">
     <div id="earth-map"></div>
     <img src="../../../../assets/img/home/out-earth.svg" alt="" class="out-earth" />
+    <img src="../../../../assets/img/home/orange.png" alt="" class="out-orange" />
+    <img src="../../../../assets/img/home/blue.png" alt="" class="out-blue" />
+    <!-- <img src="../../../../assets/img/home/equator.png" alt="" class="out-equator" /> -->
   </div>
 </template>
 
@@ -159,6 +162,7 @@ export default {
   border-radius: 50%;
   align-items: center;
   justify-content: center;
+  position: relative;
   #earth-map {
     width: 6.8rem;
     height: 6.8rem;
@@ -170,6 +174,23 @@ export default {
     width: 9.1rem;
     position: absolute;
     z-index: 10;
+  }
+  .out-orange {
+    width: 6.8rem;
+    position: absolute;
+    bottom: -0.7rem;
+    right: 0.1rem;
+  }
+  .out-blue {
+    width: 6.8rem;
+    position: absolute;
+    top: -0.7rem;
+    left: 0.1rem;
+  }
+  .out-equator {
+    width: 8.7rem;
+    position: absolute;
+    z-index: 10000;
   }
 }
 </style>

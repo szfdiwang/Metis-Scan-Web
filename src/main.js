@@ -9,15 +9,16 @@ import mixin from '@/mixin/mixin'
 import './vonder'
 import 'element-ui/lib/theme-chalk/index.css'
 import * as filters from './filters'
+import * as dayjs from 'dayjs'
 
 Object.keys(filters).map(key => {
-  console.log('key', key)
   Vue.filter(key, filters[key])
 })
 
 Vue.mixin(mixin)
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
+Vue.prototype.$day = dayjs
 
 function setHtmlFontSize() {
   const htmlWidth = document.documentElement.clientWidth || document.body.clientWidth

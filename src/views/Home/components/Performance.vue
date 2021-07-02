@@ -1,12 +1,12 @@
 <template>
   <div class="performance-box">
     <img src="@/assets/img/home/corner3.png" alt="" class="corner" />
-    <div v-for="info in performanceList" :key="info.id" class="info-box">
+    <div v-for="info in performanceInfoList" :key="info.id" class="info-box">
       <div>
-        <span class="label">{{ info.label }}</span>
+        <span class="label">{{ getLabel(info.name) }}</span>
         <span class="content">
-          <span class="value">{{ info.value }}</span>
-          <span class="unit">{{ info.unit }}</span>
+          <span class="value">{{ getValue(info) | numFormat }}</span>
+          <span class="unit">{{ getUnit(info) }}</span>
           <img src="@/assets/img/home/left.svg" alt="" class="left" />
           <img src="@/assets/img/home/right.svg" alt="" class="right" />
         </span>
@@ -20,49 +20,107 @@
 </template>
 
 <script>
-import { homeApi } from '@/api/index'
-console.log('homeApi', homeApi)
+import { changeSizeFnWithPlus, changeSizeToMb } from '@/utils/utils'
 export default {
   components: {},
+  props: {
+    cpu: {
+      type: Number,
+      default: 0
+    },
+    memory: {
+      type: Number,
+      default: 0
+    },
+    bandWidth: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
-    return {}
+    return {
+      // infoList: [
+      //   {
+      //     id: 1,
+      //     name: 'memory',
+      //     label: this.$t('common.memory'),
+      //     value: this.memory,
+      //     unit: ''
+      //   },
+      //   {
+      //     id: 2,
+      //     name: 'cpu',
+      //     label: this.$t('common.cpuCore'),
+      //     value: this.cpu,
+      //     unit: ''
+      //   },
+      //   {
+      //     id: 3,
+      //     name: 'bindWidth',
+      //     label: this.$t('common.bandWidth'),
+      //     value: this.bandWidth,
+      //     unit: 'MB/S'
+      //   }
+      // ]
+    }
   },
   computed: {
-    performanceList() {
+    performanceInfoList() {
       return [
         {
           id: 1,
           name: 'memory',
           label: this.$t('common.memory'),
-          value: '88.88',
-          unit: 'TB'
+          value: this.memory,
+          unit: ''
         },
         {
           id: 2,
           name: 'cpu',
           label: this.$t('common.cpuCore'),
-          value: '12888',
+          value: this.cpu,
           unit: ''
         },
         {
           id: 3,
           name: 'bindWidth',
           label: this.$t('common.bandWidth'),
-          value: '500',
+          value: this.bandWidth,
           unit: 'MB/S'
         }
       ]
     }
   },
-  watch: {},
-  mounted() {
-    this.initGlobalData()
-  },
   methods: {
-    initGlobalData() {
-      homeApi.getGlobalState({}).then(res => {
-        console.log(res)
-      })
+    getUnit(info) {
+      if (info.name === 'memory') {
+        return changeSizeFnWithPlus(info.value).split('-')[1]
+      } else {
+        return info.unit
+      }
+    },
+    getValue(info) {
+      if (info.name === 'memory') {
+        // B to GB
+        return changeSizeFnWithPlus(info.value).split('-')[0]
+      } else if (info.name === 'bindWidth') {
+        // B to MB
+        return changeSizeToMb(info.value)
+      } else {
+        return info.value
+      }
+    },
+    getLabel(name) {
+      switch (name) {
+        case 'memory':
+          return this.$t('common.memory')
+        case 'cpu':
+          return this.$t('common.cpuCore')
+        case 'bindWidth':
+          return this.$t('common.bandWidth')
+        default:
+          break
+      }
     }
   }
 }
@@ -97,11 +155,11 @@ export default {
     vertical-align: middle;
     .label {
       font-family: BebasNeueBold;
-      font-size: 0.48rem;
+      font-size: 0.45rem;
       color: #dee9ff;
       letter-spacing: 0;
       text-align: center;
-      line-height: 48px;
+      line-height: 0.48rem;
       font-weight: 700;
       padding-right: 0.65rem;
       vertical-align: middle;
@@ -109,6 +167,7 @@ export default {
     .content {
       position: relative;
       display: inline-block;
+      line-height: 0.8rem;
       .value {
         position: relative;
         // border-top: 3.5px solid #72cff0;
@@ -118,7 +177,7 @@ export default {
           width: 95%;
           height: 3.5px;
           background: #72cff0;
-          top: 0.05rem;
+          top: -0.05rem;
           left: 0;
           right: 0;
           margin: auto;
@@ -155,7 +214,7 @@ export default {
       .right {
         width: 0.32rem;
         position: absolute;
-        top: -0.1rem;
+        top: -0.09rem;
         right: -0.25rem;
       }
     }

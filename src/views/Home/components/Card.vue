@@ -5,7 +5,9 @@
         <div class="card-mini-box">
           <p class="label">{{ card.label }}</p>
           <p class="desc">{{ card.desc }}</p>
-          <p class="value">{{ card.value | numFormat }}</p>
+          <p class="value">
+            <span>{{ getValue(card) }}</span>
+          </p>
           <img src="../../../assets/img/home/person.svg" alt="" class="personIcon" />
         </div>
       </el-col>
@@ -15,7 +17,10 @@
         <div class="card-mini-box">
           <p class="label">{{ card.label }}</p>
           <p class="desc">{{ card.desc }}</p>
-          <p class="value">{{ card.value | numFormat }}</p>
+          <p class="value">
+            <span>{{ getValue(card) }}</span>
+            <!-- <span>{{ getUnit(card) }}</span> -->
+          </p>
           <img src="../../../assets/img/home/person.svg" alt="" class="personIcon" />
         </div>
       </el-col>
@@ -24,10 +29,19 @@
 </template>
 
 <script>
+import { thousandMark, changeSizeWithMarkFn } from '@/utils/utils'
 export default {
   components: {},
   data() {
     return {}
+  },
+  props: {
+    partnerCount: { type: Number, default: 0 },
+    dataFileSize: { type: Number, default: 0 },
+    taskCount: { type: Number, default: 0 },
+    usedDataFileSize: { type: Number, default: 0 }, // 使用数据量
+    powerServerCount: { type: Number, default: 0 },
+    dataServerCount: { type: Number, default: 0 }
   },
   computed: {
     cardListUp() {
@@ -37,21 +51,21 @@ export default {
           name: 'nodeNum',
           label: this.$t('home.nodeNum'),
           desc: this.$t('home.nodeNumDesc'),
-          value: 1222
+          value: this.dataServerCount
         },
         {
           id: 2,
           name: 'uploadData',
           label: this.$t('home.uploadData'),
           desc: this.$t('home.uploadDataDesc'),
-          value: 2000
+          value: this.dataFileSize
         },
         {
           id: 3,
           name: 'completedTask',
           label: this.$t('home.completedTask'),
           desc: this.$t('home.completedTaskDesc'),
-          value: 100000
+          value: this.partnerCount
         }
       ]
     },
@@ -62,28 +76,35 @@ export default {
           name: 'computingExecutors',
           label: this.$t('home.computingExecutors'),
           desc: this.$t('home.computingExecutorsDesc'),
-          value: 888
+          value: this.powerServerCount
         },
         {
           id: 2,
           name: 'transactionData',
           label: this.$t('home.transactionData'),
           desc: this.$t('home.transactionDataDesc'),
-          value: 200000
+          value: this.usedDataFileSize,
+          unit: ''
         },
         {
           id: 3,
           name: 'totalTask',
           label: this.$t('home.totalTask'),
           desc: this.$t('home.totalTaskDesc'),
-          value: 100000
+          value: this.taskCount
         }
       ]
     }
   },
-  watch: {},
-  mounted() {},
-  methods: {}
+  methods: {
+    getValue(card) {
+      if (card.name === 'uploadData' || card.name === 'transactionData') {
+        return changeSizeWithMarkFn(card.value)
+      } else {
+        return thousandMark(card.value)
+      }
+    }
+  }
 }
 </script>
 

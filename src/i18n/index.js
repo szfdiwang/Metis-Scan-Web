@@ -10,10 +10,8 @@ var browserLanguage
 // eslint-disable-next-line space-before-function-paren
 const identifyLanguage = function () {
   const language = navigator.language || window.navigator.browserLanguage
-  console.log('language', language)
   if (language) {
     browserLanguage = language.toLowerCase().substr(0, 2)
-    console.log('browserLanguage', browserLanguage)
   }
 }
 identifyLanguage()
