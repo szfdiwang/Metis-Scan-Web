@@ -110,5 +110,11 @@ export default {
     OccupiedResources: '算力占用信息',
     Capacity: '任务中的角色'
   },
+  log: {
+    EventType: '事件类型',
+    EVentMaker: '产生事件的参与方',
+    GenerationTime: '产生时间',
+    EventFailed: '事件内容'
+  },
   ...zhLocale
 }

@@ -112,5 +112,11 @@ export default {
     Capacity: 'Capacity'
 
   },
+  log: {
+    EventType: 'Event type',
+    EVentMaker: 'EVent maker',
+    GenerationTime: 'Generation time',
+    EventFailed: 'Event failed'
+  },
   ...enLocale
 }

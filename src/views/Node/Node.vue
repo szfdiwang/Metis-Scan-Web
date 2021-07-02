@@ -18,27 +18,27 @@
         <div style="width: 2.62rem">{{ $t('node.ParticipatedTasks') }}</div>
         <div>{{ $t('node.ActiveDegree') }}</div>
       </div>
-      <div class="rankingTd" v-for="(item, index) in 5" :key="index">
+      <div class="rankingTd" v-for="(item, index) in data" :key="index">
         <div style="width: 1.24rem" class="rankingTdImg">
           <div>
             <img src="../../assets/img/excel/1.svg" alt="" />
           </div>
-          <div>
+          <!-- <div>
             <img src="../../assets/img/node/2.icon3.svg" alt="" />
-          </div>
+          </div> -->
         </div>
         <div style="width: 3.8rem">
-          <div>xxxxxxxxx银行</div>
-          <div>xxxxxxxxxxxxxxxxxxxx</div>
+          <div>{{ item.orgName }}银行</div>
+          <div id="id" class="icoFontlist">{{ item.identityId }}</div>
         </div>
-        <div style="width: 1.99rem; color: #fec43e" @click="$router.push('/node/NodeDetail')">
+        <div style="width: 1.99rem; color: #fec43e" @click="Detail(item.identityId)">
           {{ $t('node.Detail') }}
         </div>
         <div style="width: 4.18rem" class="power">
           <div>
-            <div>CPU: xxx</div>
-            <div>{{ $t('node.Memory') }}: xxx</div>
-            <div>{{ $t('node.Bandwidth') }}: xxx</div>
+            <div>CPU: {{ item.accumulativeCore }}</div>
+            <div>{{ $t('node.Memory') }}: {{ item.accumulativeMemory }}</div>
+            <div>{{ $t('node.Bandwidth') }}: {{ item.accumulativeBandwidth }}</div>
           </div>
           <div>
             <div>{{ $t('node.Remaining') }}: xxx%</div>
@@ -46,16 +46,13 @@
             <div>{{ $t('node.Remaining') }}: xxx%</div>
           </div>
         </div>
-        <div style="width: 2.04rem">100</div>
+        <div style="width: 2.04rem">{{ item.accumulativeDataFileCount }}</div>
         <div style="width: 2.62rem">2%</div>
         <div>
-          <div>
-            <img src="../../assets/img/excel/hot.svg" alt="" />
-            <img src="../../assets/img/excel/hot.svg" alt="" />
-            <img src="../../assets/img/excel/hot.svg" alt="" />
-            <img src="../../assets/img/excel/hot.svg" alt="" />
-            <img src="../../assets/img/excel/hot.svg" alt="" />
-            <img src="../../assets/img/excel/hot.svg" alt="" />
+          <div class="hot">
+            <div v-for="(item, index) in hot" :key="index" style="margin: 0px 2px">
+              <img src="../../assets/img/excel/hot.svg" alt="" />
+            </div>
           </div>
         </div>
       </div>
@@ -65,7 +62,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage4"
-        :page-sizes="[4,100, 200, 300, 400]"
+        :page-sizes="[4, 100, 200, 300, 400]"
         :page-size="100"
         layout="total, sizes, prev, pager, next, jumper"
         :total="400"
@@ -75,15 +72,9 @@
   </div>
 </template>
 <script>
+import { nodeApi } from '../../api/index'
+console.log('nodeApi', nodeApi)
 export default {
-  methods: {
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`)
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
-    }
-  },
   data() {
     return {
       currentPage1: 5,
@@ -94,8 +85,52 @@ export default {
         page: 1,
         size: 5,
         total: 10
-      }
+      },
+      hot: '0',
+      data: [],
+      imgList: [
+        <img src="../../assets/img/excel/1.svg" alt="" />,
+        <img src="../../assets/img/excel/2.svg" alt="" />,
+        <img src="../../assets/img/excel/3.svg" alt="" />
+      ]
     }
+  },
+  created() {
+    this.getListOrgInfo()
+  },
+  methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`)
+    },
+    async getListOrgInfo() {
+      const res = await nodeApi.getOrgListOrgInfo({
+        pageNo: 1,
+        pageSize: 5
+      })
+      this.data = res.data
+      this.hot = res.data[0].status
+      console.log('123', this.data)
+      console.log('刘', res)
+    },
+    async Detail(value) {
+      this.$router.push('/node/NodeDetail')
+      // const res = await nodeApi.getOrgListOrgInfo({
+      //   identityId: '1'
+      // })
+      const res = await nodeApi.getFindOrgInfo({
+        identityId: value
+      })
+      console.log('7777', res)
+    }
+    //   async getInfo() {
+    //     const res = await nodeApi.getFindOrgInfo({
+    //       identityId: '8e16232fa7972262787a6152caa982530f75806e6025c2507e969542bae27377'
+    //     })
+    //     console.log('liujun', res)
+    //   }
   }
 }
 </script>
@@ -166,6 +201,15 @@ export default {
   }
   /deep/ .el-select el-select--mini {
     margin-left: 16rem;
+  }
+  #id {
+    overflow: hidden;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    width: 180px;
+  }
+  .hot {
+    display: flex;
   }
 }
 </style>

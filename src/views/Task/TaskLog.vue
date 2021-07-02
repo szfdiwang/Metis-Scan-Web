@@ -1,11 +1,11 @@
 <template>
   <div class="TaskLog">
     <div class="TaskLogTh">
-      <div style="width: 1.24rem">NO.</div>
-      <div style="width: 3.12rem">Event type</div>
-      <div style="width: 4.19rem">EVent maker</div>
-      <div style="width: 3.7rem">Generation time</div>
-      <div>Event failed</div>
+      <div style="width: 1.24rem">{{ $t('node.No') }}</div>
+      <div style="width: 3.12rem">{{ $t('log.EventType') }}</div>
+      <div style="width: 4.19rem">{{ $t('log.EVentMaker') }}</div>
+      <div style="width: 3.7rem">{{ $t('log.GenerationTime') }}</div>
+      <div>{{ $t('log.EventFailed') }}</div>
     </div>
     <div class="TaskLogTd" v-for="(item, index) in 5" :key="index">
       <div style="width: 1.24rem">

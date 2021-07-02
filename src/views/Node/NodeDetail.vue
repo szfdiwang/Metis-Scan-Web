@@ -14,14 +14,15 @@
       <basic-area-chart></basic-area-chart>
     </div>
     <div class="conent">
-      <div class="conentTop">
-        <div class="Metadata" :class="{ active: index === '0' }">{{ $t('node.metadata') }}：100</div>
-        <div class="Tasks" :class="{ active: index === '1' }">{{ $t('node.Tasks') }}：200</div>
-      </div>
+      <!-- <div class="conentTop">
+        <div class="Metadata">{{ $t('node.metadata') }}：100</div>
+        <div class="Tasks">{{ $t('node.Tasks') }}：200</div>
+      </div> -->
     </div>
     <div class="tab">
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane name="first">
+        <el-tab-pane name="first" label="用户管理">
+          <div slot="label" :class="{ active: index == '0' }" class="Metadatayy">{{ $t('node.metadata') }}：100</div>
           <div class="conent">
             <div class="ranking">
               <div class="rankingTh">
@@ -58,7 +59,8 @@
             </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane name="second">
+        <el-tab-pane name="second" label="用户管理" stretch="true">
+          <div slot="label" :class="{ active: index == '1' }">{{ $t('node.Tasks') }}：100</div>
           <div class="conent">
             <div class="ranking">
               <div class="rankingTh">
@@ -109,7 +111,7 @@ export default {
   data() {
     return {
       index: '0',
-      activeName: 'second'
+      activeName: 'first'
     }
   },
   methods: {
@@ -122,7 +124,8 @@ export default {
 </script>
 <style lang='scss' scoped>
 .active {
-  background-color: red;
+  background-color: #3954ff !important;
+  margin: 0px 0px !important;
 }
 .NodeDetail {
   height: 1000px;
@@ -149,22 +152,33 @@ export default {
   .conent {
     padding: 0px 0.2rem;
     // background: url('../../assets/img/node/2.border.svg');
-    .conentTop {
-      display: flex;
-      position: relative;
-      .Metadata {
-        position: absolute;
-        top: 0px;
-        left: 0.8rem;
-        z-index: 9999;
-      }
-      .Tasks {
-        position: absolute;
-        top: 0px;
-        left: 3.24rem;
-        z-index: 9999;
-      }
-    }
+    // .conentTop {
+    //   display: flex;
+    //   position: relative;
+    //   .Metadata {
+    //     position: absolute;
+    //     top: -10px;
+    //     left: 0.6rem;
+    //     z-index: -999;
+    //     width: 2.71rem;
+    //     height: 40px;
+    //     background: #11175d;
+    //     transform: rotateZ(10deg) skew(-10deg, -10deg);
+    //      text-align: center;
+    //   }
+    //   .Tasks {
+    //     position: absolute;
+    //     top: 0px;
+    //     left: 4rem;
+    //     z-index: -999;
+    //     width: 2.4rem;
+    //     height: 40px;
+    //     background: #11175d;
+    //     color: cornsilk;
+    //     transform: rotateZ(10deg) skew(-10deg, -10deg);
+    //     text-align: center;
+    //   }
+    // }
   }
 
   .rankingTh {
@@ -201,27 +215,27 @@ export default {
     display: none;
   }
   /deep/ #tab-first {
-    width: 2.61rem;
+    margin: 0px 10px 0px 40px;
+    width: 2.41rem;
     height: 0.4rem;
-    margin-left: 0.1rem;
-    color: #fff;
-    // background: url('../../assets/img/node/3.button.svg');
-    display: inline-block;
-    padding: 0.14rem 0.3rem;
+    text-align: center;
+    color: #eee;
     background: #11175d;
     transform: rotateZ(10deg) skew(-10deg, -10deg);
   }
   /deep/ #tab-second {
     width: 2.41rem;
     height: 0.4rem;
-    // background: url('../../assets/img/node/3.button2.svg');
-    padding: 0.14rem 0.3rem;
+    text-align: center;
+    color: #eee;
     background: #11175d;
     transform: rotateZ(10deg) skew(-10deg, -10deg);
-    margin-left: 10px;
   }
   .Pagination {
     margin: 0.1rem 0.3rem;
   }
+}
+/deep/ .el-tabs__item {
+  padding: 0px;
 }
 </style>
