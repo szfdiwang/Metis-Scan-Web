@@ -34,7 +34,8 @@ export default {
     async initChart() {
       const chartDom = document.getElementById('powerEchart')
       this.powerChart = this.$echarts.init(chartDom)
-      const startDate = this.$day(new Date()).format('YYYY-MM-DD')
+      // const startDate = this.$day(new Date()).format('YYYY-MM-DD')
+      const startDate = this.$day(new Date()).subtract(30, 'day').format('YYYY-MM-DD')
       const res = await homeApi.getPowerTrend({ startDate, days: 30 })
       this.powerData = res.code === 0 ? res.data : []
       this.option = {

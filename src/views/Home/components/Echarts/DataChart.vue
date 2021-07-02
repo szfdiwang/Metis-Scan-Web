@@ -42,8 +42,8 @@ export default {
     async initChart() {
       const chartDom = document.getElementById('dataEchart')
       this.dataChart = this.$echarts.init(chartDom)
-      const startDate = this.$day(new Date()).format('YYYY-MM-DD')
-      // const endDate = this.$day(new Date()).add(30, 'day').format('YYYY-MM-DD')
+      // const startDate = this.$day(new Date()).format('YYYY-MM-DD')
+      const startDate = this.$day(new Date()).subtract(30, 'day').format('YYYY-MM-DD')
       const res = await homeApi.getDataTrend({ startDate, days: 30 })
       console.log('data echart', res)
       this.dataCahrtData = res.code === 0 ? res.data : []
