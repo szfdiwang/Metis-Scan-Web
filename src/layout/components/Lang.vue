@@ -14,7 +14,6 @@ export default {
   mounted() {},
   methods: {
     switchLang(lang) {
-      console.log(lang)
       this.$i18n.locale = lang
       localStorage.setItem('lang', lang)
     }

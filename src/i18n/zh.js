@@ -34,7 +34,7 @@ export default {
     center: '计算中心与数据中心',
     growth: '增长算力',
     global: '全网算力',
-    computeCenter: '算力中心',
+    computeCenter: '计算中心',
     dataCenter: '数据中心',
     name: '姓名',
     identifier: '身份标识',

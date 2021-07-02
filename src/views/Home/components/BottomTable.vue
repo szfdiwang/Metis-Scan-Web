@@ -4,7 +4,7 @@
       <ul class="tabs-box">
         <li v-for="menu in menuList" :key="menu.id" class="tabs-item-box pointer" @click="selectRank(menu.name)">
           <div class="tab-mini-box pointer" :class="{ active: curTab === menu.name }">
-            <span style="visibility: hidden">{{ $t('home.powerRank') }}</span>
+            <div style="visibility: hidden">{{ $t('home.powerRank') }}</div>
           </div>
           <div class="tab-text pointer">{{ $t('home.powerRank') }}</div>
         </li>
@@ -26,57 +26,50 @@
       >
         <el-table-column prop="rank" :label="$t('common.rank')" width="100">
           <template slot-scope="scope">
-            <div v-if="scope.row.rank > 3">
-              <div class="rank-round">{{ scope.row.rank }}</div>
-            </div>
-            <div v-else>
-              <div v-if="scope.row.rank === 1">
-                <img src="../../../assets/img/home/rank1.svg" alt="" />
-              </div>
-              <div v-if="scope.row.rank === 2">
-                <img src="../../../assets/img/home/rank2.svg" alt="" />
-              </div>
-              <div v-if="scope.row.rank === 3">
-                <img src="../../../assets/img/home/rank3.svg" alt="" />
-              </div>
-            </div>
+            <Rankings :index="scope.$index" :curPage="curPage" :pageSize="pageSize" />
           </template>
         </el-table-column>
-        <el-table-column prop="name" :label="$t('home.name')"> </el-table-column>
-        <el-table-column prop="identifier" :label="$t('home.identifier')"></el-table-column>
+        <el-table-column prop="orgName" :label="$t('home.name')"> </el-table-column>
+        <el-table-column prop="identityId" :label="$t('home.identifier')"></el-table-column>
         <el-table-column prop="power" :label="$t('home.power')" width="520">
           <template slot-scope="scope">
             <div class="power-box">
               <div>
                 <span> {{ $t('common.cpu') }}</span
-                >&nbsp;:&nbsp;<span>{{ scope.row.power.cpu }}</span>
+                >&nbsp;:&nbsp;<span>{{ scope.row.core }}</span>
               </div>
               <div>
                 <span> {{ $t('common.memory') }}</span
-                >&nbsp;:&nbsp;<span>{{ scope.row.power.memory }}</span>
+                >&nbsp;:&nbsp;<span>{{ scope.row.memory }}</span>
               </div>
               <div>
                 <span> {{ $t('common.bandWidth') }}</span
-                >&nbsp;:&nbsp;<span>{{ scope.row.power.bandWidth }}</span>
+                >&nbsp;:&nbsp;<span>{{ scope.row.bandwidth }}</span>
               </div>
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="powerRatio" :label="$t('home.powerRatio')" width="120"> </el-table-column>
+        <el-table-column prop="powerRatio" :label="$t('home.powerRatio')" width="120">
+          <template slot-scope="scope">
+            <span> {{ getRatio(scope.row.bandwidth) }} </span>
+          </template>
+        </el-table-column>
         <el-table-column prop="activeDegree" :label="$t('home.activeDegree')">
-          <!-- <template slot-scope="scope"> </template> -->
+          <template slot-scope="scope">
+            <span v-for="(item, index) in getHot(scope.row.idleDays)" :key="index">
+              <img src="../../../assets/img/home/hot.svg" alt="" />
+            </span>
+          </template>
         </el-table-column>
       </el-table>
       <div class="page-box">
         <p></p>
         <el-Pagination
           background
-          @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="curPage"
-          :page-sizes="[10, 20, 50]"
           :page-size="pageSize"
-          layout="total, sizes, prev, pager, next"
+          layout="total, prev, pager, next"
           :total="totalNum"
         ></el-Pagination>
       </div>
@@ -87,136 +80,25 @@
 
 <script>
 import { homeApi } from '@/api/index'
+import Rankings from './Rankings'
 export default {
-  components: {},
+  components: {
+    Rankings
+  },
+  props: {
+    totalBandWidth: {
+      type: Number,
+      default: 0
+    }
+  },
+
   data() {
     return {
       curPage: 1,
       totalNum: 10,
       pageSize: 10,
       curTab: 'power',
-      tableData: [
-        {
-          name: '王小虎',
-          rank: 1,
-          identifier: '0x9012131313131231231231',
-          power: {
-            cpu: 'aaa',
-            memory: 'bbb',
-            bandWidth: 'ccc'
-          },
-          powerRatio: '2%',
-          activeDegree: '49%'
-        },
-        {
-          name: '王小虎',
-          rank: 2,
-          identifier: '0x9012131313131231231231',
-          power: {
-            cpu: 'aaa',
-            memory: 'bbb',
-            bandWidth: 'ccc'
-          },
-          powerRatio: '2%',
-          activeDegree: '49%'
-        },
-        {
-          name: '王小虎',
-          rank: 3,
-          identifier: '0x9012131313131231231231',
-          power: {
-            cpu: 'aaa',
-            memory: 'bbb',
-            bandWidth: 'ccc'
-          },
-          powerRatio: '2%',
-          activeDegree: '49%'
-        },
-        {
-          name: '王小虎',
-          rank: 4,
-          identifier: '0x9012131313131231231231',
-          power: {
-            cpu: 'aaa',
-            memory: 'bbb',
-            bandWidth: 'ccc'
-          },
-          powerRatio: '2%',
-          activeDegree: '49%'
-        },
-        {
-          name: '王小虎',
-          rank: 5,
-          identifier: '0x9012131313131231231231',
-          power: {
-            cpu: 'aaa',
-            memory: 'bbb',
-            bandWidth: 'ccc'
-          },
-          powerRatio: '2%',
-          activeDegree: '49%'
-        },
-        {
-          name: '王小虎',
-          rank: 6,
-          identifier: '0x9012131313131231231231',
-          power: {
-            cpu: 'aaa',
-            memory: 'bbb',
-            bandWidth: 'ccc'
-          },
-          powerRatio: '2%',
-          activeDegree: '49%'
-        },
-        {
-          name: '王小虎',
-          rank: 7,
-          identifier: '0x9012131313131231231231',
-          power: {
-            cpu: 'aaa',
-            memory: 'bbb',
-            bandWidth: 'ccc'
-          },
-          powerRatio: '2%',
-          activeDegree: '49%'
-        },
-        {
-          name: '王小虎',
-          rank: 8,
-          identifier: '0x9012131313131231231231',
-          power: {
-            cpu: 'aaa',
-            memory: 'bbb',
-            bandWidth: 'ccc'
-          },
-          powerRatio: '2%',
-          activeDegree: '49%'
-        },
-        {
-          name: '王小虎',
-          rank: 9,
-          identifier: '0x9012131313131231231231',
-          power: {
-            cpu: 'aaa',
-            memory: 'bbb',
-            bandWidth: 'ccc'
-          },
-          powerRatio: '2%',
-          activeDegree: '49%'
-        },
-        {
-          name: '王小虎',
-          rank: 10,
-          identifier: '0x9012131313131231231231',
-          power: {
-            cpu: 'aaa',
-            memory: 'bbb',
-            bandWidth: 'ccc'
-          },
-          powerRatio: '2%',
-          activeDegree: '49%'
-        }
-      ]
+      tableData: []
     }
   },
   computed: {
@@ -235,17 +117,29 @@ export default {
       ]
     }
   },
-  watch: {},
   mounted() {
     this.curTab === 'power' ? this.initPowerRank() : this.initActivityRank()
   },
   methods: {
-    handleCurrentChange() {},
-    handleSizeChange() {},
+    handleCurrentChange(page) {
+      this.curPage = page
+      this.curTab === 'power' ? this.initPowerRank() : this.initActivityRank()
+    },
+
+    getHot(idleDays) {
+      return Number(6 - idleDays < 0 ? 0 : 6 - idleDays)
+    },
+
+    getRatio(bandWidth) {
+      return `${((bandWidth / this.totalBandWidth) * 100).toFixed(2)}%`
+    },
+
     selectRank(type) {
       this.curTab = type
-      this.type === 'power' ? this.initPowerRank() : this.initActivityRank()
+      this.curPage = 1
+      this.curTab === 'power' ? this.initPowerRank() : this.initActivityRank()
     },
+
     initActivityRank() {
       homeApi
         .getActivityRanking({
@@ -253,7 +147,11 @@ export default {
           pageSize: this.pageSize
         })
         .then(res => {
-          console.log(res)
+          console.log('initActivityRank', res)
+          if (res.code === 0) {
+            this.tableData = res.data
+            this.totalNum = res.totalRows
+          }
         })
     },
     initPowerRank() {
@@ -263,7 +161,11 @@ export default {
           pageSize: this.pageSize
         })
         .then(res => {
-          console.log(res)
+          console.log('initPowerRank', res)
+          if (res.code === 0) {
+            this.tableData = res.data
+            this.totalNum = res.totalRows
+          }
         })
     }
   }
@@ -307,10 +209,16 @@ export default {
         margin-left: 20px;
       }
       .tab-mini-box {
-        display: inline-block;
+        display: block;
         padding: 14px 30px;
         background: #11175d;
         transform: rotateZ(10deg) skew(-10deg, -10deg);
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: #ffffff;
+        letter-spacing: 0;
+        line-height: 12px;
+        font-weight: 500;
         &.active {
           background-color: #3954ff;
         }
@@ -375,16 +283,6 @@ export default {
     & > div:not(:first-child) {
       padding-left: 0.6rem;
     }
-  }
-  .rank-round {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #3f4590;
-    color: #fff;
-    text-align: center;
-    line-height: 21px;
-    font-size: 12px;
   }
 }
 </style>

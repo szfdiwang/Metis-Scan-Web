@@ -42,9 +42,7 @@ export default {
       ]
     }
   },
-  mounted() {
-    console.log(this.$route.path)
-  },
+  mounted() {},
   methods: {
     link(item) {
       this.activeIndex = item.menuIndex

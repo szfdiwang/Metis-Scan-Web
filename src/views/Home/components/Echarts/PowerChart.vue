@@ -34,8 +34,8 @@ export default {
     async initChart() {
       const chartDom = document.getElementById('powerEchart')
       this.powerChart = this.$echarts.init(chartDom)
-      const res = await homeApi.getPowerTrend({ startDate: '2021-6-30', days: 1 })
-      console.log('dataCahrtData:', res)
+      const startDate = this.$day(new Date()).format('YYYY-MM-DD')
+      const res = await homeApi.getPowerTrend({ startDate, days: 30 })
       this.powerData = res.code === 0 ? res.data : []
       this.option = {
         color: ['#AE0BFF', 'red'],
@@ -45,6 +45,7 @@ export default {
           itemHeight: 5,
           itemWidth: 30,
           formatter: params => {
+            console.log('formatter params', params)
             return this.$t(`home.${params}`)
           },
           data: [
@@ -130,11 +131,8 @@ export default {
             smooth: true,
             name: 'growth',
             label: {
-              normal: {
-                formatter: params => {
-                  console.log(params)
-                  return this.$t(`home.${params}`)
-                }
+              formatter: params => {
+                return this.$t(`home.${params}`)
               }
             }
           },
@@ -143,24 +141,20 @@ export default {
             data: [120, 200, 150, 80, 70, 110, 130, 12, 33, 32],
             type: 'bar',
             itemStyle: {
-              normal: {
-                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  {
-                    offset: 0,
-                    color: '#2529E9'
-                  },
-                  {
-                    offset: 1,
-                    color: '#03042F'
-                  }
-                ])
-              }
+              color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: '#2529E9'
+                },
+                {
+                  offset: 1,
+                  color: '#03042F'
+                }
+              ])
             },
             label: {
-              normal: {
-                formatter: params => {
-                  return this.$t(params.name)
-                }
+              formatter: params => {
+                return this.$t(params.name)
               }
             }
           }

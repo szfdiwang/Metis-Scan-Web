@@ -8,9 +8,9 @@
           <img src="../../../assets/img/home/wave6.svg" alt="" class="wave" />
         </div>
         <div class="compute-mid">
-          <p class="computeCenterTitle">
+          <div class="computeCenterTitle">
             {{ $t('home.computeCenter') }}
-          </p>
+          </div>
           <div class="compute-img-box">
             <el-row :gutter="40">
               <el-col :span="8">
@@ -82,7 +82,7 @@
         </div>
         <div class="compute-mid">
           <p class="computeCenterTitle">
-            {{ $t('home.computeCenter') }}
+            {{ $t('home.dataCenter') }}
           </p>
           <div class="compute-img-box">
             <el-row :gutter="40">
@@ -224,7 +224,6 @@ export default {
       justify-content: space-between;
       padding: 0 0.3rem;
       .text {
-        height: 0.48rem;
         font-family: BebasNeueBold;
         font-size: 0.48rem;
         color: #dee9ff;
@@ -232,6 +231,8 @@ export default {
         text-align: center;
         line-height: 0.48rem;
         font-weight: 700;
+        padding: 10px 20px;
+        background-color: #1e2e92;
       }
     }
     .earth-wrapper {
