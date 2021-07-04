@@ -10,13 +10,12 @@
 
 <script>
 import 'echarts-gl'
-// import worldImg from '../../../../assets/img/home/earthDark.png'
-import worldImg from '../../../../assets/img/home/earth1.jpg'
 export default {
   name: 'EarthMap',
   components: {},
   data() {
     return {
+      bgUrl: require('../../../../assets/img/home/earth1.jpg'),
       chart: ''
       // geoCoordMap: {
       //   // 南宁: [108.479, 23.1152],
@@ -37,7 +36,11 @@ export default {
   },
   computed: {},
   mounted() {
-    this.initChart()
+    const earthImg = new Image()
+    earthImg.src = this.bgUrl
+    earthImg.onload = () => {
+      this.initChart(earthImg)
+    }
     window.addEventListener('resize', this.resizeFn)
   },
   beforeDestroy() {
@@ -47,7 +50,7 @@ export default {
     resizeFn() {
       this.chart.resize()
     },
-    initChart() {
+    initChart(earthImg) {
       this.chart = this.$echarts.init(document.getElementById('earth-map'))
       const option = {
         backgroundColor: 'rgb(0 0 0 / 0%)',
@@ -64,7 +67,7 @@ export default {
         ],
         globe: {
           environment: 'auto',
-          baseTexture: worldImg, // this.mapChart, //
+          baseTexture: earthImg, // this.mapChart, //
           baseColor: '#fff',
           shading: 'color',
           // light: {
