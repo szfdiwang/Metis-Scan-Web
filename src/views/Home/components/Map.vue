@@ -171,6 +171,14 @@ export default {
         display: flex;
         justify-content: center;
         margin: 0.35rem 0;
+        .left-round1,
+        .left-round2,
+        .left-round3,
+        .right-round1,
+        .right-round2,
+        .right-round3 {
+          width: 1.02rem;
+        }
         .left-round1 {
           animation: rotate 1.5s linear infinite;
         }

@@ -90,7 +90,7 @@ export default {
         grid: {
           left: 55,
           top: 25,
-          right: 35,
+          right: 0,
           bottom: 75
         },
         xAxis: {

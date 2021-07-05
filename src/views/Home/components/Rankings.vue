@@ -1,21 +1,17 @@
 <template>
-  <div>
-    <div v-if="curIndex > 3">
-      <div class="rank-round">
-        {{ curIndex }}
-      </div>
-    </div>
-    <div v-else>
-      <div v-if="curIndex === 1">
-        <img src="../../../assets/img/home/rank1.svg" alt="" />
-      </div>
-      <div v-if="curIndex === 2">
-        <img src="../../../assets/img/home/rank2.svg" alt="" />
-      </div>
-      <div v-if="curIndex === 3">
-        <img src="../../../assets/img/home/rank3.svg" alt="" />
-      </div>
-    </div>
+  <div v-if="curIndex > 3" class="rank-round">
+    {{ curIndex }}
+  </div>
+  <div v-else>
+    <span v-if="curIndex === 1">
+      <img src="../../../assets/img/home/rank1.svg" alt="" class="rank" />
+    </span>
+    <span v-if="curIndex === 2">
+      <img src="../../../assets/img/home/rank2.svg" alt="" class="rank" />
+    </span>
+    <span v-if="curIndex === 3">
+      <img src="../../../assets/img/home/rank3.svg" alt="" class="rank" />
+    </span>
   </div>
 </template>
 
@@ -52,5 +48,8 @@ export default {
   text-align: center;
   line-height: 21px;
   font-size: 12px;
+}
+.rank {
+  width: 20px;
 }
 </style>

@@ -101,7 +101,7 @@ export default {
         grid: {
           left: 35,
           top: 25,
-          right: 35,
+          right: 0,
           bottom: 75
         },
         xAxis: {

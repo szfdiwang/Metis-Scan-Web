@@ -10,12 +10,14 @@
 
 <script>
 import 'echarts-gl'
+import earthImg from '../../../../assets/img/home/earthnew2.png'
 export default {
   name: 'EarthMap',
   components: {},
   data() {
     return {
-      bgUrl: require('../../../../assets/img/home/earthnew1.png'),
+      // bgUrl: require('../../../../assets/img/home/earthnew1.png'),
+      bgUrl: require('../../../../assets/img/home/mapgithub.png'),
       chart: ''
       // geoCoordMap: {
       //   // 南宁: [108.479, 23.1152],
@@ -36,11 +38,11 @@ export default {
   },
   computed: {},
   mounted() {
-    const earthImg = new Image()
-    earthImg.src = this.bgUrl
-    earthImg.onload = () => {
-      this.initChart(earthImg)
-    }
+    // const earthImg = new Image()
+    // earthImg.src = this.bgUrl
+    // earthImg.onload = () => {
+    this.initChart(earthImg)
+    // }
     window.addEventListener('resize', this.resizeFn)
   },
   beforeDestroy() {
@@ -50,7 +52,7 @@ export default {
     resizeFn() {
       this.chart.resize()
     },
-    initChart(earthImg) {
+    initChart() {
       this.chart = this.$echarts.init(document.getElementById('earth-map'))
       const option = {
         backgroundColor: 'rgb(0 0 0 / 0%)',
@@ -86,7 +88,9 @@ export default {
             autoRotateSpeed: 10,
             autoRotate: true,
             animation: true,
-            zoomSensitivity: 0
+            zoomSensitivity: 0,
+            minAlpha: -15,
+            maxAlpha: 30
           }
         },
         series: [

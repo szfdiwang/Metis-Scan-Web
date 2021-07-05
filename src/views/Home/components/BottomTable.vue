@@ -29,9 +29,15 @@
             <Rankings :index="scope.$index" :curPage="curPage" :pageSize="pageSize" />
           </template>
         </el-table-column>
-        <el-table-column prop="orgName" :label="$t('home.name')"> </el-table-column>
-        <el-table-column prop="identityId" :label="$t('home.identifier')"></el-table-column>
-        <el-table-column prop="power" :label="$t('home.power')" width="520">
+        <el-table-column prop="orgName" :show-overflow-tooltip="true" :label="$t('home.name')" width="200">
+        </el-table-column>
+        <el-table-column
+          prop="identityId"
+          :show-overflow-tooltip="true"
+          :label="$t('home.identifier')"
+          width="350"
+        ></el-table-column>
+        <el-table-column prop="power" :label="$t('home.power')" width="350">
           <template slot-scope="scope">
             <div class="power-box">
               <div>
@@ -65,15 +71,15 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="page-box">
+      <div v-if="totalNum !== 0" class="page-box">
         <p></p>
         <el-Pagination
           background
-          @current-change="handleCurrentChange"
           :current-page="curPage"
           :page-size="pageSize"
           layout="total, prev, pager, next"
           :total="totalNum"
+          @current-change="handleCurrentChange"
         ></el-Pagination>
       </div>
     </div>
@@ -213,18 +219,18 @@ export default {
     .tabs-item-box {
       position: relative;
       &:not(:first-child) {
-        margin-left: 20px;
+        margin-left: 0.2rem;
       }
       .tab-mini-box {
         display: block;
-        padding: 14px 30px;
+        padding: 0.14rem 0.3rem;
         background: #11175d;
         transform: rotateZ(10deg) skew(-10deg, -10deg);
         font-family: PingFangSC-Medium;
         font-size: 14px;
         color: #ffffff;
         letter-spacing: 0;
-        line-height: 12px;
+        line-height: 0.12rem;
         font-weight: 500;
         &.active {
           background-color: #3954ff;
@@ -239,7 +245,7 @@ export default {
         font-size: 14px;
         color: #ffffff;
         letter-spacing: 0;
-        line-height: 12px;
+        line-height: 0.12rem;
         font-weight: 500;
         white-space: nowrap;
       }
@@ -261,7 +267,7 @@ export default {
 
   ::v-deep .el-table__header-wrapper,
   ::v-deep .el-table__header {
-    height: 0.3rem;
+    height: 0.4rem;
     line-height: 0.1rem;
     background-color: transparent;
   }
