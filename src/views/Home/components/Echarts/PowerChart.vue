@@ -13,6 +13,8 @@ export default {
   components: {},
   data() {
     return {
+      growthData: [],
+      totalData: [],
       powerChart: '',
       powerData: [],
       option: {}
@@ -37,9 +39,16 @@ export default {
       // const startDate = this.$day(new Date()).format('YYYY-MM-DD')
       const startDate = this.$day(new Date()).subtract(30, 'day').format('YYYY-MM-DD')
       const res = await homeApi.getPowerTrend({ startDate, days: 30 })
-      this.powerData = res.code === 0 ? res.data : []
+      // TODO: 两个y轴数据
+      console.log('power', res)
+      if (res.code !== 0) return
+      this.growthData = res.data.dailyBandwidth
+      this.totalData = res.data.totalBandwidth
+      this.timeList = res.data.updateAt.map(day => {
+        return this.$day(day).format('MM.DD')
+      })
       this.option = {
-        color: ['#AE0BFF', 'red'],
+        color: ['#AE0BFF', '#AE0BFF'],
         legend: {
           bottom: 20,
           itemGap: 40,
@@ -79,30 +88,37 @@ export default {
           ]
         },
         grid: {
-          left: 35,
+          left: 55,
           top: 25,
           right: 35,
           bottom: 75
         },
         xAxis: {
           axisLabel: {
-            fontSize: 14,
+            fontSize: 12,
             color: '#DEE9FF'
           },
           type: 'category',
           boundaryGap: true,
-          data: ['05.01', '05.02', '05.03', '05.04', '05.05', '05.06', '05.07', '05.08', '05.09', '05.10']
+          data: this.timeList
         },
         yAxis: {
           axisLabel: {
-            fontSize: 14,
+            fontSize: 12,
             color: '#DEE9FF'
           },
-          type: 'value'
+          splitLine: {
+            lineStyle: {
+              color: '#14153B',
+              width: 1
+            }
+          },
+          type: 'value',
+          scale: true
         },
         series: [
           {
-            data: this.powerData,
+            data: this.totalData,
             type: 'line',
             lineStyle: {
               color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -127,7 +143,7 @@ export default {
                   color: '#AE0BFF'
                 }
               ]),
-              opacity: 0.4
+              opacity: 0
             },
             smooth: true,
             name: 'growth',
@@ -139,7 +155,7 @@ export default {
           },
           {
             name: 'global',
-            data: [120, 200, 150, 80, 70, 110, 130, 12, 33, 32],
+            data: this.growthData,
             type: 'bar',
             itemStyle: {
               color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [

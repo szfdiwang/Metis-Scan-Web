@@ -15,7 +15,7 @@ export default {
   components: {},
   data() {
     return {
-      bgUrl: require('../../../../assets/img/home/earth1.jpg'),
+      bgUrl: require('../../../../assets/img/home/earthnew1.png'),
       chart: ''
       // geoCoordMap: {
       //   // 南宁: [108.479, 23.1152],
@@ -90,65 +90,64 @@ export default {
           }
         },
         series: [
-          {
-            // 点
-            name: '数据中心',
-            //		        type: 'effectScatter',
-            //		        coordinateSystem: 'bmap',
-            type: 'scatter3D',
-            blendMode: 'lighter',
-            coordinateSystem: 'globe',
-            showEffectOn: 'render',
-            zlevel: 2,
-            effectType: 'ripple',
-            symbolSize: 15,
-            rippleEffect: {
-              period: 4,
-              scale: 4,
-              brushType: 'fill'
-            },
-
-            //		        showEffectOn: 'hover',
-            label: {
-              show: true,
-              position: 'right',
-              //			                formatter: '{b}',
-              formatter: function(params) {
-                if (params.dataIndex === 1) {
-                  return '南京'
-                } else if (params.dataIndex === 2) {
-                  return '沈阳'
-                } else if (params.dataIndex === 3) {
-                  return '太原'
-                } else if (params.dataIndex === 4) {
-                  return '日本'
-                } else if (params.dataIndex === 5) {
-                  return '雅加达'
-                } else if (params.dataIndex === 0) {
-                  return '徐州'
-                } else if (params.dataIndex === 6) {
-                  return '昆明'
-                }
-              },
-              fontSize: 18,
-              color: '#f5d909',
-              fontWeight: 'bold',
-              //			                    backgroundColor:'rgba(255,255,255,0.2)'
-              backgroundColor: 'transparent'
-            },
-            itemStyle: {
-              color: 'rgb(29,183,255)'
-            },
-            data: [
-              [117.11, 34.15],
-              [118.58, 32.01],
-              [123.38, 41.8],
-              [112.01, 38.01],
-              [139.46, 35.42],
-              [116.58, 6.1],
-              [102.9, 25.31]
-            ]
-          }
+          // {
+          //   // 点
+          //   name: '数据中心',
+          //   //		        type: 'effectScatter',
+          //   //		        coordinateSystem: 'bmap',
+          //   type: 'scatter3D',
+          //   blendMode: 'lighter',
+          //   coordinateSystem: 'globe',
+          //   showEffectOn: 'render',
+          //   zlevel: 2,
+          //   effectType: 'ripple',
+          //   symbolSize: 15,
+          //   rippleEffect: {
+          //     period: 4,
+          //     scale: 4,
+          //     brushType: 'fill'
+          //   },
+          //   //		        showEffectOn: 'hover',
+          //   label: {
+          //     show: true,
+          //     position: 'right',
+          //     //			                formatter: '{b}',
+          //     formatter: function(params) {
+          //       if (params.dataIndex === 1) {
+          //         return '南京'
+          //       } else if (params.dataIndex === 2) {
+          //         return '沈阳'
+          //       } else if (params.dataIndex === 3) {
+          //         return '太原'
+          //       } else if (params.dataIndex === 4) {
+          //         return '日本'
+          //       } else if (params.dataIndex === 5) {
+          //         return '雅加达'
+          //       } else if (params.dataIndex === 0) {
+          //         return '徐州'
+          //       } else if (params.dataIndex === 6) {
+          //         return '昆明'
+          //       }
+          //     },
+          //     fontSize: 18,
+          //     color: '#f5d909',
+          //     fontWeight: 'bold',
+          //     //			                    backgroundColor:'rgba(255,255,255,0.2)'
+          //     backgroundColor: 'transparent'
+          //   },
+          //   itemStyle: {
+          //     color: 'rgb(29,183,255)'
+          //   },
+          //   data: [
+          //     [117.11, 34.15],
+          //     [118.58, 32.01],
+          //     [123.38, 41.8],
+          //     [112.01, 38.01],
+          //     [139.46, 35.42],
+          //     [116.58, 6.1],
+          //     [102.9, 25.31]
+          //   ]
+          // }
         ]
       }
       this.chart.setOption(option, true)

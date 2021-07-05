@@ -57,7 +57,10 @@
         <el-table-column prop="activeDegree" :label="$t('home.activeDegree')">
           <template slot-scope="scope">
             <span v-for="(item, index) in getHot(scope.row.idleDays)" :key="index">
-              <img src="../../../assets/img/home/hot.svg" alt="" />
+              <img src="../../../assets/img/home/red.svg" alt="" />
+            </span>
+            <span v-for="(item, index) in getCold(scope.row.idleDays)" :key="index">
+              <img src="../../../assets/img/home/cold.svg" alt="" />
             </span>
           </template>
         </el-table-column>
@@ -124,6 +127,10 @@ export default {
     handleCurrentChange(page) {
       this.curPage = page
       this.curTab === 'power' ? this.initPowerRank() : this.initActivityRank()
+    },
+
+    getCold(idleDays) {
+      return Number(6 - idleDays < 0 ? 6 : idleDays)
     },
 
     getHot(idleDays) {

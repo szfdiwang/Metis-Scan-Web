@@ -6,13 +6,13 @@
     <div class="welcome">
       <img src="../../assets/img/home/WelcometoRosetta.svg" alt="" />
     </div>
-    <div class="search-bar">
+    <!-- <div class="search-bar">
       <el-input v-model="input2" placeholder="请输入内容" class="search-box">
         <template slot="suffix">
           <div class="search-btn pointer">{{ $t('common.search') }}</div>
         </template>
       </el-input>
-    </div>
+    </div> -->
     <Card
       :partnerCount="partnerCount"
       :dataFileSize="dataFileSize"
