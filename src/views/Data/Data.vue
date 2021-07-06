@@ -14,49 +14,56 @@
         <div style="width: 3.8rem">{{ $t('data.NameIdentifier') }}</div>
         <div style="width: 2.1rem">{{ $t('data.Identifier') }}</div>
         <div style="width: 2.9rem">{{ $t('data.DataProvider') }}</div>
-        <div style="width: 2.04rem">{{ $t('node.Size') }}</div>
         <div style="width: 2.62rem">{{ $t('data.Status') }}</div>
         <div>{{ $t('data.ParticipatedTasks') }}</div>
       </div>
     </div>
-    <div class="rankingTd" v-for="(item, index) in 5" :key="index">
+    <div class="rankingTd" v-for="(item, index) in DataList" :key="index">
       <div style="width: 1.24rem" class="rankingTdImg">
         <div>
           <img src="../../assets/img/excel/1.svg" alt="" />
         </div>
-        <div>
-          <img src="../../assets/img/node/2.icon3.svg" alt="" />
-        </div>
       </div>
       <div style="width: 3.8rem">
-        <div>xxxxxxxxx任务</div>
-        <div>xxxxxxxxxxxxxxxxxxxx</div>
+        <div>{{ item.resourceName }}</div>
+        <div id="id">ID:{{ item.identityId }}</div>
       </div>
       <div style="width: 2.1rem; color: #fec43e" @click="$router.push('/node/metaData')">{{ $t('node.Detail') }}</div>
-      <div style="width: 2.9rem">XXX BANK</div>
-      <div style="width: 2.04rem">10</div>
-      <div style="width: 2.62rem">200.0MB</div>
-      <div>22</div>
+      <div style="width: 2.9rem">{{ item.dynamicFields.orgName }}</div>
+      <div style="width: 2.62rem">{{ item.size }}MB</div>
+      <div>{{ item.dynamicFields.taskCount }}</div>
     </div>
     <Pagination class="Pagination"></Pagination>
   </div>
 </template>
 <script>
 import Pagination from '../../components/Pagination.vue'
+import { dataApi } from '../../api/index'
+console.log('dataApi', dataApi)
 export default {
   components: { Pagination },
   data() {
-    return {}
+    return {
+      DataList: []
+    }
+  },
+  created() {
+    this.getListData()
   },
   methods: {
     imgEvent() {
       this.imgList++
       this.imgUrl = '../../assets/img/excel/1.svg'
       console.log(this.imgUrl)
+    },
+    async getListData() {
+      const res = await dataApi.getListDataFile({
+        pageNo: 1,
+        pageSize: 10
+      })
+      this.DataList = res.data
+      console.log('shuju', res)
     }
-  },
-  created() {
-    // this.imgEvent()
   }
 }
 </script>
@@ -118,8 +125,14 @@ export default {
       }
     }
   }
-  .Pagination{
+  .Pagination {
     margin: 0.2rem 0.09rem;
+  }
+  #id {
+    overflow: hidden;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    width: 180px;
   }
 }
 </style>

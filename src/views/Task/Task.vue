@@ -39,7 +39,7 @@
         <div>{{ $t('task.TimeSpent') }}</div>
       </div>
     </div>
-    <div class="rankingTd" v-for="(item, index) in 5" :key="index">
+    <div class="rankingTd" v-for="(item, index) in listTask" :key="index">
       <div style="width: 1.24rem" class="rankingTdImg">
         <div>
           <img src="../../assets/img/excel/1.svg" alt="" />
@@ -49,22 +49,24 @@
         </div>
       </div>
       <div style="width: 3.8rem">
-        <div>xxxxxxxxx任务</div>
-        <div>xxxxxxxxxxxxxxxxxxxx</div>
+        <div>{{ item.taskName }}任务</div>
+        <div>ID: {{ item.id }}</div>
       </div>
       <div style="width: 1.99rem; color: #fec43e" @click="$router.push('/task/TaskDetail')">
         {{ $t('node.Detail') }}
       </div>
-      <div style="width: 4.18rem">XXX BANK</div>
+      <div style="width: 4.18rem">{{ item.dynamicFields.sponsorName }}</div>
       <div style="width: 2.04rem">{{ $t('task.Succeeded') }}</div>
-      <div style="width: 2.62rem">2021-1-22 13:00:00</div>
-      <div>12:22:59</div>
+      <div style="width: 2.62rem">{{ item.createAt }}</div>
+      <div>{{ item.endAt }}</div>
     </div>
     <Pagination class="pagination"></Pagination>
   </div>
 </template>
 <script>
 import Pagination from '../../components/Pagination.vue'
+import { taskApi } from '../../api/index'
+console.log('taskApi', taskApi)
 export default {
   components: { Pagination },
   data() {
@@ -91,7 +93,21 @@ export default {
           label: '北京烤鸭'
         }
       ],
-      value: ''
+      value: '',
+      listTask: []
+    }
+  },
+  created() {
+    this.getListTask()
+  },
+  methods: {
+    async getListTask() {
+      const res = await taskApi.getListTask({
+        pageNo: 1,
+        pageSize: 10
+      })
+      this.listTask = res.data
+      console.log('任务', res)
     }
   }
 }
@@ -168,7 +184,7 @@ export default {
       margin-right: 0.7rem;
     }
   }
-  .pagination{
+  .pagination {
     margin: 0.2rem 0.1rem;
   }
 }

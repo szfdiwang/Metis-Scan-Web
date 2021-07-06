@@ -20,8 +20,13 @@
       </div>
       <div class="rankingTd" v-for="(item, index) in data" :key="index">
         <div style="width: 1.24rem" class="rankingTdImg">
-          <div>
-            <img src="../../assets/img/excel/1.svg" alt="" />
+          <div id="xh">
+            <div v-if="index > 2" class="order">
+              {{ index + 1 }}
+            </div>
+            <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
+            <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
+            <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
           </div>
           <!-- <div>
             <img src="../../assets/img/node/2.icon3.svg" alt="" />
@@ -50,7 +55,7 @@
         <div style="width: 2.62rem">2%</div>
         <div>
           <div class="hot">
-            <div v-for="(item, index) in hot" :key="index" style="margin: 0px 2px">
+            <div v-for="(item, index) in 5" :key="index" style="margin: 0px 2px">
               <img src="../../assets/img/excel/hot.svg" alt="" />
             </div>
           </div>
@@ -59,78 +64,76 @@
     </div>
     <div class="Pagination">
       <el-pagination
-        @size-change="handleSizeChange"
+        background
         @current-change="handleCurrentChange"
-        :current-page="currentPage4"
-        :page-sizes="[4, 100, 200, 300, 400]"
-        :page-size="100"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
+        :current-page="curPage"
+        :page-size="pageSize"
+        layout="total, prev, pager, next"
+        :total="totalRows"
       >
       </el-pagination>
     </div>
   </div>
 </template>
 <script>
-import { nodeApi } from '../../api/index'
+import { nodeApi, dataApi } from '../../api/index'
 console.log('nodeApi', nodeApi)
 export default {
   data() {
     return {
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 10,
-      page: {
-        page: 1,
-        size: 5,
-        total: 10
-      },
+      curPage: 1,
+      pageSize: 5,
+      totalRows: 10,
+      curTab: 'power',
       hot: '0',
       data: [],
-      imgList: [
-        <img src="../../assets/img/excel/1.svg" alt="" />,
-        <img src="../../assets/img/excel/2.svg" alt="" />,
-        <img src="../../assets/img/excel/3.svg" alt="" />
-      ]
     }
   },
   created() {
     this.getListOrgInfo()
   },
   methods: {
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`)
+    getHot(idleDays) {
+      return Number(6 - idleDays < 0 ? 0 : 6 - idleDays)
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
+    handleCurrentChange(page) {
+      this.curPage = page
     },
     async getListOrgInfo() {
       const res = await nodeApi.getOrgListOrgInfo({
-        pageNo: 1,
-        pageSize: 5
+        pageNo: this.curPage,
+        pageSize: this.pageSize
       })
-      this.data = res.data
-      this.hot = res.data[0].status
-      console.log('123', this.data)
-      console.log('刘', res)
+      console.log('刘俊', res)
+      if (res.code === 0) {
+        this.data = res.data
+        this.totalRows = res.totalRows
+      }
     },
-    async Detail(value) {
-      this.$router.push('/node/NodeDetail')
-      // const res = await nodeApi.getOrgListOrgInfo({
-      //   identityId: '1'
-      // })
-      const res = await nodeApi.getFindOrgInfo({
-        identityId: value
+    Detail(value) {
+      this.$router.push({
+        name: 'nodeDetail',
+        params: {
+          identityId: value
+        }
       })
-      console.log('7777', res)
+      console.log('00000', identityId)
     }
-    //   async getInfo() {
-    //     const res = await nodeApi.getFindOrgInfo({
-    //       identityId: '8e16232fa7972262787a6152caa982530f75806e6025c2507e969542bae27377'
-    //     })
-    //     console.log('liujun', res)
-    //   }
+    // async Detail(value) {
+    //   this.$router.push({
+    //     path: 'nodeDetail',
+    //     query: {
+    //       identityId: value
+    //     }
+    //   })
+    //   console.log('0000000',identityId)
+    //   const res = await dataApi.getListDataFileBy({
+    //     identityId: value,
+    //     pageNo: 1,
+    //     pageSize: 5
+    //   })
+    //   console.log('7777', res)
+    // }
   }
 }
 </script>
@@ -193,11 +196,27 @@ export default {
     }
   }
   .Pagination {
-    width: 18.4rem;
-    height: 0.4rem;
-    background: #080c3d;
-    border-radius: 0.04rem;
-    margin-left: 0.1rem;
+    // width: 18.4rem;
+    // height: 0.4rem;
+    // background: #080c3d;
+    // border-radius: 0.04rem;
+    // margin-left: 0.1rem;
+    display: flex;
+    justify-content: space-between;
+    .el-pagination {
+      margin-top: 0.1rem;
+      ::v-deep .el-input__inner {
+        background: #303047;
+        border-color: #303047;
+        color: #fff;
+      }
+      ::v-deep .btn-prev,
+      ::v-deep .btn-next {
+        background: #303047;
+        border-color: #303047;
+        color: #fff;
+      }
+    }
   }
   /deep/ .el-select el-select--mini {
     margin-left: 16rem;
@@ -210,6 +229,17 @@ export default {
   }
   .hot {
     display: flex;
+  }
+  #xh {
+    list-style-type: decimal !important;
+  }
+  .order {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #3f4590;
+    text-align: center;
+    margin-left: 20px;
   }
 }
 </style>

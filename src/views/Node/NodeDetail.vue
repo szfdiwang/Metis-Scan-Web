@@ -35,27 +35,29 @@
                 <div>{{ $t('data.ParticipatedTasks') }}</div>
               </div>
             </div>
-            <div class="rankingTd" v-for="(item, index) in 5" :key="index">
+            <div class="rankingTd" v-for="(item, index) in DataList" :key="index">
               <div style="width: 1.24rem" class="rankingTdImg">
-                <div>
-                  <img src="../../assets/img/excel/1.svg" alt="" />
-                </div>
-                <div>
-                  <img src="../../assets/img/node/2.icon3.svg" alt="" />
+                <div id="xh">
+                  <div v-if="index > 2" class="order">
+                    {{ index + 1 }}
+                  </div>
+                  <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
+                  <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
+                  <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
                 </div>
               </div>
               <!-- <BasicAreaChart></BasicAreaChart> -->
               <div style="width: 3.8rem">
-                <div>xxxxxxxxx银行</div>
-                <div>xxxxxxxxxxxxxxxxxxxx</div>
+                <div>{{ item.fileName }}数据</div>
+                <div>{{ item.identityId }}</div>
               </div>
               <div style="width: 2.5rem; color: #fec43e" @click="$router.push('/node/metaData')">
                 {{ $t('node.Detail') }}
               </div>
-              <div style="width: 2.9rem">10.0MB</div>
-              <div style="width: 2.54rem">10</div>
-              <div style="width: 2.62rem">5000</div>
-              <div>22</div>
+              <div style="width: 2.9rem">{{ item.size }}0MB</div>
+              <div style="width: 2.54rem">{{ item.columns }}</div>
+              <div style="width: 2.62rem">{{ item.rows }}</div>
+              <div>{{ item.dynamicFields.taskCount }}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -76,11 +78,13 @@
             </div>
             <div class="rankingTd" v-for="(item, index) in 5" :key="index">
               <div style="width: 1.24rem" class="rankingTdImg">
-                <div>
-                  <img src="../../assets/img/excel/1.svg" alt="" />
-                </div>
-                <div>
-                  <img src="../../assets/img/node/2.icon3.svg" alt="" />
+                <div id="xh">
+                  <div v-if="index > 2" class="order">
+                    {{ index + 1 }}
+                  </div>
+                  <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
+                  <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
+                  <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
                 </div>
               </div>
               <div style="width: 3.8rem">
@@ -106,19 +110,52 @@
 <script>
 import BasicAreaChart from './components/BasicAreaChart.vue'
 import Pagination from '../../components/Pagination.vue'
+import { dataApi, nodeApi } from '../../api/index'
+console.log('dataApi', dataApi)
 export default {
   components: { BasicAreaChart, Pagination },
   data() {
     return {
       index: '0',
-      activeName: 'first'
+      activeName: 'first',
+      DataList: [],
+      id: ''
     }
+  },
+  created() {
+    this.listData()
+    this.getParams()
+    this.getOrgInfo()
   },
   methods: {
     handleClick(tab) {
       console.log(tab)
       this.index = tab.index
+    },
+    async listData() {
+      const res = await dataApi.getListDataFileBy({
+        identityId: 'identityId_000001',
+        pageNo: 1,
+        pageSize: 5
+      })
+      this.DataList = res.data
+    },
+    getParams() {
+      this.id = this.$route.params.identityId
+      console.log('标', this.id)
+    },
+    async getOrgInfo() {
+      const res = await nodeApi.getOrgListOrgInfo({
+        identityId: this.id
+      })
+      console.log('1', identityId)
     }
+    // async getData() {
+    //   const res = await dataApi.getDataFile({
+    //     identityId: 'identityId_000001'
+    //   })
+    //   console.log('元数据', res)
+    // }
   }
 }
 </script>
@@ -151,34 +188,6 @@ export default {
   }
   .conent {
     padding: 0px 0.2rem;
-    // background: url('../../assets/img/node/2.border.svg');
-    // .conentTop {
-    //   display: flex;
-    //   position: relative;
-    //   .Metadata {
-    //     position: absolute;
-    //     top: -10px;
-    //     left: 0.6rem;
-    //     z-index: -999;
-    //     width: 2.71rem;
-    //     height: 40px;
-    //     background: #11175d;
-    //     transform: rotateZ(10deg) skew(-10deg, -10deg);
-    //      text-align: center;
-    //   }
-    //   .Tasks {
-    //     position: absolute;
-    //     top: 0px;
-    //     left: 4rem;
-    //     z-index: -999;
-    //     width: 2.4rem;
-    //     height: 40px;
-    //     background: #11175d;
-    //     color: cornsilk;
-    //     transform: rotateZ(10deg) skew(-10deg, -10deg);
-    //     text-align: center;
-    //   }
-    // }
   }
 
   .rankingTh {
@@ -237,5 +246,21 @@ export default {
 }
 /deep/ .el-tabs__item {
   padding: 0px;
+}
+.order {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #3f4590;
+  text-align: center;
+  margin-left: 20px;
+}
+.order {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #3f4590;
+  text-align: center;
+  margin-left: 20px;
 }
 </style>

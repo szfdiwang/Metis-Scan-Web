@@ -44,11 +44,7 @@
     <div class="rankingList">
       <div class="rankingTd" v-for="(item, index) in 24" :key="index">
         <div style="width: 1.27rem">
-          <img src="../../assets/img/excel/1.svg" alt="" style="margin: 0.05rem" /><img
-            src="../../assets/img/node/2.icon3.svg"
-            alt=""
-            style="margin: 0.05rem"
-          />
+          <img src="../../assets/img/excel/1.svg" alt="" style="margin: 0.05rem" />
         </div>
         <div>xxxxxxxxxxxx</div>
       </div>
@@ -57,7 +53,24 @@
 </template>
 
 <script>
-export default {}
+import { dataApi } from '../../api/index'
+console.log('dataApi', dataApi)
+export default {
+  data() {
+    return {}
+  },
+  created() {
+    this.getDataFile()
+  },
+  methods: {
+    async getDataFile() {
+      const res = await dataApi.getDataFile({
+        metaDataId: 'identityId_000001'
+      })
+      console.log('数据详情', res)
+    }
+  }
+}
 </script>
 <style lang='scss' scoped>
 .metaData {

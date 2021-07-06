@@ -1,5 +1,8 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import {
+    MessageBox,
+    Message
+} from 'element-ui'
 
 
 // create an axios instance
@@ -23,7 +26,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         const res = response.data
-        return res
+        return resaa
     },
     error => {
         Message({
