@@ -22,7 +22,6 @@
 <script>
 import { changeSizeFnWithPlus, changeSizeToMb } from '@/utils/utils'
 export default {
-  components: {},
   props: {
     cpu: {
       type: Number,

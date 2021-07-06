@@ -9,11 +9,15 @@
 
 <script>
 import { homeApi } from '@/api/index'
+import { changeSizeToGb } from '@/utils/utils'
 export default {
   components: {},
   data() {
     return {
+      timeList: [],
       dataChart: '',
+      growthData: [],
+      totalData: [],
       dataCahrtData: [],
       option: {}
     }
@@ -45,8 +49,16 @@ export default {
       // const startDate = this.$day(new Date()).format('YYYY-MM-DD')
       const startDate = this.$day(new Date()).subtract(30, 'day').format('YYYY-MM-DD')
       const res = await homeApi.getDataTrend({ startDate, days: 30 })
-      console.log('data echart', res)
-      this.dataCahrtData = res.code === 0 ? res.data : []
+      console.log('data', res)
+      // TODO: this.growthData this.totalData 两个趋势
+      this.growthData = res.data.dailySize.map(size => changeSizeToGb(size))
+      console.log(this.growthData)
+      this.totalData = res.data.totalSize.map(size => changeSizeToGb(size))
+      console.log(this.totalData)
+      this.timeList = res.data.updateAt.map(day => {
+        return this.$day(day).format('MM.DD')
+      })
+
       this.option = {
         color: ['#2A6EE6', 'red'],
         legend: {
@@ -89,28 +101,34 @@ export default {
         grid: {
           left: 35,
           top: 25,
-          right: 35,
+          right: 0,
           bottom: 75
         },
         xAxis: {
           axisLabel: {
-            fontSize: 14,
+            fontSize: 12,
             color: '#DEE9FF'
           },
           type: 'category',
           boundaryGap: true,
-          data: ['05.01', '05.02', '05.03', '05.04', '05.05', '05.06', '05.07', '05.08', '05.09', '05.10']
+          data: this.timeList // 固定的 当前天数向前推进30天
         },
         yAxis: {
           axisLabel: {
-            fontSize: 14,
+            fontSize: 12,
             color: '#DEE9FF'
+          },
+          splitLine: {
+            lineStyle: {
+              color: '#14153B',
+              width: 1
+            }
           },
           type: 'value'
         },
         series: [
           {
-            data: this.dataCahrtData,
+            data: this.totalData,
             type: 'line',
             lineStyle: {
               color: '#2A6EE6'
@@ -136,10 +154,10 @@ export default {
                   color: '#0B22FF'
                 }
               ]),
-              opacity: 0.4
+              opacity: 0.2
             },
             smooth: true,
-            name: 'growth',
+            name: 'global',
             label: {
               formatter: params => {
                 console.log('params========>', params)
@@ -148,8 +166,8 @@ export default {
             }
           },
           {
-            name: 'global',
-            data: [120, 200, 150, 80, 70, 110, 130, 12, 33, 32],
+            name: 'growth',
+            data: this.growthData,
             type: 'bar',
             itemStyle: {
               color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [

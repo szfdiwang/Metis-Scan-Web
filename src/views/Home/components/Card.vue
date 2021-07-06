@@ -129,7 +129,6 @@ export default {
       right: 0.2rem;
     }
     .label {
-      font-family: PingFangSC-Medium;
       font-size: 0.2rem;
       color: #dee9ff;
       text-align: center;

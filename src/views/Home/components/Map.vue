@@ -45,6 +45,10 @@
       <div class="title">
         <img src="../../../assets/img/home/round-single-left.svg" alt="" />
         <p class="text">
+          <img src="../../../assets/img/home/border-left-top.svg" alt="" class="border-left-top" />
+          <img src="../../../assets/img/home/border-left-bottom.svg" alt="" class="border-left-bottom" />
+          <img src="../../../assets/img/home/border-right-top.svg" alt="" class="border-right-top" />
+          <img src="../../../assets/img/home/border-right-bottom.svg" alt="" class="border-right-bottom" />
           {{ $t('home.center') }}
         </p>
         <img src="../../../assets/img/home/round-single-right.svg" alt="" />
@@ -167,6 +171,14 @@ export default {
         display: flex;
         justify-content: center;
         margin: 0.35rem 0;
+        .left-round1,
+        .left-round2,
+        .left-round3,
+        .right-round1,
+        .right-round2,
+        .right-round3 {
+          width: 1.02rem;
+        }
         .left-round1 {
           animation: rotate 1.5s linear infinite;
         }
@@ -233,6 +245,27 @@ export default {
         font-weight: 700;
         padding: 10px 20px;
         background-color: #1e2e92;
+        position: relative;
+        .border-left-top {
+          position: absolute;
+          left: -0.2rem;
+          top: -0.2rem;
+        }
+        .border-left-bottom {
+          position: absolute;
+          left: -0.2rem;
+          bottom: -0.2rem;
+        }
+        .border-right-top {
+          position: absolute;
+          right: -0.2rem;
+          top: -0.2rem;
+        }
+        .border-right-bottom {
+          position: absolute;
+          right: -0.2rem;
+          bottom: -0.2rem;
+        }
       }
     }
     .earth-wrapper {
