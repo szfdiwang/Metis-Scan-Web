@@ -41,11 +41,13 @@
     </div>
     <div class="rankingTd" v-for="(item, index) in listTask" :key="index">
       <div style="width: 1.24rem" class="rankingTdImg">
-        <div>
-          <img src="../../assets/img/excel/1.svg" alt="" />
-        </div>
-        <div>
-          <img src="../../assets/img/node/2.icon3.svg" alt="" />
+        <div id="xh">
+          <div v-if="index > 2" class="order">
+            {{ index + 1 }}
+          </div>
+          <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
+          <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
+          <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
         </div>
       </div>
       <div style="width: 3.8rem">
@@ -186,6 +188,14 @@ export default {
   }
   .pagination {
     margin: 0.2rem 0.1rem;
+  }
+  .order {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #3f4590;
+    text-align: center;
+    margin-left: 20px;
   }
 }
 </style>

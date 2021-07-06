@@ -33,7 +33,7 @@
           </div> -->
         </div>
         <div style="width: 3.8rem">
-          <div>{{ item.orgName }}银行</div>
+          <div>{{ item.orgName }}</div>
           <div id="id" class="icoFontlist">{{ item.identityId }}</div>
         </div>
         <div style="width: 1.99rem; color: #fec43e" @click="Detail(item.identityId)">
@@ -55,7 +55,7 @@
         <div style="width: 2.62rem">2%</div>
         <div>
           <div class="hot">
-            <div v-for="(item, index) in 5" :key="index" style="margin: 0px 2px">
+            <div v-for="(item, index) in getHot(item.dynamicFields.idleDays)" :key="index" style="margin: 0px 2px">
               <img src="../../assets/img/excel/hot.svg" alt="" />
             </div>
           </div>
@@ -87,6 +87,8 @@ export default {
       curTab: 'power',
       hot: '0',
       data: [],
+      id:''
+
     }
   },
   created() {
@@ -98,6 +100,7 @@ export default {
     },
     handleCurrentChange(page) {
       this.curPage = page
+      this.getListOrgInfo()
     },
     async getListOrgInfo() {
       const res = await nodeApi.getOrgListOrgInfo({
@@ -117,7 +120,8 @@ export default {
           identityId: value
         }
       })
-      console.log('00000', identityId)
+      this.id = identityId
+      console.log('00000', this.id)
     }
     // async Detail(value) {
     //   this.$router.push({

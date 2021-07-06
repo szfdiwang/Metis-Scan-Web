@@ -144,12 +144,12 @@ export default {
       this.id = this.$route.params.identityId
       console.log('标', this.id)
     },
-    async getOrgInfo() {
-      const res = await nodeApi.getOrgListOrgInfo({
-        identityId: this.id
-      })
-      console.log('1', identityId)
-    }
+    // async getOrgInfo() {
+    //   const res = await nodeApi.getOrgListOrgInfo({
+    //     identityId: this.id
+    //   })
+    //   console.log('1', identityId)
+    // }
     // async getData() {
     //   const res = await dataApi.getDataFile({
     //     identityId: 'identityId_000001'
@@ -248,19 +248,12 @@ export default {
   padding: 0px;
 }
 .order {
-  width: 20px;
-  height: 20px;
+  width: 0.2rem;
+  height: 0.2rem;
   border-radius: 50%;
   background-color: #3f4590;
   text-align: center;
-  margin-left: 20px;
-}
-.order {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #3f4590;
-  text-align: center;
-  margin-left: 20px;
+  line-height: 0.2rem;
+  margin-left: 0.2rem;
 }
 </style>
