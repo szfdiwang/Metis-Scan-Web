@@ -10,7 +10,7 @@ module.exports = {
     open: true,
     proxy: {
       '/apis': {
-        target: 'http://192.168.112.32:8088/rosettanet-scan/', // 代理接口位置
+        target: 'http://192.168.112.32:8088/', // 代理接口位置
         pathRewrite: {
           '^/apis': ''
         }
