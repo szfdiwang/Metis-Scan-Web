@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-
+// 节点列表
 const nodeApi = {
     getOrgListOrgInfo(params) {
         return request({

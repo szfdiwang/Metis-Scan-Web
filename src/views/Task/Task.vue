@@ -62,7 +62,17 @@
       <div style="width: 2.62rem">{{ item.createAt }}</div>
       <div>{{ item.endAt }}</div>
     </div>
-    <Pagination class="pagination"></Pagination>
+    <div class="Pagination">
+      <el-pagination
+        background
+        @current-change="handleCurrentChange"
+        :current-page="curPage"
+        :page-size="pageSize"
+        layout="total, prev, pager, next"
+        :total="totalRows"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 <script>
@@ -96,13 +106,19 @@ export default {
         }
       ],
       value: '',
-      listTask: []
+      listTask: [],
+      curPage: 1,
+      pageSize: 5,
+      totalRows: 10
     }
   },
   created() {
     this.getListTask()
   },
   methods: {
+    handleCurrentChange(page) {
+      this.curPage = page
+    },
     async getListTask() {
       const res = await taskApi.getListTask({
         pageNo: 1,
@@ -197,5 +213,20 @@ export default {
     text-align: center;
     margin-left: 20px;
   }
-}
+  .el-pagination {
+      margin-top: 0.1rem;
+      ::v-deep .el-input__inner {
+        background: #303047;
+        border-color: #303047;
+        color: #fff;
+      }
+      ::v-deep .btn-prev,
+      ::v-deep .btn-next {
+        background: #303047;
+        border-color: #303047;
+        color: #fff;
+      }
+    }
+  }
+
 </style>

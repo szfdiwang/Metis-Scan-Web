@@ -5,7 +5,7 @@
         <img src="../../assets/img/node/3.icon1.svg" alt="" style="line-height: 0.42rem" />
       </div>
       <div class="bank">XXXBANK</div>
-      <div class="Identifier">ID：XXXXXXXXXXXXXXXXXXXXX</div>
+      <div class="Identifier">ID：{{ this.id }}</div>
     </div>
     <div class="tableData">
       <table>
@@ -44,10 +44,28 @@
     <div class="rankingList">
       <div class="rankingTd" v-for="(item, index) in 24" :key="index">
         <div style="width: 1.27rem">
-          <img src="../../assets/img/excel/1.svg" alt="" style="margin: 0.05rem" />
+          <div id="xh">
+            <div v-if="index > 2" class="order">
+              {{ index + 1 }}
+            </div>
+            <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" style="margin: 5px 10px" />
+            <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" style="margin: 5px 10px" />
+            <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" style="margin: 5px 10px" />
+          </div>
         </div>
         <div>xxxxxxxxxxxx</div>
       </div>
+    </div>
+    <div class="Pagination">
+      <el-pagination
+        background
+        @current-change="handleCurrentChange"
+        :current-page="curPage"
+        :page-size="pageSize"
+        layout="total, prev, pager, next"
+        :total="totalRows"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -57,17 +75,29 @@ import { dataApi } from '../../api/index'
 console.log('dataApi', dataApi)
 export default {
   data() {
-    return {}
+    return {
+      id: '',
+      curPage: 1,
+      pageSize: 5,
+      totalRows: 10
+    }
   },
   created() {
-    this.getDataFile()
+    this.metaData()
+    this.getFile()
   },
   methods: {
-    async getDataFile() {
-      const res = await dataApi.getDataFile({
-        metaDataId: 'identityId_000001'
+    handleCurrentChange(page) {
+      this.curPage = page
+    },
+    metaData() {
+      this.id = this.$route.query.metaDataId
+      console.log('222', this.id)
+    },
+    getFile() {
+      dataApi.getDataFile({ metaDataId: this.id }).then(res => {
+        console.log('meta', res)
       })
-      console.log('数据详情', res)
     }
   }
 }
@@ -140,6 +170,33 @@ export default {
       display: flex;
       margin: 0.1rem 0px;
       line-height: 0.4rem;
+    }
+  }
+  .order {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #3f4590;
+    line-height: 20px;
+    text-align: center;
+    margin: 10px;
+  }
+  .Pagination {
+    display: flex;
+    justify-content: space-between;
+    .el-pagination {
+      margin-top: 0.1rem;
+      ::v-deep .el-input__inner {
+        background: #303047;
+        border-color: #303047;
+        color: #fff;
+      }
+      ::v-deep .btn-prev,
+      ::v-deep .btn-next {
+        background: #303047;
+        border-color: #303047;
+        color: #fff;
+      }
     }
   }
 }

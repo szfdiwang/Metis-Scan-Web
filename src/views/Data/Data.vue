@@ -39,7 +39,17 @@
       <div style="width: 2.62rem">{{ item.size }}MB</div>
       <div>{{ item.dynamicFields.taskCount }}</div>
     </div>
-    <Pagination class="Pagination"></Pagination>
+    <div class="Pagination">
+      <el-pagination
+        background
+        @current-change="handleCurrentChange"
+        :current-page="curPage"
+        :page-size="pageSize"
+        layout="total, prev, pager, next"
+        :total="totalRows"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 <script>
@@ -50,13 +60,19 @@ export default {
   components: { Pagination },
   data() {
     return {
-      DataList: []
+      DataList: [],
+      curPage: 1,
+      pageSize: 5,
+      totalRows: 10
     }
   },
   created() {
     this.getListData()
   },
   methods: {
+    handleCurrentChange(page) {
+      this.curPage = page
+    },
     imgEvent() {
       this.imgList++
       this.imgUrl = '../../assets/img/excel/1.svg'
@@ -147,6 +163,24 @@ export default {
     background-color: #3f4590;
     text-align: center;
     margin-left: 20px;
+  }
+  .Pagination {
+    display: flex;
+    justify-content: space-between;
+    .el-pagination {
+      margin-top: 0.1rem;
+      ::v-deep .el-input__inner {
+        background: #303047;
+        border-color: #303047;
+        color: #fff;
+      }
+      ::v-deep .btn-prev,
+      ::v-deep .btn-next {
+        background: #303047;
+        border-color: #303047;
+        color: #fff;
+      }
+    }
   }
 }
 </style>

@@ -5,7 +5,7 @@
         <img src="../../assets/img/node/3.icon1.svg" alt="" style="line-height: 0.42rem" />
       </div>
       <div class="bank">XXXBANK</div>
-      <div class="Identifier">Identifier：XXXXXXXXXXXXXXXXXXXXX</div>
+      <div class="Identifier">Identifier：{{ this.id }}</div>
     </div>
     <div style="text-align: center">
       <img src="../../assets/img/node/3.title.svg" alt="" />
@@ -39,7 +39,7 @@
               <div style="width: 1.24rem" class="rankingTdImg">
                 <div id="xh">
                   <div v-if="index > 2" class="order">
-                    {{ index + 1 }}
+                    {{index + 1 }}
                   </div>
                   <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
                   <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
@@ -48,13 +48,13 @@
               </div>
               <!-- <BasicAreaChart></BasicAreaChart> -->
               <div style="width: 3.8rem">
-                <div>{{ item.fileName }}数据</div>
-                <div>{{ item.identityId }}</div>
+                <div>{{ item.resourceName }}</div>
+                <div>{{ item.metaDataId }}</div>
               </div>
-              <div style="width: 2.5rem; color: #fec43e" @click="$router.push('/node/metaData')">
+              <div style="width: 2.5rem; color: #fec43e" @click="MetaData(item.metaDataId)">
                 {{ $t('node.Detail') }}
               </div>
-              <div style="width: 2.9rem">{{ item.size }}0MB</div>
+              <div style="width: 2.9rem">{{ item.size / 1024 / 1024 }}MB</div>
               <div style="width: 2.54rem">{{ item.columns }}</div>
               <div style="width: 2.62rem">{{ item.rows }}</div>
               <div>{{ item.dynamicFields.taskCount }}</div>
@@ -70,13 +70,13 @@
                 <div style="width: 3.8rem">{{ $t('task.NameIdentifier') }}</div>
                 <div style="width: 1.99rem">{{ $t('task.Identifier') }}</div>
                 <div style="width: 2.7rem">{{ $t('task.Capacity') }}</div>
-                <div style="width: 2.04rem">{{ $t('node.Columns') }}</div>
+                <!-- <div style="width: 2.04rem">{{ $t('node.Columns') }}</div> -->
                 <div style="width: 2.04rem">{{ $t('task.Status') }}</div>
                 <div style="width: 2.62rem">{{ $t('task.StartTime') }}</div>
                 <div>{{ $t('task.TimeSpent') }}</div>
               </div>
             </div>
-            <div class="rankingTd" v-for="(item, index) in 5" :key="index">
+            <div class="rankingTd" v-for="(item, index) in taskList" :key="index">
               <div style="width: 1.24rem" class="rankingTdImg">
                 <div id="xh">
                   <div v-if="index > 2" class="order">
@@ -88,74 +88,104 @@
                 </div>
               </div>
               <div style="width: 3.8rem">
-                <div>xxxxxxxxx任务</div>
-                <div>xxxxxxxxxxxxxxxxxxxx</div>
+                <div>{{ item.taskName }}</div>
+                <div>ID:{{ item.id }}</div>
               </div>
               <div style="width: 1.99rem; color: #fec43e" @click="$router.push('/task/TaskDetail')">
                 {{ $t('node.Detail') }}
               </div>
-              <div style="width: 2.7rem">XXX BANK</div>
-              <div style="width: 2.04rem">10</div>
-              <div style="width: 2.04rem">{{ $t('task.Succeeded') }}</div>
-              <div style="width: 2.62rem">2021-1-22 13:00:00</div>
+              <div style="width: 2.7rem"></div>
+              <!-- <div style="width: 2.04rem">10</div> -->
+              <div style="width: 2.04rem">{{ item.status }}</div>
+              <div style="width: 2.62rem">{{ item.createAt }}</div>
               <div>12:22:59</div>
             </div>
           </div>
         </el-tab-pane>
       </el-tabs>
-      <Pagination class="Pagination"></Pagination>
+      <div class="Pagination">
+        <el-pagination
+          background
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="curPage"
+          :page-size="pageSize"
+          layout="total, prev, pager, next"
+          :total="totalRows"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import BasicAreaChart from './components/BasicAreaChart.vue'
-import Pagination from '../../components/Pagination.vue'
-import { dataApi, nodeApi } from '../../api/index'
+import { dataApi, nodeApi, taskApi } from '../../api/index'
 console.log('dataApi', dataApi)
 export default {
-  components: { BasicAreaChart, Pagination },
+  components: { BasicAreaChart },
   data() {
     return {
+      curPage: 1,
+      pageSize: 5,
+      totalRows: 10,
       index: '0',
       activeName: 'first',
       DataList: [],
-      id: ''
+      id: '',
+      taskList: []
     }
   },
   created() {
-    this.listData()
+    // this.listData()
     this.getParams()
     this.getOrgInfo()
+    this.getListTask()
   },
   methods: {
+    handleSizeChange(size) {
+      this.pageSize = size
+      this.getOrgInfo()
+    },
+    handleCurrentChange(page) {
+      this.curPage = page
+      this.getOrgInfo()
+    },
     handleClick(tab) {
       console.log(tab)
       this.index = tab.index
     },
-    async listData() {
-      const res = await dataApi.getListDataFileBy({
-        identityId: 'identityId_000001',
-        pageNo: 1,
-        pageSize: 5
+    MetaData(value) {
+      this.$router.push({
+        path: 'MetaData',
+        query: {
+          metaDataId: value
+        }
       })
-      this.DataList = res.data
+      // console.log('标', value)
     },
     getParams() {
-      this.id = this.$route.params.identityId
-      console.log('标', this.id)
+      this.id = this.$route.query.identityId
+      // console.log('标', this.id)
     },
-    // async getOrgInfo() {
-    //   const res = await nodeApi.getOrgListOrgInfo({
-    //     identityId: this.id
-    //   })
-    //   console.log('1', identityId)
-    // }
-    // async getData() {
-    //   const res = await dataApi.getDataFile({
-    //     identityId: 'identityId_000001'
-    //   })
-    //   console.log('元数据', res)
-    // }
+    async getOrgInfo() {
+      const res = await dataApi.getListDataFileBy({
+        identityId: this.id,
+        pageNo: 1,
+        pageSize: 10
+      })
+      this.DataList = res.data
+      console.log('1', res)
+    },
+    async getListTask() {
+      const res = await taskApi.getListTaskBy({
+        identityId: this.id,
+        pageNo: 1,
+        pageSize: 10
+      })
+      this.taskList = res.data
+      console.log('任务', res)
+    }
   }
 }
 </script>
@@ -246,6 +276,24 @@ export default {
 }
 /deep/ .el-tabs__item {
   padding: 0px;
+}
+.Pagination {
+  display: flex;
+  justify-content: space-between;
+  .el-pagination {
+    margin-top: 0.1rem;
+    ::v-deep .el-input__inner {
+      background: #303047;
+      border-color: #303047;
+      color: #fff;
+    }
+    ::v-deep .btn-prev,
+    ::v-deep .btn-next {
+      background: #303047;
+      border-color: #303047;
+      color: #fff;
+    }
+  }
 }
 .order {
   width: 0.2rem;

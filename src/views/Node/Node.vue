@@ -21,10 +21,13 @@
       <div class="rankingTd" v-for="(item, index) in data" :key="index">
         <div style="width: 1.24rem" class="rankingTdImg">
           <div id="xh">
-            <div v-if="index > 2" class="order">
-              {{ index + 1 }}
+            <div v-if="index > 2 && isShow === true" class="order">
+              {{ (curPage - 1) * pageSize + index + 1 }}
             </div>
-            <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
+            <div v-if="isShow === false" class="order">
+              {{ (curPage - 1) * pageSize + index + 1 }}
+            </div>
+            <img v-if="index === 0 && isShow" src="../../assets/img/excel/1.svg" alt="" />
             <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
             <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
           </div>
@@ -41,14 +44,24 @@
         </div>
         <div style="width: 4.18rem" class="power">
           <div>
-            <div>CPU: {{ item.accumulativeCore }}</div>
-            <div>{{ $t('node.Memory') }}: {{ item.accumulativeMemory }}</div>
-            <div>{{ $t('node.Bandwidth') }}: {{ item.accumulativeBandwidth }}</div>
+            <div>CPU: {{ item.dynamicFields.remainCore }}</div>
+            <div>{{ $t('node.Memory') }}: {{ item.dynamicFields.remainMemory }}</div>
+            <div>{{ $t('node.Bandwidth') }}: {{ item.dynamicFields.remainBandwidth }}</div>
           </div>
           <div>
-            <div>{{ $t('node.Remaining') }}: xxx%</div>
-            <div>{{ $t('node.Remaining') }}: xxx%</div>
-            <div>{{ $t('node.Remaining') }}: xxx%</div>
+            <div>
+              {{ $t('node.Remaining') }}:
+              {{
+                [item.dynamicFields.totalCore / item.dynamicFields.remainCore === NaN]
+                  ? 0
+                  : item.dynamicFields.totalCore / item.dynamicFields.remainCore
+              }}%
+            </div>
+            <div>{{ $t('node.Remaining') }}: {{ item.dynamicFields.totalMemory / item.dynamicFields ? NaN : 0 }}%</div>
+            <div>
+              {{ $t('node.Remaining') }}:
+              {{ item.dynamicFields.totalBandwidth / item.dynamicFields.remainBandwidth ? NaN : 0 }}%
+            </div>
           </div>
         </div>
         <div style="width: 2.04rem">{{ item.accumulativeDataFileCount }}</div>
@@ -87,8 +100,7 @@ export default {
       curTab: 'power',
       hot: '0',
       data: [],
-      id:''
-
+      isShow: true
     }
   },
   created() {
@@ -100,6 +112,7 @@ export default {
     },
     handleCurrentChange(page) {
       this.curPage = page
+      this.isShow = false
       this.getListOrgInfo()
     },
     async getListOrgInfo() {
@@ -107,7 +120,7 @@ export default {
         pageNo: this.curPage,
         pageSize: this.pageSize
       })
-      console.log('刘俊', res)
+      console.log('节点', res)
       if (res.code === 0) {
         this.data = res.data
         this.totalRows = res.totalRows
@@ -115,13 +128,12 @@ export default {
     },
     Detail(value) {
       this.$router.push({
-        name: 'nodeDetail',
-        params: {
+        path: 'nodeDetail',
+        query: {
           identityId: value
         }
       })
-      this.id = identityId
-      console.log('00000', this.id)
+      console.log('00000', value)
     }
     // async Detail(value) {
     //   this.$router.push({
@@ -200,11 +212,6 @@ export default {
     }
   }
   .Pagination {
-    // width: 18.4rem;
-    // height: 0.4rem;
-    // background: #080c3d;
-    // border-radius: 0.04rem;
-    // margin-left: 0.1rem;
     display: flex;
     justify-content: space-between;
     .el-pagination {
