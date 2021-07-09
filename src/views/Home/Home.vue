@@ -82,7 +82,8 @@ export default {
   height: auto;
   background: url('../../assets/img/home/bj1.png') repeat;
   position: relative;
-  margin: 0 0.2rem;
+  margin: 0 auto;
+  max-width: 1920px;
   .bg-blue {
     position: absolute;
     top: 0;

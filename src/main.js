@@ -23,7 +23,7 @@ Vue.prototype.$day = dayjs
 function setHtmlFontSize() {
   const htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
   const htmlDom = document.getElementsByTagName('html')[0]
-  htmlDom.style.fontSize = htmlWidth / 19.2 + 'px'
+  htmlDom.style.fontSize = htmlWidth > 1920 ? 1920 / 19.2 + 'px' : htmlWidth / 19.2 + 'px'
 }
 setHtmlFontSize()
 // eslint-disable-next-line space-before-function-paren
