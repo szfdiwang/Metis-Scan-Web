@@ -48,8 +48,8 @@ export default {
           // },
           data: [
             {
-              name: 'growth',
-              icon: 'rect',
+              // name: 'growth',
+              // icon: 'rect',
               itemStyle: {
                 borderWidth: 100
               },
@@ -137,32 +137,7 @@ export default {
               }
             }
           }
-          // {
-          //   name: 'global',
-          //   data: [120, 200, 150, 80, 70, 110, 130, 12, 33, 32],
-          //   type: 'bar',
-          //   itemStyle: {
-          //     normal: {
-          //       color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          //         {
-          //           offset: 0,
-          //           color: ' #FF6600'
-          //         },
-          //         {
-          //           offset: 1,
-          //           color: 'rgba(4,4,42,0.30)'
-          //         }
-          //       ])
-          //     }
-          //   },
-          //   label: {
-          //     normal: {
-          //       formatter: params => {
-          //         return this.$t(params.name)
-          //       }
-          //     }
-          //   }
-          // }
+          
         ]
       }
 

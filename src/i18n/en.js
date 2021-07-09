@@ -62,7 +62,8 @@ export default {
     Size: ' Size',
     Columns: 'Columns',
     Rows: 'Rows',
-    PARTICIPATINGNODESINTHEWHOLENETWORK: 'PARTICIPATING NODES IN THE WHOLE NETWORK'
+    PARTICIPATINGNODESINTHEWHOLENETWORK: 'PARTICIPATING NODES IN THE WHOLE NETWORK',
+    NumberTasks:'NUMBER OF PARTICIPATING TASKS'
   },
   data: {
     No: 'NO.',
@@ -109,7 +110,8 @@ export default {
     MetadataNameID: 'Metadata name & ID',
     PROVIDERS: 'DATA PROVIDERS',
     OccupiedResources: 'Occupied resources',
-    Capacity: 'Capacity'
+    Capacity: 'Capacity',
+    pending: 'pending'
 
   },
   log: {

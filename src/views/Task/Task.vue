@@ -11,13 +11,13 @@
     <div class="selectItem">
       <div>
         <span>{{ $t('task.StatusItem') }}:</span>
-        <el-select v-model="value" placeholder="请选择">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+        <el-select v-model="value" placeholder="请选择" @change="selectChange">
+          <el-option v-for="item in option" :key="item.value" :label="item.label" :value="item.value"> </el-option>
         </el-select>
       </div>
       <div>
         <span>{{ $t('task.TimeSpan') }}:</span>
-        <el-select v-model="value" placeholder="请选择">
+        <!-- <el-select v-model="value" placeholder="请选择">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
         </el-select>
       </div>
@@ -25,7 +25,19 @@
         <span>{{ $t('task.to') }}</span>
         <el-select v-model="value" placeholder="请选择">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
-        </el-select>
+        </el-select>  -->
+        <el-date-picker
+          v-model="value1"
+          type="datetimerange"
+          :picker-options="pickerOptions"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          align="right"
+          value-format="yyyy-MM-dd"
+          @change="pickerChange"
+        >
+        </el-date-picker>
       </div>
     </div>
     <div class="ranking">
@@ -42,25 +54,28 @@
     <div class="rankingTd" v-for="(item, index) in listTask" :key="index">
       <div style="width: 1.24rem" class="rankingTdImg">
         <div id="xh">
-          <div v-if="index > 2" class="order">
-            {{ index + 1 }}
+          <div v-if="index > 2 && isShow === true" class="order">
+            {{ (curPage - 1) * pageSize + index + 1 }}
           </div>
-          <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
-          <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
-          <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
+          <div v-if="isShow === false" class="order">
+            {{ (curPage - 1) * pageSize + index + 1 }}
+          </div>
+          <img v-if="index === 0 && isShow" src="../../assets/img/excel/1.svg" alt="" />
+          <img v-if="index === 1 && isShow" src="../../assets/img/excel/2.svg" alt="" />
+          <img v-if="index === 2 && isShow" src="../../assets/img/excel/3.svg" alt="" />
         </div>
       </div>
       <div style="width: 3.8rem">
-        <div>{{ item.taskName }}任务</div>
-        <div>ID: {{ item.id }}</div>
+        <div>{{ item.taskName }}</div>
+        <div>ID : {{ item.id }}</div>
       </div>
-      <div style="width: 1.99rem; color: #fec43e" @click="$router.push('/task/TaskDetail')">
+      <div style="width: 1.99rem; color: #fec43e" @click="TaskDetail(item.id)">
         {{ $t('node.Detail') }}
       </div>
       <div style="width: 4.18rem">{{ item.dynamicFields.sponsorName }}</div>
-      <div style="width: 2.04rem">{{ $t('task.Succeeded') }}</div>
-      <div style="width: 2.62rem">{{ item.createAt }}</div>
-      <div>{{ item.endAt }}</div>
+      <div style="width: 2.04rem">{{ item.status }}</div>
+      <div style="width: 2.62rem">{{ formatDate(item.createAt) }}</div>
+      <div>{{ formatDates(getTimeStamp(item.endAt) - getTimeStamp(item.createAt)) }}</div>
     </div>
     <div class="Pagination">
       <el-pagination
@@ -76,40 +91,76 @@
   </div>
 </template>
 <script>
+import dayjs from 'dayjs'
+import { formatDate, formatDates } from '../../utils/tiem'
 import Pagination from '../../components/Pagination.vue'
 import { taskApi } from '../../api/index'
 console.log('taskApi', taskApi)
 export default {
-  components: { Pagination },
+  components: { Pagination, formatDate, formatDates },
   data() {
     return {
-      options: [
+      option: [
         {
-          value: '选项1',
-          label: '黄金糕'
+          value: 'pending',
+          label: 'pending'
         },
         {
-          value: '选项2',
-          label: '双皮奶'
+          value: 'denied',
+          label: 'denied'
         },
         {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: 'computing',
+          label: 'computing'
         },
         {
-          value: '选项4',
-          label: '龙须面'
+          value: 'failed',
+          label: 'failed'
         },
         {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: 'success',
+          label: 'success'
         }
       ],
       value: '',
       listTask: [],
       curPage: 1,
       pageSize: 5,
-      totalRows: 10
+      totalRows: 10,
+      isShow: true,
+      //
+      pickerOptions: {
+        shortcuts: [
+          {
+            text: '最近一周',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+              picker.$emit('pick', [start, end])
+            }
+          },
+          {
+            text: '最近一个月',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+              picker.$emit('pick', [start, end])
+            }
+          },
+          {
+            text: '最近三个月',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+              picker.$emit('pick', [start, end])
+            }
+          }
+        ]
+      },
+      value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)]
     }
   },
   created() {
@@ -118,14 +169,60 @@ export default {
   methods: {
     handleCurrentChange(page) {
       this.curPage = page
+      this.isShow = false
+      if (this.curPage === 1) {
+        this.isShow = true
+      }
+      this.getListTask()
     },
     async getListTask() {
       const res = await taskApi.getListTask({
-        pageNo: 1,
-        pageSize: 10
+        pageNo: this.curPage,
+        pageSize: this.pageSize
       })
       this.listTask = res.data
+      this.totalRows = res.totalRows
       console.log('任务', res)
+    },
+    TaskDetail(value) {
+      this.$router.push({
+        path: '/task/TaskDetail',
+        query: {
+          identId: value
+        }
+      })
+    },
+    async pickerChange(value) {
+      console.log(value)
+      const res = await taskApi.getListTask({
+        pageNo: this.curPage,
+        pageSize: this.pageSize,
+        startDate: value[0],
+        endDate: value[1]
+      })
+      console.log('时间搜索任务列表', res)
+    },
+    async selectChange(value) {
+      console.log(value)
+      const res = await taskApi.getListTask({
+        pageNo: this.curPage,
+        pageSize: this.pageSize,
+        status: value
+      })
+      this.listTask = res.data
+      this.totalRows = res.totalRows
+      console.log('状态搜索任务', res)
+    },
+    formatDate(time) {
+      return formatDate(time, 'YYYY-MM-DD HH:mm:ss')
+    },
+    getTimeStamp(str) {
+      var date = new Date(str)
+      // 可以准确精确到毫秒
+      return date.getTime(date)
+    },
+    formatDates(time) {
+      return formatDate(time, 'HH:mm:ss')
     }
   }
 }
@@ -214,19 +311,18 @@ export default {
     margin-left: 20px;
   }
   .el-pagination {
-      margin-top: 0.1rem;
-      ::v-deep .el-input__inner {
-        background: #303047;
-        border-color: #303047;
-        color: #fff;
-      }
-      ::v-deep .btn-prev,
-      ::v-deep .btn-next {
-        background: #303047;
-        border-color: #303047;
-        color: #fff;
-      }
+    margin-top: 0.1rem;
+    ::v-deep .el-input__inner {
+      background: #303047;
+      border-color: #303047;
+      color: #fff;
+    }
+    ::v-deep .btn-prev,
+    ::v-deep .btn-next {
+      background: #303047;
+      border-color: #303047;
+      color: #fff;
     }
   }
-
+}
 </style>

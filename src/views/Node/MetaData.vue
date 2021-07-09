@@ -5,29 +5,29 @@
         <img src="../../assets/img/node/3.icon1.svg" alt="" style="line-height: 0.42rem" />
       </div>
       <div class="bank">XXXBANK</div>
-      <div class="Identifier">ID：{{ this.id }}</div>
+      <div class="Identifier">ID：{{ this.id || this.Id}}</div>
     </div>
     <div class="tableData">
       <table>
         <tbody>
           <tr>
             <td>{{ $t('data.Dataprovide') }}</td>
-            <td>xxxxxxxxxxx</td>
+            <td>{{ dataList.identityId }}</td>
             <td>{{ $t('data.INFORMATIONOFFIFLDS') }}:</td>
-            <td>13,000</td>
+            <td>{{ dataList.rows }}</td>
           </tr>
           <tr>
             <td>{{ $t('data.Size0fData') }}</td>
-            <td>2.0 GB</td>
+            <td>{{ dataList.size / 1024 }} GB</td>
             <td>{{ $t('data.NumberOfData') }}</td>
-            <td>20</td>
+            <td>{{ dataList.columns }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="Description">
       <div>{{ $t('data.Description') }}</div>
-      <div class="ipt">xxxxxxxxx</div>
+      <div class="ipt">{{ dataList.remarks }}</div>
     </div>
     <div class="rankingListTop">
       <div><img src="../../assets/img/node/3.button.svg" alt="" /></div>
@@ -42,7 +42,7 @@
       <div style="width: 4.03rem">{{ $t('data.FieldName') }}</div>
     </div>
     <div class="rankingList">
-      <div class="rankingTd" v-for="(item, index) in 24" :key="index">
+      <div class="rankingTd" v-for="(item, index) in metaList" :key="index">
         <div style="width: 1.27rem">
           <div id="xh">
             <div v-if="index > 2" class="order">
@@ -53,7 +53,7 @@
             <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" style="margin: 5px 10px" />
           </div>
         </div>
-        <div>xxxxxxxxxxxx</div>
+        <div>{{ item.columnName }}</div>
       </div>
     </div>
     <div class="Pagination">
@@ -77,27 +77,66 @@ export default {
   data() {
     return {
       id: '',
+      Id: '',
       curPage: 1,
-      pageSize: 5,
-      totalRows: 10
+      pageSize: 10,
+      totalRows: 10,
+      dataList: {},
+      metaList: []
     }
   },
   created() {
-    this.metaData()
-    this.getFile()
+    this.id = this.$route.query.metaDataId
+    this.Id = this.$route.query.metaId
+    if ((this.id = this.$route.query.metaDataId)) {
+      this.getFile()
+      this.getMeta()
+    } else {
+      this.getFiles()
+      this.getMetas()
+    }
   },
   methods: {
     handleCurrentChange(page) {
       this.curPage = page
     },
-    metaData() {
-      this.id = this.$route.query.metaDataId
-      console.log('222', this.id)
-    },
     getFile() {
       dataApi.getDataFile({ metaDataId: this.id }).then(res => {
-        console.log('meta', res)
+        this.dataList = res.data
       })
+    },
+    getMeta() {
+      dataApi
+        .getListMetaData({
+          metaDataId: this.id,
+          pageNo: this.curPage,
+          pageSize: this.pageSize
+        })
+        .then(res => {
+          this.metaList = res.data
+          this.totalRows = res.totalRows
+          // console.log('数据详情1', res)
+        })
+    },
+    // data页面跳转
+    getFiles() {
+      dataApi.getDataFile({ metaDataId: this.Id }).then(res => {
+        this.dataList = res.data
+        // console.log('数据22', res)
+      })
+    },
+    getMetas() {
+      dataApi
+        .getListMetaData({
+          metaDataId: this.Id,
+          pageNo: this.curPage,
+          pageSize: this.pageSize
+        })
+        .then(res => {
+          this.metaList = res.data
+          this.totalRows = res.totalRows
+           console.log('数据详情22', res)
+        })
     }
   }
 }

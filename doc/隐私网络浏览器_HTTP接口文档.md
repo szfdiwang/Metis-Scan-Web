@@ -477,9 +477,7 @@ taskResultSender对象属性，参考/org/findOrgInfo返回数据
 
 
 ### 查询所有组织的任务列表
-
 - url: /task/listTask
-
 - 请求参数
 
 | 参数名    | 说明           |

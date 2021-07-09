@@ -16,6 +16,13 @@ const dataApi = {
             params: params
         })
     },
+    getListMetaData(params) {
+        return request({
+            method: 'get',
+            url: '/data/listMetaDataColumn',
+            params: params
+        })
+    },
     getListDataFile(params) {
         return request({
             method: 'get',

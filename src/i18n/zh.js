@@ -62,7 +62,8 @@ export default {
     Size: '数据大小',
     Columns: '字段数量',
     Rows: '条数',
-    PARTICIPATINGNODESINTHEWHOLENETWORK: '全网共1,222个参与方节点'
+    PARTICIPATINGNODESINTHEWHOLENETWORK: '个参与方节点',
+    NumberTasks: '参与任务数量'
   },
   data: {
     No: '序号',
@@ -72,7 +73,7 @@ export default {
     Status: '数据大小',
     ParticipatedTasks: '参与任务次数',
     DATA: '数据',
-    PIECESOFMETADATAINTHEWHOLENETWORK: '全网共122,222条元数据',
+    PIECESOFMETADATAINTHEWHOLENETWORK: '全网共条元数据',
     Dataprovide: '数据方',
     INFORMATIONOFFIFLDS: '数据条数',
     Size0fData: '数据大小',
@@ -108,7 +109,8 @@ export default {
     MetadataNameID: '元数据名称 与 ID',
     PROVIDERS: '算力提供方',
     OccupiedResources: '算力占用信息',
-    Capacity: '任务中的角色'
+    Capacity: '任务中的角色',
+    pending: '等待'
   },
   log: {
     EventType: '事件类型',

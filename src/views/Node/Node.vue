@@ -5,7 +5,7 @@
         <div><img src="../../assets/img/node/2.bj1.png" /></div>
         <div><img src="../../assets/img/node/2.bj1.png" /></div>
         <div class="textNode">{{ $t('node.NODE') }}</div>
-        <div class="text">{{ $t('node.PARTICIPATINGNODESINTHEWHOLENETWORK') }}</div>
+        <div class="text">{{ this.totalRows }}{{ $t('node.PARTICIPATINGNODESINTHEWHOLENETWORK') }}</div>
       </div>
     </div>
     <div class="ranking">
@@ -28,8 +28,8 @@
               {{ (curPage - 1) * pageSize + index + 1 }}
             </div>
             <img v-if="index === 0 && isShow" src="../../assets/img/excel/1.svg" alt="" />
-            <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
-            <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
+            <img v-if="index === 1 && isShow" src="../../assets/img/excel/2.svg" alt="" />
+            <img v-if="index === 2 && isShow" src="../../assets/img/excel/3.svg" alt="" />
           </div>
           <!-- <div>
             <img src="../../assets/img/node/2.icon3.svg" alt="" />
@@ -52,12 +52,19 @@
             <div>
               {{ $t('node.Remaining') }}:
               {{
-                [item.dynamicFields.totalCore / item.dynamicFields.remainCore === NaN]
+                item.dynamicFields.totalCore / item.dynamicFields.remainCore === NaN
                   ? 0
                   : item.dynamicFields.totalCore / item.dynamicFields.remainCore
               }}%
             </div>
-            <div>{{ $t('node.Remaining') }}: {{ item.dynamicFields.totalMemory / item.dynamicFields ? NaN : 0 }}%</div>
+            <div>
+              {{ $t('node.Remaining') }}:
+              {{
+                [item.dynamicFields.totalMemory / item.dynamicFields] === NaN
+                  ? 0
+                  : item.dynamicFields.totalMemory / item.dynamicFields
+              }}%
+            </div>
             <div>
               {{ $t('node.Remaining') }}:
               {{ item.dynamicFields.totalBandwidth / item.dynamicFields.remainBandwidth ? NaN : 0 }}%
@@ -111,8 +118,12 @@ export default {
       return Number(6 - idleDays < 0 ? 0 : 6 - idleDays)
     },
     handleCurrentChange(page) {
+      console.log('page', page)
       this.curPage = page
       this.isShow = false
+      if (this.curPage === 1) {
+        this.isShow = true
+      }
       this.getListOrgInfo()
     },
     async getListOrgInfo() {
@@ -135,21 +146,6 @@ export default {
       })
       console.log('00000', value)
     }
-    // async Detail(value) {
-    //   this.$router.push({
-    //     path: 'nodeDetail',
-    //     query: {
-    //       identityId: value
-    //     }
-    //   })
-    //   console.log('0000000',identityId)
-    //   const res = await dataApi.getListDataFileBy({
-    //     identityId: value,
-    //     pageNo: 1,
-    //     pageSize: 5
-    //   })
-    //   console.log('7777', res)
-    // }
   }
 }
 </script>
