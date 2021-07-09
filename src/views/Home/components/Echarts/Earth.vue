@@ -10,39 +10,24 @@
 
 <script>
 import 'echarts-gl'
-import earthImg from '../../../../assets/img/home/earthnew2.png'
+// import earthImg from '../../../../assets/img/home/earthnew1.png'
 export default {
   name: 'EarthMap',
   components: {},
   data() {
     return {
-      // bgUrl: require('../../../../assets/img/home/earthnew1.png'),
-      bgUrl: require('../../../../assets/img/home/mapgithub.png'),
+      bgUrl: require('../../../../assets/img/home/earthnew1.png'),
+      // bgUrl: require('../../../../assets/img/home/mapgithub.png'),
       chart: ''
-      // geoCoordMap: {
-      //   // 南宁: [108.479, 23.1152],
-      //   // 广州: [113.5107, 23.2196],
-      //   重庆: [107.7539, 30.1904]
-      //   // 芬兰: [24.909912, 60.169095],
-      //   // 美国: [-100.696295, 33.679979],
-      //   // 日本: [139.710164, 35.706962],
-      //   // 韩国: [126.979208, 37.53875],
-      //   // 瑞士: [7.445147, 46.956241],
-      //   // 东南亚: [117.53244, 5.300343],
-      //   // 澳大利亚: [135.193845, -25.304039],
-      //   // 德国: [13.402393, 52.518569],
-      //   // 英国: [-0.126608, 51.208425],
-      //   // 加拿大: [-102.646409, 59.994255]
-      // }
     }
   },
   computed: {},
   mounted() {
-    // const earthImg = new Image()
-    // earthImg.src = this.bgUrl
-    // earthImg.onload = () => {
-    this.initChart(earthImg)
-    // }
+    const earthImg = new Image()
+    earthImg.src = this.bgUrl
+    earthImg.onload = () => {
+      this.initChart(earthImg)
+    }
     window.addEventListener('resize', this.resizeFn)
   },
   beforeDestroy() {
@@ -52,7 +37,7 @@ export default {
     resizeFn() {
       this.chart.resize()
     },
-    initChart() {
+    initChart(earthImg) {
       this.chart = this.$echarts.init(document.getElementById('earth-map'))
       const option = {
         backgroundColor: 'rgb(0 0 0 / 0%)',
