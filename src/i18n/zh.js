@@ -110,7 +110,10 @@ export default {
     PROVIDERS: '算力提供方',
     OccupiedResources: '算力占用信息',
     Capacity: '任务中的角色',
-    pending: '等待'
+    pending: '等待',
+    taskSponsor: '发起方',
+    DataProvider: '数据提供方',
+    powerProvider: '算力提供方'
   },
   log: {
     EventType: '事件类型',

@@ -5,12 +5,18 @@
 </template>
 
 <script>
+import { taskApi } from '../../../api/index'
+import { formatDate } from '../../../utils/tiem'
 export default {
+  props: ['id'],
   components: {},
   data() {
     return {
       dataChart: '',
-      option: {}
+      option: {},
+      // taskList: [],
+      numList: [],
+      newArray: []
     }
   },
   computed: {},
@@ -30,12 +36,26 @@ export default {
     window.removeEventListener('resize', this.resizeFn)
   },
   methods: {
+    formatDate(time) {
+      return formatDate(time, 'HH:mm:ss')
+    },
     resizeFn() {
       this.dataChart.resize()
     },
-    initChart() {
+    async initChart() {
       const chartDom = document.getElementById('dataEchart')
       this.dataChart = this.$echarts.init(chartDom)
+      const res = await taskApi.getOrgTaskTrend({
+        identityId: this.id,
+        startDate: this.$day(new Date()).subtract(20, 'day').format('YYYY-MM-DD'),
+        days: 6
+      })
+      this.newArray = res.data.map(item => {
+        return this.$day(item.createAt).format('YYYY-MM-DD')
+      })
+      this.numList = res.data.map(item => {
+        return item.taskCount
+      })
       this.option = {
         color: ['#2A6EE6', 'red'],
         legend: {
@@ -48,8 +68,6 @@ export default {
           // },
           data: [
             {
-              // name: 'growth',
-              // icon: 'rect',
               itemStyle: {
                 borderWidth: 100
               },
@@ -88,7 +106,7 @@ export default {
           },
           type: 'category',
           boundaryGap: true,
-          data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+          data: this.newArray
         },
         yAxis: {
           axisLabel: {
@@ -96,10 +114,12 @@ export default {
             color: '#DEE9FF'
           },
           type: 'value'
+          // realtimeSort: true,
+          // splitLine:{show:false}
         },
         series: [
           {
-            data: [220, 132, 91, 34, 290, 133, 320, 10, 22, 99],
+            data: this.numList,
             type: 'line',
             lineStyle: {
               color: '#2A6EE6'
@@ -137,9 +157,9 @@ export default {
               }
             }
           }
-          
         ]
       }
+      console.log('打印', this.numList)
 
       this.option && this.dataChart.setOption(this.option)
     }

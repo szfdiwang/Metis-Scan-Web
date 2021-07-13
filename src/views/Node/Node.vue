@@ -21,15 +21,9 @@
       <div class="rankingTd" v-for="(item, index) in data" :key="index">
         <div style="width: 1.24rem" class="rankingTdImg">
           <div id="xh">
-            <div v-if="index > 2 && isShow === true" class="order">
+            <div  class="order">
               {{ (curPage - 1) * pageSize + index + 1 }}
             </div>
-            <div v-if="isShow === false" class="order">
-              {{ (curPage - 1) * pageSize + index + 1 }}
-            </div>
-            <img v-if="index === 0 && isShow" src="../../assets/img/excel/1.svg" alt="" />
-            <img v-if="index === 1 && isShow" src="../../assets/img/excel/2.svg" alt="" />
-            <img v-if="index === 2 && isShow" src="../../assets/img/excel/3.svg" alt="" />
           </div>
           <!-- <div>
             <img src="../../assets/img/node/2.icon3.svg" alt="" />
@@ -118,7 +112,6 @@ export default {
       return Number(6 - idleDays < 0 ? 0 : 6 - idleDays)
     },
     handleCurrentChange(page) {
-      console.log('page', page)
       this.curPage = page
       this.isShow = false
       if (this.curPage === 1) {
@@ -144,7 +137,6 @@ export default {
           identityId: value
         }
       })
-      console.log('00000', value)
     }
   }
 }

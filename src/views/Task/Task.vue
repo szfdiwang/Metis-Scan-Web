@@ -200,6 +200,8 @@ export default {
         startDate: value[0],
         endDate: value[1]
       })
+      this.listTask = res.data
+      this.totalRows = res.totalRows
       console.log('时间搜索任务列表', res)
     },
     async selectChange(value) {
@@ -303,8 +305,8 @@ export default {
     margin: 0.2rem 0.1rem;
   }
   .order {
-    width: 20px;
-    height: 20px;
+    width: 0.2rem;
+    height: 0.2rem;
     border-radius: 50%;
     background-color: #3f4590;
     text-align: center;

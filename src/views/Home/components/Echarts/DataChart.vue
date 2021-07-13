@@ -58,7 +58,6 @@ export default {
       this.timeList = res.data.updateAt.map(day => {
         return this.$day(day).format('MM.DD')
       })
-
       this.option = {
         color: ['#2A6EE6', 'red'],
         legend: {

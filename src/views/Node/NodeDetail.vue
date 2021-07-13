@@ -14,7 +14,7 @@
       </div>
     </div>
     <div>
-      <basic-area-chart></basic-area-chart>
+      <basic-area-chart :id="this.id"></basic-area-chart>
     </div>
     <div class="conent">
       <!-- <div class="conentTop">
@@ -66,18 +66,18 @@
               <div style="width: 2.54rem">{{ item.columns }}</div>
               <div style="width: 2.62rem">{{ item.rows }}</div>
               <div>{{ item.dynamicFields.taskCount }}</div>
-              <div class="Pagination">
-                <el-pagination
-                  background
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="curPage"
-                  :page-size="pageSize"
-                  layout="total, prev, pager, next"
-                  :total="totalRows"
-                >
-                </el-pagination>
-              </div>
+            </div>
+            <div class="Pagination">
+              <el-pagination
+                background
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="curPage"
+                :page-size="pageSize"
+                layout="total, prev, pager, next"
+                :total="totalRows"
+              >
+              </el-pagination>
             </div>
           </div>
         </el-tab-pane>
@@ -99,12 +99,9 @@
             <div class="rankingTd" v-for="(item, index) in taskList" :key="index">
               <div style="width: 1.24rem" class="rankingTdImg">
                 <div id="xh">
-                  <div v-if="index > 2" class="order">
-                    {{ index + 1 }}
+                  <div class="order">
+                    {{ (curPages - 1) * pageSizes + index + 1 }}
                   </div>
-                  <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
-                  <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
-                  <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
                 </div>
               </div>
               <div style="width: 3.8rem">
@@ -114,27 +111,33 @@
               <div style="width: 1.99rem; color: #fec43e" @click="TaskDetail(item.id)">
                 {{ $t('node.Detail') }}
               </div>
-              <div style="width: 2.7rem">{{ item.dynamicFields.sponsorName }}</div>
+              <div style="width: 2.7rem">
+                <template>
+                  <div v-if="item.dynamicFields.taskSponsor === 1">{{ $t('task.taskSponsor') }}</div>
+                  <div v-if="item.dynamicFields.dataProvider === 1">{{ $t('task.DataProvider') }}</div>
+                  <div v-if="item.dynamicFields.powerProvider === 1">{{ $t('task.powerProvider') }}</div>
+                </template>
+              </div>
               <!-- <div style="width: 2.04rem">10</div> -->
               <div style="width: 2.04rem">{{ item.status }}</div>
               <div style="width: 2.62rem">{{ formatDate(item.createAt) }}</div>
               <div>{{ formatDates(getTimeStamp(item.startAt) - getTimeStamp(item.endAt)) }}</div>
             </div>
+            <div class="Pagination">
+              <el-pagination
+                background
+                @size-change="handleSizeChanges"
+                @current-change="handleCurrentChanges"
+                :current-page="curPages"
+                :page-size="pageSizes"
+                layout="total, prev, pager, next"
+                :total="totalRowss"
+              >
+              </el-pagination>
+            </div>
           </div>
         </el-tab-pane>
       </el-tabs>
-      <div class="Pagination">
-        <el-pagination
-          background
-          @size-change="handleSizeChanges"
-          @current-change="handleCurrentChanges"
-          :current-page="curPages"
-          :page-size="pageSizes"
-          layout="total, prev, pager, next"
-          :total="totalRowss"
-        >
-        </el-pagination>
-      </div>
     </div>
   </div>
 </template>
@@ -162,6 +165,7 @@ export default {
       taskList: [],
       newArrList: [],
       isShow: true,
+      show: true,
       name: '',
       date: ''
     }
@@ -170,8 +174,8 @@ export default {
     this.id = this.$route.query.identityId
     this.getOrgInfo()
     this.getListTask()
-    this.getCurrentTime()
-    this.gettaskTrend()
+    // this.getCurrentTime()
+    // this.gettaskTrend()
   },
   methods: {
     handleSizeChange(size) {
@@ -193,9 +197,9 @@ export default {
     },
     handleCurrentChanges(page) {
       this.curPages = page
-      this.isShow = false
+      this.show = false
       if (this.curPages === 1) {
-        this.isShow = true
+        this.show = true
       }
       this.getListTask()
     },
@@ -239,7 +243,7 @@ export default {
       })
       this.taskList = res.data
       this.totalRowss = res.totalRows
-      console.log('任务', this.totalRowss)
+      console.log('任务', res)
     },
     tabClick(value) {
       // console.log('tab标签',value);
@@ -254,28 +258,28 @@ export default {
     },
     formatDates(time) {
       return formatDate(time, 'HH:mm:ss')
-    },
-    async gettaskTrend() {
-      const res = await taskApi.getOrgTaskTrend({
-        identityId: this.id,
-        startDate: this.date,
-        days: 6
-      })
-      console.log('走势图', res)
-    },
-    getCurrentTime() {
-      let date = new Date()
-      let Y = date.getFullYear()
-      let M = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-      let D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
-      // let hours = date.getHours()
-      // let minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-      // let seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
-      this.date = Y + '-' + M + '-' + D
-      // + ' ' + hours + ':' + minutes + ':' + seconds
-      console.log('时间', this.date) // 2019-10-12 15:19:28
-      return this.date
     }
+    // async gettaskTrend() {
+    //   const res = await taskApi.getOrgTaskTrend({
+    //     identityId: this.id,
+    //     startDate: this.$day(new Date()).subtract(20, 'day').format('YYYY-MM-DD'),
+    //     days: 6
+    //   })
+    //   console.log('走势图', res)
+    // }
+    // getCurrentTime() {
+    //   let date = new Date()
+    //   let Y = date.getFullYear()
+    //   let M = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+    //   let D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+    //   // let hours = date.getHours()
+    //   // let minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+    //   // let seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
+    //   this.date = Y + '-' + M + '-' + D
+    //   // + ' ' + hours + ':' + minutes + ':' + seconds
+    //   console.log('时间', this.date) // 2019-10-12 15:19:28
+    //   return this.date
+    // },
   }
 }
 </script>

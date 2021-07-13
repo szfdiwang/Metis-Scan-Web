@@ -63,7 +63,7 @@ export default {
     Columns: 'Columns',
     Rows: 'Rows',
     PARTICIPATINGNODESINTHEWHOLENETWORK: 'PARTICIPATING NODES IN THE WHOLE NETWORK',
-    NumberTasks:'NUMBER OF PARTICIPATING TASKS'
+    NumberTasks: 'NUMBER OF PARTICIPATING TASKS'
   },
   data: {
     No: 'NO.',
@@ -111,7 +111,10 @@ export default {
     PROVIDERS: 'DATA PROVIDERS',
     OccupiedResources: 'Occupied resources',
     Capacity: 'Capacity',
-    pending: 'pending'
+    pending: 'pending',
+    taskSponsor: 'Sponsor',
+    DataProvider: 'Data provider',
+    powerProvider:'Computing executors'
 
   },
   log: {

@@ -10,72 +10,73 @@
     <div class="steps">
       <div class="stepper">
         <el-steps :active="1">
-          <el-step title="2020-03-13 10:01:03" description="Task started"> </el-step>
+          <el-step description="Task started">
+            <template slot="description">
+              <div>{{ 11111 }}</div>
+              <div>11111</div>
+            </template>
+          </el-step>
           <el-step title="2020-03-13 10:01:23" description="Computation Succeeded"></el-step>
           <el-step title="2020-03-13 10:01:23" description="Computation failed"></el-step>
         </el-steps>
       </div>
       <!-- <div class="btn" @click="$router.push('/task/TaskLog')">{{ $t('task.VIEWTHETASKEVENTS') }}</div> -->
-      <div class="btn" @click="$router.push('/task/TaskLog')">{{ $t('task.VIEWTHETASKEVENTS') }}</div>
+      <div class="btn" @click="log">{{ $t('task.VIEWTHETASKEVENTS') }}</div>
     </div>
-    <div class="participants">
-      <img src="../../assets/img/node/3.button.svg" alt="" />
-      <span class="text">{{ $t('task.PARTICIPANTSINFORMATION') }}</span>
-    </div>
-    <div class="participantsData">
-      <table>
-        <tbody>
-          <tr>
-            <td>{{ $t('task.sponsor') }} :</td>
-            <td>{{ sponsor.orgName }}</td>
-            <td>{{ $t('task.Id') }} ： {{ sponsor.identityId }}</td>
-          </tr>
-          <tr v-for="(item, index) in taskResult" :key="index">
-            <td>{{ $t('task.ResultReceiver') }} :</td>
-            <td>{{ index + 1 }} . {{ item.orgName }}</td>
-            <td>{{ $t('task.Id') }} ：{{ item.identityId }}</td>
-          </tr>
-          <!-- <tr>
-            <td>{{ $t('task.AlgorithmProvider') }} :</td>
-            <td>{{}}</td>
-            <td>{{ $t('task.Id') }} ：XXXXXXXXXXXXXXXXXXXXX</td>
-          </tr> -->
-        </tbody>
-      </table>
-    </div>
-    <div class="Data" style="margin-bottom: 3rem">
-      <div class="dataPic">
+    <div v-if="isShow">
+      <div class="participants">
         <img src="../../assets/img/node/3.button.svg" alt="" />
-        <span class="text">{{ $t('task.DATAPROVIDERS') }}</span>
+        <span class="text">{{ $t('task.PARTICIPANTSINFORMATION') }}</span>
       </div>
-      <div class="precedence">
-        <div style="width: 1.2rem">{{ $t('node.No') }}</div>
-        <div style="width: 3.12rem">{{ $t('task.Name') }}</div>
-        <div style="width: 5.21rem">{{ $t('task.Id') }}</div>
-        <div style="width: 3rem">{{ $t('task.MetadataNameID') }}</div>
+      <div class="participantsData">
+        <table>
+          <tbody>
+            <tr>
+              <td>{{ $t('task.sponsor') }} :</td>
+              <td>{{ sponsor.orgName }}</td>
+              <td>{{ $t('task.Id') }} ： {{ sponsor.identityId }}</td>
+            </tr>
+            <tr v-for="(item, index) in taskResult" :key="index">
+              <td>{{ $t('task.ResultReceiver') }} :</td>
+              <td>{{ index + 1 }} . {{ item.orgName }}</td>
+              <td>{{ $t('task.Id') }} ：{{ item.identityId }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="precedence precedenceData" v-for="(item, index) in taskDataProviderList" :key="index">
-        <div style="width: 1.24rem">
-          <div id="xh">
-            <div v-if="index > 2" class="order">
-              {{ index + 1 }}
+      <div class="Data" style="margin-bottom: 3rem">
+        <div class="dataPic">
+          <img src="../../assets/img/node/3.button.svg" alt="" />
+          <span class="text">{{ $t('task.DATAPROVIDERS') }}</span>
+        </div>
+        <div class="precedence">
+          <div style="width: 1.2rem">{{ $t('node.No') }}</div>
+          <div style="width: 3.12rem">{{ $t('task.Name') }}</div>
+          <div style="width: 5.21rem">{{ $t('task.Id') }}</div>
+          <div style="width: 3rem">{{ $t('task.MetadataNameID') }}</div>
+        </div>
+        <div class="precedence precedenceData" v-for="(item, index) in taskDataProviderList" :key="index">
+          <div style="width: 1.24rem">
+            <div id="xh">
+              <div v-if="index > 2" class="order">
+                {{ index + 1 }}
+              </div>
+              <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
+              <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
+              <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
             </div>
-            <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
-            <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
-            <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
+          </div>
+          <div style="width: 3.12rem">{{ item.dynamicFields.orgName }}</div>
+          <div style="width: 5.21rem">{{ item.dynamicFields.identityId }}</div>
+          <div style="width: 3rem" class="taskId">
+            <div>{{ item.dynamicFields.resourceName }}</div>
+            <div style="margin-left: 20px">{{ item.taskId }}</div>
           </div>
         </div>
-        <div style="width: 3.12rem">{{ item.dynamicFields.orgName }}</div>
-        <div style="width: 5.21rem">{{ item.dynamicFields.identityId }}</div>
-        <div style="width: 3rem" class="taskId">
-          <div>{{ item.dynamicFields.resourceName }}</div>
-          <div style="margin-left: 10px">{{ item.taskId }}</div>
-        </div>
       </div>
     </div>
-
     <!-- 2 -->
-    <div class="Data" style="margin-top: 0.1rem">
+    <div class="Data" style="margin-top: 0.1rem" v-if="isShow">
       <div class="dataPic">
         <img src="../../assets/img/node/3.button.svg" alt="" />
         <span class="text">{{ $t('task.PROVIDERS') }}</span>
@@ -109,24 +110,34 @@
     <!-- 日志板块 -->
     <div class="TaskLog" v-if="show">
       <div class="TaskLogTh">
-        <div style="width: 1.24rem">NO.</div>
-        <div style="width: 3.12rem">Event type</div>
-        <div style="width: 4.19rem">EVent maker</div>
-        <div style="width: 3.7rem">Generation time</div>
-        <div>Event failed</div>
+        <div style="width: 1.24rem">{{ $t('node.No') }}</div>
+        <div style="width: 3.12rem">{{ $t('log.EventType') }}</div>
+        <div style="width: 4.19rem">{{ $t('log.EVentMaker') }}</div>
+        <div style="width: 3.7rem">{{ $t('log.GenerationTime') }}</div>
+        <div>{{ $t('log.EventFailed') }}</div>
       </div>
-      <div class="TaskLogTd" v-for="(item, index) in 5" :key="index">
-        <div style="width: 1.24rem"></div>
-        <div style="width: 3.12rem">xxxxxxxxxxx</div>
-        <div style="width: 4.19rem">xxxxxxxxxxxxxxx</div>
-        <div style="width: 3.7rem">2021-2-2 12:23:59</div>
-        <div>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+      <div class="TaskLogTd" v-for="(item, index) in logList" :key="index">
+        <div style="width: 1.24rem; padding: 0px 10px">
+          <div id="xh">
+            <div v-if="index > 2" class="order">
+              {{ index + 1 }}
+            </div>
+            <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" />
+            <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" />
+            <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" />
+          </div>
+        </div>
+        <div style="width: 3.12rem">{{ item.eventType }}</div>
+        <div style="width: 4.19rem">{{ item.dynamicFields.orgName }}</div>
+        <div style="width: 3.7rem">{{ formatDate(item.eventAt) }}</div>
+        <div>{{ item.eventContent }}</div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import { taskApi } from '../../api/index'
+import { formatDate } from '../../utils/tiem'
 console.log('taskApi', taskApi)
 export default {
   data() {
@@ -138,22 +149,29 @@ export default {
       taskResult: [],
       taskPowerprovider: [],
       taskDataProviderList: [],
-      Id: ''
+      logList: [],
+      Id: '',
+      isShow: true
     }
   },
   created() {
     this.id = this.$route.query.id
     this.Id = this.$route.query.identId
-    this.getlog()
     if ((this.id = this.$route.query.id)) {
       this.getTask()
     } else {
       this.getTasks()
     }
+    if ((this.id = this.$route.query.id)) {
+      this.getlogs()
+    } else {
+      this.getlog()
+    }
   },
   methods: {
-    TaskLog() {
+    log() {
       this.show = !this.show
+      this.isShow = !this.isShow
     },
     async getTask() {
       const res = await taskApi.getTaskDetail({
@@ -180,9 +198,19 @@ export default {
     },
     async getlog() {
       const res = await taskApi.getListTaskLog({
+        taskId: this.Id
+      })
+      this.logList = res.data
+      console.log('日志', res)
+    },
+    async getlogs() {
+      const res = await taskApi.getListTaskLog({
         taskId: this.id
       })
-      console.log('日志', res)
+      this.logList = res.data
+    },
+    formatDate(time) {
+      return formatDate(time, 'YYYY-MM-DD HH:mm:ss')
     }
   }
 }
@@ -246,11 +274,9 @@ export default {
   }
   .participantsData {
     padding: 0.15rem 0.4rem;
-    tr {
-      // padding-bottom: 10px;
-      td {
-        padding-right: 1rem;
-      }
+
+    td {
+      padding-right: 1rem;
     }
   }
   .Data {
@@ -304,6 +330,7 @@ export default {
     background-color: #3f4590;
     text-align: center;
     line-height: 0.2rem;
+    margin-top: 0.1rem;
   }
   .taskId {
     display: flex;
