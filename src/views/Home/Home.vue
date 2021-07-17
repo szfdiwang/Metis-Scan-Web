@@ -25,7 +25,7 @@
       <img src="../../assets/img/home/WelcometoRosetta.svg" alt="" />
     </div>
     <div class="search-bar">
-      <el-input v-model="input2" placeholder="SEARCH BY ID OR KEY WORDS" class="search-box">
+      <el-input v-model="input2" :placeholder="$t('home.searchPlaceholder')" class="search-box">
         <template slot="suffix">
           <div class="search-btn pointer">{{ $t('common.search') }}</div>
         </template>
@@ -135,7 +135,7 @@ export default {
       height: 0.8rem;
       ::v-deep .el-input__inner {
         height: 100% !important;
-        font-family: PingFangSC-Semibold;
+        font-family: BebasNeueBold, PuHuiTiRegular;
         font-size: 20px;
         color: #dee9ff;
         background: linear-gradient(180deg, rgba(22, 72, 174, 0.1) 0%, rgba(19, 62, 148, 0.31) 100%);
@@ -158,7 +158,7 @@ export default {
         background: #3954ff;
         border-radius: 8px;
         margin-top: 0.1rem;
-        font-family: BebasNeueBold;
+        font-family: BebasNeueBold, PuHuiTiMedium;
         font-size: 0.4rem;
         color: #dee9ff;
         letter-spacing: 0;

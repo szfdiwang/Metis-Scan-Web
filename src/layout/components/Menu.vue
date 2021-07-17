@@ -84,7 +84,7 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: PingFangSC-Medium;
+      font-family: BebasNeueBold, PuHuiTiMedium;
       font-size: 14px;
       color: #ffffff;
       letter-spacing: 0;

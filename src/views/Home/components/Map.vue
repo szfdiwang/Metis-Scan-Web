@@ -160,7 +160,7 @@ export default {
     .compute-mid {
       width: 100%;
       .computeCenterTitle {
-        font-family: BebasNeueBold;
+        font-family: BebasNeueBold, PuHuiTiMedium;
         font-size: 0.32rem;
         color: #dee9ff;
         letter-spacing: 0;
@@ -238,7 +238,7 @@ export default {
       justify-content: space-between;
       padding: 0 0.3rem;
       .text {
-        font-family: BebasNeueBold;
+        font-family: BebasNeueBold, PuHuiTiMedium;
         font-size: 0.48rem;
         color: #dee9ff;
         letter-spacing: 0;

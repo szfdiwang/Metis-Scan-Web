@@ -138,7 +138,7 @@ export default {
     .desc {
       width: 4rem;
       opacity: 0.5;
-      font-family: PingFangSC-Medium;
+      font-family: BebasNeueBold, PuHuiTiMedium;
       font-size: 0.14rem;
       color: #dee9ff;
       text-align: center;

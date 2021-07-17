@@ -243,7 +243,7 @@ export default {
         padding: 0.14rem 0.3rem;
         background: #11175d;
         transform: rotateZ(10deg) skew(-10deg, -10deg);
-        font-family: PingFangSC-Medium;
+        font-family: BebasNeueBold, PuHuiTiMedium;
         font-size: 14px;
         color: #ffffff;
         letter-spacing: 0;
@@ -258,7 +258,7 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-family: PingFangSC-Medium;
+        font-family: BebasNeueBold, PuHuiTiMedium;
         font-size: 14px;
         color: #ffffff;
         letter-spacing: 0;
