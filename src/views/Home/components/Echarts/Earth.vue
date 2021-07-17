@@ -54,7 +54,7 @@ export default {
         ],
         globe: {
           environment: 'auto',
-          baseTexture: earthImg, // this.mapChart, //
+          baseTexture: require('../../../../assets/img/home/earthnew1.png'), // this.mapChart, //
           baseColor: '#fff',
           shading: 'color',
           // light: {
@@ -155,25 +155,25 @@ export default {
   justify-content: center;
   position: relative;
   #earth-map {
-    width: 6.8rem;
-    height: 6.8rem;
+    width: 4.8rem;
+    height: 4.8rem;
     position: relative;
     background: transparent;
     z-index: 100;
   }
   .out-earth {
-    width: 9.1rem;
+    width: 6.5rem;
     position: absolute;
     z-index: 10;
   }
   .out-orange {
-    width: 6.8rem;
+    width: 4.8rem;
     position: absolute;
     bottom: -0.7rem;
     right: 0.1rem;
   }
   .out-blue {
-    width: 6.8rem;
+    width: 4.8rem;
     position: absolute;
     top: -0.7rem;
     left: 0.1rem;

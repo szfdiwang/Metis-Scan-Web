@@ -32,13 +32,13 @@
       <div class="top-echart-data">
         <PowerChart />
       </div>
-      <div class="left-cell">
+      <!-- <div class="left-cell">
         <img src="../../../assets/img/home/left-cell.svg" alt="" />
         <img src="../../../assets/img/home/left-round.svg" alt="" />
       </div>
       <div class="bottom-map">
         <img src="../../../assets/img/home/left-bottom-map.svg" alt="" />
-      </div>
+      </div> -->
     </div>
     <!-- mid -->
     <div class="mid">
@@ -56,29 +56,30 @@
       <div class="earth-wrapper">
         <EarthChart />
       </div>
-      <div class="footer">
+      <div class="mfooter"></div>
+      <!-- <div class="footer">
         <div class="infinite-img-box">
           <img src="../../../assets/img/home/bottom-line1.svg" alt="" />
           <img src="../../../assets/img/home/bottom-line1.svg" alt="" />
         </div>
         <img src="../../../assets/img/home/bottom-line2.png" alt="" />
-      </div>
+      </div> -->
     </div>
     <!-- right -->
     <div class="right">
-      <div class="top-map">
+      <!-- <div class="top-map">
         <img src="../../../assets/img/home/right-top-map.svg" alt="" />
       </div>
       <div class="gap">
         <img src="../../../assets/img/home/wave3.svg" alt="" />
         <img src="../../../assets/img/home/wave4.svg" alt="" />
-      </div>
+      </div> -->
       <div class="right-data-echarts">
         <DataChart />
       </div>
-      <div class="gap right-strip">
+      <!-- <div class="gap right-strip">
         <img src="../../../assets/img/home/wave5.png" alt="" />
-      </div>
+      </div> -->
       <div class="data-center-charts">
         <div class="top">
           <p class="round" style="background: #0053fc"></p>
@@ -139,7 +140,7 @@ export default {
   }
   .compute-center-echart,
   .data-center-charts {
-    border: 1px solid #333352;
+    /* border: 1px solid #333352; */
     height: 3.96rem;
     .top {
       display: flex;
@@ -213,6 +214,7 @@ export default {
   }
   .left {
     flex: 1;
+    margin-top: 220px;
     width: 4.96rem;
     .top-echart-data {
       height: 4.6rem;
@@ -270,8 +272,15 @@ export default {
     }
     .earth-wrapper {
       width: 100%;
-      height: 8.5rem;
-      margin-top: 1.12rem;
+      height: 7.4rem;
+      margin-top: 2.2rem;
+    }
+    .mfooter {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background-image: url('../../../assets/img/home/bottom-line2.png');
     }
     .footer {
       margin: 0 0.3rem;
@@ -288,6 +297,7 @@ export default {
     }
   }
   .right {
+    margin-top: 170px;
     flex: 1;
     width: 4.96rem;
     .top-map {

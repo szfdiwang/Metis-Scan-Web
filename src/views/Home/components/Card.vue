@@ -110,7 +110,7 @@ export default {
 
 <style lang="scss" scoped>
 .card-box {
-  margin: 55px 0 20px;
+  margin: 124px 0 55px;
   .card-mini-box {
     // width: 6.13rem;
     display: flex;

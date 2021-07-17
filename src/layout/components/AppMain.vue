@@ -1,6 +1,5 @@
-
 <template>
-  <el-scrollbar ref="scroll" class="app-main" wrapClass="x-hidden">
+  <el-scrollbar ref="scroll" class="app-main" wrapClass="x-hidden app-hidden">
     <transition name="fade-transform" mode="out-in">
       <router-view :key="key" />
     </transition>
@@ -28,7 +27,7 @@ export default {
   height: calc(100vh - 80px);
   width: 100%;
   position: relative;
-  background-color: #05052e;
+  background-color: #000; // #05052e;
 }
 .x-hidden {
   overflow-x: hidden;

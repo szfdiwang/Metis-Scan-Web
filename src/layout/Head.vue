@@ -1,10 +1,12 @@
 <template>
-  <div class="header-box">
-    <div class="logo">
-      <img src="@/assets/img/home/logo.svg" alt="" />
-      <Menu />
+  <div class="header-box-wrapper">
+    <div class="header-box">
+      <div class="logo">
+        <img src="@/assets/img/home/logo.svg" alt="" />
+        <Menu />
+      </div>
+      <Lang />
     </div>
-    <Lang />
   </div>
 </template>
 <script>
@@ -19,18 +21,25 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.header-box {
-  height: 80px;
-  width: 100vw;
-  background: #05052e;
+.header-box-wrapper {
+  width: 100%;
+  background: #000;
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1%;
+  /* box-shadow: 0 1px 0 0 rgba(10,84,234,0.30); */
+  border-bottom: 1px solid rgba(10,84,234,0.30);
+  .header-box {
+    margin: 0 auto;
+    max-width: 1700px;
+    height: 79px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 0 1%; */
+  }
   .logo {
     display: flex;
     align-items: center;
   }
 }
 </style>
+
