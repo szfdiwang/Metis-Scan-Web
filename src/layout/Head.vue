@@ -22,12 +22,13 @@ export default {
 .header-box {
   height: 80px;
   width: 100vw;
-  background: #05052e;
+  background: #000;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1%;
+  // padding: 0 1%;
+  padding: 0 1.1rem;
   .logo {
     display: flex;
     align-items: center;

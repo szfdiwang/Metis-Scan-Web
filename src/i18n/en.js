@@ -85,7 +85,8 @@ export default {
   },
   task: {
     No: 'NO.',
-    NameIdentifier: 'Name&Identifier',
+    Name: 'Name',
+    identifier: 'ID',
     Identifier: 'Identifier',
     Sponsor: 'Sponsor',
     Status: 'Status',
@@ -112,9 +113,10 @@ export default {
     OccupiedResources: 'Occupied resources',
     Capacity: 'Capacity',
     pending: 'pending',
-    taskSponsor: 'Sponsor',
+    taskSponsor: 'SPONSOR',
     DataProvider: 'Data provider',
-    powerProvider:'Computing executors'
+    powerProvider: 'Computing executors',
+    ResultReceiver: 'RESULT RECEIVER'
 
   },
   log: {

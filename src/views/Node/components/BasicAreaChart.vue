@@ -100,26 +100,30 @@ export default {
           bottom: 75
         },
         xAxis: {
+          boundaryGap: false,
           axisLabel: {
             fontSize: 14,
-            color: '#DEE9FF'
+            color: '#DEE9FF',
           },
           type: 'category',
           boundaryGap: true,
-          data: this.newArray
+          // data: this.newArray
+          data:['202-06-11','2020-06-12','2020-06-13','2020-06-14','2020-06-15','2020-06-16']
         },
         yAxis: {
           axisLabel: {
             fontSize: 14,
             color: '#DEE9FF'
           },
-          type: 'value'
+          type: 'value',
+          splitLine: false
           // realtimeSort: true,
           // splitLine:{show:false}
         },
         series: [
           {
-            data: this.numList,
+            // data: this.numList,
+            data:[0.7 ,0.5,0.8,2,1,2],
             type: 'line',
             lineStyle: {
               color: '#2A6EE6'
@@ -173,8 +177,8 @@ export default {
     // width: 10.3rem;
     // height: 4.1rem;
     margin: 0 auto;
-    width: 1769px;
-    height: 190px;
+    width: 16.53rem;
+    height: 1.9rem;
   }
 }
 </style>

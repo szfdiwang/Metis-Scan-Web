@@ -28,7 +28,7 @@ export default {
   height: calc(100vh - 80px);
   width: 100%;
   position: relative;
-  background-color: #05052e;
+  background-color:#000;
 }
 .x-hidden {
   overflow-x: hidden;

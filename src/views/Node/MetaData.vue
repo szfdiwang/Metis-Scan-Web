@@ -2,70 +2,75 @@
   <div class="metaData">
     <div class="metaDataTop">
       <div class="pic" @click="$router.push('/node/NodeDetail')">
-        <img src="../../assets/img/node/3.icon1.svg" alt="" style="line-height: 0.42rem" />
+        <img src="../../assets/img/node/3.icon1.svg" alt="" />
       </div>
       <div class="bank">XXXBANK</div>
-      <div class="Identifier">ID：{{ this.id || this.Id}}</div>
+      <div class="Identifier">ID：{{ this.id || this.Id }}</div>
     </div>
     <div class="tableData">
       <table>
         <tbody>
           <tr>
-            <td>{{ $t('data.Dataprovide') }}</td>
-            <td>{{ dataList.identityId }}</td>
-            <td>{{ $t('data.INFORMATIONOFFIFLDS') }}:</td>
+            <td>{{ $t('data.Dataprovide') }} :</td>
+            <td><span style="margin-left:0.2rem ;">{{ dataList.identityId }}</span></td>
+            <td style="padding-left: 3.2rem">{{ $t('data.INFORMATIONOFFIFLDS') }} :</td>
             <td>{{ dataList.rows }}</td>
           </tr>
           <tr>
-            <td>{{ $t('data.Size0fData') }}</td>
-            <td>{{ dataList.size / 1024 }} GB</td>
-            <td>{{ $t('data.NumberOfData') }}</td>
+            <td>{{ $t('data.Size0fData') }} :</td>
+            <td> <span style="margin-left:0.2rem ;">{{ dataList.size / 1024 }} GB</span></td>
+            <td style="padding-left: 3.2rem">{{ $t('data.NumberOfData') }} :</td>
             <td>{{ dataList.columns }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="Description">
-      <div>{{ $t('data.Description') }}</div>
-      <div class="ipt">{{ dataList.remarks }}</div>
+      <div>{{ $t('data.Description') }} :</div>
+      <div class="ipt"> <span style="margin-left:0.2rem ;">{{ dataList.remarks }}</span></div>
     </div>
-    <div class="rankingListTop">
-      <div><img src="../../assets/img/node/3.button.svg" alt="" /></div>
-      <div class="text">{{ $t('data.INFO') }}</div>
-    </div>
-    <div class="rankingTh">
-      <div style="width: 1.27rem">{{ $t('node.No') }}</div>
-      <div style="width: 5.1rem">{{ $t('data.FieldName') }}</div>
-      <div style="width: 1.27rem">{{ $t('node.No') }}</div>
-      <div style="width: 5.06rem">{{ $t('data.FieldName') }}</div>
-      <div style="width: 1.27rem">{{ $t('node.No') }}</div>
-      <div style="width: 4.03rem">{{ $t('data.FieldName') }}</div>
-    </div>
-    <div class="rankingList">
-      <div class="rankingTd" v-for="(item, index) in metaList" :key="index">
-        <div style="width: 1.27rem">
-          <div id="xh">
-            <div v-if="index > 2" class="order">
-              {{ index + 1 }}
-            </div>
-            <img v-if="index === 0" src="../../assets/img/excel/1.svg" alt="" style="margin: 5px 10px" />
-            <img v-if="index === 1" src="../../assets/img/excel/2.svg" alt="" style="margin: 5px 10px" />
-            <img v-if="index === 2" src="../../assets/img/excel/3.svg" alt="" style="margin: 5px 10px" />
-          </div>
-        </div>
-        <div>{{ item.columnName }}</div>
+    <div>
+      <div class="rankingListTop">
+        <div><img src="../../assets/img/node/3.button.svg" alt="" /></div>
+        <div class="text">{{ $t('data.INFO') }}</div>
       </div>
-    </div>
-    <div class="Pagination">
-      <el-pagination
-        background
-        @current-change="handleCurrentChange"
-        :current-page="curPage"
-        :page-size="pageSize"
-        layout="total, prev, pager, next"
-        :total="totalRows"
-      >
-      </el-pagination>
+      <div class="rankingTh">
+        <div style="width: 5rem">
+          <span style="margin-left: 0.3rem">{{ $t('node.No') }}</span>
+          <span style="margin-left: 0.7rem">{{ $t('data.FieldName') }}</span>
+        </div>
+        <div style="width: 5rem; margin-left: 0.6rem">
+          <span style="margin-left: 0.3rem">{{ $t('node.No') }}</span>
+          <span style="margin-left: 0.7rem">{{ $t('data.FieldName') }}</span>
+        </div>
+        <div style="width: 500px; margin-left: 0.6rem">
+          <span style="margin-left: 0.3rem">{{ $t('node.No') }}</span>
+          <span style="margin-left: 0.7rem">{{ $t('data.FieldName') }}</span>
+        </div>
+      </div>
+      <div class="rankingList">
+        <div class="rankingTd" v-for="(item, index) in metaList" :key="index">
+          <div style="width: 1.27rem">
+            <div id="xh">
+              <div class="order">
+                {{ index + 1 }}
+              </div>
+            </div>
+          </div>
+          <div>{{ item.columnName }}</div>
+        </div>
+      </div>
+      <div class="Pagination">
+        <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          :current-page="curPage"
+          :page-size="pageSize"
+          layout="total, prev, pager, next"
+          :total="totalRows"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -135,7 +140,7 @@ export default {
         .then(res => {
           this.metaList = res.data
           this.totalRows = res.totalRows
-           console.log('数据详情22', res)
+          console.log('数据详情22', res)
         })
     }
   }
@@ -143,66 +148,65 @@ export default {
 </script>
 <style lang='scss' scoped>
 .metaData {
-  height: 1000px;
-  background: url('../../assets/img/home/bj1.png');
-  padding: 0px 0.2rem;
+  // height: 1000px;
+  // background: url('../../assets/img/home/bj1.png');
+  padding: 0px 1.1rem;
   .metaDataTop {
     height: 0.42rem;
     display: flex;
     margin-bottom: 0.1rem;
     .pic {
       line-height: 0.5rem;
-      margin-left: 0.2rem;
+      // margin-left: 0.2rem;
     }
     .bank {
-      font-size: 30px;
+      font-size: 0.3rem;
       font-weight: 600;
       margin: 0.02rem 0.2rem;
     }
     .Identifier {
       margin-left: 0.3rem;
-      line-height: 0.6rem;
+      // line-height: 0.6rem;
+      margin-top: 0.15rem;
     }
   }
   .tableData {
-    padding: 0.1rem 0.4rem;
+    padding: 0.1rem 0;
     td {
-      padding: 0.2rem;
+      padding: 0.1rem 0.45rem 0.1rem 0;
     }
   }
   .Description {
     display: flex;
-    padding-left: 0.6rem;
+    padding-bottom: 0.2rem;
     .ipt {
       width: 9rem;
-      height: 1.1rem;
-      border: 0.02rem solid #333352;
       border-radius: 0.02rem;
-      margin-left: 0.55rem;
-      padding-left: 0.2rem;
+      margin-left: 45px;
     }
   }
   .rankingListTop {
     display: flex;
-    padding: 0.4rem 0.2rem;
+    padding: 0.2rem 0.2rem;
     position: relative;
     .text {
       position: absolute;
-      top: 0.5rem;
-      left: 0.7rem;
+      top: 0.3rem;
+      left: 0.9rem;
     }
   }
   .rankingTh {
     display: flex;
-    padding: 0px 0.18rem;
   }
   .rankingList {
+    height: 2.4rem;
     padding: 0px 0.1rem;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     .rankingTd {
-      width: 5.8rem;
+      width: 5rem;
       height: 0.4rem;
       background: #080c3d;
       border-radius: 0.04rem;
@@ -211,20 +215,24 @@ export default {
       line-height: 0.4rem;
     }
   }
-  .order {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #3f4590;
-    line-height: 20px;
+  #xh {
     text-align: center;
-    margin: 10px;
+    width: 5rem;
+    height: 0.4rem;
+    .order {
+      width: 0.2rem;
+      height: 0.2rem;
+      border-radius: 50%;
+      margin: 0.1rem 0.2rem 0;
+      background-color: #3f4590;
+      line-height: 0.2rem;
+    }
   }
   .Pagination {
     display: flex;
     justify-content: space-between;
+    margin-left: 0.1rem;
     .el-pagination {
-      margin-top: 0.1rem;
       ::v-deep .el-input__inner {
         background: #303047;
         border-color: #303047;
@@ -238,5 +246,13 @@ export default {
       }
     }
   }
+  /deep/ .el-pager li {
+    background: #303047;
+    color: #fff;
+  }
+}
+/deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #3954ff; // 进行修改选中项背景和字体
+  color: #fff;
 }
 </style>

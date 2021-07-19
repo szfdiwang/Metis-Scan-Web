@@ -1,71 +1,66 @@
 <template>
   <div class="Data">
-    <div class="imgBox">
-      <div class="topImg">
-        <div><img src="../../assets/img/node/2.bj1.png" /></div>
-        <div><img src="../../assets/img/node/2.bj1.png" /></div>
-        <div class="textNode">{{ $t('data.DATA') }}</div>
-        <div class="text">{{ $t('data.PIECESOFMETADATAINTHEWHOLENETWORK') }}</div>
-      </div>
+    <div class="imgBox"></div>
+    <div style="margin-left: 1.1rem" class="textBox">
+      <span class="textNode">{{ $t('data.DATA') }}</span>
+      <span class="text">{{ $t('data.PIECESOFMETADATAINTHEWHOLENETWORK') }}</span>
     </div>
-    <div class="ranking">
-      <div class="rankingTh">
-        <div style="width: 1.24rem">{{ $t('data.No') }}</div>
-        <div style="width: 3.8rem">{{ $t('data.NameIdentifier') }}</div>
-        <div style="width: 2.1rem">{{ $t('data.Identifier') }}</div>
-        <div style="width: 2.9rem">{{ $t('data.DataProvider') }}</div>
-        <div style="width: 2.62rem">{{ $t('data.Status') }}</div>
-        <div>{{ $t('data.ParticipatedTasks') }}</div>
-      </div>
-    </div>
-    <div class="rankingTd" v-for="(item, index) in DataList" :key="index">
-      <div style="width: 1.24rem" class="rankingTdImg">
-        <div id="xh">
-          <div v-if="index > 2 && isShow === true" class="order">
-            {{ (curPage - 1) * pageSize + index + 1 }}
+    <div style="padding: 0 1.1rem">
+      <div class="ranking">
+        <div class="rankingTh">
+          <div style="width: 1.8rem">
+            <span style="margin-left: 0.3rem">{{ $t('data.No') }}</span>
           </div>
-          <div v-if="isShow === false" class="order">
-            {{ (curPage - 1) * pageSize + index + 1 }}
-          </div>
-          <img v-if="index === 0 && isShow" src="../../assets/img/excel/1.svg" alt="" />
-          <img v-if="index === 1 && isShow" src="../../assets/img/excel/2.svg" alt="" />
-          <img v-if="index === 2 && isShow" src="../../assets/img/excel/3.svg" alt="" />
+          <!-- <div style="width: 3rem">{{ $t('data.NameIdentifier') }}</div>
+          <div></div> -->
+          <div style="width: 3.2rem">{{ $t('task.Name') }}</div>
+          <div style="width: 2.4rem">{{ $t('task.identifier') }}</div>
+          <div style="width: 2.5rem">{{ $t('data.DataProvider') }}</div>
+          <div style="width: 2.42rem">{{ $t('data.Status') }}</div>
+          <div style="width: 2rem">{{ $t('data.ParticipatedTasks') }}</div>
+          <div></div>
         </div>
       </div>
-
-      <div style="width: 3.8rem">
-        <div>{{ item.resourceName }}</div>
-        <div id="id">ID:{{ item.identityId }}</div>
+      <div class="rankingTd" v-for="(item, index) in DataList" :key="index">
+        <div style="width: 1.8rem" class="rankingTdImg">
+          <div id="xh">
+            <div class="order">
+              {{ (curPage - 1) * pageSize + index + 1 }}
+            </div>
+          </div>
+        </div>
+        <div style="width: 3.2rem">
+          {{ item.resourceName }}
+        </div>
+        <div style="width: 2.4rem">{{ item.identityId }}</div>
+        <div style="width: 2.5rem">{{ item.dynamicFields.orgName }}</div>
+        <div style="width: 2.42rem">{{ (item.size / 1024 / 1024).toFixed(2) }}MB</div>
+        <div style="width: 2rem">{{ item.dynamicFields.taskCount }}</div>
+        <div style="color: #fec43e; cursor: pointer" @click="DataMeat(item.metaDataId)">{{ $t('node.Detail') }}</div>
       </div>
-      <div style="width: 2.1rem; color: #fec43e" @click="DataMeat(item.metaDataId)">{{ $t('node.Detail') }}</div>
-      <div style="width: 2.9rem">{{ item.dynamicFields.orgName }}</div>
-      <div style="width: 2.62rem">{{ (item.size / 1024 / 1024).toFixed(2) }}MB</div>
-      <div>{{ item.dynamicFields.taskCount }}</div>
-    </div>
-    <div class="Pagination">
-      <el-pagination
-        background
-        @current-change="handleCurrentChange"
-        :current-page="curPage"
-        :page-size="pageSize"
-        layout="total, prev, pager, next"
-        :total="totalRows"
-      >
-      </el-pagination>
+      <div class="Pagination">
+        <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          :current-page="curPage"
+          :page-size="pageSize"
+          layout="total, prev, pager, next"
+          :total="totalRows"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import Pagination from '../../components/Pagination.vue'
 import { dataApi } from '../../api/index'
 console.log('dataApi', dataApi)
 export default {
-  components: { Pagination },
   data() {
     return {
       DataList: [],
       curPage: 1,
-      pageSize: 5,
+      pageSize: 10,
       totalRows: 10,
       isShow: true
     }
@@ -105,43 +100,32 @@ export default {
 </script>
 <style lang="scss" scoped>
 .Data {
-  height: 1000px;
-  background: url('../../assets/img/home/bj1.png');
-  padding: 0px 0.2rem;
   .imgBox {
+    margin-bottom: 0.2rem;
+    height: 0.94rem;
+    line-height: 0.94rem;
+    background: url('../../assets/img/node/2.bj1.png');
+    opacity: 0.4;
     position: relative;
-    padding-bottom: 0.1rem;
-    .topImg {
-      padding: 0px 1.445rem;
-      width: 1.24rem;
-      display: flex;
-      justify-content: space-between;
-      img {
-        width: 8rem;
-        height: 1rem;
-      }
-      .textNode {
-        position: absolute;
-        left: 0.2rem;
-        top: 0.35rem;
-        font-size: 30px;
-      }
-      .text {
-        position: absolute;
-        left: 2rem;
-        top: 0.35rem;
-        font-size: 25px;
-      }
+  }
+  .textBox {
+    position: absolute;
+    top: 0.2rem;
+    .textNode {
+      font-size: 0.4rem;
+    }
+    .text {
+      margin-left: 1rem;
+      font-size: 0.32rem;
     }
   }
   .rankingTh {
-    margin: 0.1rem;
+    margin: 0.1rem 0.2rem;
     display: flex;
   }
   .rankingTd {
-    margin: 0.1rem;
-    width: 18.4rem;
-    height: 0.94rem;
+    margin: 0.1rem 0.2rem;
+    height: 0.4rem;
     background: #080c3d;
     border-radius: 4px;
     display: flex;
@@ -162,27 +146,29 @@ export default {
     }
   }
   .Pagination {
-    margin: 0.2rem 0.09rem;
+    margin: 0 0.15rem;
   }
   #id {
     overflow: hidden;
     word-break: keep-all;
     text-overflow: ellipsis;
-    width: 180px;
+    width: 1.8rem;
+    margin-top: 0.14rem;
+    font-size: 12px;
   }
   .order {
-    width: 20px;
-    height: 20px;
+    width: 0.2rem;
+    height: 0.2rem;
     border-radius: 50%;
     background-color: #3f4590;
     text-align: center;
-    margin-left: 20px;
+    margin-left: 0.3rem;
   }
   .Pagination {
     display: flex;
     justify-content: space-between;
     .el-pagination {
-      margin-top: 0.1rem;
+      // margin-top: 0.1rem;
       ::v-deep .el-input__inner {
         background: #303047;
         border-color: #303047;
@@ -196,5 +182,13 @@ export default {
       }
     }
   }
+  /deep/ .el-pager li {
+    background: #303047;
+    color: #fff;
+  }
+}
+/deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #3954ff; // 进行修改选中项背景和字体
+  color: #fff;
 }
 </style>

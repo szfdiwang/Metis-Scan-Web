@@ -84,14 +84,15 @@ export default {
   },
   task: {
     No: '序号',
-    NameIdentifier: '名称与ID',
+    Name:'名称',
+    identifier: 'ID',
     Identifier: '查看详情',
     Sponsor: '任务中的角色',
     Status: '状态',
     StartTime: '发起时间',
     TimeSpent: '用时',
     TASK: '任务',
-    PTASKSINTHEWHOLENETWORK: '全网共122,222项任务',
+    PTASKSINTHEWHOLENETWORK: '全网共项任务',
     StatusItem: '任务状态',
     TimeSpan: '时间范围',
     to: '至',
@@ -113,7 +114,8 @@ export default {
     pending: '等待',
     taskSponsor: '发起方',
     DataProvider: '数据提供方',
-    powerProvider: '算力提供方'
+    powerProvider: '算力提供方',
+    ResultReceiver:'结果方'
   },
   log: {
     EventType: '事件类型',
