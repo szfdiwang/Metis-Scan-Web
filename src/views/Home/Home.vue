@@ -1,18 +1,36 @@
 <template>
   <div class="home-box">
     <Performance :cpu="cpu" :memory="memory" :bandWidth="bandWidth" />
-    <img src="../../assets/img/home/bj4.png" alt="" class="bg-blue" />
-    <img src="../../assets/img/home/bj5.png" alt="" class="bg-stripe" />
+    <vue-particles
+      color="#2E2E2E"
+      :particleOpacity="0.7"
+      :particlesNumber="50"
+      shapeType="circle"
+      :particleSize="2"
+      linesColor="#2E2E2E"
+      :linesWidth="1"
+      :lineLinked="true"
+      :lineOpacity="0.7"
+      :linesDistance="150"
+      :moveSpeed="2"
+      :hoverEffect="true"
+      hoverMode="grab"
+      :clickEffect="false"
+      clickMode="repulse"
+      class="lizi"
+    ></vue-particles>
+    <!-- <img src="../../assets/img/home/bj4.png" alt="" class="bg-blue" /> -->
+    <!-- <img src="../../assets/img/home/bj5.png" alt="" class="bg-stripe" /> -->
     <div class="welcome">
       <img src="../../assets/img/home/WelcometoRosetta.svg" alt="" />
     </div>
-    <!-- <div class="search-bar">
-      <el-input v-model="input2" placeholder="请输入内容" class="search-box">
+    <div class="search-bar">
+      <el-input v-model="input2" :placeholder="$t('home.searchPlaceholder')" class="search-box">
         <template slot="suffix">
           <div class="search-btn pointer">{{ $t('common.search') }}</div>
         </template>
       </el-input>
-    </div> -->
+    </div>
     <Card
       :partnerCount="partnerCount"
       :dataFileSize="dataFileSize"
@@ -80,10 +98,11 @@ export default {
 <style lang="scss" scoped>
 .home-box {
   height: auto;
-  background: url('../../assets/img/home/bj1.png') repeat;
+  /* background: url('../../assets/img/home/bj1.png') repeat; */
   position: relative;
-  margin: 0 auto;
-  max-width: 1920px;
+  margin: 50px auto 0;
+  max-width: 1700px;
+  z-index: 0;
   .bg-blue {
     position: absolute;
     top: 0;
@@ -105,18 +124,18 @@ export default {
   }
   .welcome {
     text-align: center;
-    margin: 60px 0;
+    margin: 100px 0 91px;
   }
   .search-bar {
     width: 100%;
-    height: 1rem;
+    height: 0.8rem;
     text-align: center;
     .search-box {
       width: 15rem;
-      height: 1rem;
+      height: 0.8rem;
       ::v-deep .el-input__inner {
         height: 100% !important;
-        font-family: PingFangSC-Semibold;
+        font-family: BebasNeueBold, PuHuiTiRegular;
         font-size: 20px;
         color: #dee9ff;
         background: linear-gradient(180deg, rgba(22, 72, 174, 0.1) 0%, rgba(19, 62, 148, 0.31) 100%);
@@ -134,12 +153,12 @@ export default {
         display: flex;
       }
       .search-btn {
-        width: 2.56rem;
-        height: 0.8rem;
+        width: 1.66rem;
+        height: 0.58rem;
         background: #3954ff;
         border-radius: 8px;
         margin-top: 0.1rem;
-        font-family: BebasNeueBold;
+        font-family: BebasNeueBold, PuHuiTiMedium;
         font-size: 0.4rem;
         color: #dee9ff;
         letter-spacing: 0;
@@ -156,5 +175,15 @@ export default {
       }
     }
   }
+}
+
+.lizi {
+  position: absolute;
+  top: -50px;
+  left: calc(850px - 50vw);
+  height: 800px;
+  width: 100%;
+  min-width: 100vw;
+  z-index: -1;
 }
 </style>

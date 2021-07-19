@@ -36,7 +36,7 @@ export default {
     width: 100%;
     display: inline-block;
     line-height: 32px;
-    font-family: PingFangSC-Semibold;
+    font-family: BebasNeueBold, PuHuiTiMedium;
     font-size: 14px;
     color: #ffffff;
     letter-spacing: 0;

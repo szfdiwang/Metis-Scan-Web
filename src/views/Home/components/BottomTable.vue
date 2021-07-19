@@ -58,12 +58,23 @@
             <span> {{ getRatio(scope.row.bandwidth) }} </span>
           </template>
         </el-table-column>
+        <!-- <el-table-column prop="activeDegree" :label="$t('home.activeDegree')" width="200">
+          <template slot-scope="scope">
+            <ul class="degree">
+              <li
+                v-for="item in 6"
+                :key="item"
+                :style="{ height: 50 / (8 - item) + 'px', opacity: getOpacity(item, scope.row.idleDays) }"
+              ></li>
+            </ul>
+          </template>
+        </el-table-column> -->
         <el-table-column prop="activeDegree" :label="$t('home.activeDegree')" width="200">
           <template slot-scope="scope">
             <span v-for="(item, index) in getHot(scope.row.idleDays)" :key="index">
               <img src="../../../assets/img/home/red.svg" alt="" />
             </span>
-            <span v-for="(item, index) in getCold(scope.row.idleDays)" :key="index">
+            <span v-for="(item, index) in getCold(scope.row.idleDays)" :key="index + 'C'">
               <img src="../../../assets/img/home/cold.svg" alt="" />
             </span>
           </template>
@@ -141,6 +152,14 @@ export default {
       return Number(6 - idleDays < 0 ? 0 : 6 - idleDays)
     },
 
+    getOpacity(index, idleDays) {
+      if (idleDays >= 6) {
+        return 0.15
+      }
+      let count = 6 - idleDays - index
+      return [1, 0.7, 0.6, 0.5, 0.4, 0.3][count]
+    },
+
     getRatio(bandWidth) {
       return `${((bandWidth / this.totalBandWidth) * 100).toFixed(2)}%`
     },
@@ -183,7 +202,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .bottom-table-box {
   height: 6.53rem;
   padding: 0.2rem;
@@ -224,7 +243,7 @@ export default {
         padding: 0.14rem 0.3rem;
         background: #11175d;
         transform: rotateZ(10deg) skew(-10deg, -10deg);
-        font-family: PingFangSC-Medium;
+        font-family: BebasNeueBold, PuHuiTiMedium;
         font-size: 14px;
         color: #ffffff;
         letter-spacing: 0;
@@ -239,7 +258,7 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-family: PingFangSC-Medium;
+        font-family: BebasNeueBold, PuHuiTiMedium;
         font-size: 14px;
         color: #ffffff;
         letter-spacing: 0;
@@ -294,6 +313,18 @@ export default {
     & > div:not(:first-child) {
       padding-left: 0.6rem;
     }
+  }
+}
+.degree {
+  display: flex;
+  align-items: flex-end;
+  & > li {
+    margin: 0 1.5px;
+    width: 10px;
+    height: 100%;
+    opacity: 0.15;
+    background: #b03b3b;
+    border-radius: 1.54px 1.54px 0 0;
   }
 }
 </style>

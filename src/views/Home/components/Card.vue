@@ -110,7 +110,7 @@ export default {
 
 <style lang="scss" scoped>
 .card-box {
-  margin: 55px 0 20px;
+  margin: 124px 0 55px;
   .card-mini-box {
     // width: 6.13rem;
     display: flex;
@@ -138,7 +138,7 @@ export default {
     .desc {
       width: 4rem;
       opacity: 0.5;
-      font-family: PingFangSC-Medium;
+      font-family: BebasNeueBold, PuHuiTiMedium;
       font-size: 0.14rem;
       color: #dee9ff;
       text-align: center;

@@ -11,6 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import * as filters from './filters'
 import * as dayjs from 'dayjs'
 
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)
+
 Object.keys(filters).map(key => {
   Vue.filter(key, filters[key])
 })

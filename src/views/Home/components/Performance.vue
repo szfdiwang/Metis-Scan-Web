@@ -153,7 +153,7 @@ export default {
     position: relative;
     vertical-align: middle;
     .label {
-      font-family: BebasNeueBold;
+      font-family: BebasNeueBold, PuHuiTiMedium;
       font-size: 0.45rem;
       color: #dee9ff;
       letter-spacing: 0;
@@ -184,7 +184,7 @@ export default {
       }
       .value,
       .unit {
-        font-family: DINEngschrift;
+        font-family: DINEngschrift, PuHuiTiRegular;
         font-size: 0.54rem;
         color: #ffffff;
         letter-spacing: 1px;

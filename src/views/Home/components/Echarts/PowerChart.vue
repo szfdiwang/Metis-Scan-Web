@@ -189,7 +189,7 @@ export default {
   .title {
     margin-top: 0.33rem;
     text-align: center;
-    font-family: BebasNeueBold;
+    font-family: BebasNeueBold, PuHuiTiMedium;
     font-size: 0.32rem;
     color: #dee9ff;
     letter-spacing: 0;
