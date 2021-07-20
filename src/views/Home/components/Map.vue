@@ -43,7 +43,7 @@
     <!-- mid -->
     <div class="mid">
       <div class="title">
-        <img src="../../../assets/img/home/round-single-left.svg" alt="" />
+        <img src="../../../assets/img/home/round-single-left.svg" alt="" class="title-left round" />
         <p class="text">
           <img src="../../../assets/img/home/border-left-top.svg" alt="" class="border-left-top" />
           <img src="../../../assets/img/home/border-left-bottom.svg" alt="" class="border-left-bottom" />
@@ -51,7 +51,7 @@
           <img src="../../../assets/img/home/border-right-bottom.svg" alt="" class="border-right-bottom" />
           {{ $t('home.center') }}
         </p>
-        <img src="../../../assets/img/home/round-single-right.svg" alt="" />
+        <img src="../../../assets/img/home/round-single-right.svg" alt="" class="title-right round" />
       </div>
       <div class="earth-wrapper">
         <EarthChart />
@@ -130,11 +130,10 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .map-box {
   display: flex;
-  margin: 0.2rem 0;
-  height: 12.57rem;
+  height: 12.04rem;
   .gap > img {
     width: 100%;
   }
@@ -179,29 +178,30 @@ export default {
         .right-round2,
         .right-round3 {
           width: 1.02rem;
-        }
-        .left-round1 {
-          animation: rotate 1.5s linear infinite;
-        }
-        .left-round2 {
           animation: rotate 5s linear infinite;
-          animation-delay: 0.2s;
         }
-        .left-round3 {
-          animation: rotate 2s linear infinite;
-          animation-delay: 0.4s;
-        }
-        .right-round1 {
-          animation: rotate-reverse 1.5s linear infinite;
-        }
-        .right-round2 {
-          animation: rotate-reverse 5s linear infinite;
-          animation-delay: 0.2s;
-        }
-        .right-round3 {
-          animation: rotate-reverse 2s linear infinite;
-          animation-delay: 0.4s;
-        }
+        // .left-round1 {
+        //   animation: rotate 1.5s linear infinite;
+        // }
+        // .left-round2 {
+        //   animation: rotate 5s linear infinite;
+        //   animation-delay: 0.2s;
+        // }
+        // .left-round3 {
+        //   animation: rotate 2s linear infinite;
+        //   animation-delay: 0.4s;
+        // }
+        // .right-round1 {
+        //   animation: rotate-reverse 1.5s linear infinite;
+        // }
+        // .right-round2 {
+        //   animation: rotate-reverse 5s linear infinite;
+        //   animation-delay: 0.2s;
+        // }
+        // .right-round3 {
+        //   animation: rotate-reverse 2s linear infinite;
+        //   animation-delay: 0.4s;
+        // }
       }
     }
     .compute-bottom {
@@ -214,7 +214,7 @@ export default {
   }
   .left {
     flex: 1;
-    margin-top: 220px;
+    margin-top: 2.2rem;
     width: 4.96rem;
     .top-echart-data {
       height: 4.6rem;
@@ -233,11 +233,21 @@ export default {
     width: 9.1rem;
     .title {
       display: flex;
+      width: 100%;
       height: 2rem;
       align-items: center;
       justify-content: space-between;
       padding: 0 0.3rem;
+      .title-left {
+        position: relative;
+        right: 1.2rem;
+      }
+      .title-right {
+        position: relative;
+        left: 1.2rem;
+      }
       .text {
+        width: 5.6rem;
         font-family: BebasNeueBold, PuHuiTiMedium;
         font-size: 0.48rem;
         color: #dee9ff;
@@ -297,7 +307,7 @@ export default {
     }
   }
   .right {
-    margin-top: 170px;
+    margin-top: 1.7rem;
     flex: 1;
     width: 4.96rem;
     .top-map {
@@ -314,5 +324,8 @@ export default {
       height: 4.58rem;
     }
   }
+}
+.round {
+  animation: rotate 5s linear infinite;
 }
 </style>

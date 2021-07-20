@@ -27,3 +27,10 @@
         transform: translateX(-100%);
     }
 }
+
+.clip-border {
+  background-image: url(../img/home/left-top.svg), url(../img/home/right-top.svg),
+    url(../img/home/right-bottom.svg), url(../img/home/left-bottom.svg);
+  background-position: left top, right top, right bottom, left bottom;
+  background-repeat: no-repeat;
+}
