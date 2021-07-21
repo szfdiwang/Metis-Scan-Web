@@ -12,19 +12,23 @@
       <div class="NumberTasks">
         {{ $t('node.NumberTasks') }}
       </div>
+      <img src="../../assets/img/node/nodeborder/border1.svg" class="topLeft" alt="" />
+      <img src="../../assets/img/node/nodeborder/border2.svg" class="topRight" alt="" />
+      <img src="../../assets/img/node/nodeborder/border3.svg" class="bottomRight" alt="" />
+      <img src="../../assets/img/node/nodeborder/border4.svg" class="bottomLeft" alt="" />
     </div>
     <div style="padding: 0px 1.11rem">
       <basic-area-chart :id="this.id"></basic-area-chart>
     </div>
     <div class="tab" style="padding: 0px 1.11rem">
       <div class="data">{{ $t('node.metadata') }}</div>
-       <div class="task">{{ $t('node.Tasks') }}</div>
+      <div class="task">{{ $t('node.Tasks') }}</div>
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane name="first" label="元数据">
           <div slot="label" :class="{ active: index == '0' }" class="Metadatayy" style="font-size: 0px">
             {{ $t('node.metadata') }}：100
           </div>
-          <div class="conent" style="padding: 0px 0.2rem">
+          <div class="conent" style="padding: 0.1rem 0.2rem">
             <div class="ranking">
               <div class="rankingTh">
                 <div style="width: 1.44rem">
@@ -34,7 +38,7 @@
                 <div style="width: 2.7rem">{{ $t('node.Size') }}</div>
                 <div style="width: 2.54rem">{{ $t('node.Columns') }}</div>
                 <div style="width: 2.62rem">{{ $t('node.Rows') }}</div>
-                <div style="width: 2rem">{{ $t('data.ParticipatedTasks') }}</div>
+                <div style="width: 1rem">{{ $t('data.ParticipatedTasks') }}</div>
                 <div></div>
               </div>
             </div>
@@ -42,7 +46,7 @@
               <div style="width: 1.44rem" class="rankingTdImg">
                 <div id="xh">
                   <div class="order">
-                    {{ (curPage - 1) * pageSize + index + 1 }}
+                    <div class="num">{{ (curPage - 1) * pageSize + index + 1 }}</div>
                   </div>
                 </div>
               </div>
@@ -55,8 +59,18 @@
               </template>
               <div style="width: 2.54rem">{{ item.columns }}</div>
               <div style="width: 2.62rem">{{ item.rows }}</div>
-              <div style="width: 2rem">{{ item.dynamicFields.taskCount }}</div>
-              <div style="color: #fec43e; cursor: pointer" @click="MetaData(item.metaDataId)">
+              <div style="width: 0.9rem">{{ item.dynamicFields.taskCount }}</div>
+              <div
+                style="
+                  color: #fec43e;
+                  cursor: pointer;
+                  width: 2.8rem;
+                  height: 100%;
+                  line-height: 0.94rem;
+                  text-align: center;
+                "
+                @click="MetaData(item.metaDataId)"
+              >
                 {{ $t('node.Detail') }}
               </div>
             </div>
@@ -72,11 +86,15 @@
               >
               </el-pagination>
             </div>
+            <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
+            <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
+            <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
+            <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
           </div>
         </el-tab-pane>
         <el-tab-pane name="second" label="任务" stretch="true" @tab-click="tabClick">
           <div slot="label" :class="{ active: index == '1' }" style="font-size: 0">{{ $t('node.Tasks') }}：100</div>
-          <div class="conent" style="padding: 0 0.2rem">
+          <div class="conent" style="padding: 0.1rem 0.2rem">
             <div class="ranking">
               <div class="rankingTh">
                 <div style="width: 1.74rem">
@@ -87,15 +105,15 @@
                 <div style="width: 2.6rem">{{ $t('task.Capacity') }}</div>
                 <div style="width: 2.24rem">{{ $t('task.Status') }}</div>
                 <div style="width: 2.82rem">{{ $t('task.StartTime') }}</div>
-                <div style="width: 2.1rem">{{ $t('task.TimeSpent') }}</div>
-                <div></div>
+                <div style="width: 1rem">{{ $t('task.TimeSpent') }}</div>
+                <div style="width: 2.8rem"></div>
               </div>
             </div>
             <div class="rankingTd" v-for="(item, index) in taskList" :key="index">
               <div style="width: 1.74rem" class="rankingTdImg">
                 <div id="xh">
                   <div class="order">
-                    {{ (curPages - 1) * pageSizes + index + 1 }}
+                    <div class="num">{{ (curPages - 1) * pageSizes + index + 1 }}</div>
                   </div>
                 </div>
               </div>
@@ -115,8 +133,18 @@
               </div>
               <div style="width: 2.24rem; color: #5bc49f">{{ item.status }}</div>
               <div style="width: 2.82rem">{{ formatDate(item.createAt) }}</div>
-              <div style="width: 2.1rem">{{ formatDates(getTimeStamp(item.startAt) - getTimeStamp(item.endAt)) }}</div>
-              <div style="color: #fec43e; cursor: pointer" @click="TaskDetail(item.id)">
+              <div style="width: 1.1rem">{{ formatDates(getTimeStamp(item.startAt) - getTimeStamp(item.endAt)) }}</div>
+              <div
+                style="
+                  color: #fec43e;
+                  cursor: pointer;
+                  width: 2.8rem;
+                  height: 100%;
+                  line-height: 0.94rem;
+                  text-align: center;
+                "
+                @click="TaskDetail(item.id)"
+              >
                 {{ $t('node.Detail') }}
               </div>
             </div>
@@ -132,6 +160,10 @@
               >
               </el-pagination>
             </div>
+            <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
+            <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
+            <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
+            <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -266,9 +298,31 @@ export default {
   background: #182d98;
   text-align: center;
   line-height: 0.32rem;
+  position: relative;
+}
+.topLeft {
+  position: absolute;
+  top: -0.12rem;
+  left: -0.12rem;
+}
+.topRight {
+  position: absolute;
+  top: -0.12rem;
+  right: -0.12rem;
+}
+.bottomLeft {
+  position: absolute;
+  bottom: -0.12rem;
+  left: -0.12rem;
+}
+.bottomRight {
+  position: absolute;
+  bottom: -0.12rem;
+  right: -0.12rem;
 }
 .NodeDetail {
   // height: 1000px;
+  padding-bottom: 0.3rem;
   position: relative;
   .NodeDetailTop {
     height: 0.94rem;
@@ -297,23 +351,23 @@ export default {
     }
   }
   .rankingTh {
-    margin: 0.1rem 0px;
+    // margin: 0.1rem 0px;
     display: flex;
   }
   .rankingTd {
     height: 0.94rem;
-    background: #080c3d;
+    background: #0c0e26;
     border-radius: 4px;
     display: flex;
     margin: 10px 0;
     align-items: center;
+
     .rankingTdImg {
       display: flex;
       img {
         margin: 0px 0.15rem;
       }
     }
-
     .power {
       display: flex;
       align-items: center;
@@ -339,7 +393,7 @@ export default {
   }
   /deep/ #tab-second {
     width: 2.31rem;
-    height: 0.4rem;
+    height: 0.42rem;
     text-align: center;
     position: absolute;
     top: 0px;
@@ -350,15 +404,19 @@ export default {
 }
 .data {
   position: absolute;
-  top: 3.65rem;
-  left: 2.5rem;
+  top: 3.66rem;
+  left: 2.1rem;
   z-index: 999;
 }
-.task{
+/deep/.el-tabs__item,
+.is-top {
+  position: relative;
+}
+.task {
   position: absolute;
-  top: 3.65rem;
-  left: 4.95rem;
-  z-index:999;
+  top: 3.66rem;
+  left: 4.55rem;
+  z-index: 999;
 }
 /deep/ .el-tabs__item {
   padding: 0px;
@@ -390,12 +448,41 @@ export default {
   height: 0.2rem;
   border-radius: 50%;
   background-color: #3f4590;
-  text-align: center;
-  line-height: 0.2rem;
   margin-left: 0.3rem;
+  .num {
+    text-align: center;
+    line-height: 0.2rem;
+  }
 }
 /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #3954ff; // 进行修改选中项背景和字体
   color: #fff;
+}
+/deep/ .rankingTd:hover {
+  background-color: #3954ff;
+}
+.borderBottomRight {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.borderTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.borderBottomLeft {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.borderTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/deep/ .el-tabs__nav-scroll {
+  margin-left: -30px !important;
+  padding-bottom: 10px;
 }
 </style>

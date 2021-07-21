@@ -14,40 +14,56 @@
           <!-- <div style="width: 3rem">{{ $t('data.NameIdentifier') }}</div>
           <div></div> -->
           <div style="width: 3.2rem">{{ $t('task.Name') }}</div>
-          <div style="width: 2.4rem">{{ $t('task.identifier') }}</div>
+          <div style="width: 2.5rem">{{ $t('task.identifier') }}</div>
           <div style="width: 2.5rem">{{ $t('data.DataProvider') }}</div>
           <div style="width: 2.42rem">{{ $t('data.Status') }}</div>
-          <div style="width: 2rem">{{ $t('data.ParticipatedTasks') }}</div>
-          <div></div>
+          <div style="width: 1.2rem">{{ $t('data.ParticipatedTasks') }}</div>
+          <div style="width: 2.8rem"></div>
         </div>
-      </div>
-      <div class="rankingTd" v-for="(item, index) in DataList" :key="index">
-        <div style="width: 1.8rem" class="rankingTdImg">
-          <div id="xh">
-            <div class="order">
-              {{ (curPage - 1) * pageSize + index + 1 }}
+        <div class="rankingTd" v-for="(item, index) in DataList" :key="index">
+          <div style="width: 1.8rem" class="rankingTdImg">
+            <div id="xh">
+              <div class="order">
+                <div class="num"> {{ (curPage - 1) * pageSize + index + 1 }}</div>
+              </div>
             </div>
           </div>
+          <div style="width: 3.2rem">
+            {{ item.resourceName }}
+          </div>
+          <div style="width: 2.5rem">{{ item.identityId }}</div>
+          <div style="width: 2.5rem">{{ item.dynamicFields.orgName }}</div>
+          <div style="width: 2.42rem">{{ (item.size / 1024 / 1024).toFixed(2) }}MB</div>
+          <div style="width: 0.9rem">{{ item.dynamicFields.taskCount }}</div>
+          <div
+            style="
+              color: #fec43e;
+              cursor: pointer;
+              height: 100%;
+              width: 2.8rem;
+              line-height: 0.4rem;
+              text-align: center;
+            "
+            @click="DataMeat(item.metaDataId)"
+          >
+            {{ $t('node.Detail') }}
+          </div>
         </div>
-        <div style="width: 3.2rem">
-          {{ item.resourceName }}
+        <div class="Pagination">
+          <el-pagination
+            background
+            @current-change="handleCurrentChange"
+            :current-page="curPage"
+            :page-size="pageSize"
+            layout="total, prev, pager, next"
+            :total="totalRows"
+          >
+          </el-pagination>
         </div>
-        <div style="width: 2.4rem">{{ item.identityId }}</div>
-        <div style="width: 2.5rem">{{ item.dynamicFields.orgName }}</div>
-        <div style="width: 2.42rem">{{ (item.size / 1024 / 1024).toFixed(2) }}MB</div>
-        <div style="width: 2rem">{{ item.dynamicFields.taskCount }}</div>
-        <div style="color: #fec43e; cursor: pointer" @click="DataMeat(item.metaDataId)">{{ $t('node.Detail') }}</div>
-      </div>
-      <div class="Pagination">
-        <el-pagination
-          background
-          @current-change="handleCurrentChange"
-          :current-page="curPage"
-          :page-size="pageSize"
-          layout="total, prev, pager, next"
-          :total="totalRows"
-        >
-        </el-pagination>
+        <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
+        <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
+        <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
+        <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
       </div>
     </div>
   </div>
@@ -100,13 +116,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .Data {
+  position: relative;
+  padding-bottom: 30px;
   .imgBox {
     margin-bottom: 0.2rem;
     height: 0.94rem;
     line-height: 0.94rem;
     background: url('../../assets/img/node/2.bj1.png');
     opacity: 0.4;
-    position: relative;
   }
   .textBox {
     position: absolute;
@@ -119,24 +136,27 @@ export default {
       font-size: 0.32rem;
     }
   }
-  .rankingTh {
-    margin: 0.1rem 0.2rem;
-    display: flex;
-  }
-  .rankingTd {
-    margin: 0.1rem 0.2rem;
-    height: 0.4rem;
-    background: #080c3d;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    .rankingTdImg {
+  .ranking {
+    position: relative;
+    padding: 12px 0;
+    .rankingTh {
+      margin: 0rem 0.2rem;
       display: flex;
-      img {
-        margin: 0px 0.15rem;
+    }
+    .rankingTd {
+      margin: 0.1rem 0.2rem;
+      height: 0.4rem;
+      background: #0c0e26;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      .rankingTdImg {
+        display: flex;
+        img {
+          margin: 0px 0.15rem;
+        }
       }
     }
-
     .power {
       display: flex;
       align-items: center;
@@ -161,8 +181,11 @@ export default {
     height: 0.2rem;
     border-radius: 50%;
     background-color: #3f4590;
-    text-align: center;
     margin-left: 0.3rem;
+    .num{
+    text-align: center;
+    line-height: 0.2rem;
+     }
   }
   .Pagination {
     display: flex;
@@ -190,5 +213,31 @@ export default {
 /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #3954ff; // 进行修改选中项背景和字体
   color: #fff;
+}
+/deep/ .rankingTd:hover {
+  background-color: #3954ff !important;
+}
+// .content {
+//   position: relative;
+// }
+.borderBottomRight {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.borderTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.borderBottomLeft {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.borderTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>

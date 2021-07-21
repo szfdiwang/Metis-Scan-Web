@@ -28,59 +28,75 @@
         </el-date-picker>
       </div>
     </div>
-    <div class="ranking">
-      <div class="rankingTh">
-        <div style="width: 1.64rem">
-          <span style="margin-left: 0.3rem">{{ $t('task.No') }}</span>
-        </div>
-        <div style="width: 2.3rem">{{ $t('task.Name') }}</div>
-        <div style="width: 2.2rem">{{ $t('task.identifier') }}</div>
-        <!-- <div style="width: 1.9rem"></div> -->
-        <div style="width: 2.38rem">{{ $t('task.Sponsor') }}</div>
-        <div style="width: 2rem">{{ $t('task.Status') }}</div>
-        <div style="width: 2.4rem">{{ $t('task.StartTime') }}</div>
-        <div style="1.9rem">{{ $t('task.TimeSpent') }}</div>
-        <div></div>
-      </div>
-    </div>
-    <div class="rankingTd" v-for="(item, index) in listTask" :key="index">
-      <div style="width: 1.64rem" class="rankingTdImg">
-        <div id="xh">
-          <div class="order">
-            {{ (curPage - 1) * pageSize + index + 1 }}
+    <div style="padding: 0 1.1rem">
+      <div class="ranking">
+        <div class="rankingTh">
+          <div style="width: 1.64rem">
+            <span style="margin-left: 0.3rem">{{ $t('task.No') }}</span>
           </div>
+          <div style="width: 2.3rem">{{ $t('task.Name') }}</div>
+          <div style="width: 2.2rem">{{ $t('task.identifier') }}</div>
+          <!-- <div style="width: 1.9rem"></div> -->
+          <div style="width: 2.38rem">{{ $t('task.Sponsor') }}</div>
+          <div style="width: 2rem">{{ $t('task.Status') }}</div>
+          <div style="width: 2.4rem">{{ $t('task.StartTime') }}</div>
+          <div style="width: 1rem">{{ $t('task.TimeSpent') }}</div>
+          <div style="width: 2.8rem"></div>
         </div>
-      </div>
-      <div style="width: 2.3rem">
-        {{ item.taskName }}
-      </div>
-      <div style="width: 2.2rem">
-        <div>{{ item.id }}</div>
-      </div>
-      <!-- <div style="width: 1.9rem; color: #fec43e" @click="TaskDetail(item.id)">
+        <div class="rankingTd" v-for="(item, index) in listTask" :key="index">
+          <div style="width: 1.64rem" class="rankingTdImg">
+            <div id="xh">
+              <div class="order">
+                <div class="num">{{ (curPage - 1) * pageSize + index + 1 }}</div>
+              </div>
+            </div>
+          </div>
+          <div style="width: 2.3rem">
+            {{ item.taskName }}
+          </div>
+          <div style="width: 2.2rem">
+            <div>{{ item.id }}</div>
+          </div>
+          <!-- <div style="width: 1.9rem; color: #fec43e" @click="TaskDetail(item.id)">
         {{ $t('node.Detail') }}
       </div> -->
-      <div style="width: 2.38rem">{{ item.dynamicFields.sponsorName }}</div>
-      <div style="width: 2rem">
-        <span style="color: #5bc49f">{{ item.status }}</span>
-        <span v-if="item.status === 'Failed'" style="color: #f24b4b">{{ item.status }}</span>
+          <div style="width: 2.38rem">{{ item.dynamicFields.sponsorName }}</div>
+          <div style="width: 2rem">
+            <span style="color: #5bc49f">{{ item.status }}</span>
+            <span v-if="item.status === 'Failed'" style="color: #f24b4b">{{ item.status }}</span>
+          </div>
+          <div style="width: 2.4rem">{{ formatDate(item.createAt) }}</div>
+          <div style="width: 1rem">{{ formatDates(getTimeStamp(item.endAt) - getTimeStamp(item.createAt)) }}</div>
+          <div
+            style="
+              color: #fec43e;
+              cursor: pointer;
+              width: 2.8rem;
+              height: 100%;
+              line-height: 0.4rem;
+              text-align: center;
+            "
+            @click="TaskDetail(item.id)"
+          >
+            <span style="margin-left: -0.4rem"> {{ $t('node.Detail') }}</span>
+          </div>
+        </div>
+        <div class="Pagination">
+          <el-pagination
+            background
+            @current-change="handleCurrentChange"
+            :current-page="curPage"
+            :page-size="pageSize"
+            layout="total, prev, pager, next"
+            :total="totalRows"
+          >
+          </el-pagination>
+        </div>
+        <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
+        <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
+        <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
+        <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
       </div>
-      <div style="width: 2.4rem">{{ formatDate(item.createAt) }}</div>
-      <div style="width: 1.9rem">{{ formatDates(getTimeStamp(item.endAt) - getTimeStamp(item.createAt)) }}</div>
-      <div style="color: #fec43e; cursor: pointer" @click="TaskDetail(item.id)">
-        {{ $t('node.Detail') }}
-      </div>
-    </div>
-    <div class="Pagination">
-      <el-pagination
-        background
-        @current-change="handleCurrentChange"
-        :current-page="curPage"
-        :page-size="pageSize"
-        layout="total, prev, pager, next"
-        :total="totalRows"
-      >
-      </el-pagination>
     </div>
   </div>
 </template>
@@ -113,10 +129,6 @@ export default {
         {
           value: 'success',
           label: 'success'
-        },
-        {
-          // value: '',
-          // label: ''
         }
       ],
       value: '',
@@ -157,7 +169,7 @@ export default {
           }
         ]
       },
-       value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)]
+      value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)]
     }
   },
   created() {
@@ -227,25 +239,69 @@ export default {
 }
 </script>
 <style>
-/* .el-picker-panel,
+.el-scrollbar__view,
+.el-select-dropdown__list {
+  padding-bottom: 20px;
+}
+.el-picker-panel,
 .el-date-range-picker,
 .el-popper,
 .has-sidebar,
-.has-time { */
+.has-time {
+  border: 1px solid #2c3b8d !important;
+}
 .el-button,
 .el-picker-panel__footer,
 .el-input__inner,
 .el-picker-panel__sidebar,
 .el-picker-panel__body-wrapper {
-  background-color: #08164d !important;
-  color: #fff;
+  background-color: #08164d;
+  color: #c0c4cc;
+  border-color: rgba(10, 84, 234, 0.3) !important;
 }
- .el-date-table__row {
-  background-color: #08164d !important;
+.el-picker-panel__content,
+.el-date-range-picker__content,
+.is-left {
+  border-color: rgba(10, 84, 234, 0.3) !important;
+}
+.el-date-range-picker__time-header {
+  border-color: rgba(10, 84, 234, 0.3) !important;
+}
+.el-date-table__row {
+  background-color: #08164d;
+}
+.el-input__inner {
+  background-color: #141f34 !important;
+  border: 2px solid #031c4f !important;
+  border-radius: 4px !important;
+}
+.el-picker-panel__shortcut {
+  color: #c0c4cc !important;
+}
+.el-date-table th {
+  border-bottom: 2px solid #2c3b8d !important;
+  color: #c0c4cc;
+}
+.el-date-table td.in-range div,
+.el-date-table td.in-range div:hover,
+.el-date-table.is-week-mode .el-date-table__row.current div,
+.el-date-table.is-week-mode .el-date-table__row:hover div {
+  background-color: #08164d;
+}
+.el-button.is-disabled.is-plain,
+.el-button.is-disabled.is-plain:focus,
+.el-button.is-disabled.is-plain:hover {
+  background-color: #3954ff;
+}
+.el-button.is-plain:focus,
+.el-button.is-plain:hover {
+  background-color: #3954ff;
+  color: #fff;
 }
 </style>
 <style lang="scss" scoped>
 .Data {
+  position: relative;
   .select {
     height: 0.4rem;
     background-color: sandybrown;
@@ -272,24 +328,27 @@ export default {
       margin-left: 0.41rem;
     }
   }
-  .rankingTh {
-    margin: 0.1rem 1.3rem;
-    display: flex;
-  }
-  .rankingTd {
-    margin: 0.1rem 1.3rem;
-    height: 0.4rem;
-    background: #080c3d;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    .rankingTdImg {
+  .ranking {
+    position: relative;
+    padding: 0.12rem 0px;
+    .rankingTh {
+      margin: 0rem 0.2rem;
       display: flex;
-      img {
-        margin: 0px 0.15rem;
+    }
+    .rankingTd {
+      margin: 0.1rem 0.2rem;
+      height: 0.4rem;
+      background: #0c0e26;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      .rankingTdImg {
+        display: flex;
+        img {
+          margin: 0px 0.15rem;
+        }
       }
     }
-
     .power {
       display: flex;
       align-items: center;
@@ -309,15 +368,18 @@ export default {
     }
   }
   .Pagination {
-    padding: 0px 1.3rem;
+    padding: 0px 0.2rem;
   }
   .order {
     width: 0.2rem;
     height: 0.2rem;
     border-radius: 50%;
     background-color: #3f4590;
-    text-align: center;
-    margin-left: 30px;
+    margin-left: 0.3rem;
+    .num {
+      text-align: center;
+      line-height: 0.2rem;
+    }
   }
   .el-pagination {
     margin-top: 0.1rem;
@@ -336,15 +398,17 @@ export default {
   /deep/ .el-select,
   /deep/ .el-input,
   /deep/ .el-input__inner {
-    background-color: #08164d;
+    // background-color:#81AAFF;
+    background-color: rgb(129, 170, 255) 10% !important;
     color: #fff;
     border: 0px;
     border-radius: 0px;
     text-align: center;
   }
   /deep/ .el-range-input {
-    background-color: #08164d;
-    color: #fff;
+    background-color: #141f34;
+    //  background-color: rgb(129, 170, 255) 10% !important;
+    color: #c0c4cc;
   }
   /deep/ .el-range-separator {
     color: #ccc;
@@ -365,7 +429,7 @@ export default {
 }
 /deep/ .el-select-dropdown {
   background-color: #08164d;
-  color: #fff !important;
+  color: #fff;
   border: #08164d;
 }
 /deep/ .el-select-dropdown__item.hover,
@@ -374,5 +438,28 @@ export default {
 }
 /deep/ .el-select-dropdown__item {
   color: #fff;
+}
+/deep/ .rankingTd:hover {
+  background-color: #3954ff !important;
+}
+.borderBottomRight {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.borderTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.borderBottomLeft {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.borderTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>

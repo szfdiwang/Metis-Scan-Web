@@ -4,7 +4,7 @@
     <div class="textBox">
       <div class="textNode">{{ $t('node.NODE') }}</div>
       <div class="text">
-        <span style="color: #f36101">{{ this.totalRows }}</span
+        <span style="color: #f36101; margin-right: 5px; font-size: 40px">{{ this.totalRows }}</span
         >{{ $t('node.PARTICIPATINGNODESINTHEWHOLENETWORK') }}
       </div>
     </div>
@@ -22,14 +22,14 @@
           <div style="width: 3.8rem">{{ $t('node.ComputingPower') }}</div>
           <div style="width: 2.04rem">{{ $t('node.Metadata') }}</div>
           <div style="width: 2.02rem">{{ $t('node.ParticipatedTasks') }}</div>
-          <div style="width: 1.9rem">{{ $t('node.ActiveDegree') }}</div>
-          <div></div>
+          <div style="width: 1rem">{{ $t('node.ActiveDegree') }}</div>
+          <div style="width: 1.2rem"></div>
         </div>
         <div class="rankingTd" v-for="(item, index) in data" :key="index">
           <div style="width: 1.8rem" class="rankingTdImg">
             <div id="xh">
               <div class="order">
-                {{ (curPage - 1) * pageSize + index + 1 }}
+                <div class="num">{{ (curPage - 1) * pageSize + index + 1 }}</div>
               </div>
             </div>
           </div>
@@ -40,17 +40,34 @@
           <!-- <div style="width: 1.99rem; color: #fec43e" @click="Detail(item.identityId)">
             {{ $t('node.Detail') }}
           </div> -->
-          <div style="width: 3.8rem" class="power">
-            <div style="width: 1.2rem">
-              <div>
-                C P U : <span style="margin-left: 0.13rem">{{ item.dynamicFields.remainCore }}</span>
+          <div style="width: 3.9rem" class="power">
+            <div style="width: 1.3rem; line-height: 0.28rem">
+              <!-- <div>
+                C P U : <span style="margin-left: 0.2rem">{{ item.dynamicFields.remainCore }}</span>
+              </div> 
+              <div style="display: flex">
+                <div style="width: 0.6rem">C P U :</div>
+                <div style="width: 0.5rem">{{ item.dynamicFields.remainCore }}</div>
               </div>
+
               <div style="margin: 0.08rem 0">
                 {{ $t('node.Memory') }} : <span style="margin-left: 0.1rem">{{ item.dynamicFields.remainMemory }}</span>
               </div>
               <div>
-                {{ $t('node.Bandwidth') }} :
-                <span style="margin-left: 0.1rem">{{ item.dynamicFields.remainBandwidth }}</span>
+                {{ $t('node.Bandwidth') }}:
+                <span style="margin-left: 0.13rem">{{ item.dynamicFields.remainBandwidth }}</span>
+              </div> -->
+              <div style="display: flex">
+                <span style="width: 0.7rem">C P U :</span>
+                <span style="width: 0.5rem">{{ item.dynamicFields.remainCore }}</span>
+              </div>
+              <div style="display: flex">
+                <span style="width: 0.7rem">{{ $t('node.Memory') }} :</span>
+                <span style="width: 0.5rem">{{ item.dynamicFields.remainMemory }}</span>
+              </div>
+              <div style="display: flex">
+                <span style="width: 0.7rem"> {{ $t('node.Bandwidth') }} :</span>
+                <span style="width: 0.5rem">{{ item.dynamicFields.remainBandwidth }}</span>
               </div>
             </div>
             <div>
@@ -86,14 +103,33 @@
           <div style="width: 2.04rem">{{ item.accumulativeDataFileCount }}</div>
           <div style="width: 2.02rem">{{ item.accumulativePowerTaskCount + item.accumulativeDataTaskCount }}</div>
           <div>
-            <div class="hot" style="width: 1.9rem">
-              <div v-for="(item, index) in getHot(item.dynamicFields.idleDays)" :key="index" style="margin: 0px 2px">
+            <div class="hot" style="width: 1rem">
+              <!-- <div v-for="(item, index) in getHot(item.dynamicFields.idleDays)" :key="index" style="margin: 0px 2px">
                 <img src="../../assets/img/excel/hot.svg" alt="" />
+              </div> -->
+              <div class="hotBox">
+                <div class="box1"></div>
+                <!-- <div class="boxa"></div> -->
+                <div class="box2"></div>
+                <div class="box3"></div>
+                <div class="box4"></div>
+                <div class="box5"></div>
+                <div class="box6"></div>
               </div>
             </div>
           </div>
-          <div style="color: #fec43e; cursor: pointer" @click="Detail(item.identityId)">
-            {{ $t('node.Detail') }}
+          <div
+            style="
+              color: #fec43e;
+              cursor: pointer;
+              width: 2.8rem;
+              height: 100%;
+              line-height: 0.94rem;
+              margin-left: 0.3rem;
+            "
+            @click="Detail(item.identityId)"
+          >
+            <span style="margin-left: 1rem">{{ $t('node.Detail') }}</span>
           </div>
         </div>
         <div class="Pagination">
@@ -108,6 +144,10 @@
           </el-pagination>
         </div>
         <!-- <img src="../../assets/img/node/2.border.svg" alt="" class="borderImg" /> -->
+        <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
+        <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
+        <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
+        <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
       </div>
     </div>
   </div>
@@ -166,6 +206,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .nodeBox {
+  width: 1920px;
   position: relative;
   .imgBox {
     display: flex;
@@ -186,7 +227,7 @@ export default {
     display: flex;
     .textNode {
       font-size: 0.4rem;
-      margin: 0px 1.12rem 0px 1.1rem;
+      margin: 8px 1.12rem 0px 1.1rem;
     }
     .text {
       margin-top: 0.15rem;
@@ -201,8 +242,7 @@ export default {
   //   background-repeat: no-repeat;
   // }
   .ranking {
-    padding: 0px 0.2rem;
-
+    padding: 0.2rem 0.2rem;
     // background-size: 100% 6.45rem;
     position: relative;
 
@@ -215,10 +255,11 @@ export default {
       margin: 0.1rem 0;
       margin-bottom: 0.1rem;
       height: 0.94rem;
-      background: #080c3d;
+      background: #0c0e26;
       border-radius: 0.04rem;
       display: flex;
       align-items: center;
+
       .rankingTdImg {
         display: flex;
         img {
@@ -291,8 +332,11 @@ export default {
     height: 0.2rem;
     border-radius: 50%;
     background-color: #3f4590;
-    text-align: center;
     margin-left: 0.3rem;
+    .num {
+      text-align: center;
+      line-height: 0.2rem;
+    }
   }
   /deep/ .el-pager li {
     background: #303047;
@@ -302,5 +346,94 @@ export default {
 /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #3954ff; // 进行修改选中项背景和字体
   color: #fff;
+}
+/deep/ .rankingTd[data-v-28655dc5]:hover {
+  background-color: #3954ff !important;
+}
+.borderBottomRight {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.borderTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.borderBottomLeft {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.borderTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.hotBox {
+  height: 0.5rem;
+  display: flex;
+  align-items: flex-end;
+  .box1 {
+    width: 0.108rem;
+    height: 0.115rem;
+    opacity: 0.3;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+    margin-right: 0.03rem;
+  }
+  .boxa {
+    width: 0.108rem;
+    height: 0.115rem;
+    opacity: 0.15;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+    // margin-right: 0.03rem;
+  }
+  .box2 {
+    width: 0.108rem;
+    height: 0.169rem;
+    opacity: 0.4;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+    margin-right: 0.03rem;
+  }
+  .box3 {
+    width: 0.108rem;
+    height: 0.238rem;
+    opacity: 0.5;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+    margin-right: 0.03rem;
+  }
+  .box4 {
+    width: 0.108rem;
+    height: 0.338rem;
+    opacity: 0.6;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+    margin-right: 0.03rem;
+  }
+  .box5 {
+    width: 0.108rem;
+    height: 0.431rem;
+    opacity: 0.7;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+    margin-right: 0.03rem;
+  }
+  .box6 {
+    width: 0.108rem;
+    height: 0.5rem;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+  }
 }
 </style>

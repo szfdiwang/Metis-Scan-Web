@@ -26,117 +26,121 @@
         <!-- <div class="ste"></div> -->
         <div class="ste">
           <div class="ste1">
-            <div style="width: 2rem;margin:0.2rem 0 0 -0.3rem ;">{{ formatDate(taskList.createAt) }}</div>
-            <div style="width: 1rem;margin: -0.1rem;">Task started</div>
+            <div style="width: 2rem; margin: 0.2rem 0 0 -0.4rem">{{ formatDate(taskList.createAt) }}</div>
+            <div style="width: 1rem; margin: -0.1rem 0 0 -0.2rem">Task started</div>
           </div>
           <div class="ste2">
-            <div style="margin: 0.1rem 0 0 2.8rem ;">
-              Time spent: 12:22:59
-            </div>
+            <div style="margin: 0.1rem 0 0 2.5rem">Time spent : {{formatDates(getTimeStamp(taskList.createAt) - getTimeStamp(taskList.startAt))}}</div>
           </div>
           <div class="ste3">
-              <div style="width: 2rem;margin:0.2rem 0 0 -0.3rem">{{ formatDate(taskList.startAt) }}</div>
-              <div style="width: 2rem;margin: -0.1rem  0 0 -0.3rem;">Computation succeeded</div>
+            <div style="width: 2rem; margin: 0.2rem 0 0 -0.4rem">{{ formatDate(taskList.startAt) }}</div>
+            <div style="width: 2rem; margin: -0.1rem 0 0 -0.5rem">Computation succeeded</div>
           </div>
         </div>
       </div>
       <div class="btn" @click="log">{{ $t('task.VIEWTHETASKEVENTS') }}</div>
     </div>
-    <div v-if="isShow">
-      <div class="participants">
-        <img src="../../assets/img/node/3.button.svg" alt="" />
-        <span class="text" style="margin-left: 0.1rem">{{ $t('task.taskSponsor') }}</span>
-      </div>
-      <div class="participantsData">
-        <div>
-          <span style="margin-left: 1.3rem">{{ $t('task.Name') }}</span>
-          <span style="margin-left: 2.66rem">{{ $t('task.Id') }}</span>
-        </div>
-        <div class="td">
-          <span style="margin-left: 1.3rem">{{ sponsor.orgName }}</span>
-          <span style="margin-left: 2.05rem"> {{ sponsor.identityId }}</span>
-        </div>
-      </div>
-      <div>
+    <div class="content">
+      <div v-if="isShow">
         <div class="participants">
-          <img src="../../assets/img/node/3.button.svg" alt="" />
-          <span class="text">{{ $t('task.ResultReceiver') }}</span>
+          <!-- <img src="../../assets/img/node/3.button.svg" alt="" /> -->
+          <div class="text">{{ $t('task.taskSponsor') }}</div>
         </div>
-        <div class="ResultReceiverTh">
-          <div style="width: 1.22rem">
-            <span style="padding-left: 0.2rem">{{ $t('task.No') }}</span>
+        <div class="participantsData">
+          <div>
+            <span style="margin-left: 1.3rem">{{ $t('task.Name') }}</span>
+            <span style="margin-left: 2.66rem">{{ $t('task.Id') }}</span>
           </div>
-          <div style="width: 3.1rem">{{ $t('task.Name') }}</div>
-          <div style="width: 3rem">{{ $t('task.Id') }}</div>
+          <div class="td">
+            <span style="margin-left: 1.3rem">{{ sponsor.orgName }}</span>
+            <span style="margin-left: 2.05rem"> {{ sponsor.identityId }}</span>
+          </div>
         </div>
-        <div class="ResultReceiverTd" v-for="(item, index) in taskResult" :key="index">
-          <div class="order">
-            <span>{{ index + 1 }}</span>
+        <div>
+          <div class="participants">
+            <!-- <img src="../../assets/img/node/3.button.svg" alt="" /> -->
+            <div class="text">{{ $t('task.ResultReceiver') }}</div>
           </div>
-          <div style="width: 3.1rem; margin-left: 0.8rem">{{ item.orgName }}</div>
-          <div style="width: 3rem">{{ item.identityId }}</div>
+          <div class="ResultReceiverTh">
+            <div style="width: 1.22rem">
+              <span style="padding-left: 0.2rem">{{ $t('task.No') }}</span>
+            </div>
+            <div style="width: 3.1rem">{{ $t('task.Name') }}</div>
+            <div style="width: 3rem">{{ $t('task.Id') }}</div>
+          </div>
+          <div class="ResultReceiverTd" v-for="(item, index) in taskResult" :key="index">
+            <div class="order">
+              <div class="num">{{ index + 1 }}</div>
+            </div>
+            <div style="width: 3.1rem; margin-left: 0.8rem">{{ item.orgName }}</div>
+            <div style="width: 3rem">{{ item.identityId }}</div>
+          </div>
+        </div>
+        <div class="Data" style="margin-bottom: 0.4rem">
+          <div class="dataPic" style="margin-top: 0.4rem">
+            <!-- <img src="../../assets/img/node/3.button.svg" alt="" /> -->
+            <div class="text">{{ $t('task.DATAPROVIDERS') }}</div>
+          </div>
+          <div class="precedence">
+            <div style="width: 1.2rem">
+              <span style="padding-left: 0.2rem">{{ $t('task.No') }}</span>
+            </div>
+            <div style="width: 3.12rem">{{ $t('task.Name') }}</div>
+            <div style="width: 4.21rem">{{ $t('task.Id') }}</div>
+            <div style="width: 3rem">{{ $t('task.MetadataNameID') }}</div>
+          </div>
+          <div class="precedenceData" v-for="(item, index) in taskDataProviderList" :key="index">
+            <div style="width: 1.24rem">
+              <div id="xh">
+                <div class="order">
+                  <div class="num">{{ index + 1 }}</div>
+                </div>
+              </div>
+            </div>
+            <div style="width: 3.12rem">{{ item.dynamicFields.orgName }}</div>
+            <div style="width: 4.21rem">{{ item.dynamicFields.identityId }}</div>
+            <div style="width: 3rem" class="taskId">
+              <div>{{ item.dynamicFields.resourceName }}</div>
+              <div style="margin-left: 0.2rem">{{ item.taskId }}</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="Data" style="margin-bottom: 0.4rem">
+      <!-- 2 -->
+      <div class="Data" style="margin-top: 0.1rem" v-if="isShow">
         <div class="dataPic">
-          <img src="../../assets/img/node/3.button.svg" alt="" />
-          <span class="text">{{ $t('task.DATAPROVIDERS') }}</span>
+          <!-- <img src="../../assets/img/node/3.button.svg" alt="" /> -->
+          <div class="text">{{ $t('task.PROVIDERS') }}</div>
         </div>
-        <div class="precedence">
-          <div style="width: 1.2rem">
+        <div class="precedence pres">
+          <div style="width: 1.24rem">
             <span style="padding-left: 0.2rem">{{ $t('task.No') }}</span>
           </div>
           <div style="width: 3.12rem">{{ $t('task.Name') }}</div>
           <div style="width: 4.21rem">{{ $t('task.Id') }}</div>
-          <div style="width: 3rem">{{ $t('task.MetadataNameID') }}</div>
+          <div style="width: 3rem">{{ $t('task.OccupiedResources') }}</div>
         </div>
-        <div class="precedenceData" v-for="(item, index) in taskDataProviderList" :key="index">
+        <div class="precedenceData" v-for="(item, index) in taskPowerprovider" :key="index">
           <div style="width: 1.24rem">
             <div id="xh">
               <div class="order">
-                {{ index + 1 }}
+                <div class="num">{{ index + 1 }}</div>
               </div>
             </div>
           </div>
           <div style="width: 3.12rem">{{ item.dynamicFields.orgName }}</div>
-          <div style="width: 4.21rem">{{ item.dynamicFields.identityId }}</div>
-          <div style="width: 3rem" class="taskId">
-            <div>{{ item.dynamicFields.resourceName }}</div>
-            <div style="margin-left: 0.2rem">{{ item.taskId }}</div>
+          <div style="width: 4.21rem">{{ item.identityId }}</div>
+          <div style="width: 7rem" class="data">
+            <span>CPU ：{{ item.usedCore }}</span>
+            <span style="margin: 0px 0.5rem">{{ $t('node.Memory') }} ：{{ item.usedMemory }}</span>
+            <span>{{ $t('node.Bandwidth') }} ： {{ item.usedBandwidth }}</span>
           </div>
         </div>
       </div>
-    </div>
-    <!-- 2 -->
-    <div class="Data" style="margin-top: 0.1rem" v-if="isShow">
-      <div class="dataPic">
-        <img src="../../assets/img/node/3.button.svg" alt="" />
-        <span class="text">{{ $t('task.PROVIDERS') }}</span>
-      </div>
-      <div class="precedence pres">
-        <div style="width: 1.24rem">
-          <span style="padding-left: 0.2rem">{{ $t('task.No') }}</span>
-        </div>
-        <div style="width: 3.12rem">{{ $t('task.Name') }}</div>
-        <div style="width: 4.21rem">{{ $t('task.Id') }}</div>
-        <div style="width: 3rem">{{ $t('task.OccupiedResources') }}</div>
-      </div>
-      <div class="precedenceData" v-for="(item, index) in taskPowerprovider" :key="index">
-        <div style="width: 1.24rem">
-          <div id="xh">
-            <div class="order">
-              {{ index + 1 }}
-            </div>
-          </div>
-        </div>
-        <div style="width: 3.12rem">{{ item.dynamicFields.orgName }}</div>
-        <div style="width: 4.21rem">{{ item.identityId }}</div>
-        <div style="width: 7rem" class="data">
-          <span>CPU ：{{ item.usedCore }}</span>
-          <span style="margin: 0px 0.5rem">{{ $t('node.Memory') }} ：{{ item.usedMemory }}</span>
-          <span>{{ $t('node.Bandwidth') }} ： {{ item.usedBandwidth }}</span>
-        </div>
-      </div>
+      <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
+      <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
+      <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
+      <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
     </div>
     <!-- 日志板块 -->
     <div class="TaskLog" v-if="show">
@@ -167,7 +171,7 @@
 </template>
 <script>
 import { taskApi } from '../../api/index'
-import { formatDate } from '../../utils/tiem'
+import { formatDate ,formatDates} from '../../utils/tiem'
 console.log('taskApi', taskApi)
 export default {
   data() {
@@ -241,6 +245,14 @@ export default {
     },
     formatDate(time) {
       return formatDate(time, 'YYYY-MM-DD HH:mm:ss')
+    },
+    getTimeStamp(str) {
+      var date = new Date(str)
+      // 可以准确精确到毫秒
+      return date.getTime(date)
+    },
+    formatDates(time) {
+      return formatDate(time, 'HH:mm:ss')
     }
   }
 }
@@ -249,6 +261,7 @@ export default {
 .TakDetail {
   padding: 0 1.1rem;
   line-height: 0.42rem;
+  margin-bottom: 0.5rem;
   .TakDetailTop {
     height: 0.42rem;
     display: flex;
@@ -293,16 +306,21 @@ export default {
   }
   .participants {
     margin: 0 0.2rem;
-    position: relative;
+    // position: relative;
+    width: 2.69rem;
+    height: 0.4rem;
+    background: url('../../assets/img/node/btn.svg');
     .text {
-      position: absolute;
-      left: 0.9rem;
+      // position: absolute;
+      // left: 0.9rem;
+      text-align: center;
+      line-height: 0.4rem;
     }
   }
   .participantsData {
     padding: 0px 0.2rem;
     .td {
-      background: #080c3d;
+      background: #0c0e26;
       border-radius: 0.04rem;
       height: 0.4rem;
       margin-bottom: 0.4rem;
@@ -312,11 +330,16 @@ export default {
     background-size: 100%;
     padding: 0px 0.2rem;
     .dataPic {
-      margin: 0.4rem 0 0 0;
-      position: relative;
+      // margin: 0.4rem 0 0 0;
+      width: 2.69rem;
+      height: 0.4rem;
+      // position: relative;
+      background: url('../../assets/img/node/btn.svg');
       .text {
-        position: absolute;
-        left: 0.9rem;
+        // position: absolute;
+        // left: 0.9rem;
+        text-align: center;
+        line-height: 40px;
       }
     }
     .precedence {
@@ -324,7 +347,7 @@ export default {
       margin-bottom: -0.15rem;
     }
     .precedenceData {
-      background: #080c3d;
+      background: #0c0e26;
       border-radius: 0.04rem;
       margin: 0.1rem 0;
       display: flex;
@@ -340,7 +363,7 @@ export default {
       display: flex;
       width: 18.4rem;
       height: 0.4rem;
-      background: #080c3d;
+      background: #0c0e26;
       border-radius: 0.04rem;
       margin: 0.1rem 0px;
       align-items: center;
@@ -351,10 +374,12 @@ export default {
     height: 0.2rem;
     border-radius: 50%;
     background-color: #3f4590;
-    text-align: center;
-    line-height: 0.2rem;
     margin-top: 0.1rem;
     margin-left: 0.2rem;
+    .num{
+      text-align: center;
+      line-height: 0.2rem;
+    }
   }
   .taskId {
     display: flex;
@@ -382,7 +407,7 @@ export default {
   padding: 0 0.2rem;
 }
 .ResultReceiverTd {
-  background: #080c3d;
+  background: #0c0e26;
   border-radius: 0.04rem;
   height: 0.4rem;
   display: flex;
@@ -408,5 +433,38 @@ export default {
     border-radius: 50%;
     background-color: #5bc49f;
   }
+}
+.TakDetail .participantsData .td[data-v-69f16454]:hover {
+  background-color: #3954ff;
+}
+.ResultReceiverTd[data-v-69f16454]:hover {
+  background-color: #3954ff;
+}
+.TakDetail .Data .precedenceData[data-v-69f16454]:hover {
+  background-color: #3954ff;
+}
+.borderBottomRight {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.borderTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.borderBottomLeft {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.borderTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.content {
+  position: relative !important;
+  padding: 0.2rem 0 0.1rem 0;
 }
 </style>

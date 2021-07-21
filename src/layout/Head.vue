@@ -28,13 +28,14 @@ export default {
   /* box-shadow: 0 1px 0 0 rgba(10,84,234,0.30); */
   border-bottom: 1px solid rgba(10,84,234,0.30);
   .header-box {
-    margin: 0 auto;
+    // margin: 0 auto;
     max-width: 1700px;
     height: 79px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     /* padding: 0 1%; */
+    padding: 0 1.1rem;
   }
   .logo {
     display: flex;

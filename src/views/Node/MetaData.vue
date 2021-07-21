@@ -8,68 +8,104 @@
       <div class="Identifier">ID：{{ this.id || this.Id }}</div>
     </div>
     <div class="tableData">
-      <table>
+      <div style="display: flex; margin: 0.2rem 0">
+        <div style="display: flex">
+          <div style="width: 1rem">{{ $t('data.Dataprovide') }}:</div>
+          <div style="margin-left: 0.45rem">{{ dataList.identityId }}</div>
+        </div>
+        <div style="display: flex; margin-left: 3.2rem">
+          <div style="width: 1.5rem">{{ $t('data.INFORMATIONOFFIFLDS') }}:</div>
+          <div>{{ dataList.rows }}</div>
+        </div>
+      </div>
+      <div style="display: flex; margin: 0.1rem 0">
+        <div style="display: flex">
+          <div style="width: 1rem">{{ $t('data.Size0fData') }}</div>
+          <div style="margin-left: 0.45rem">{{ dataList.size / 1024 }} GB</div>
+        </div>
+        <div style="display: flex; margin-left: 3.32rem">
+          <div style="width: 1rem">{{ $t('data.NumberOfData') }} :</div>
+          <div style="margin-left: 0.5rem">{{ dataList.columns }}</div>
+        </div>
+      </div>
+      <!-- <table>
         <tbody>
           <tr>
             <td>{{ $t('data.Dataprovide') }} :</td>
-            <td><span style="margin-left:0.2rem ;">{{ dataList.identityId }}</span></td>
-            <td style="padding-left: 3.2rem">{{ $t('data.INFORMATIONOFFIFLDS') }} :</td>
+            <td>
+              <span style="margin-left: 0.2rem">{{ dataList.identityId }}</span>
+            </td>
+            <td style="padding-left: 3.1rem">{{ $t('data.INFORMATIONOFFIFLDS') }} :</td>
             <td>{{ dataList.rows }}</td>
           </tr>
           <tr>
             <td>{{ $t('data.Size0fData') }} :</td>
-            <td> <span style="margin-left:0.2rem ;">{{ dataList.size / 1024 }} GB</span></td>
-            <td style="padding-left: 3.2rem">{{ $t('data.NumberOfData') }} :</td>
+            <td>
+              <span style="margin-left: 0.2rem">{{ dataList.size / 1024 }} GB</span>
+            </td>
+            <td style="padding-left: 3.1rem">{{ $t('data.NumberOfData') }} :</td>
             <td>{{ dataList.columns }}</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
     <div class="Description">
-      <div>{{ $t('data.Description') }} :</div>
-      <div class="ipt"> <span style="margin-left:0.2rem ;">{{ dataList.remarks }}</span></div>
+      <div style="width: 1rem">{{ $t('data.Description') }} :</div>
+      <div class="ipt">
+        <div style="width: 4rem">{{ dataList.remarks }}</div>
+      </div>
     </div>
-    <div>
+    <div class="content">
       <div class="rankingListTop">
-        <div><img src="../../assets/img/node/3.button.svg" alt="" /></div>
+        <!-- <div><img src="../../assets/img/node/3.button.svg" alt="" /></div> -->
         <div class="text">{{ $t('data.INFO') }}</div>
       </div>
-      <div class="rankingTh">
-        <div style="width: 5rem">
-          <span style="margin-left: 0.3rem">{{ $t('node.No') }}</span>
-          <span style="margin-left: 0.7rem">{{ $t('data.FieldName') }}</span>
+      <div>
+        <div class="rankingTh">
+          <div style="width: 5.4rem; display: flex">
+            <div style="width: 0.5rem; margin-left: 0.3rem">{{ $t('node.No') }}</div>
+            <div style="width: 4rem; margin-left: 0.55rem">{{ $t('data.FieldName') }}</div>
+          </div>
+          <div style="width: 5.4rem; display: flex">
+            <div style="width: 0.5rem; margin-left: 0.4rem">{{ $t('node.No') }}</div>
+            <div style="width: 4rem; margin-left: 0.52rem">{{ $t('data.FieldName') }}</div>
+          </div>
+          <div style="width: 5.4rem; margin-left: 0.45rem; display: flex">
+            <div style="width: 0.5rem">{{ $t('node.No') }}</div>
+            <div style="width: 4rem; margin-left: 0.56rem">{{ $t('data.FieldName') }}</div>
+          </div>
+          <!-- <div style="width: 4.9rem">
+            <span style="width: 0.5rem">{{ $t('node.No') }}</span>
+            <span style="width: 3rem">{{ $t('data.FieldName') }}</span>
+          </div> -->
         </div>
-        <div style="width: 5rem; margin-left: 0.6rem">
-          <span style="margin-left: 0.3rem">{{ $t('node.No') }}</span>
-          <span style="margin-left: 0.7rem">{{ $t('data.FieldName') }}</span>
-        </div>
-        <div style="width: 500px; margin-left: 0.6rem">
-          <span style="margin-left: 0.3rem">{{ $t('node.No') }}</span>
-          <span style="margin-left: 0.7rem">{{ $t('data.FieldName') }}</span>
-        </div>
-      </div>
-      <div class="rankingList">
-        <div class="rankingTd" v-for="(item, index) in metaList" :key="index">
-          <div style="width: 1.27rem">
-            <div id="xh">
-              <div class="order">
-                {{ index + 1 }}
+        <div class="rankingList">
+          <div class="rankingTd" v-for="(item, index) in metaList" :key="index">
+            <div style="width: 1.27rem">
+              <div id="xh">
+                <div class="order">
+                  <div class="num">{{ index + 1 }}</div>
+                </div>
               </div>
             </div>
+            <div>{{ item.columnName }}</div>
           </div>
-          <div>{{ item.columnName }}</div>
         </div>
-      </div>
-      <div class="Pagination">
-        <el-pagination
-          background
-          @current-change="handleCurrentChange"
-          :current-page="curPage"
-          :page-size="pageSize"
-          layout="total, prev, pager, next"
-          :total="totalRows"
-        >
-        </el-pagination>
+        <div class="Pagination">
+          <el-pagination
+            background
+            @current-change="handleCurrentChange"
+            :current-page="curPage"
+            :page-size="pageSize"
+            layout="total, prev, pager, next"
+            :total="totalRows"
+          >
+          </el-pagination>
+        </div>
+        <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
+        <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
+        <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
+        <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
       </div>
     </div>
   </div>
@@ -186,20 +222,21 @@ export default {
     }
   }
   .rankingListTop {
-    display: flex;
-    padding: 0.2rem 0.2rem;
-    position: relative;
+    margin: 0.2rem 0.1rem;
+    // font-family: PingFangSC-Medium;
+    background: url('../../assets/img/node/3.button.svg');
+    width: 271px;
+    height: 40px;
     .text {
-      position: absolute;
-      top: 0.3rem;
-      left: 0.9rem;
+      text-align: center;
+      line-height: 40px;
     }
   }
   .rankingTh {
     display: flex;
   }
   .rankingList {
-    height: 2.4rem;
+    height: 2.1rem;
     padding: 0px 0.1rem;
     display: flex;
     flex-direction: column;
@@ -208,24 +245,29 @@ export default {
     .rankingTd {
       width: 5rem;
       height: 0.4rem;
-      background: #080c3d;
+      background: #0c0e26;
       border-radius: 0.04rem;
       display: flex;
-      margin: 0.1rem 0px;
+      margin: 0.05rem 10px 0.05rem 0;
       line-height: 0.4rem;
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
     }
   }
   #xh {
     text-align: center;
     width: 5rem;
-    height: 0.4rem;
+    // height: 0.4rem;
     .order {
       width: 0.2rem;
       height: 0.2rem;
       border-radius: 50%;
       margin: 0.1rem 0.2rem 0;
       background-color: #3f4590;
-      line-height: 0.2rem;
+     .num{
+       text-align: center;
+       line-height: 0.2rem;
+     }
     }
   }
   .Pagination {
@@ -254,5 +296,38 @@ export default {
 /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #3954ff; // 进行修改选中项背景和字体
   color: #fff;
+}
+.metaData .rankingList .rankingTd[data-v-46cc2312]:hover {
+  background-color: #3954ff;
+}
+.content {
+  position: absolute;
+  padding: 0.1rem 0;
+}
+.borderBottomRight {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.borderTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.borderBottomLeft {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.borderTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/deep/ .x-hidden,
+.app-hidden,
+.el-scrollbar__wrap {
+  margin-bottom: 0px;
+  margin-right: 0px;
 }
 </style>
