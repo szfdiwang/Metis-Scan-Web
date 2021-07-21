@@ -37,7 +37,7 @@ export default {
     resizeFn() {
       this.chart.resize()
     },
-    initChart(earthImg) {
+    initChart() {
       this.chart = this.$echarts.init(document.getElementById('earth-map'))
       const option = {
         backgroundColor: 'rgb(0 0 0 / 0%)',

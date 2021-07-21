@@ -3,8 +3,8 @@
     <Performance :cpu="cpu" :memory="memory" :bandWidth="bandWidth" />
     <vue-particles
       color="#2E2E2E"
-      :particleOpacity="0.7"
-      :particlesNumber="50"
+      :particleOpacity="0.85"
+      :particlesNumber="80"
       shapeType="circle"
       :particleSize="2"
       linesColor="#2E2E2E"
@@ -131,7 +131,7 @@ export default {
     height: 0.8rem;
     text-align: center;
     .search-box {
-      width: 15rem;
+      width: 11.04rem;
       height: 0.8rem;
       ::v-deep .el-input__inner {
         height: 100% !important;
@@ -158,8 +158,8 @@ export default {
         background: #3954ff;
         border-radius: 8px;
         margin-top: 0.1rem;
-        font-family: BebasNeueBold, PuHuiTiMedium;
-        font-size: 0.4rem;
+        font-family: BebasNeueBold, PuHuiTiRegular;
+        font-size: 0.3rem;
         color: #dee9ff;
         letter-spacing: 0;
         text-align: center;
@@ -181,7 +181,7 @@ export default {
   position: absolute;
   top: -50px;
   left: calc(850px - 50vw);
-  height: 800px;
+  height: 1100px;
   width: 100%;
   min-width: 100vw;
   z-index: -1;

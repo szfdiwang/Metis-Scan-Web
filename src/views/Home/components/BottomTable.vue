@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom-table-box">
+  <div class="bottom-table-box clip-border">
     <div class="bottom-table-wrapper">
       <ul class="tabs-box">
         <li v-for="menu in menuList" :key="menu.id" class="tabs-item-box pointer" @click="selectRank(menu.name)">
@@ -81,7 +81,6 @@
         </el-table-column>
       </el-table>
       <div v-if="totalNum !== 0" class="page-box">
-        <p></p>
         <el-Pagination
           background
           :current-page="curPage"
@@ -92,7 +91,7 @@
         ></el-Pagination>
       </div>
     </div>
-    <img src="../../../assets/img/home/table-bg.svg" alt="" class="bg-img" />
+    <!-- <img src="../../../assets/img/home/table-bg.svg" alt="" class="bg-img" /> -->
   </div>
 </template>
 
@@ -223,7 +222,8 @@ export default {
         color: #fff;
       }
       ::v-deep .btn-prev,
-      ::v-deep .btn-next {
+      ::v-deep .btn-next,
+      ::v-deep .el-pager li {
         background: #303047;
         border-color: #303047;
         color: #fff;
@@ -326,5 +326,9 @@ export default {
     background: #b03b3b;
     border-radius: 1.54px 1.54px 0 0;
   }
+}
+/deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #3954ff; // 进行修改选中项背景和字体
+  color: #fff;
 }
 </style>
