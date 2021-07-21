@@ -76,6 +76,10 @@ export default {
     this.initGlobalData()
   },
   methods: {
+    apple() {
+      this.dataServerCount = Date.now()
+      this.powerServerCount = Date.now()
+    },
     initGlobalData() {
       homeApi.getGlobalState({}).then(res => {
         if (res.code === 0) {
@@ -143,8 +147,7 @@ export default {
         text-align: left;
         font-weight: 600;
         border: 1px solid #0a54ea;
-        border-bottom-left-radius: 8px;
-        border-top-left-radius: 8px;
+        border-radius: 8px;
       }
       ::v-deep .el-input__inner::placeholder {
         opacity: 0.5;

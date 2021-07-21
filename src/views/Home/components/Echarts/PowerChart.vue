@@ -189,8 +189,8 @@ export default {
   .title {
     margin-top: 0.33rem;
     text-align: center;
-    font-family: BebasNeueBold, PuHuiTiMedium;
-    font-size: 0.32rem;
+    font-family: BebasNeueBold, PuHuiTiRegular;
+    font-size: 0.3rem;
     color: #dee9ff;
     letter-spacing: 0;
     line-height: 0.48rem;
