@@ -131,7 +131,7 @@ export default {
     height: 0.8rem;
     text-align: center;
     .search-box {
-      width: 11.04rem;
+      width: 1104px;
       height: 0.8rem;
       ::v-deep .el-input__inner {
         height: 100% !important;
