@@ -8,7 +8,7 @@
 import { taskApi } from '../../../api/index'
 import { formatDate } from '../../../utils/tiem'
 export default {
-  props: ['id'],
+  // props: ['id'],
   components: {},
   data() {
     return {
@@ -46,7 +46,7 @@ export default {
       const chartDom = document.getElementById('dataEchart')
       this.dataChart = this.$echarts.init(chartDom)
       const res = await taskApi.getOrgTaskTrend({
-        identityId: this.id,
+        identityId: localStorage.getItem('id'),
         startDate: this.$day(new Date()).subtract(20, 'day').format('YYYY-MM-DD'),
         days: 6
       })
@@ -97,18 +97,20 @@ export default {
           left: 35,
           top: 25,
           right: 35,
-          bottom: 75
+          bottom: 95
         },
         xAxis: {
           boundaryGap: false,
           axisLabel: {
-            fontSize: 14,
+            fontSize: 12,
             color: '#DEE9FF',
+            interval: 0,
+            rotate: '290' //旋转度数
           },
           type: 'category',
-          boundaryGap: true,
-          // data: this.newArray
-          data:['202-06-11','2020-06-12','2020-06-13','2020-06-14','2020-06-15','2020-06-16']
+          // boundaryGap: true, // 自动分配间距
+          data: this.newArray
+          // data:['202-06-11','2020-06-12','2020-06-13','2020-06-14','2020-06-15','2020-06-16']
         },
         yAxis: {
           axisLabel: {
@@ -116,14 +118,15 @@ export default {
             color: '#DEE9FF'
           },
           type: 'value',
-          splitLine: false
+           splitLine: false,
           // realtimeSort: true,
           // splitLine:{show:false}
+            minInterval:1, //设置坐标轴分割显示成整数
         },
         series: [
           {
-            // data: this.numList,
-            data:[0.7 ,0.5,0.8,2,1,2],
+            data: this.numList,
+            // data:[0.7 ,0.5,0.8,2,1,2],
             type: 'line',
             lineStyle: {
               color: '#2A6EE6'
@@ -163,7 +166,7 @@ export default {
           }
         ]
       }
-      console.log('打印', this.numList)
+      console.log('走势图', this.numList)
 
       this.option && this.dataChart.setOption(this.option)
     }

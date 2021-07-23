@@ -17,6 +17,7 @@
         <el-date-picker
           v-model="value1"
           type="datetimerange"
+          :clearable="false"
           :picker-options="pickerOptions"
           range-separator="至"
           start-placeholder="开始日期"
@@ -36,7 +37,6 @@
           </div>
           <div style="width: 2.3rem">{{ $t('task.Name') }}</div>
           <div style="width: 2.2rem">{{ $t('task.identifier') }}</div>
-          <!-- <div style="width: 1.9rem"></div> -->
           <div style="width: 2.38rem">{{ $t('task.Sponsor') }}</div>
           <div style="width: 2rem">{{ $t('task.Status') }}</div>
           <div style="width: 2.4rem">{{ $t('task.StartTime') }}</div>
@@ -57,9 +57,6 @@
           <div style="width: 2.2rem">
             <div>{{ item.id }}</div>
           </div>
-          <!-- <div style="width: 1.9rem; color: #fec43e" @click="TaskDetail(item.id)">
-        {{ $t('node.Detail') }}
-      </div> -->
           <div style="width: 2.38rem">{{ item.dynamicFields.sponsorName }}</div>
           <div style="width: 2rem">
             <span style="color: #5bc49f">{{ item.status }}</span>
@@ -175,6 +172,13 @@ export default {
   created() {
     this.getListTask()
   },
+  watch: {
+    value1(newVal) {
+      if (newVal == null) {
+        this.value1 = []
+      }
+    }
+  },
   methods: {
     handleCurrentChange(page) {
       this.curPage = page
@@ -250,6 +254,11 @@ export default {
 .has-time {
   border: 1px solid #2c3b8d !important;
 }
+.el-input__icon,
+.el-range__icon,
+.el-icon-time :hover {
+  cursor: pointer;
+}
 .el-button,
 .el-picker-panel__footer,
 .el-input__inner,
@@ -259,14 +268,15 @@ export default {
   color: #c0c4cc;
   border-color: rgba(10, 84, 234, 0.3) !important;
 }
+.el-date-range-picker__time-header,
 .el-picker-panel__content,
 .el-date-range-picker__content,
 .is-left {
   border-color: rgba(10, 84, 234, 0.3) !important;
 }
-.el-date-range-picker__time-header {
+/* .el-date-range-picker__time-header {
   border-color: rgba(10, 84, 234, 0.3) !important;
-}
+} */
 .el-date-table__row {
   background-color: #08164d;
 }
@@ -275,6 +285,8 @@ export default {
   border: 2px solid #031c4f !important;
   border-radius: 4px !important;
 }
+.el-picker-panel__icon-btn,
+.el-icon-d-arrow-left,
 .el-picker-panel__shortcut {
   color: #c0c4cc !important;
 }
@@ -284,7 +296,8 @@ export default {
 }
 .el-date-table td.in-range div,
 .el-date-table td.in-range div:hover,
-.el-date-table.is-week-mode .el-date-table__row.current div,
+.el-date-table.is-week-mode,
+.el-date-table__row.current div,
 .el-date-table.is-week-mode .el-date-table__row:hover div {
   background-color: #08164d;
 }
@@ -399,7 +412,7 @@ export default {
   /deep/ .el-input,
   /deep/ .el-input__inner {
     // background-color:#81AAFF;
-    background-color: rgb(129, 170, 255) 10% !important;
+    // background-color: rgb(129, 170, 255) 10% !important;
     color: #fff;
     border: 0px;
     border-radius: 0px;
@@ -413,11 +426,11 @@ export default {
   /deep/ .el-range-separator {
     color: #ccc;
   }
-  /deep/ .el-select__caret,
-  /deep/ .el-input__icon,
-  /deep/ .el-icon-arrow-up {
-    color: #3954ff;
-  }
+  // /deep/ .el-select__caret,
+  // /deep/ .el-input__icon,
+  // /deep/ .el-icon-arrow-up {
+  //   color: #3954ff;
+  // }
   /deep/ .el-pager li {
     background: #303047;
     color: #fff;
@@ -434,7 +447,8 @@ export default {
 }
 /deep/ .el-select-dropdown__item.hover,
 .el-select-dropdown__item:hover {
-  background-color: #08164d;
+  background-color: #7584e7;
+  // 下拉框鼠标悬停的背景颜色
 }
 /deep/ .el-select-dropdown__item {
   color: #fff;

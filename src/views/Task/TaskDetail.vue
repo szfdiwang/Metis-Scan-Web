@@ -27,20 +27,31 @@
         <div class="ste">
           <div class="ste1">
             <div style="width: 2rem; margin: 0.2rem 0 0 -0.4rem">{{ formatDate(taskList.createAt) }}</div>
-            <div style="width: 1rem; margin: -0.1rem 0 0 -0.2rem">Task started</div>
+            <div style="width: 1rem; margin: -0.1rem 0 0 -0.3rem; font-family: PingFangSC-Medium">
+              {{ $t('task.TaskStarted') }}
+            </div>
           </div>
           <div class="ste2">
-            <div style="margin: 0.1rem 0 0 2.5rem">Time spent : {{formatDates(getTimeStamp(taskList.createAt) - getTimeStamp(taskList.startAt))}}</div>
+            <div style="margin: 0.1rem 0 0 2.5rem">
+              Time spent : {{ formatDates(getTimeStamp(taskList.createAt) - getTimeStamp(taskList.startAt)) }}
+            </div>
           </div>
           <div class="ste3">
             <div style="width: 2rem; margin: 0.2rem 0 0 -0.4rem">{{ formatDate(taskList.startAt) }}</div>
-            <div style="width: 2rem; margin: -0.1rem 0 0 -0.5rem">Computation succeeded</div>
+            <div style="width: 1.9rem; margin: -0.1rem 0 0 -0.8rem; color: #5bc49f">
+              <div style="text-align: center; font-family: PingFangSC-Medium">
+                {{ $t('task.ComputationSucceeded') }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="btn" @click="log">{{ $t('task.VIEWTHETASKEVENTS') }}</div>
+      <div class="btn" @click="log" style="cursor: pointer">
+        <span v-if="isHowse">{{ $t('task.VIEWTHETASKEVENTS') }}</span>
+        <span v-if="isHows">{{ $t('task.return') }}</span>
+      </div>
     </div>
-    <div class="content">
+    <div class="content" v-if="isShow">
       <div v-if="isShow">
         <div class="participants">
           <!-- <img src="../../assets/img/node/3.button.svg" alt="" /> -->
@@ -145,33 +156,37 @@
     <!-- 日志板块 -->
     <div class="TaskLog" v-if="show">
       <div class="TaskLogTh">
-        <div style="width: 1.24rem">
-          <span>{{ $t('node.No') }}</span>
+        <div style="width: 2rem">
+          <span style="margin-left: 30px">{{ $t('node.No') }}</span>
         </div>
         <div style="width: 3.12rem">{{ $t('log.EventType') }}</div>
-        <div style="width: 4.19rem">{{ $t('log.EVentMaker') }}</div>
-        <div style="width: 3.7rem">{{ $t('log.GenerationTime') }}</div>
+        <div style="width: 3.6rem">{{ $t('log.EVentMaker') }}</div>
+        <div style="width: 3.6rem">{{ $t('log.GenerationTime') }}</div>
         <div>{{ $t('log.EventFailed') }}</div>
       </div>
       <div class="TaskLogTd" v-for="(item, index) in logList" :key="index">
-        <div style="width: 1.24rem; padding: 0px 0.1rem">
-          <div id="xh">
-            <div class="order">
-              {{ index + 1 }}
+        <div style="width: 2rem; padding: 0px 0.1rem">
+          <div id="xh" style="line-height: 40px">
+            <div class="orders">
+              <div class="num">{{ index + 1 }}</div>
             </div>
           </div>
         </div>
         <div style="width: 3.12rem">{{ item.eventType }}</div>
-        <div style="width: 4.19rem">{{ item.dynamicFields.orgName }}</div>
-        <div style="width: 3.7rem">{{ formatDate(item.eventAt) }}</div>
+        <div style="width: 3.6rem">{{ item.dynamicFields.orgName }}</div>
+        <div style="width: 3.6rem">{{ formatDate(item.eventAt) }}</div>
         <div>{{ item.eventContent }}</div>
       </div>
+      <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBtmRight" />
+      <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTRight" />
+      <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBtmLeft" />
+      <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTLeft" />
     </div>
   </div>
 </template>
 <script>
 import { taskApi } from '../../api/index'
-import { formatDate ,formatDates} from '../../utils/tiem'
+import { formatDate, formatDates } from '../../utils/tiem'
 console.log('taskApi', taskApi)
 export default {
   data() {
@@ -185,7 +200,9 @@ export default {
       taskDataProviderList: [],
       logList: [],
       Id: '',
-      isShow: true
+      isShow: true,
+      isHows: false,
+      isHowse: true
     }
   },
   created() {
@@ -206,6 +223,8 @@ export default {
     log() {
       this.show = !this.show
       this.isShow = !this.isShow
+      this.isHows = !this.isHows
+      this.isHowse = !this.isHowse
     },
     async getTask() {
       const res = await taskApi.getTaskDetail({
@@ -265,7 +284,7 @@ export default {
   .TakDetailTop {
     height: 0.42rem;
     display: flex;
-    margin-bottom: 0.1rem;
+    margin-top: 0.3rem;
     .pic {
       line-height: 0.5rem;
       margin-right: 0.1rem;
@@ -306,13 +325,10 @@ export default {
   }
   .participants {
     margin: 0 0.2rem;
-    // position: relative;
     width: 2.69rem;
     height: 0.4rem;
     background: url('../../assets/img/node/btn.svg');
     .text {
-      // position: absolute;
-      // left: 0.9rem;
       text-align: center;
       line-height: 0.4rem;
     }
@@ -330,14 +346,10 @@ export default {
     background-size: 100%;
     padding: 0px 0.2rem;
     .dataPic {
-      // margin: 0.4rem 0 0 0;
       width: 2.69rem;
       height: 0.4rem;
-      // position: relative;
       background: url('../../assets/img/node/btn.svg');
       .text {
-        // position: absolute;
-        // left: 0.9rem;
         text-align: center;
         line-height: 40px;
       }
@@ -355,19 +367,54 @@ export default {
   }
   // 日志模块
   .TaskLog {
-    padding: 0.4rem;
+    padding: 0.2rem;
+    position: relative;
     .TaskLogTh {
       display: flex;
     }
     .TaskLogTd {
       display: flex;
-      width: 18.4rem;
       height: 0.4rem;
       background: #0c0e26;
       border-radius: 0.04rem;
-      margin: 0.1rem 0px;
+      margin-bottom: 0.1rem;
       align-items: center;
     }
+  }
+  .orders {
+    width: 0.2rem;
+    height: 0.2rem;
+    border-radius: 50%;
+    background-color: #3f4590;
+    margin-left: 0.2rem;
+    .num {
+      text-align: center;
+      line-height: 0.2rem;
+    }
+  }
+  //   borderBtmRight
+  // borderTRight"
+  // borderBtmLeft"
+  // borderTLeft"
+  .borderBtmRight {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  .borderTRight {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .borderBtmLeft {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  .borderTLeft {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   .order {
     width: 0.2rem;
@@ -376,7 +423,7 @@ export default {
     background-color: #3f4590;
     margin-top: 0.1rem;
     margin-left: 0.2rem;
-    .num{
+    .num {
       text-align: center;
       line-height: 0.2rem;
     }
@@ -388,15 +435,6 @@ export default {
 /deep/ .el-step__line {
   background-color: #3954ff;
 }
-// .ste {
-//   width: 0.23rem;
-//   height: 0.23rem;
-//   border-radius: 50%;
-//   background-color: red;
-//   position: absolute;
-//   top: 0.58rem;
-//   left: 8.5rem;
-// }
 /deep/ .el-step__icon {
   background-color: #3954ff;
   border: 0;
@@ -420,6 +458,7 @@ export default {
     height: 0.23rem;
     border-radius: 50%;
     background-color: #3954ff;
+    border: 2px solid #ccc;
   }
   .ste2 {
     width: 6rem;
@@ -441,6 +480,9 @@ export default {
   background-color: #3954ff;
 }
 .TakDetail .Data .precedenceData[data-v-69f16454]:hover {
+  background-color: #3954ff;
+}
+.TakDetail .TaskLog .TaskLogTd[data-v-69f16454]:hover {
   background-color: #3954ff;
 }
 .borderBottomRight {

@@ -84,7 +84,7 @@ export default {
   },
   task: {
     No: '序号',
-    Name:'名称',
+    Name: '名称',
     identifier: 'ID',
     Identifier: '查看详情',
     Sponsor: '任务中的角色',
@@ -115,7 +115,10 @@ export default {
     taskSponsor: '发起方',
     DataProvider: '数据提供方',
     powerProvider: '算力提供方',
-    ResultReceiver:'结果方'
+    ResultReceiver: '结果方',
+    ComputationSucceeded: '计算成功',
+    TaskStarted: '任务开始',
+    return: '返回'
   },
   log: {
     EventType: '事件类型',

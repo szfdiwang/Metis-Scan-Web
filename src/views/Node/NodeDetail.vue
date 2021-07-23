@@ -22,7 +22,9 @@
     </div>
     <div class="tab" style="padding: 0px 1.11rem">
       <div class="data">{{ $t('node.metadata') }}</div>
-      <div class="task">{{ $t('node.Tasks') }}</div>
+      <div class="task">
+        <div class="text">{{ $t('node.Tasks') }}</div>
+      </div>
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane name="first" label="元数据">
           <div slot="label" :class="{ active: index == '0' }" class="Metadatayy" style="font-size: 0px">
@@ -100,8 +102,7 @@
                 <div style="width: 1.74rem">
                   <span style="margin-left: 0.3rem">{{ $t('task.No') }}</span>
                 </div>
-                <div style="width: 2.6rem">{{ $t('task.NameIdentifier') }}</div>
-                <!-- <div style="width: 1.99rem"></div> -->
+                <div style="width: 2.6rem">{{ $t('data.NameIdentifier') }}</div>
                 <div style="width: 2.6rem">{{ $t('task.Capacity') }}</div>
                 <div style="width: 2.24rem">{{ $t('task.Status') }}</div>
                 <div style="width: 2.82rem">{{ $t('task.StartTime') }}</div>
@@ -121,9 +122,6 @@
                 <div>{{ item.taskName }}</div>
                 <div style="font: size 0.12rem; margin-top: 0.14rem">ID:{{ item.id }}</div>
               </div>
-              <!-- <div style="width: 1.99rem; color: #fec43e" @click="TaskDetail(item.id)">
-                {{ $t('node.Detail') }}
-              </div> -->
               <div style="width: 2.6rem">
                 <template>
                   <div v-if="item.dynamicFields.taskSponsor === 1">{{ $t('task.taskSponsor') }}</div>
@@ -200,9 +198,10 @@ export default {
     }
   },
   created() {
-    this.id = this.$route.query.identityId
+    // this.id = this.$route.query.identityId
     this.getOrgInfo()
     this.getListTask()
+   
   },
   methods: {
     handleSizeChange(size) {
@@ -231,7 +230,7 @@ export default {
       this.getListTask()
     },
     handleClick(tab) {
-      console.log('标签', tab.name)
+      console.log('标签', tab.label)
       this.name = tab.name
       this.index = tab.index
     },
@@ -253,17 +252,18 @@ export default {
     },
     async getOrgInfo() {
       const res = await dataApi.getListDataFileBy({
-        identityId: this.id,
+        identityId: localStorage.getItem('id'),
         pageNo: this.curPage,
         pageSize: this.pageSize
       })
+      console.log('本地',localStorage.getItem('id'));
       this.DataList = res.data
       this.totalRows = res.totalRows
       console.log('元数据', this.totalRows)
     },
     async getListTask() {
       const res = await taskApi.getListTaskBy({
-        identityId: this.id,
+        identityId: localStorage.getItem('id'),
         pageNo: this.curPages,
         pageSize: this.pageSizes
       })
@@ -351,7 +351,6 @@ export default {
     }
   }
   .rankingTh {
-    // margin: 0.1rem 0px;
     display: flex;
   }
   .rankingTd {
@@ -414,9 +413,13 @@ export default {
 }
 .task {
   position: absolute;
-  top: 3.66rem;
+  top: 3.58rem;
   left: 4.55rem;
   z-index: 999;
+  height: 0.38rem;
+  .text {
+    line-height: 0.38rem;
+  }
 }
 /deep/ .el-tabs__item {
   padding: 0px;
@@ -425,7 +428,6 @@ export default {
   display: flex;
   justify-content: space-between;
   .el-pagination {
-    // margin-top: 0.1rem;
     ::v-deep .el-input__inner {
       background: #303047;
       border-color: #303047;

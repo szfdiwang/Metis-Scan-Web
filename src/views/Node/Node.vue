@@ -9,16 +9,12 @@
       </div>
     </div>
     <div style="padding: 0px 1.1rem" class="ImgBox">
-      <!-- <div class="borderImg">
-          <img src="'../../assets/img/node/2.border.svg" alt="" />
-        </div> -->
       <div class="ranking">
         <div class="rankingTh">
           <div style="width: 1.8rem">
             <span style="margin-left: 0.3rem">{{ $t('node.No') }}</span>
           </div>
           <div style="width: 2.5rem">{{ $t('node.NameIdentifier') }}</div>
-          <!-- <div style="width: 1.99rem"></div> -->
           <div style="width: 3.8rem">{{ $t('node.ComputingPower') }}</div>
           <div style="width: 2.04rem">{{ $t('node.Metadata') }}</div>
           <div style="width: 2.02rem">{{ $t('node.ParticipatedTasks') }}</div>
@@ -37,26 +33,8 @@
             <div>{{ item.orgName }}</div>
             <div id="id" class="icoFontlist">{{ item.identityId }}</div>
           </div>
-          <!-- <div style="width: 1.99rem; color: #fec43e" @click="Detail(item.identityId)">
-            {{ $t('node.Detail') }}
-          </div> -->
           <div style="width: 3.9rem" class="power">
             <div style="width: 1.3rem; line-height: 0.28rem">
-              <!-- <div>
-                C P U : <span style="margin-left: 0.2rem">{{ item.dynamicFields.remainCore }}</span>
-              </div> 
-              <div style="display: flex">
-                <div style="width: 0.6rem">C P U :</div>
-                <div style="width: 0.5rem">{{ item.dynamicFields.remainCore }}</div>
-              </div>
-
-              <div style="margin: 0.08rem 0">
-                {{ $t('node.Memory') }} : <span style="margin-left: 0.1rem">{{ item.dynamicFields.remainMemory }}</span>
-              </div>
-              <div>
-                {{ $t('node.Bandwidth') }}:
-                <span style="margin-left: 0.13rem">{{ item.dynamicFields.remainBandwidth }}</span>
-              </div> -->
               <div style="display: flex">
                 <span style="width: 0.7rem">C P U :</span>
                 <span style="width: 0.5rem">{{ item.dynamicFields.remainCore }}</span>
@@ -104,17 +82,19 @@
           <div style="width: 2.02rem">{{ item.accumulativePowerTaskCount + item.accumulativeDataTaskCount }}</div>
           <div>
             <div class="hot" style="width: 1rem">
-              <!-- <div v-for="(item, index) in getHot(item.dynamicFields.idleDays)" :key="index" style="margin: 0px 2px">
-                <img src="../../assets/img/excel/hot.svg" alt="" />
-              </div> -->
               <div class="hotBox">
-                <div class="box1"></div>
-                <!-- <div class="boxa"></div> -->
-                <div class="box2"></div>
-                <div class="box3"></div>
-                <div class="box4"></div>
-                <div class="box5"></div>
-                <div class="box6"></div>
+                <div class="box1" v-if="6 - item.dynamicFields.idleDays >= 1"></div>
+                <div class="boxa" v-if="6 - item.dynamicFields.idleDays <= 0"></div>
+                <div class="box2" v-if="6 - item.dynamicFields.idleDays >= 2"></div>
+                <div class="boxb" v-if="6 - item.dynamicFields.idleDays < 2"></div>
+                <div class="box3" v-if="6 - item.dynamicFields.idleDays >= 3"></div>
+                <div class="boxc" v-if="6 - item.dynamicFields.idleDays < 3"></div>
+                <div class="box4" v-if="6 - item.dynamicFields.idleDays >= 4"></div>
+                <div class="boxd" v-if="6 - item.dynamicFields.idleDays < 4"></div>
+                <div class="box5" v-if="6 - item.dynamicFields.idleDays >= 5"></div>
+                <div class="boxe" v-if="6 - item.dynamicFields.idleDays < 5"></div>
+                <div class="box6" v-if="6 - item.dynamicFields.idleDays >= 6"></div>
+                <div class="boxf" v-if="6 - item.dynamicFields.idleDays < 6"></div>
               </div>
             </div>
           </div>
@@ -143,7 +123,6 @@
           >
           </el-pagination>
         </div>
-        <!-- <img src="../../assets/img/node/2.border.svg" alt="" class="borderImg" /> -->
         <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
         <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
         <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
@@ -171,9 +150,9 @@ export default {
     this.getListOrgInfo()
   },
   methods: {
-    getHot(idleDays) {
-      return Number(6 - idleDays < 0 ? 0 : 6 - idleDays)
-    },
+    // getHot(idleDays) {
+    //   return Number(6 - idleDays < 0 ? 0 : 6 - idleDays)
+    // },
     handleCurrentChange(page) {
       this.curPage = page
       this.isShow = false
@@ -193,6 +172,7 @@ export default {
         this.totalRows = res.totalRows
       }
     },
+    // 点击跳转并传id
     Detail(value) {
       this.$router.push({
         path: 'nodeDetail',
@@ -200,6 +180,7 @@ export default {
           identityId: value
         }
       })
+      window.localStorage.setItem('id',value)
     }
   }
 }
@@ -216,10 +197,10 @@ export default {
     margin: 0.05rem 0;
     line-height: 0.9rem;
 
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    // img {
+    //   width: 100%;
+    //   height: 100%;
+    // }
   }
   .textBox {
     position: absolute;
@@ -234,21 +215,10 @@ export default {
       font-size: 0.25rem;
     }
   }
-  // .ImgBox {
-  //   background: url('../../assets/img/node/2.border.svg');
-  //  background-size: 2000px 600px;
-  //  width: 100%;
-  //  height: 100%;
-  //   background-repeat: no-repeat;
-  // }
   .ranking {
     padding: 0.2rem 0.2rem;
-    // background-size: 100% 6.45rem;
     position: relative;
-
     .rankingTh {
-      // position: relative;
-      //  margin: 0.2rem 0 0.1rem 0;
       display: flex;
     }
     .rankingTd {
@@ -276,21 +246,6 @@ export default {
       }
     }
   }
-  // .borderImg {
-  //   position: absolute;
-  //   img {
-  //     width: 100%;
-  //     height: 100%;
-  //   }
-  // }
-  // .borderImg {
-  //   width: 1900px;
-  //   height: 100%;
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   z-index: 10;
-  // }
   .Pagination {
     display: flex;
     justify-content: space-between;
@@ -390,12 +345,21 @@ export default {
     background: #b03b3b;
     border-radius: 0.0154rem 0.0154rem 0 0;
     border-radius: 0.0154rem 0.0154rem 0px 0px;
-    // margin-right: 0.03rem;
+    margin-right: 0.03rem;
   }
   .box2 {
     width: 0.108rem;
     height: 0.169rem;
     opacity: 0.4;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+    margin-right: 0.03rem;
+  }
+  .boxb {
+    width: 0.108rem;
+    height: 0.169rem;
+    opacity: 0.15;
     background: #b03b3b;
     border-radius: 0.0154rem 0.0154rem 0 0;
     border-radius: 0.0154rem 0.0154rem 0px 0px;
@@ -410,10 +374,28 @@ export default {
     border-radius: 0.0154rem 0.0154rem 0px 0px;
     margin-right: 0.03rem;
   }
+  .boxc {
+    width: 0.108rem;
+    height: 0.238rem;
+    opacity: 0.15;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+    margin-right: 0.03rem;
+  }
   .box4 {
     width: 0.108rem;
     height: 0.338rem;
     opacity: 0.6;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+    margin-right: 0.03rem;
+  }
+  .boxd {
+    width: 0.108rem;
+    height: 0.338rem;
+    opacity: 0.15;
     background: #b03b3b;
     border-radius: 0.0154rem 0.0154rem 0 0;
     border-radius: 0.0154rem 0.0154rem 0px 0px;
@@ -428,9 +410,26 @@ export default {
     border-radius: 0.0154rem 0.0154rem 0px 0px;
     margin-right: 0.03rem;
   }
+  .boxe {
+    width: 0.108rem;
+    height: 0.431rem;
+    opacity: 0.15;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+    margin-right: 0.03rem;
+  }
   .box6 {
     width: 0.108rem;
     height: 0.5rem;
+    background: #b03b3b;
+    border-radius: 0.0154rem 0.0154rem 0 0;
+    border-radius: 0.0154rem 0.0154rem 0px 0px;
+  }
+  .boxf {
+    width: 0.108rem;
+    height: 0.5rem;
+    opacity: 0.15;
     background: #b03b3b;
     border-radius: 0.0154rem 0.0154rem 0 0;
     border-radius: 0.0154rem 0.0154rem 0px 0px;

@@ -25,29 +25,9 @@
         </div>
         <div style="display: flex; margin-left: 3.32rem">
           <div style="width: 1rem">{{ $t('data.NumberOfData') }} :</div>
-          <div style="margin-left: 0.5rem">{{ dataList.columns }}</div>
+          <div style="margin-left: 0.53rem">{{ dataList.columns }}</div>
         </div>
       </div>
-      <!-- <table>
-        <tbody>
-          <tr>
-            <td>{{ $t('data.Dataprovide') }} :</td>
-            <td>
-              <span style="margin-left: 0.2rem">{{ dataList.identityId }}</span>
-            </td>
-            <td style="padding-left: 3.1rem">{{ $t('data.INFORMATIONOFFIFLDS') }} :</td>
-            <td>{{ dataList.rows }}</td>
-          </tr>
-          <tr>
-            <td>{{ $t('data.Size0fData') }} :</td>
-            <td>
-              <span style="margin-left: 0.2rem">{{ dataList.size / 1024 }} GB</span>
-            </td>
-            <td style="padding-left: 3.1rem">{{ $t('data.NumberOfData') }} :</td>
-            <td>{{ dataList.columns }}</td>
-          </tr>
-        </tbody>
-      </table> -->
     </div>
     <div class="Description">
       <div style="width: 1rem">{{ $t('data.Description') }} :</div>
@@ -57,7 +37,6 @@
     </div>
     <div class="content">
       <div class="rankingListTop">
-        <!-- <div><img src="../../assets/img/node/3.button.svg" alt="" /></div> -->
         <div class="text">{{ $t('data.INFO') }}</div>
       </div>
       <div>
@@ -74,10 +53,6 @@
             <div style="width: 0.5rem">{{ $t('node.No') }}</div>
             <div style="width: 4rem; margin-left: 0.56rem">{{ $t('data.FieldName') }}</div>
           </div>
-          <!-- <div style="width: 4.9rem">
-            <span style="width: 0.5rem">{{ $t('node.No') }}</span>
-            <span style="width: 3rem">{{ $t('data.FieldName') }}</span>
-          </div> -->
         </div>
         <div class="rankingList">
           <div class="rankingTd" v-for="(item, index) in metaList" :key="index">
@@ -184,25 +159,21 @@ export default {
 </script>
 <style lang='scss' scoped>
 .metaData {
-  // height: 1000px;
-  // background: url('../../assets/img/home/bj1.png');
   padding: 0px 1.1rem;
   .metaDataTop {
     height: 0.42rem;
     display: flex;
-    margin-bottom: 0.1rem;
+    margin-top: 0.3rem;
     .pic {
       line-height: 0.5rem;
-      // margin-left: 0.2rem;
     }
     .bank {
       font-size: 0.3rem;
       font-weight: 600;
-      margin: 0.02rem 0.2rem;
+      margin: 0.05rem 0.2rem 0 0.1rem;
     }
     .Identifier {
       margin-left: 0.3rem;
-      // line-height: 0.6rem;
       margin-top: 0.15rem;
     }
   }
@@ -223,7 +194,6 @@ export default {
   }
   .rankingListTop {
     margin: 0.2rem 0.1rem;
-    // font-family: PingFangSC-Medium;
     background: url('../../assets/img/node/3.button.svg');
     width: 271px;
     height: 40px;
@@ -257,7 +227,6 @@ export default {
   #xh {
     text-align: center;
     width: 5rem;
-    // height: 0.4rem;
     .order {
       width: 0.2rem;
       height: 0.2rem;

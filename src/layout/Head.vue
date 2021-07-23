@@ -31,7 +31,7 @@ export default {
   border-bottom: 1px solid rgba(10, 84, 234, 0.3);
   .header-box {
     // margin: 0 auto;
-    max-width: 1700px;
+    max-width: 1920px;
     height: 79px;
     display: flex;
     align-items: center;

@@ -116,7 +116,10 @@ export default {
     taskSponsor: 'SPONSOR',
     DataProvider: 'Data provider',
     powerProvider: 'Computing executors',
-    ResultReceiver: 'RESULT RECEIVER'
+    ResultReceiver: 'RESULT RECEIVER',
+    ComputationSucceeded: 'Computation succeeded',
+    TaskStarted: 'Task started',
+    return: 'return'
 
   },
   log: {
