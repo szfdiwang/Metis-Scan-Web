@@ -3,10 +3,10 @@
     <img src="@/assets/img/home/corner3.png" alt="" class="corner" />
     <div v-for="info in performanceInfoList" :key="info.id" class="info-box">
       <div>
-        <span class="label">{{ getLabel(info.name) }}</span>
+        <span class="label rosettanet">{{ getLabel(info.name) }}</span>
         <span class="content">
-          <span class="value">{{ getValue(info) | numFormat }}</span>
-          <span class="unit">{{ getUnit(info) }}</span>
+          <span v-countup class="value">{{ getValue(info) | numFormat }}</span>
+          <span class="unit unit-wiget">{{ getUnit(info) }}</span>
           <img src="@/assets/img/home/left.svg" alt="" class="left" />
           <img src="@/assets/img/home/right.svg" alt="" class="right" />
         </span>
@@ -128,7 +128,7 @@ export default {
 <style lang="scss" scoped>
 .performance-box {
   display: flex;
-  height: 172px;
+  height: 152px;
   // background: linear-gradient(180deg, rgba(129, 170, 255, 0.1) 0%, rgba(2, 29, 83, 0.2) 100%);
   // background: url('../../../assets/img/home/corner1.svg') no-repeat; //;
   // background-size: cover;
@@ -217,6 +217,33 @@ export default {
         right: -0.25rem;
       }
     }
+  }
+}
+.rosettanet {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: -18px;
+    width: 62px;
+    height: 12px;
+    background-image: url('../../../assets/img/home/Rosettanet.svg');
+    background-repeat: no-repeat;
+  }
+}
+
+.unit-wiget {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: -5px;
+    width: 100%;
+    height: 4px;
+    background-image: url('../../../assets/img/home/topRight.svg');
+    background-repeat: repeat-x;
   }
 }
 </style>

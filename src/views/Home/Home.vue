@@ -76,6 +76,10 @@ export default {
     this.initGlobalData()
   },
   methods: {
+    apple() {
+      this.dataServerCount = Date.now()
+      this.powerServerCount = Date.now()
+    },
     initGlobalData() {
       homeApi.getGlobalState({}).then(res => {
         if (res.code === 0) {
@@ -131,7 +135,7 @@ export default {
     height: 0.8rem;
     text-align: center;
     .search-box {
-      width: 11.04rem;
+      width: 1104px;
       height: 0.8rem;
       ::v-deep .el-input__inner {
         height: 100% !important;
@@ -143,8 +147,7 @@ export default {
         text-align: left;
         font-weight: 600;
         border: 1px solid #0a54ea;
-        border-bottom-left-radius: 8px;
-        border-top-left-radius: 8px;
+        border-radius: 8px;
       }
       ::v-deep .el-input__inner::placeholder {
         opacity: 0.5;

@@ -6,7 +6,7 @@
           <p class="label">{{ card.label }}</p>
           <p class="desc">{{ card.desc }}</p>
           <p class="value">
-            <span>{{ getValue(card) }}</span>
+            <span v-countup>{{ getValue(card) }}</span>
           </p>
           <img src="../../../assets/img/home/person.svg" alt="" class="personIcon" />
         </div>
@@ -18,7 +18,7 @@
           <p class="label">{{ card.label }}</p>
           <p class="desc">{{ card.desc }}</p>
           <p class="value">
-            <span>{{ getValue(card) }}</span>
+            <span v-countup>{{ getValue(card) }}</span>
             <!-- <span>{{ getUnit(card) }}</span> -->
           </p>
           <img src="../../../assets/img/home/person.svg" alt="" class="personIcon" />
@@ -148,7 +148,7 @@ export default {
     }
     .value {
       margin-top: 0.32rem;
-      font-family: DINPro-Bold;
+      font-family: DINEngschrift, DINPro-Bold;
       font-size: 0.4rem;
       color: #dee9ff;
       letter-spacing: 0;
