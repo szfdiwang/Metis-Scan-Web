@@ -100,17 +100,17 @@ export default {
           bottom: 95
         },
         xAxis: {
-          boundaryGap: false,
+           boundaryGap: false,
           axisLabel: {
             fontSize: 12,
             color: '#DEE9FF',
             interval: 0,
-            rotate: '290' //旋转度数
+            // rotate: '290' //旋转度数
           },
           type: 'category',
-          // boundaryGap: true, // 自动分配间距
-          data: this.newArray
-          // data:['202-06-11','2020-06-12','2020-06-13','2020-06-14','2020-06-15','2020-06-16']
+          boundaryGap: true, // 自动分配间距
+          // data: this.newArray
+          data:['202-06-11','2020-06-12','2020-06-13','2020-06-14','2020-06-15','2020-06-16']
         },
         yAxis: {
           axisLabel: {
@@ -125,8 +125,8 @@ export default {
         },
         series: [
           {
-            data: this.numList,
-            // data:[0.7 ,0.5,0.8,2,1,2],
+            // data: this.numList,
+             data:[0.7 ,0.5,0.8,2,1,2],
             type: 'line',
             lineStyle: {
               color: '#2A6EE6'

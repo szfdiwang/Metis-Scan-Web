@@ -8,30 +8,30 @@
     <div style="padding: 0 1.1rem">
       <div class="ranking">
         <div class="rankingTh">
-          <div style="width: 1.8rem">
+          <div style="width: 1.6rem">
             <span style="margin-left: 0.3rem">{{ $t('data.No') }}</span>
           </div>
           <!-- <div style="width: 3rem">{{ $t('data.NameIdentifier') }}</div>
           <div></div> -->
-          <div style="width: 3.2rem">{{ $t('task.Name') }}</div>
-          <div style="width: 2.5rem">{{ $t('task.identifier') }}</div>
+          <div style="width: 3rem">{{ $t('task.Name') }}</div>
+          <div style="width: 3.3rem">{{ $t('task.identifier') }}</div>
           <div style="width: 2.5rem">{{ $t('data.DataProvider') }}</div>
           <div style="width: 2.42rem">{{ $t('data.Status') }}</div>
           <div style="width: 1.2rem">{{ $t('data.ParticipatedTasks') }}</div>
-          <div style="width: 2.8rem"></div>
+          <div style="width: 2.6rem"></div>
         </div>
         <div class="rankingTd" v-for="(item, index) in DataList" :key="index">
-          <div style="width: 1.8rem" class="rankingTdImg">
+          <div style="width: 1.6rem" class="rankingTdImg">
             <div id="xh">
               <div class="order">
-                <div class="num"> {{ (curPage - 1) * pageSize + index + 1 }}</div>
+                <div class="num">{{ (curPage - 1) * pageSize + index + 1 }}</div>
               </div>
             </div>
           </div>
-          <div style="width: 3.2rem">
+          <div style="width: 3rem">
             {{ item.resourceName }}
           </div>
-          <div style="width: 2.5rem">{{ item.identityId }}</div>
+          <div style="width: 3.3rem">{{ item.identityId }}</div>
           <div style="width: 2.5rem">{{ item.dynamicFields.orgName }}</div>
           <div style="width: 2.42rem">{{ (item.size / 1024 / 1024).toFixed(2) }}MB</div>
           <div style="width: 0.9rem">{{ item.dynamicFields.taskCount }}</div>
@@ -76,7 +76,7 @@ export default {
     return {
       DataList: [],
       curPage: 1,
-      pageSize: 10,
+      pageSize: 13,
       totalRows: 10,
       isShow: true
     }
@@ -89,7 +89,8 @@ export default {
       this.$router.push({
         path: '/node/MetaData',
         query: {
-          metaId: value
+          metaId: value,
+          deatil: '3'
         }
       })
       console.log('打印', value)
@@ -133,7 +134,7 @@ export default {
     }
     .text {
       margin-left: 1rem;
-      font-size: 0.32rem;
+      font-size: 0.25rem;
     }
   }
   .ranking {
@@ -182,10 +183,10 @@ export default {
     border-radius: 50%;
     background-color: #3f4590;
     margin-left: 0.3rem;
-    .num{
-    text-align: center;
-    line-height: 0.2rem;
-     }
+    .num {
+      text-align: center;
+      line-height: 0.2rem;
+    }
   }
   .Pagination {
     display: flex;

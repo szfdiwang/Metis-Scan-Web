@@ -1,7 +1,8 @@
 <template>
   <div class="metaData">
     <div class="metaDataTop">
-      <div class="pic" @click="$router.push('/node/NodeDetail')">
+      <!-- <div class="pic" @click="$router.push('/node/NodeDetail')"> -->
+      <div class="pic" @click="comment">
         <img src="../../assets/img/node/3.icon1.svg" alt="" />
       </div>
       <div class="bank">XXXBANK</div>
@@ -98,10 +99,14 @@ export default {
       pageSize: 10,
       totalRows: 10,
       dataList: {},
-      metaList: []
+      metaList: [],
+      fromPath: '',
+      deatil: ''
     }
   },
   created() {
+    this.deatil = this.$route.query.deatil
+    window.localStorage.setItem('deatil', this.deatil)
     this.id = this.$route.query.metaDataId
     this.Id = this.$route.query.metaId
     if ((this.id = this.$route.query.metaDataId)) {
@@ -111,6 +116,14 @@ export default {
       this.getFiles()
       this.getMetas()
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      // 通过 `vm` 访问组件实例,将值传入fromPath
+      vm.fromPath = from.path
+      console.log(to)
+      console.log(from)
+    })
   },
   methods: {
     handleCurrentChange(page) {
@@ -153,6 +166,11 @@ export default {
           this.totalRows = res.totalRows
           console.log('数据详情22', res)
         })
+    },
+    comment() {
+      this.$router.push({
+        path: this.fromPath
+      })
     }
   }
 }
@@ -166,6 +184,7 @@ export default {
     margin-top: 0.3rem;
     .pic {
       line-height: 0.5rem;
+      cursor: pointer;
     }
     .bank {
       font-size: 0.3rem;
@@ -195,7 +214,7 @@ export default {
   .rankingListTop {
     margin: 0.2rem 0.1rem;
     background: url('../../assets/img/node/3.button.svg');
-    width: 271px;
+    width: 269px;
     height: 40px;
     .text {
       text-align: center;
@@ -206,7 +225,7 @@ export default {
     display: flex;
   }
   .rankingList {
-    height: 2.1rem;
+    height: 2.5rem;
     padding: 0px 0.1rem;
     display: flex;
     flex-direction: column;
@@ -233,10 +252,10 @@ export default {
       border-radius: 50%;
       margin: 0.1rem 0.2rem 0;
       background-color: #3f4590;
-     .num{
-       text-align: center;
-       line-height: 0.2rem;
-     }
+      .num {
+        text-align: center;
+        line-height: 0.2rem;
+      }
     }
   }
   .Pagination {

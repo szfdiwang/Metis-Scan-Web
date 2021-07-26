@@ -11,13 +11,13 @@
     <div style="padding: 0px 1.1rem" class="ImgBox">
       <div class="ranking">
         <div class="rankingTh">
-          <div style="width: 1.8rem">
+          <div style="width: 1.73rem">
             <span style="margin-left: 0.3rem">{{ $t('node.No') }}</span>
           </div>
-          <div style="width: 2.5rem">{{ $t('node.NameIdentifier') }}</div>
-          <div style="width: 3.8rem">{{ $t('node.ComputingPower') }}</div>
+          <div style="width: 2.4rem">{{ $t('node.NameIdentifier') }}</div>
+          <div style="width: 4.4rem">{{ $t('node.ComputingPower') }}</div>
           <div style="width: 2.04rem">{{ $t('node.Metadata') }}</div>
-          <div style="width: 2.02rem">{{ $t('node.ParticipatedTasks') }}</div>
+          <div style="width: 1.9rem">{{ $t('node.ParticipatedTasks') }}</div>
           <div style="width: 1rem">{{ $t('node.ActiveDegree') }}</div>
           <div style="width: 1.2rem"></div>
         </div>
@@ -33,23 +33,23 @@
             <div>{{ item.orgName }}</div>
             <div id="id" class="icoFontlist">{{ item.identityId }}</div>
           </div>
-          <div style="width: 3.9rem" class="power">
-            <div style="width: 1.3rem; line-height: 0.28rem">
+          <div style="width: 4.5rem" class="power">
+            <div style="width: 1.6rem">
               <div style="display: flex">
-                <span style="width: 0.7rem">C P U :</span>
-                <span style="width: 0.5rem">{{ item.dynamicFields.remainCore }}</span>
+                <span style="width: 0.7rem; margin-top: 2px">C P U :</span>
+                <span style="width: 0.8rem">{{ item.dynamicFields.remainCore }} {{ $t('node.cores') }}</span>
               </div>
-              <div style="display: flex">
-                <span style="width: 0.7rem">{{ $t('node.Memory') }} :</span>
-                <span style="width: 0.5rem">{{ item.dynamicFields.remainMemory }}</span>
+              <div style="display: flex; margin: 0.08rem 0">
+                <span style="width: 0.65rem">{{ $t('node.Memory') }} :</span>
+                <span style="width: 0.8rem">{{ item.dynamicFields.remainMemory }} MB</span>
               </div>
               <div style="display: flex">
                 <span style="width: 0.7rem"> {{ $t('node.Bandwidth') }} :</span>
-                <span style="width: 0.5rem">{{ item.dynamicFields.remainBandwidth }}</span>
+                <span style="width: 0.8rem">{{ item.dynamicFields.remainBandwidth }} Mbps</span>
               </div>
             </div>
             <div>
-              <div style="margin-left: 0.1rem">
+              <div style="margin-left: 0.2rem">
                 <div>
                   {{ $t('node.Remaining') }}:<span style="margin-left: 0.1rem"
                     >{{
@@ -180,7 +180,7 @@ export default {
           identityId: value
         }
       })
-      window.localStorage.setItem('id',value)
+      window.localStorage.setItem('id', value)
     }
   }
 }

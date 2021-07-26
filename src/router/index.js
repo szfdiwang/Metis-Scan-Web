@@ -48,7 +48,8 @@ const routes = [{
     path: '/data/DataDetail',
     name: 'dataDetail',
     component: () => import(/* webpackChunkName: "DataDetail" */ '../views/Data/DataDetail.vue')
-  }
+  },
+
   ]
 },
 {

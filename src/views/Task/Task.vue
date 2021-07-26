@@ -8,7 +8,12 @@
     <div class="selectItem">
       <div>
         <span>{{ $t('task.StatusItem') }}:</span>
-        <el-select v-model="value" placeholder="请选择" @change="selectChange" :popper-append-to-body="false">
+        <el-select
+          v-model="value"
+          :placeholder="$t('task.pleaseChoose')"
+          @change="selectChange"
+          :popper-append-to-body="false"
+        >
           <el-option v-for="item in option" :key="item.value" :label="item.label" :value="item.value"> </el-option>
         </el-select>
       </div>
@@ -19,7 +24,7 @@
           type="datetimerange"
           :clearable="false"
           :picker-options="pickerOptions"
-          range-separator="至"
+          :range-separator="$t('task.to')"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
           align="right"
@@ -59,7 +64,7 @@
           </div>
           <div style="width: 2.38rem">{{ item.dynamicFields.sponsorName }}</div>
           <div style="width: 2rem">
-            <span style="color: #5bc49f">{{ item.status }}</span>
+            <span style="color: #5bc49f">{{ $t('task.success') }}</span>
             <span v-if="item.status === 'Failed'" style="color: #f24b4b">{{ item.status }}</span>
           </div>
           <div style="width: 2.4rem">{{ formatDate(item.createAt) }}</div>
@@ -108,37 +113,29 @@ export default {
     return {
       option: [
         {
-          value: 'pending',
-          label: 'pending'
+          value: this.$t('task.All'),
+          label: this.$t('task.All')
         },
         {
-          value: 'denied',
-          label: 'denied'
+          value: this.$t('task.succeed'),
+          label: this.$t('task.succeed')
         },
         {
-          value: 'computing',
-          label: 'computing'
-        },
-        {
-          value: 'failed',
-          label: 'failed'
-        },
-        {
-          value: 'success',
-          label: 'success'
+          value: this.$t('task.failed'),
+          label: this.$t('task.failed')
         }
       ],
       value: '',
       listTask: [],
       curPage: 1,
-      pageSize: 10,
+      pageSize: 12,
       totalRows: 10,
       isShow: true,
       //
       pickerOptions: {
         shortcuts: [
           {
-            text: '最近一周',
+            text: this.$t('task.week'),
             onClick(picker) {
               const end = new Date()
               const start = new Date()
@@ -147,7 +144,7 @@ export default {
             }
           },
           {
-            text: '最近一个月',
+            text: this.$t('task.month'),
             onClick(picker) {
               const end = new Date()
               const start = new Date()
@@ -156,7 +153,7 @@ export default {
             }
           },
           {
-            text: '最近三个月',
+            text: this.$t('task.months'),
             onClick(picker) {
               const end = new Date()
               const start = new Date()
@@ -243,6 +240,20 @@ export default {
 }
 </script>
 <style>
+.el-button,
+.el-picker-panel__link-btn,
+.el-button--default,
+.el-button--mini,
+.is-plain {
+  margin-right: 10px;
+  width: 50px;
+}
+.el-button,
+.el-picker-panel__link-btn,
+.el-button--default,
+.el-button--mini:hover {
+  background-color: #3954ff;
+}
 .el-scrollbar__view,
 .el-select-dropdown__list {
   padding-bottom: 20px;
@@ -336,7 +347,7 @@ export default {
       margin-left: 1.1rem;
     }
     .text {
-      font-size: 0.32rem;
+      font-size: 0.25rem;
       line-height: 1rem;
       margin-left: 0.41rem;
     }

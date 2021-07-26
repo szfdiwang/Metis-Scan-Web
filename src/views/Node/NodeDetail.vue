@@ -201,7 +201,6 @@ export default {
     // this.id = this.$route.query.identityId
     this.getOrgInfo()
     this.getListTask()
-   
   },
   methods: {
     handleSizeChange(size) {
@@ -244,9 +243,10 @@ export default {
     },
     MetaData(value) {
       this.$router.push({
-        path: 'MetaData',
+        path: '/node/MetaData',
         query: {
-          metaDataId: value
+          metaDataId: value,
+          deatil: '3'
         }
       })
     },
@@ -256,7 +256,7 @@ export default {
         pageNo: this.curPage,
         pageSize: this.pageSize
       })
-      console.log('本地',localStorage.getItem('id'));
+      console.log('本地', localStorage.getItem('id'))
       this.DataList = res.data
       this.totalRows = res.totalRows
       console.log('元数据', this.totalRows)

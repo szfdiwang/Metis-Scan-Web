@@ -51,7 +51,7 @@ export default {
     ComputingPower: '算力信息',
     Metadata: '元数据数量',
     ParticipatedTasks: '任务数量',
-    ActiveDegree: '热度',
+    ActiveDegree: '活跃度',
     NODE: '节点',
     Memory: '内存',
     Bandwidth: '带宽',
@@ -63,7 +63,8 @@ export default {
     Columns: '字段数量',
     Rows: '条数',
     PARTICIPATINGNODESINTHEWHOLENETWORK: '个参与方节点',
-    NumberTasks: '参与任务数量'
+    NumberTasks: '参与任务数量',
+    cores: '核'
   },
   data: {
     No: '序号',
@@ -118,13 +119,22 @@ export default {
     ResultReceiver: '结果方',
     ComputationSucceeded: '计算成功',
     TaskStarted: '任务开始',
-    return: '返回'
+    return: '返回',
+    success: '成功',
+    pleaseChoose: '请选择',
+    week: '最近一周',
+    month: '最近一个月',
+    months: '最近三个月',
+    All: '全部',
+    succeed: '成功',
+    failed: '失败'
+
   },
   log: {
     EventType: '事件类型',
     EVentMaker: '产生事件的参与方',
     GenerationTime: '产生时间',
-    EventFailed: '事件内容'
+    EventFailed: '事件内容',
   },
   ...zhLocale
 }

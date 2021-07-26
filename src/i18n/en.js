@@ -63,7 +63,8 @@ export default {
     Columns: 'Columns',
     Rows: 'Rows',
     PARTICIPATINGNODESINTHEWHOLENETWORK: 'PARTICIPATING NODES IN THE WHOLE NETWORK',
-    NumberTasks: 'NUMBER OF PARTICIPATING TASKS'
+    NumberTasks: 'NUMBER OF PARTICIPATING TASKS',
+    cores: 'cores'
   },
   data: {
     No: 'NO.',
@@ -119,7 +120,16 @@ export default {
     ResultReceiver: 'RESULT RECEIVER',
     ComputationSucceeded: 'Computation succeeded',
     TaskStarted: 'Task started',
-    return: 'return'
+    return: 'return',
+    success: 'succeed',
+    pleaseChoose: 'please choose',
+    week: 'latest week',
+    month: 'Last month',
+    months: 'Last 3 months',
+    All: 'All',
+    succeed: 'succeed',
+    failed: 'failed'
+
 
   },
   log: {

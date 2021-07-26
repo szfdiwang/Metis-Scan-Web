@@ -1,7 +1,8 @@
 <template>
   <div class="TakDetail">
     <div class="TakDetailTop">
-      <div class="pic" @click="$router.push('/node/NodeDetail')">
+      <!-- <div class="pic" @click="$router.push('/node/NodeDetail')"> -->
+      <div class="pic" @click="comment">
         <img src="../../assets/img/node/3.icon1.svg" alt="" style="line-height: 0.42rem" />
       </div>
       <div class="bank">XXXBANK</div>
@@ -202,7 +203,8 @@ export default {
       Id: '',
       isShow: true,
       isHows: false,
-      isHowse: true
+      isHowse: true,
+      fromPath: ''
     }
   },
   created() {
@@ -219,7 +221,20 @@ export default {
       this.getlog()
     }
   },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      // 通过 `vm` 访问组件实例,将值传入fromPath
+      vm.fromPath = from.path
+      console.log(to)
+      console.log(from)
+    })
+  },
   methods: {
+    comment() {
+      this.$router.push({
+        path: this.fromPath
+      })
+    },
     log() {
       this.show = !this.show
       this.isShow = !this.isShow
@@ -288,6 +303,7 @@ export default {
     .pic {
       line-height: 0.5rem;
       margin-right: 0.1rem;
+      cursor: pointer;
     }
     .bank {
       font-size: 0.3rem;
@@ -319,7 +335,7 @@ export default {
       text-align: center;
       position: absolute;
       top: 0.6rem;
-      right: 1.6rem;
+      right: 2.8rem;
       font-size: 0.14rem;
     }
   }
@@ -471,6 +487,7 @@ export default {
     height: 0.23rem;
     border-radius: 50%;
     background-color: #5bc49f;
+     border: 2px solid #ccc;
   }
 }
 .TakDetail .participantsData .td[data-v-69f16454]:hover {
