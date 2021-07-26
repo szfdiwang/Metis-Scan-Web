@@ -24,18 +24,19 @@
           border: 'none'
         }"
       >
-        <el-table-column prop="rank" :label="$t('common.rank')" width="100">
+        <el-table-column prop="rank" :label="$t('common.rank')" width="50">
           <template slot-scope="scope">
             <Rankings :index="scope.$index" :curPage="curPage" :pageSize="pageSize" />
           </template>
         </el-table-column>
-        <el-table-column prop="orgName" :show-overflow-tooltip="true" :label="$t('home.name')"> </el-table-column>
+        <el-table-column prop="orgName" :show-overflow-tooltip="true" :label="$t('home.name')" min-width="120"> </el-table-column>
         <el-table-column
           prop="identityId"
           :show-overflow-tooltip="true"
           :label="$t('home.identifier')"
+          min-width="120"
         ></el-table-column>
-        <el-table-column prop="power" :label="$t('home.power')">
+        <el-table-column prop="power" :label="$t('home.power')" min-width="200">
           <template slot-scope="scope">
             <div class="power-box">
               <div>
@@ -53,12 +54,12 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="powerRatio" :label="$t('home.powerRatio')" width="200">
+        <el-table-column prop="powerRatio" :label="$t('home.powerRatio')" min-width="100">
           <template slot-scope="scope">
             <span> {{ getRatio(scope.row.bandwidth) }} </span>
           </template>
         </el-table-column>
-        <!-- <el-table-column prop="activeDegree" :label="$t('home.activeDegree')" width="200">
+        <!-- <el-table-column prop="activeDegree" :label="$t('home.activeDegree')">
           <template slot-scope="scope">
             <ul class="degree">
               <li
@@ -69,7 +70,7 @@
             </ul>
           </template>
         </el-table-column> -->
-        <el-table-column prop="activeDegree" :label="$t('home.activeDegree')" width="200">
+        <el-table-column prop="activeDegree" :label="$t('home.activeDegree')" min-width="120">
           <template slot-scope="scope">
             <span v-for="(item, index) in getHot(scope.row.idleDays)" :key="index">
               <img src="../../../assets/img/home/red.svg" alt="" />

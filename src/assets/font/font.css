@@ -21,14 +21,14 @@
 
 @font-face {
     font-family: "PuHuiTiRegular";
-    src: url("./Alibaba-PuHuiTi-Regular.otf");
+    src: url("./Alibaba-PuHuiTi-Regular.ttf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "PuHuiTiMedium";
-    src: url("./Alibaba-PuHuiTi-Medium.otf");
+    src: url("./Alibaba-PuHuiTi-Medium.ttf");
     font-weight: normal;
     font-style: normal;
 }
