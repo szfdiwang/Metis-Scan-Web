@@ -14,6 +14,9 @@ module.exports = {
   // add your custom rules here
   // it is base on https://github.com/vuejs/eslint-config-vue
   rules: {
+    "vue/attribute-hyphenation": ["error", "always" | "never", {
+      "ignore": []
+    }],
     'vue/max-attributes-per-line': [
       2,
       {
@@ -45,12 +48,13 @@ module.exports = {
         allowSingleLine: true
       }
     ],
-    camelcase: [
-      0,
-      {
-        properties: 'always'
-      }
-    ],
+    camelcase: 'off',
+    //  [
+    //   0,
+    //   {
+    //     properties: 'always'
+    //   }
+    // ],
     'comma-dangle': [2, 'never'],
     'comma-spacing': [
       2,

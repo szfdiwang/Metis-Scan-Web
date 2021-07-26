@@ -138,5 +138,20 @@ export default {
     GenerationTime: 'Generation time',
     EventFailed: 'Event failed'
   },
+  map: {
+    beijing: 'Bei Jing',
+    tokyo: 'Tokyo',
+    shenzhen: 'Shen Zhen',
+    shanghai: 'Shang Hai',
+    jakarta: 'Jakarta',
+    nanjing: 'Nan Jing',
+    newyork: 'New York',
+    london: 'London',
+    losAngeles: 'Los Angeles',
+    stockholm: 'Stockholm',
+    paris: 'Paris',
+    munich: 'Munich',
+    melbourne: 'Melbourne'
+  },
   ...enLocale
 }
