@@ -16,12 +16,43 @@ export default {
   components: {},
   data() {
     return {
+      option: {},
       bgUrl: require('../../../../assets/img/home/earthnew1.png'),
       // bgUrl: require('../../../../assets/img/home/mapgithub.png'),
       chart: ''
     }
   },
-  computed: {},
+  computed: {
+    centerList() {
+      return [
+        // `北京`,
+        // '东京',
+        // '深圳',
+        // '上海',
+        // '雅加达',
+        // '南京',
+        // '纽约',
+        // '伦敦',
+        // '洛杉矶',
+        // '斯德哥尔摩',
+        // '巴黎',
+        // '慕尼黑',
+        // '墨尔本'
+        this.$t('map.beijing'),
+        this.$t('map.tokyo'),
+        this.$t('map.shenzhen'),
+        this.$t('map.shanghai'),
+        this.$t('map.jakarta'),
+        this.$t('map.nanjing'),
+        this.$t('map.newyork'),
+        this.$t('map.london'),
+        this.$t('map.losAngeles'),
+        this.$t('map.stockholm'),
+        this.$t('map.paris'),
+        this.$t('map.munich')
+      ]
+    }
+  },
   mounted() {
     const earthImg = new Image()
     earthImg.src = this.bgUrl
@@ -33,13 +64,20 @@ export default {
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeFn)
   },
+  watch: {
+    '$i18n.locale'(newValue) {
+      // 不需要重新设置配置项，只需要手动触发一下setOption()
+      this.option && this.chart.setOption(this.option, true)
+    }
+  },
   methods: {
     resizeFn() {
       this.chart.resize()
     },
     initChart() {
+      let that = this
       this.chart = this.$echarts.init(document.getElementById('earth-map'))
-      const option = {
+      this.option = {
         backgroundColor: 'rgb(0 0 0 / 0%)',
         // tooltip: {
         //   trigger: 'item',
@@ -57,18 +95,21 @@ export default {
           baseTexture: require('../../../../assets/img/home/earthnew1.png'), // this.mapChart, //
           baseColor: '#fff',
           shading: 'color',
-          // light: {
-          //   main: {
-          //     color: '',
-          //     intensity: 1,
-          //     shadow: false
-          //   },
-          //   ambientCubemap: {
-          //     exposure: 2,
-          //     diffuseIntensity: 2,
-          //     specularIntensity: 2
-          //   }
-          // },
+          center: [116.46, 39.92],
+          targetCoord: [116.46, 39.92],
+          light: {
+            main: {
+              color: '',
+              intensity: 1,
+              shadow: false
+            },
+            ambientCubemap: {
+              exposure: 2,
+              diffuseIntensity: 2,
+              specularIntensity: 2
+            }
+          },
+          // postEffect: enable,
           viewControl: {
             autoRotateSpeed: 10,
             autoRotate: true,
@@ -80,59 +121,33 @@ export default {
         },
         series: [
           {
-            // 点
-            name: '数据中心',
+            name: '景区',
             type: 'scatter3D',
-            // blendMode: 'lighter',
+            // coordinateSystem: 'bmap',
+            // type: 'scatter3D',
+            blendMode: 'lighter',
             coordinateSystem: 'globe',
-            // showEffectOn: 'render',
-            // zlevel: 2,
-            // effectType: 'ripple',
-            // symbolSize: 15,
-            // rippleEffect: {
-            //   color: '#3954ff',
-            //   period: 4,
-            //   scale: 4,
-            //   brushType: 'fill'
-            // },
-            //		        showEffectOn: 'hover',
+
+            showEffectOn: 'render',
+            zlevel: 0,
+            effectType: 'ripple',
+            symbolSize: 8,
+            rippleEffect: {
+              period: 4,
+              scale: 4,
+              brushType: 'fill'
+            },
             label: {
               show: true,
-              position: 'right',
+              distance: 0,
+              position: 'top',
               //			                formatter: '{b}',
               formatter: function (params) {
-                const centerList = [
-                  `北京`,
-                  '东京',
-                  '深圳',
-                  '上海',
-                  '雅加达',
-                  '南京',
-                  '纽约',
-                  '伦敦',
-                  '洛杉矶',
-                  '斯德哥尔摩',
-                  '巴黎',
-                  '慕尼黑',
-                  '墨尔本'
-                  // $t('map.beijing'),
-                  // $t('map.tokyo'),
-                  // $t('map.shenzhen'),
-                  // $t('map.shanghai'),
-                  // $t('map.jakarta'),
-                  // $t('map.nanjing'),
-                  // $t('map.newyork'),
-                  // $t('map.london'),
-                  // $t('map.losAngeles'),
-                  // $t('map.stockholm'),
-                  // $t('map.paris'),
-                  // $t('map.munich')
-                ]
-                return centerList[params.dataIndex]
+                return that.centerList[params.dataIndex]
               },
-              fontSize: 18,
+              fontSize: 12,
               color: '#f5d909',
-              fontWeight: 'bold',
+              fontWeight: 400,
               //			                    backgroundColor:'rgba(255,255,255,0.2)'
               backgroundColor: 'transparent'
             },
@@ -157,7 +172,7 @@ export default {
           }
         ]
       }
-      this.chart.setOption(option, true)
+      this.chart.setOption(this.option, true)
     }
   }
 }
