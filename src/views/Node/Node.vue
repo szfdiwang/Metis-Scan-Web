@@ -4,7 +4,7 @@
     <div class="textBox">
       <div class="textNode">{{ $t('node.NODE') }}</div>
       <div class="text">
-        <span style="color: #f36101; margin-right: 5px; font-size: 40px">{{ this.totalRows }}</span
+        <span style="color: #f36101; margin-right: 0.05rem; font-size: 40px">{{ this.totalRows }}</span
         >{{ $t('node.PARTICIPATINGNODESINTHEWHOLENETWORK') }}
       </div>
     </div>
@@ -14,10 +14,10 @@
           <div style="width: 1.73rem">
             <span style="margin-left: 0.3rem">{{ $t('node.No') }}</span>
           </div>
-          <div style="width: 2.4rem">{{ $t('node.NameIdentifier') }}</div>
+          <div style="width: 2.45rem">{{ $t('node.NameIdentifier') }}</div>
           <div style="width: 4.4rem">{{ $t('node.ComputingPower') }}</div>
-          <div style="width: 2.04rem">{{ $t('node.Metadata') }}</div>
-          <div style="width: 1.9rem">{{ $t('node.ParticipatedTasks') }}</div>
+          <div style="width: 1.95rem">{{ $t('node.Metadata') }}</div>
+          <div style="width: 1.96rem">{{ $t('node.ParticipatedTasks') }}</div>
           <div style="width: 1rem">{{ $t('node.ActiveDegree') }}</div>
           <div style="width: 1.2rem"></div>
         </div>
@@ -31,12 +31,12 @@
           </div>
           <div style="width: 2.5rem">
             <div>{{ item.orgName }}</div>
-            <div id="id" class="icoFontlist">{{ item.identityId }}</div>
+            <div id="id" class="icoFontlist" >{{ item.identityId }}</div>
           </div>
           <div style="width: 4.5rem" class="power">
             <div style="width: 1.6rem">
               <div style="display: flex">
-                <span style="width: 0.7rem; margin-top: 2px">C P U :</span>
+                <span style="width: 0.65rem; margin-top: 2px">C P U :</span>
                 <span style="width: 0.8rem">{{ item.dynamicFields.remainCore }} {{ $t('node.cores') }}</span>
               </div>
               <div style="display: flex; margin: 0.08rem 0">
@@ -123,10 +123,10 @@
           >
           </el-pagination>
         </div>
-        <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
-        <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
-        <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
-        <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
+        <img src="../../assets/img/node/border/1.svg" alt="" class="borderBottomRight" />
+        <img src="../../assets/img/node/border/2.svg" alt="" class="borderTopRight" />
+        <img src="../../assets/img/node/border/3.svg" alt="" class="borderBottomLeft" />
+        <img src="../../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
       </div>
     </div>
   </div>
@@ -138,7 +138,7 @@ export default {
   data() {
     return {
       curPage: 1,
-      pageSize: 5,
+      pageSize: 6,
       totalRows: 10,
       curTab: 'power',
       hot: '0',
@@ -208,7 +208,7 @@ export default {
     display: flex;
     .textNode {
       font-size: 0.4rem;
-      margin: 8px 1.12rem 0px 1.1rem;
+      margin: 8px 1rem 0px 1.1rem;
     }
     .text {
       margin-top: 0.15rem;
@@ -220,6 +220,8 @@ export default {
     position: relative;
     .rankingTh {
       display: flex;
+      height: 0.16rem;
+      line-height: 0.16rem;
     }
     .rankingTd {
       margin: 0.1rem 0;
@@ -268,13 +270,17 @@ export default {
     margin-left: 16rem;
   }
   #id {
-    overflow: hidden;
-    word-break: keep-all;
-    text-overflow: ellipsis;
-    width: 1.8rem;
+    // overflow: hidden;
+    // word-break: keep-all;
+    // text-overflow: ellipsis;
+    width: 1.4rem;
     font-size: 0.12rem;
     padding-top: 0.14rem;
+    white-space:nowrap; 
+  	overflow: hidden;    	
+  	text-overflow: ellipsis;	
   }
+  
   .hot {
     width: 2rem;
     display: flex;
@@ -434,5 +440,9 @@ export default {
     border-radius: 0.0154rem 0.0154rem 0 0;
     border-radius: 0.0154rem 0.0154rem 0px 0px;
   }
+}
+/deep/ .el-pagination__total {
+  height: 0.28rem;
+  width: 0.4rem;
 }
 </style>

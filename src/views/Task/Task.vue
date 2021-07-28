@@ -6,19 +6,27 @@
       <div class="text">{{ $t('task.PTASKSINTHEWHOLENETWORK') }}</div>
     </div>
     <div class="selectItem">
-      <div>
-        <span>{{ $t('task.StatusItem') }}:</span>
+      <div style="display: flex; line-height: 0.4rem; text-align: center">
+        <div style="width: 0.66rem; height: 0.16rem; line-height: 0.16rem; margin-top: 0.13rem">
+          {{ $t('task.StatusItem') }}:
+        </div>
         <el-select
           v-model="value"
           :placeholder="$t('task.pleaseChoose')"
           @change="selectChange"
+          @visible-change="seleOpen"
           :popper-append-to-body="false"
         >
-          <el-option v-for="item in option" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+          <el-option :label="$t('task.All')" :value="$t('task.All')"></el-option>
+          <el-option :label="$t('task.success')" :value="$t('task.success')"></el-option>
+          <el-option :label="$t('task.failed')" :value="$t('task.failed')"></el-option>
+          <!-- <el-option v-for="item in option" :key="item.value" :label="item.label" :value="item.value"> </el-option> -->
         </el-select>
       </div>
-      <div>
-        <span>{{ $t('task.TimeSpan') }}:</span>
+      <div style="display: flex; line-height: 0.4rem; text-align: center; margin-left: 0.2rem">
+        <div style="width: 0.66rem; height: 0.16rem; line-height: 0.16rem; margin-top: 0.13rem">
+          {{ $t('task.TimeSpan') }}:
+        </div>
         <el-date-picker
           v-model="value1"
           type="datetimerange"
@@ -31,12 +39,13 @@
           value-format="yyyy-MM-dd"
           @change="pickerChange"
         >
+          <el-picker-options :text="111"></el-picker-options>
         </el-date-picker>
       </div>
     </div>
     <div style="padding: 0 1.1rem">
       <div class="ranking">
-        <div class="rankingTh">
+        <div class="rankingTh" style="height: 0.16rem; line-height: 0.16rem">
           <div style="width: 1.64rem">
             <span style="margin-left: 0.3rem">{{ $t('task.No') }}</span>
           </div>
@@ -94,10 +103,10 @@
           >
           </el-pagination>
         </div>
-        <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
-        <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
-        <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
-        <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
+        <img src="../../assets/img/node/border/1.svg" alt="" class="borderBottomRight" />
+        <img src="../../assets/img/node/border/2.svg" alt="" class="borderTopRight" />
+        <img src="../../assets/img/node/border/3.svg" alt="" class="borderBottomLeft" />
+        <img src="../../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
       </div>
     </div>
   </div>
@@ -111,31 +120,32 @@ export default {
   components: { formatDate, formatDates },
   data() {
     return {
-      option: [
-        {
-          value: this.$t('task.All'),
-          label: this.$t('task.All')
-        },
-        {
-          value: this.$t('task.succeed'),
-          label: this.$t('task.succeed')
-        },
-        {
-          value: this.$t('task.failed'),
-          label: this.$t('task.failed')
-        }
-      ],
+      // option: [
+      //   {
+      //     value: this.$t('task.All'),
+      //     label: this.$t('task.All')
+      //   },
+      //   {
+      //     value: this.$t('task.success'),
+      //     label: this.$t('task.success')
+      //   },
+      //   {
+      //     value: this.$t('task.failed'),
+      //     label: this.$t('task.failed')
+      //   }
+      // ],
       value: '',
       listTask: [],
       curPage: 1,
       pageSize: 12,
       totalRows: 10,
       isShow: true,
-      //
+      label: '',
       pickerOptions: {
         shortcuts: [
           {
-            text: this.$t('task.week'),
+            // text: this.$t('task.week'),
+            text: '最近一周',
             onClick(picker) {
               const end = new Date()
               const start = new Date()
@@ -144,7 +154,8 @@ export default {
             }
           },
           {
-            text: this.$t('task.month'),
+            // text: this.$t('task.month'),
+            text: '最近一个月',
             onClick(picker) {
               const end = new Date()
               const start = new Date()
@@ -153,7 +164,8 @@ export default {
             }
           },
           {
-            text: this.$t('task.months'),
+            // text: this.$t('task.months'),
+            text: '最近三个月',
             onClick(picker) {
               const end = new Date()
               const start = new Date()
@@ -169,6 +181,9 @@ export default {
   created() {
     this.getListTask()
   },
+  mounted() {
+    // console.log(this.$refs.sele, '打印')
+  },
   watch: {
     value1(newVal) {
       if (newVal == null) {
@@ -177,6 +192,7 @@ export default {
     }
   },
   methods: {
+    seleOpen() {},
     handleCurrentChange(page) {
       this.curPage = page
       this.isShow = false
@@ -214,13 +230,19 @@ export default {
       this.totalRows = res.totalRows
       console.log('时间搜索任务列表', res)
     },
-    async selectChange(value) {
-      console.log(value)
+    async selectChange(label) {
+      console.log('23456', label)
+      if (label === '成功') {
+        this.label = 'success'
+      } else {
+        this.label = label
+      }
       const res = await taskApi.getListTask({
         pageNo: this.curPage,
         pageSize: this.pageSize,
-        status: value
+        status: this.label
       })
+      console.log(label)
       this.listTask = res.data
       this.totalRows = res.totalRows
       console.log('状态搜索任务', res)
@@ -240,6 +262,26 @@ export default {
 }
 </script>
 <style>
+/* .el-time-panel,
+.el-popper {
+  background-color: #08164d;
+}
+.el-time-panel__btn, .cancel{
+  font-weight: 800;
+  color:#409EFF;
+}
+.el-time-spinner__item,.active{
+  color: #fff !important;
+} */
+.el-input__inner {
+  font-family: BebasNeueRegular !important;
+}
+.el-select-dropdown__item {
+  color: #c0c4cc !important;
+}
+.el-picker-panel__shortcut {
+  font-family: BebasNeueRegular !important;
+}
 .el-button,
 .el-picker-panel__link-btn,
 .el-button--default,
@@ -247,16 +289,19 @@ export default {
 .is-plain {
   margin-right: 10px;
   width: 50px;
+  font-family: BebasNeueRegular !important;
 }
 .el-button,
 .el-picker-panel__link-btn,
 .el-button--default,
 .el-button--mini:hover {
   background-color: #3954ff;
+  color: #fff;
 }
 .el-scrollbar__view,
 .el-select-dropdown__list {
   padding-bottom: 20px;
+  font-weight: normal !important;
 }
 .el-picker-panel,
 .el-date-range-picker,
@@ -264,6 +309,7 @@ export default {
 .has-sidebar,
 .has-time {
   border: 1px solid #2c3b8d !important;
+  font-family: BebasNeueRegular !important;
 }
 .el-input__icon,
 .el-range__icon,
@@ -322,6 +368,11 @@ export default {
   background-color: #3954ff;
   color: #fff;
 }
+.el-select__caret,
+.el-input__icon,
+.el-icon-arrow-up {
+  color: #3954ff !important;
+}
 </style>
 <style lang="scss" scoped>
 .Data {
@@ -343,13 +394,21 @@ export default {
     display: flex;
     .textNode {
       font-size: 0.4rem;
-      line-height: 0.94rem;
       margin-left: 1.1rem;
+      width: 0.8rem;
+      height: 0.4rem;
+      text-align: center;
+      line-height: 40px;
+      margin-top: 27px;
     }
     .text {
       font-size: 0.25rem;
-      line-height: 1rem;
-      margin-left: 0.41rem;
+      margin-left: 1rem;
+      height: 25px;
+      width: 3rem;
+      line-height: 0.25rem;
+      // text-align: center;
+      margin-top: 42px;
     }
   }
   .ranking {
@@ -388,7 +447,7 @@ export default {
       margin-right: 0.2rem;
     }
     div {
-      margin-right: 0.7rem;
+      margin-right: 0.3rem;
     }
   }
   .Pagination {
@@ -486,5 +545,9 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+/deep/ .el-pagination__total {
+  height: 0.28rem;
+  width: 0.4rem;
 }
 </style>

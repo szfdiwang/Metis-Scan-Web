@@ -126,8 +126,9 @@ export default {
     month: '最近一个月',
     months: '最近三个月',
     All: '全部',
-    succeed: '成功',
-    failed: '失败'
+    success: '成功',
+    failed: '失败',
+    AlgorithmProvider: '算法提供方'
 
   },
   log: {

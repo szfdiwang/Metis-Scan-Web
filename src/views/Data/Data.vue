@@ -2,14 +2,22 @@
   <div class="Data">
     <div class="imgBox"></div>
     <div style="margin-left: 1.1rem" class="textBox">
-      <span class="textNode">{{ $t('data.DATA') }}</span>
-      <span class="text">{{ $t('data.PIECESOFMETADATAINTHEWHOLENETWORK') }}</span>
+      <!-- <span class="textNode"> <span style="width: 60px;height: 40px;background-color:green;">{{ $t('data.DATA') }}</span></span>
+      <span class="text">{{ $t('data.PIECESOFMETADATAINTHEWHOLENETWORK') }}</span> -->
+      <div class="textNode">
+        <span>{{ $t('data.DATA') }}</span>
+      </div>
+      <div class="text">
+        <span>{{ $t('data.PIECESOFMETADATAINTHEWHOLENETWORK') }}</span>
+      </div>
     </div>
     <div style="padding: 0 1.1rem">
       <div class="ranking">
-        <div class="rankingTh">
+        <div class="rankingTh" style="height: 0.16rem; line-height: 0.16rem">
           <div style="width: 1.6rem">
-            <span style="margin-left: 0.3rem">{{ $t('data.No') }}</span>
+            <div style="margin-left: 0.3rem; width: 0.32rem; height: 0.16rem; text-align: center; line-height: 0.16rem">
+              {{ $t('data.No') }}
+            </div>
           </div>
           <!-- <div style="width: 3rem">{{ $t('data.NameIdentifier') }}</div>
           <div></div> -->
@@ -60,10 +68,10 @@
           >
           </el-pagination>
         </div>
-        <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
-        <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
-        <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
-        <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
+        <img src="../../assets/img/node/border/1.svg" alt="" class="borderBottomRight" />
+        <img src="../../assets/img/node/border/2.svg" alt="" class="borderTopRight" />
+        <img src="../../assets/img/node/border/3.svg" alt="" class="borderBottomLeft" />
+        <img src="../../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
       </div>
     </div>
   </div>
@@ -87,7 +95,7 @@ export default {
   methods: {
     DataMeat(value) {
       this.$router.push({
-        path: '/node/MetaData',
+        path: '/data/DataDetail',
         query: {
           metaId: value,
           deatil: '3'
@@ -129,12 +137,24 @@ export default {
   .textBox {
     position: absolute;
     top: 0.2rem;
+    display: flex;
     .textNode {
       font-size: 0.4rem;
+      width: 80px;
+      height: 40px;
+      // background-color: #3954ff;
+      text-align: center;
+      line-height: 40px;
     }
     .text {
       margin-left: 1rem;
       font-size: 0.25rem;
+      height: 25px;
+      width: 339px;
+      line-height: 25px;
+      // text-align: center;
+      margin-top: 15px;
+      // background-color: #3954ff;
     }
   }
   .ranking {
@@ -240,5 +260,9 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+/deep/ .el-pagination__total {
+  height: 0.28rem;
+  width: 0.5rem;
 }
 </style>

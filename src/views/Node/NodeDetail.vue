@@ -2,8 +2,8 @@
   <div class="NodeDetail">
     <div class="NodeDetailTop"></div>
     <div class="textBox">
-      <div class="pic" @click="$router.push('/node/index')">
-        <img src="../../assets/img/node/3.icon1.svg" alt="" style="line-height: 0.42rem" />
+      <div class="picBox" @click="$router.push('/node/index')">
+        <img src="../../assets/img/node/3.icon1.svg" alt="" class="pic" />
       </div>
       <div class="bank">XXXBANK</div>
       <div class="Identifier">Identifier：{{ this.id }}</div>
@@ -36,9 +36,9 @@
                 <div style="width: 1.44rem">
                   <span style="margin-left: 0.3rem">{{ $t('data.No') }}</span>
                 </div>
-                <div style="width: 3rem">{{ $t('data.NameIdentifier') }}</div>
-                <div style="width: 2.7rem">{{ $t('node.Size') }}</div>
-                <div style="width: 2.54rem">{{ $t('node.Columns') }}</div>
+                <div style="width: 2.98rem">{{ $t('data.NameIdentifier') }}</div>
+                <div style="width: 2.65rem">{{ $t('node.Size') }}</div>
+                <div style="width: 2.57rem">{{ $t('node.Columns') }}</div>
                 <div style="width: 2.62rem">{{ $t('node.Rows') }}</div>
                 <div style="width: 1rem">{{ $t('data.ParticipatedTasks') }}</div>
                 <div></div>
@@ -54,7 +54,18 @@
               </div>
               <div style="width: 3rem">
                 <div>{{ item.resourceName }}</div>
-                <div style="font-size: 0.12rem; margin-top: 0.14rem">{{ item.metaDataId }}</div>
+                <div
+                  style="
+                    font-size: 0.12rem;
+                    margin-top: 0.14rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width:1.3rem;
+                  "
+                >
+                  {{ item.metaDataId }}
+                </div>
               </div>
               <template>
                 <div style="width: 2.7rem">{{ (item.size / 1024 / 1024).toFixed(2) }}MB</div>
@@ -88,10 +99,10 @@
               >
               </el-pagination>
             </div>
-            <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
-            <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
-            <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
-            <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
+            <img src="../../assets/img/node/border/1.svg" alt="" class="borderBottomRight" />
+            <img src="../../assets/img/node/border/2.svg" alt="" class="borderTopRight" />
+            <img src="../../assets/img/node/border/3.svg" alt="" class="borderBottomLeft" />
+            <img src="../../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
           </div>
         </el-tab-pane>
         <el-tab-pane name="second" label="任务" stretch="true" @tab-click="tabClick">
@@ -110,6 +121,12 @@
                 <div style="width: 2.8rem"></div>
               </div>
             </div>
+            <div
+              v-if="taskList.length < 1"
+              style="text-align: center; margin-top: 180px; color: #413e3e; font-size: 20px"
+            >
+              暂 无 数 据 。。。。
+            </div>
             <div class="rankingTd" v-for="(item, index) in taskList" :key="index">
               <div style="width: 1.74rem" class="rankingTdImg">
                 <div id="xh">
@@ -120,7 +137,9 @@
               </div>
               <div style="width: 2.6rem">
                 <div>{{ item.taskName }}</div>
-                <div style="font: size 0.12rem; margin-top: 0.14rem">ID:{{ item.id }}</div>
+                <div style="font: size 0.12rem; margin-top: 0.14rem">
+                  ID: <span style="margin-left: 0.05rem">{{ item.id }}</span>
+                </div>
               </div>
               <div style="width: 2.6rem">
                 <template>
@@ -146,7 +165,7 @@
                 {{ $t('node.Detail') }}
               </div>
             </div>
-            <div class="Pagination">
+            <div class="Pagination" v-if="taskList.length > 1">
               <el-pagination
                 background
                 @size-change="handleSizeChanges"
@@ -158,10 +177,10 @@
               >
               </el-pagination>
             </div>
-            <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
-            <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
-            <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
-            <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
+            <img src="../../assets/img/node/border/1.svg" alt="" class="borderBottomRight" />
+            <img src="../../assets/img/node/border/2.svg" alt="" class="borderTopRight" />
+            <img src="../../assets/img/node/border/3.svg" alt="" class="borderBottomLeft" />
+            <img src="../../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -173,7 +192,7 @@ import dayjs from 'dayjs'
 import { formatDate, formatDates } from '../../utils/tiem'
 import BasicAreaChart from './components/BasicAreaChart.vue'
 import { dataApi, nodeApi, taskApi } from '../../api/index'
-console.log('dataApi', dataApi)
+console.log('dataApi', dataApi, nodeApi)
 export default {
   components: { BasicAreaChart, formatDate, formatDates },
   data() {
@@ -235,7 +254,7 @@ export default {
     },
     TaskDetail(value) {
       this.$router.push({
-        path: '/task/TaskDetail',
+        path: '/node/TaskDetail',
         query: {
           id: value
         }
@@ -249,6 +268,8 @@ export default {
           deatil: '3'
         }
       })
+      // window.localStorage.setItem('metaDataId', value)
+      console.log(value, '标识111111111111')
     },
     async getOrgInfo() {
       const res = await dataApi.getListDataFileBy({
@@ -267,6 +288,7 @@ export default {
         pageNo: this.curPages,
         pageSize: this.pageSizes
       })
+      this.id = localStorage.getItem('id')
       this.taskList = res.data
       this.totalRowss = res.totalRows
       console.log('任务', res)
@@ -335,9 +357,24 @@ export default {
     position: absolute;
     top: 0;
     display: flex;
-    .pic {
-      line-height: 1.06rem;
+    // .pic {
+    //   line-height: 1.06rem;
+    //   margin-left: 1.1rem;
+    // }
+    .picBox {
+      height: 0.3rem;
+      width: 0.6rem;
+      background: #11175d;
+      border-radius: 0.08rem;
+      border-radius: 0.08rem;
+      margin-top: 0.31rem;
+      cursor: pointer;
+      text-align: center;
       margin-left: 1.1rem;
+      // line-height: 1.06rem;
+      .pic {
+        margin-top: 0.04rem;
+      }
     }
     .bank {
       font-size: 0.3rem;
@@ -352,6 +389,8 @@ export default {
   }
   .rankingTh {
     display: flex;
+    height: 0.16rem;
+    line-height: 0.16rem;
   }
   .rankingTd {
     height: 0.94rem;
@@ -484,7 +523,11 @@ export default {
   left: 0;
 }
 /deep/ .el-tabs__nav-scroll {
-  margin-left: -30px !important;
-  padding-bottom: 10px;
+  margin-left: -0.3rem !important;
+  padding-bottom: 0.1rem;
+}
+/deep/ .el-pagination__total {
+  height: 0.28rem;
+  width: 0.45rem;
 }
 </style>

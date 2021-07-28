@@ -16,6 +16,7 @@ export default {
     switchLang(lang) {
       this.$i18n.locale = lang
       localStorage.setItem('lang', lang)
+      console.log('语言切换',lang);
     }
   }
 }

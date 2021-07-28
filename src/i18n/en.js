@@ -56,7 +56,7 @@ export default {
     Memory: 'Memory',
     Bandwidth: 'Bandwidth',
     Remaining: 'Remaining',
-    Detail: 'detail',
+    Detail: 'View details',
     metadata: 'Metadata',
     Tasks: 'Tasks',
     Size: ' Size',
@@ -122,13 +122,14 @@ export default {
     TaskStarted: 'Task started',
     return: 'return',
     success: 'succeed',
-    pleaseChoose: 'please choose',
-    week: 'latest week',
+    pleaseChoose: 'select',
+    week: 'Last week',
     month: 'Last month',
     months: 'Last 3 months',
     All: 'All',
-    succeed: 'succeed',
-    failed: 'failed'
+    success: 'success',
+    failed: 'failed',
+    AlgorithmProvider: 'Algorithm provider'
 
 
   },

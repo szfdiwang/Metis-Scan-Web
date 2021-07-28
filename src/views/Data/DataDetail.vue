@@ -1,5 +1,16 @@
 <template>
-  <div class="">
-    <h1>This is an Task page</h1>
+  <div>
+    <data-details></data-details>
   </div>
 </template>
+<script>
+import DataDetails from '../../components/DataDetails.vue'
+export default {
+  components: { DataDetails },
+  data() {
+    return {
+      
+    }
+  },
+}
+</script>

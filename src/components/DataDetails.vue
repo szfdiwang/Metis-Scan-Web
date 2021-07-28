@@ -2,35 +2,35 @@
   <div class="metaData">
     <div class="metaDataTop">
       <!-- <div class="pic" @click="$router.push('/node/NodeDetail')"> -->
-      <div class="pic" @click="comment">
-        <img src="../../assets/img/node/3.icon1.svg" alt="" />
+      <div class="picBox" @click="comment">
+        <img src="../assets/img/node/3.icon1.svg" alt="" class="pic" />
       </div>
       <div class="bank">XXXBANK</div>
       <div class="Identifier">ID：{{ this.id || this.Id }}</div>
     </div>
     <div class="tableData">
       <div style="display: flex; margin: 0.2rem 0">
-        <div style="display: flex">
-          <div style="width: 1rem">{{ $t('data.Dataprovide') }}:</div>
-          <div style="margin-left: 0.45rem">{{ dataList.identityId }}</div>
+        <div style="display: flex;height: 0.16rem;line-height: 0.16rem;">
+          <div style="width: 1rem;height: 0.16rem; line-height: 0.16rem;">{{ $t('data.Dataprovide') }}:</div>
+          <div style="margin-left: 0.45rem;height: 0.16rem; line-height: 0.16rem;width: 3rem;">{{ dataList.identityId }}</div>
         </div>
-        <div style="display: flex; margin-left: 3.2rem">
+        <div style="display: flex; margin-left: 1.16rem;height: 0.16rem;line-height: 0.16rem;">
           <div style="width: 1.5rem">{{ $t('data.INFORMATIONOFFIFLDS') }}:</div>
           <div>{{ dataList.rows }}</div>
         </div>
       </div>
-      <div style="display: flex; margin: 0.1rem 0">
-        <div style="display: flex">
-          <div style="width: 1rem">{{ $t('data.Size0fData') }}</div>
-          <div style="margin-left: 0.45rem">{{ dataList.size / 1024 }} GB</div>
+      <div style="display: flex; margin: 0.1rem 0;height: 0.16rem;line-height: 0.16rem;">
+        <div style="display: flex;">
+          <div style="width: 1rem">{{ $t('data.Size0fData') }}:</div>
+          <div style="margin-left: 0.45rem;width: 2rem;">{{ dataList.size / 1024 }} GB</div>
         </div>
-        <div style="display: flex; margin-left: 3.32rem">
+        <div style="display: flex; margin-left: 2.17rem;">
           <div style="width: 1rem">{{ $t('data.NumberOfData') }} :</div>
           <div style="margin-left: 0.53rem">{{ dataList.columns }}</div>
         </div>
       </div>
     </div>
-    <div class="Description">
+    <div class="Description" style="height: 0.16rem;line-height: 0.16rem;margin-bottom: 0.4rem;">
       <div style="width: 1rem">{{ $t('data.Description') }} :</div>
       <div class="ipt">
         <div style="width: 4rem">{{ dataList.remarks }}</div>
@@ -41,16 +41,16 @@
         <div class="text">{{ $t('data.INFO') }}</div>
       </div>
       <div>
-        <div class="rankingTh">
+        <div class="rankingTh" style="height: 0.16rem;line-height: 0.16rem;">
           <div style="width: 5.4rem; display: flex">
             <div style="width: 0.5rem; margin-left: 0.3rem">{{ $t('node.No') }}</div>
             <div style="width: 4rem; margin-left: 0.55rem">{{ $t('data.FieldName') }}</div>
           </div>
-          <div style="width: 5.4rem; display: flex">
+          <div style="width: 5.4rem; display: flex" v-if="metaList > 10">
             <div style="width: 0.5rem; margin-left: 0.4rem">{{ $t('node.No') }}</div>
             <div style="width: 4rem; margin-left: 0.52rem">{{ $t('data.FieldName') }}</div>
           </div>
-          <div style="width: 5.4rem; margin-left: 0.45rem; display: flex">
+          <div style="width: 5.4rem; margin-left: 0.45rem; display: flex" v-if="metaList > 5">
             <div style="width: 0.5rem">{{ $t('node.No') }}</div>
             <div style="width: 4rem; margin-left: 0.56rem">{{ $t('data.FieldName') }}</div>
           </div>
@@ -78,17 +78,17 @@
           >
           </el-pagination>
         </div>
-        <img src="../../assets/img/node/边角/1.svg" alt="" class="borderBottomRight" />
-        <img src="../../assets/img/node/边角/2.svg" alt="" class="borderTopRight" />
-        <img src="../../assets/img/node/边角/3.svg" alt="" class="borderBottomLeft" />
-        <img src="../../assets/img/node/边角/4.svg" alt="" class="borderTopLeft" />
+        <img src="../assets/img/node/border/1.svg" alt="" class="borderBottomRight" />
+        <img src="../assets/img/node/border/2.svg" alt="" class="borderTopRight" />
+        <img src="../assets/img/node/border/3.svg" alt="" class="borderBottomLeft" />
+        <img src="../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { dataApi } from '../../api/index'
+import { dataApi } from '../api/index'
 console.log('dataApi', dataApi)
 export default {
   data() {
@@ -99,14 +99,14 @@ export default {
       pageSize: 10,
       totalRows: 10,
       dataList: {},
-      metaList: [],
-      fromPath: '',
-      deatil: ''
+      metaList: []
+      // fromPath: '',
+      // deatil: ''
     }
   },
   created() {
-    this.deatil = this.$route.query.deatil
-    window.localStorage.setItem('deatil', this.deatil)
+    // this.deatil = this.$route.query.deatil
+    // window.localStorage.setItem('deatil', this.deatil)
     this.id = this.$route.query.metaDataId
     this.Id = this.$route.query.metaId
     if ((this.id = this.$route.query.metaDataId)) {
@@ -117,14 +117,14 @@ export default {
       this.getMetas()
     }
   },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      // 通过 `vm` 访问组件实例,将值传入fromPath
-      vm.fromPath = from.path
-      console.log(to)
-      console.log(from)
-    })
-  },
+  // beforeRouteEnter(to, from, next) {
+  //   next(vm => {
+  //     // 通过 `vm` 访问组件实例,将值传入fromPath
+  //     vm.fromPath = from.path
+  //     console.log(to)
+  //     console.log(from)
+  //   })
+  // },
   methods: {
     handleCurrentChange(page) {
       this.curPage = page
@@ -168,9 +168,10 @@ export default {
         })
     },
     comment() {
-      this.$router.push({
-        path: this.fromPath
-      })
+      // this.$router.push({
+      //   path: this.fromPath
+      // })
+      this.$router.go(-1)
     }
   }
 }
@@ -182,9 +183,18 @@ export default {
     height: 0.42rem;
     display: flex;
     margin-top: 0.3rem;
-    .pic {
-      line-height: 0.5rem;
+    .picBox {
+      height: 0.3rem;
+      width: 0.6rem;
+      background: #11175d;
+      border-radius: 0.08rem;
+      border-radius: 0.08rem;
+      margin-top: 0.05rem;
       cursor: pointer;
+      text-align: center;
+      .pic {
+        margin-top: 0.04rem;
+      }
     }
     .bank {
       font-size: 0.3rem;
@@ -212,13 +222,14 @@ export default {
     }
   }
   .rankingListTop {
-    margin: 0.2rem 0.1rem;
-    background: url('../../assets/img/node/3.button.svg');
-    width: 269px;
-    height: 40px;
+    margin: 0rem 0 0.1rem 0.1rem;
+    background: url('../assets/img/node/3.button.svg');
+    width: 2.69rem;
+    height: 0.4rem;
+    margin-bottom: 20px;
     .text {
       text-align: center;
-      line-height: 40px;
+      line-height: 0.4rem;
     }
   }
   .rankingTh {
@@ -237,7 +248,7 @@ export default {
       background: #0c0e26;
       border-radius: 0.04rem;
       display: flex;
-      margin: 0.05rem 10px 0.05rem 0;
+      margin: 0.05rem 0.1rem 0.05rem 0;
       line-height: 0.4rem;
       font-family: PingFangSC-Regular;
       font-size: 14px;
@@ -290,7 +301,8 @@ export default {
 }
 .content {
   position: absolute;
-  padding: 0.1rem 0;
+  padding: 0.2rem 0.1rem;
+  width: 1700px;
 }
 .borderBottomRight {
   position: absolute;
