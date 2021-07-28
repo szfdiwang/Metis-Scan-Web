@@ -137,5 +137,20 @@ export default {
     GenerationTime: '产生时间',
     EventFailed: '事件内容',
   },
+  map: {
+    beijing: '北京',
+    tokyo: '东京',
+    shenzhen: '深圳',
+    shanghai: '上海',
+    jakarta: '雅加达',
+    nanjing: '南京',
+    newyork: '纽约',
+    london: '伦敦',
+    losAngeles: '洛杉矶',
+    stockholm: '斯德哥尔摩',
+    paris: '巴黎',
+    munich: '慕尼黑',
+    melbourne: '墨尔本'
+  },
   ...zhLocale
 }
