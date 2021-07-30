@@ -23,7 +23,6 @@ export default {
   watch: {
     '$i18n.locale'(newValue) {
       console.log('语言改变', newValue)
-      // 不需要重新设置配置项，只需要手动触发一下setOption()
       this.dataChart.setOption(this.option)
     }
   },
@@ -63,9 +62,6 @@ export default {
           itemGap: 40,
           itemHeight: 5,
           itemWidth: 30,
-          // formatter: params => {
-          //   return this.$t(`home.${params}`)
-          // },
           data: [
             {
               itemStyle: {
@@ -109,8 +105,7 @@ export default {
           },
           type: 'category',
           boundaryGap: true, // 自动分配间距
-          // data: this.newArray
-          data: ['202-06-11', '2020-06-12', '2020-06-13', '2020-06-14', '2020-06-15', '2020-06-16']
+          data: this.newArray
         },
         yAxis: {
           axisLabel: {
@@ -125,21 +120,10 @@ export default {
         },
         series: [
           {
-            // data: this.numList,
-            data: [0.7, 0.5, 0.8, 2, 1, 2],
+            data: this.numList,
             type: 'line',
             lineStyle: {
               color: '#2A6EE6'
-              //  new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              //   {
-              //     offset: 0,
-              //     color: '#9C2ED3'
-              //   },
-              //   {
-              //     offset: 1,
-              //     color: '#AE0BFF'
-              //   }
-              // ])
             },
             areaStyle: {
               color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
