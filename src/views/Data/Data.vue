@@ -2,8 +2,6 @@
   <div class="Data">
     <div class="imgBox"></div>
     <div style="margin-left: 1.1rem" class="textBox">
-      <!-- <span class="textNode"> <span style="width: 60px;height: 40px;background-color:green;">{{ $t('data.DATA') }}</span></span>
-      <span class="text">{{ $t('data.PIECESOFMETADATAINTHEWHOLENETWORK') }}</span> -->
       <div class="textNode">
         <span>{{ $t('data.DATA') }}</span>
       </div>
@@ -19,10 +17,8 @@
               {{ $t('data.No') }}
             </div>
           </div>
-          <!-- <div style="width: 3rem">{{ $t('data.NameIdentifier') }}</div>
-          <div></div> -->
-          <div style="width: 3rem">{{ $t('task.Name') }}</div>
-          <div style="width: 3.3rem">{{ $t('task.identifier') }}</div>
+          <div style="width: 2.2rem">{{ $t('task.Name') }}</div>
+          <div style="width: 3.78rem">{{ $t('task.identifier') }}</div>
           <div style="width: 2.5rem">{{ $t('data.DataProvider') }}</div>
           <div style="width: 2.42rem">{{ $t('data.Status') }}</div>
           <div style="width: 1.2rem">{{ $t('data.ParticipatedTasks') }}</div>
@@ -36,10 +32,10 @@
               </div>
             </div>
           </div>
-          <div style="width: 3rem">
+          <div style="width: 2.2rem">
             {{ item.resourceName }}
           </div>
-          <div style="width: 3.3rem">{{ item.identityId }}</div>
+          <div style="width: 3.8rem">{{ item.identityId }}</div>
           <div style="width: 2.5rem">{{ item.dynamicFields.orgName }}</div>
           <div style="width: 2.42rem">{{ (item.size / 1024 / 1024).toFixed(2) }}MB</div>
           <div style="width: 0.9rem">{{ item.dynamicFields.taskCount }}</div>
@@ -142,7 +138,6 @@ export default {
       font-size: 0.4rem;
       width: 80px;
       height: 40px;
-      // background-color: #3954ff;
       text-align: center;
       line-height: 40px;
     }
@@ -152,9 +147,7 @@ export default {
       height: 25px;
       width: 339px;
       line-height: 25px;
-      // text-align: center;
       margin-top: 15px;
-      // background-color: #3954ff;
     }
   }
   .ranking {
@@ -238,9 +231,6 @@ export default {
 /deep/ .rankingTd:hover {
   background-color: #3954ff !important;
 }
-// .content {
-//   position: relative;
-// }
 .borderBottomRight {
   position: absolute;
   right: 0;

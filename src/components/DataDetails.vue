@@ -10,28 +10,30 @@
     </div>
     <div class="tableData">
       <div style="display: flex; margin: 0.2rem 0">
-        <div style="display: flex;height: 0.16rem;line-height: 0.16rem;">
-          <div style="width: 1rem;height: 0.16rem; line-height: 0.16rem;">{{ $t('data.Dataprovide') }}:</div>
-          <div style="margin-left: 0.45rem;height: 0.16rem; line-height: 0.16rem;width: 3rem;">{{ dataList.identityId }}</div>
+        <div style="display: flex; height: 0.16rem; line-height: 0.16rem">
+          <div style="width: 1.3rem; height: 0.16rem; line-height: 0.16rem">{{ $t('data.Dataprovide') }}:</div>
+          <div style="margin-left: 0.45rem; height: 0.16rem; line-height: 0.16rem; width: 3rem">
+            {{ dataList.identityId }}
+          </div>
         </div>
-        <div style="display: flex; margin-left: 1.16rem;height: 0.16rem;line-height: 0.16rem;">
+        <div style="display: flex; margin-left: 1.16rem; height: 0.16rem; line-height: 0.16rem">
           <div style="width: 1.5rem">{{ $t('data.INFORMATIONOFFIFLDS') }}:</div>
           <div>{{ dataList.rows }}</div>
         </div>
       </div>
-      <div style="display: flex; margin: 0.1rem 0;height: 0.16rem;line-height: 0.16rem;">
-        <div style="display: flex;">
-          <div style="width: 1rem">{{ $t('data.Size0fData') }}:</div>
-          <div style="margin-left: 0.45rem;width: 2rem;">{{ dataList.size / 1024 }} GB</div>
+      <div style="display: flex; margin: 0.1rem 0; height: 0.16rem; line-height: 0.16rem">
+        <div style="display: flex">
+          <div style="width: 1.3rem">{{ $t('data.Size0fData') }}:</div>
+          <div style="margin-left: 0.45rem; width: 2rem">{{ (dataList.size / 1024).toFixed(2) }} GB</div>
         </div>
-        <div style="display: flex; margin-left: 2.17rem;">
+        <div style="display: flex; margin-left: 2.16rem">
           <div style="width: 1rem">{{ $t('data.NumberOfData') }} :</div>
-          <div style="margin-left: 0.53rem">{{ dataList.columns }}</div>
+          <div style="margin-left: 0.52rem">{{ dataList.columns }}</div>
         </div>
       </div>
     </div>
-    <div class="Description" style="height: 0.16rem;line-height: 0.16rem;margin-bottom: 0.4rem;">
-      <div style="width: 1rem">{{ $t('data.Description') }} :</div>
+    <div class="Description" style="height: 0.16rem; line-height: 0.16rem; margin-bottom: 0.4rem">
+      <div style="width: 1.3rem">{{ $t('data.Description') }} :</div>
       <div class="ipt">
         <div style="width: 4rem">{{ dataList.remarks }}</div>
       </div>
@@ -41,26 +43,31 @@
         <div class="text">{{ $t('data.INFO') }}</div>
       </div>
       <div>
-        <div class="rankingTh" style="height: 0.16rem;line-height: 0.16rem;">
+        <div class="rankingTh" style="height: 0.16rem; line-height: 0.16rem">
           <div style="width: 5.4rem; display: flex">
             <div style="width: 0.5rem; margin-left: 0.3rem">{{ $t('node.No') }}</div>
             <div style="width: 4rem; margin-left: 0.55rem">{{ $t('data.FieldName') }}</div>
           </div>
-          <div style="width: 5.4rem; display: flex" v-if="metaList > 10">
+          <div style="width: 5.4rem; display: flex;text-align: center;" v-if="metaList.length > 10">
+            <div style="width: 0.5rem; margin-left: 0.3rem;">{{ $t('node.No') }}</div>
+            <div style="width: 2rem;">{{ $t('data.FieldName') }}</div>
+          </div>
+          <div style="width: 5.4rem; display: flex; margin-left: 2.8rem" v-if="metaList.length == 10">
             <div style="width: 0.5rem; margin-left: 0.4rem">{{ $t('node.No') }}</div>
             <div style="width: 4rem; margin-left: 0.52rem">{{ $t('data.FieldName') }}</div>
           </div>
-          <div style="width: 5.4rem; margin-left: 0.45rem; display: flex" v-if="metaList > 5">
+          <div style="width: 5.4rem; margin-left: 0.55rem; display: flex" v-if="metaList.length > 10">
             <div style="width: 0.5rem">{{ $t('node.No') }}</div>
             <div style="width: 4rem; margin-left: 0.56rem">{{ $t('data.FieldName') }}</div>
           </div>
         </div>
+        <!-- <div style="display: flex;"> <div>{{ $t('node.No') }}</div><div>{{ $t('data.FieldName') }}</div></div> -->
         <div class="rankingList">
           <div class="rankingTd" v-for="(item, index) in metaList" :key="index">
             <div style="width: 1.27rem">
               <div id="xh">
                 <div class="order">
-                  <div class="num">{{ index + 1 }}</div>
+                  <div class="num">{{ (curPage - 1) * pageSize + index + 1 }}</div>
                 </div>
               </div>
             </div>
@@ -96,7 +103,7 @@ export default {
       id: '',
       Id: '',
       curPage: 1,
-      pageSize: 10,
+      pageSize: 21,
       totalRows: 10,
       dataList: {},
       metaList: []
@@ -117,17 +124,14 @@ export default {
       this.getMetas()
     }
   },
-  // beforeRouteEnter(to, from, next) {
-  //   next(vm => {
-  //     // 通过 `vm` 访问组件实例,将值传入fromPath
-  //     vm.fromPath = from.path
-  //     console.log(to)
-  //     console.log(from)
-  //   })
-  // },
   methods: {
     handleCurrentChange(page) {
       this.curPage = page
+      if ((this.id = this.$route.query.metaDataId)) {
+        this.getMeta()
+      } else {
+        this.getMetas()
+      }
     },
     getFile() {
       dataApi.getDataFile({ metaDataId: this.id }).then(res => {
@@ -144,14 +148,12 @@ export default {
         .then(res => {
           this.metaList = res.data
           this.totalRows = res.totalRows
-          // console.log('数据详情1', res)
         })
     },
     // data页面跳转
     getFiles() {
       dataApi.getDataFile({ metaDataId: this.Id }).then(res => {
         this.dataList = res.data
-        // console.log('数据22', res)
       })
     },
     getMetas() {
@@ -164,19 +166,18 @@ export default {
         .then(res => {
           this.metaList = res.data
           this.totalRows = res.totalRows
-          console.log('数据详情22', res)
         })
     },
     comment() {
-      // this.$router.push({
-      //   path: this.fromPath
-      // })
       this.$router.go(-1)
     }
   }
 }
 </script>
 <style lang='scss' scoped>
+.metaData .rankingList .rankingTd[data-v-ee1f2d90]:hover {
+  background-color: #3954ff !important;
+}
 .metaData {
   padding: 0px 1.1rem;
   .metaDataTop {
@@ -236,7 +237,7 @@ export default {
     display: flex;
   }
   .rankingList {
-    height: 2.5rem;
+   height: 3.5rem;
     padding: 0px 0.1rem;
     display: flex;
     flex-direction: column;
@@ -296,9 +297,6 @@ export default {
   background-color: #3954ff; // 进行修改选中项背景和字体
   color: #fff;
 }
-.metaData .rankingList .rankingTd[data-v-46cc2312]:hover {
-  background-color: #3954ff;
-}
 .content {
   position: absolute;
   padding: 0.2rem 0.1rem;
@@ -324,10 +322,14 @@ export default {
   top: 0;
   left: 0;
 }
-/deep/ .x-hidden,
-.app-hidden,
-.el-scrollbar__wrap {
-  margin-bottom: 0px;
-  margin-right: 0px;
+// /deep/ .x-hidden,
+// .app-hidden,
+// .el-scrollbar__wrap {
+//   margin-bottom: 0px;
+//   margin-right: 0px;
+// }
+/deep/ .el-pagination__total {
+  height: 0.28rem;
+  width: 0.5rem;
 }
 </style>

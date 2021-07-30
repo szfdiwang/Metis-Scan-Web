@@ -61,7 +61,7 @@
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    width:1.3rem;
+                    width: 1.3rem;
                   "
                 >
                   {{ item.metaDataId }}
@@ -343,7 +343,6 @@ export default {
   right: -0.12rem;
 }
 .NodeDetail {
-  // height: 1000px;
   padding-bottom: 0.3rem;
   position: relative;
   .NodeDetailTop {
@@ -357,10 +356,6 @@ export default {
     position: absolute;
     top: 0;
     display: flex;
-    // .pic {
-    //   line-height: 1.06rem;
-    //   margin-left: 1.1rem;
-    // }
     .picBox {
       height: 0.3rem;
       width: 0.6rem;
@@ -371,7 +366,6 @@ export default {
       cursor: pointer;
       text-align: center;
       margin-left: 1.1rem;
-      // line-height: 1.06rem;
       .pic {
         margin-top: 0.04rem;
       }

@@ -39,7 +39,6 @@
     <div class="content" v-if="isShow">
       <div v-if="isShow">
         <div class="participants">
-          <!-- <img src="../../assets/img/node/3.button.svg" alt="" /> -->
           <div class="text">{{ $t('task.taskSponsor') }}</div>
         </div>
         <div class="participantsData">
@@ -54,7 +53,6 @@
         </div>
         <div>
           <div class="participants">
-            <!-- <img src="../../assets/img/node/3.button.svg" alt="" /> -->
             <div class="text">{{ $t('task.ResultReceiver') }}</div>
           </div>
           <div class="ResultReceiverTh">
@@ -73,8 +71,7 @@
           </div>
         </div>
         <!-- 算法提供方 -->
-        <div class="participants">
-          <!-- <img src="../../assets/img/node/3.button.svg" alt="" /> -->
+        <div class="participants"  style="margin-top:0.4rem ;">
           <div class="text">{{ $t('task.AlgorithmProvider') }}</div>
         </div>
         <div class="participantsData">
@@ -83,14 +80,13 @@
             <span style="margin-left: 2.66rem">{{ $t('task.Id') }}</span>
           </div>
           <div class="td">
-             <span style="margin-left: 1.3rem">{{taskAlgoProvider.dynamicFields.orgName }}</span> 
-            <span style="margin-left: 2.05rem"> {{this.taskAlgoProvider.identityId }}</span>
+            <span style="margin-left: 1.3rem">{{ taskAlgoProvider.dynamicFields.orgName }}</span>
+            <span style="margin-left: 2.05rem"> {{ this.taskAlgoProvider.identityId }}</span>
           </div>
         </div>
-        
+
         <div class="Data" style="margin-bottom: 0.4rem">
           <div class="dataPic" style="margin-top: 0.4rem">
-            <!-- <img src="../../assets/img/node/3.button.svg" alt="" /> -->
             <div class="text">{{ $t('task.DATAPROVIDERS') }}</div>
           </div>
           <div class="precedence">
@@ -123,7 +119,6 @@
       <!-- 2 -->
       <div class="Data" style="margin-top: 0.1rem" v-if="isShow">
         <div class="dataPic">
-          <!-- <img src="../../assets/img/node/3.button.svg" alt="" /> -->
           <div class="text">{{ $t('task.PROVIDERS') }}</div>
         </div>
         <div class="precedence pres">
@@ -201,13 +196,12 @@ export default {
       taskResult: [],
       taskPowerprovider: [],
       taskDataProviderList: [],
-      taskAlgoProvider:{},
+      taskAlgoProvider: {},
       logList: [],
       Id: '',
       isShow: true,
       isHows: false,
       isHowse: true
-      //   fromPath: ''
     }
   },
   created() {
@@ -224,20 +218,8 @@ export default {
       this.getlog()
     }
   },
-  //   beforeRouteEnter(to, from, next) {
-  //     next(vm => {
-  //       // 通过 `vm` 访问组件实例,将值传入fromPath
-  //       vm.fromPath = from.path
-  //       console.log('to',to)
-  //       console.log(from)
-  //       console.log(vm.fromPath);
-  //     })
-  //   },
   methods: {
     comment() {
-      //   this.$router.push({
-      //     path: this.fromPath
-      //   })
       this.$router.go(-1)
     },
     log() {
@@ -255,8 +237,8 @@ export default {
       this.taskResult = res.data.taskResultReceiverList
       this.taskPowerprovider = res.data.taskPowerProviderList
       this.taskDataProviderList = res.data.taskDataProviderList
-      this.taskAlgoProvider= res.data.taskAlgoProvider
-      console.log('算法提供方',this.taskAlgoProvider);
+      this.taskAlgoProvider = res.data.taskAlgoProvider
+      console.log('算法提供方', this.taskAlgoProvider)
       console.log('任务详情', res)
     },
     // 任务页面跳转
@@ -269,8 +251,8 @@ export default {
       this.taskResult = res.data.taskResultReceiverList
       this.taskPowerprovider = res.data.taskPowerProviderList
       this.taskDataProviderList = res.data.taskDataProviderList
-      this.taskAlgoProvider= res.data.taskAlgoProvider
-      console.log('算法提供方',this.taskAlgoProvider);
+      this.taskAlgoProvider = res.data.taskAlgoProvider
+      console.log('算法提供方', this.taskAlgoProvider)
       console.log('任务详情', res)
     },
     async getlog() {
@@ -309,11 +291,6 @@ export default {
     height: 0.42rem;
     display: flex;
     margin-top: 0.3rem;
-    // .pic {
-    //   line-height: 0.5rem;
-    //   margin-right: 0.1rem;
-    //   cursor: pointer;
-    // }
     .picBox {
       height: 0.3rem;
       width: 0.6rem;
@@ -431,10 +408,6 @@ export default {
       line-height: 0.2rem;
     }
   }
-  //   borderBtmRight
-  // borderTRight"
-  // borderBtmLeft"
-  // borderTLeft"
   .borderBtmRight {
     position: absolute;
     bottom: 0;
@@ -546,7 +519,7 @@ export default {
   left: 0;
 }
 .content {
-  position: relative !important;
+  position: relative;
   padding: 0.2rem 0 0.1rem 0;
 }
 </style>

@@ -20,7 +20,6 @@
           <el-option :label="$t('task.All')" :value="$t('task.All')"></el-option>
           <el-option :label="$t('task.success')" :value="$t('task.success')"></el-option>
           <el-option :label="$t('task.failed')" :value="$t('task.failed')"></el-option>
-          <!-- <el-option v-for="item in option" :key="item.value" :label="item.label" :value="item.value"> </el-option> -->
         </el-select>
       </div>
       <div style="display: flex; line-height: 0.4rem; text-align: center; margin-left: 0.2rem">
@@ -120,20 +119,6 @@ export default {
   components: { formatDate, formatDates },
   data() {
     return {
-      // option: [
-      //   {
-      //     value: this.$t('task.All'),
-      //     label: this.$t('task.All')
-      //   },
-      //   {
-      //     value: this.$t('task.success'),
-      //     label: this.$t('task.success')
-      //   },
-      //   {
-      //     value: this.$t('task.failed'),
-      //     label: this.$t('task.failed')
-      //   }
-      // ],
       value: '',
       listTask: [],
       curPage: 1,
@@ -142,47 +127,44 @@ export default {
       isShow: true,
       label: '',
       pickerOptions: {
-        shortcuts: [
-          {
-            // text: this.$t('task.week'),
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            // text: this.$t('task.month'),
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            // text: this.$t('task.months'),
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-              picker.$emit('pick', [start, end])
-            }
-          }
-        ]
+        // shortcuts: [
+        //   {
+        //     // text: this.$t('task.week'),
+        //     text: '最近一周',
+        //     onClick(picker) {
+        //       const end = new Date()
+        //       const start = new Date()
+        //       start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+        //       picker.$emit('pick', [start, end])
+        //     }
+        //   },
+        //   {
+        //     // text: this.$t('task.month'),
+        //     text: '最近一个月',
+        //     onClick(picker) {
+        //       const end = new Date()
+        //       const start = new Date()
+        //       start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+        //       picker.$emit('pick', [start, end])
+        //     }
+        //   },
+        //   {
+        //     // text: this.$t('task.months'),
+        //     text: '最近三个月',
+        //     onClick(picker) {
+        //       const end = new Date()
+        //       const start = new Date()
+        //       start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+        //       picker.$emit('pick', [start, end])
+        //     }
+        //   }
+        // ]
       },
       value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)]
     }
   },
   created() {
     this.getListTask()
-  },
-  mounted() {
-    // console.log(this.$refs.sele, '打印')
   },
   watch: {
     value1(newVal) {
@@ -331,9 +313,6 @@ export default {
 .is-left {
   border-color: rgba(10, 84, 234, 0.3) !important;
 }
-/* .el-date-range-picker__time-header {
-  border-color: rgba(10, 84, 234, 0.3) !important;
-} */
 .el-date-table__row {
   background-color: #08164d;
 }
@@ -407,7 +386,6 @@ export default {
       height: 25px;
       width: 3rem;
       line-height: 0.25rem;
-      // text-align: center;
       margin-top: 42px;
     }
   }
@@ -481,8 +459,6 @@ export default {
   /deep/ .el-select,
   /deep/ .el-input,
   /deep/ .el-input__inner {
-    // background-color:#81AAFF;
-    // background-color: rgb(129, 170, 255) 10% !important;
     color: #fff;
     border: 0px;
     border-radius: 0px;
@@ -490,17 +466,11 @@ export default {
   }
   /deep/ .el-range-input {
     background-color: #141f34;
-    //  background-color: rgb(129, 170, 255) 10% !important;
     color: #c0c4cc;
   }
   /deep/ .el-range-separator {
     color: #ccc;
   }
-  // /deep/ .el-select__caret,
-  // /deep/ .el-input__icon,
-  // /deep/ .el-icon-arrow-up {
-  //   color: #3954ff;
-  // }
   /deep/ .el-pager li {
     background: #303047;
     color: #fff;

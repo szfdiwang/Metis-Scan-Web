@@ -14,8 +14,8 @@
           <div style="width: 1.73rem">
             <span style="margin-left: 0.3rem">{{ $t('node.No') }}</span>
           </div>
-          <div style="width: 2.45rem">{{ $t('node.NameIdentifier') }}</div>
-          <div style="width: 4.4rem">{{ $t('node.ComputingPower') }}</div>
+          <div style="width: 2.3rem">{{ $t('node.NameIdentifier') }}</div>
+          <div style="width: 4.7rem">{{ $t('node.ComputingPower') }}</div>
           <div style="width: 1.95rem">{{ $t('node.Metadata') }}</div>
           <div style="width: 1.96rem">{{ $t('node.ParticipatedTasks') }}</div>
           <div style="width: 1rem">{{ $t('node.ActiveDegree') }}</div>
@@ -33,19 +33,19 @@
             <div>{{ item.orgName }}</div>
             <div id="id" class="icoFontlist" >{{ item.identityId }}</div>
           </div>
-          <div style="width: 4.5rem" class="power">
-            <div style="width: 1.6rem">
+          <div style="width: 5rem" class="power">
+            <div style="width: 2rem">
               <div style="display: flex">
-                <span style="width: 0.65rem; margin-top: 2px">C P U :</span>
+                <span style="width: 0.63rem; margin-top: 1.5px">C P U :</span>
                 <span style="width: 0.8rem">{{ item.dynamicFields.remainCore }} {{ $t('node.cores') }}</span>
               </div>
               <div style="display: flex; margin: 0.08rem 0">
                 <span style="width: 0.65rem">{{ $t('node.Memory') }} :</span>
-                <span style="width: 0.8rem">{{ item.dynamicFields.remainMemory }} MB</span>
+                <span style="width: 1rem">{{ item.dynamicFields.remainMemory }} MB</span>
               </div>
               <div style="display: flex">
                 <span style="width: 0.7rem"> {{ $t('node.Bandwidth') }} :</span>
-                <span style="width: 0.8rem">{{ item.dynamicFields.remainBandwidth }} Mbps</span>
+                <span style="width: 1.2rem">{{ item.dynamicFields.remainBandwidth }} Mbps</span>
               </div>
             </div>
             <div>
@@ -150,9 +150,6 @@ export default {
     this.getListOrgInfo()
   },
   methods: {
-    // getHot(idleDays) {
-    //   return Number(6 - idleDays < 0 ? 0 : 6 - idleDays)
-    // },
     handleCurrentChange(page) {
       this.curPage = page
       this.isShow = false
@@ -196,11 +193,6 @@ export default {
     opacity: 0.4;
     margin: 0.05rem 0;
     line-height: 0.9rem;
-
-    // img {
-    //   width: 100%;
-    //   height: 100%;
-    // }
   }
   .textBox {
     position: absolute;
@@ -270,9 +262,6 @@ export default {
     margin-left: 16rem;
   }
   #id {
-    // overflow: hidden;
-    // word-break: keep-all;
-    // text-overflow: ellipsis;
     width: 1.4rem;
     font-size: 0.12rem;
     padding-top: 0.14rem;
