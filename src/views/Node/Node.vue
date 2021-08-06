@@ -133,7 +133,6 @@
 </template>
 <script>
 import { nodeApi, dataApi } from '../../api/index'
-console.log('nodeApi', nodeApi)
 export default {
   data() {
     return {
@@ -163,7 +162,6 @@ export default {
         pageNo: this.curPage,
         pageSize: this.pageSize
       })
-      console.log('节点', res)
       if (res.code === 0) {
         this.data = res.data
         this.totalRows = res.totalRows

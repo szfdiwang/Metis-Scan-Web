@@ -1,5 +1,6 @@
 // TODO 转换单位 MB GB 
 export const changeSizeFn = (input) => {
+    if(input === undefined || input === null || input === '') return `0.00 B` 
     let size = ''
     if (input < 0.1 * 1024) { // 小于0.1KB，则转化成B
         size = `${input.toFixed(2)}B`

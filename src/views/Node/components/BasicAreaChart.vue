@@ -22,7 +22,6 @@ export default {
   computed: {},
   watch: {
     '$i18n.locale'(newValue) {
-      console.log('语言改变', newValue)
       this.dataChart.setOption(this.option)
     }
   },
@@ -150,8 +149,6 @@ export default {
           }
         ]
       }
-      console.log('走势图', this.numList)
-
       this.option && this.dataChart.setOption(this.option)
     }
   }

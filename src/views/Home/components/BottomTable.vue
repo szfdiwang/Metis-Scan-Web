@@ -4,9 +4,9 @@
       <ul class="tabs-box">
         <li v-for="menu in menuList" :key="menu.id" class="tabs-item-box pointer" @click="selectRank(menu.name)">
           <div class="tab-mini-box pointer" :class="{ active: curTab === menu.name }">
-            <div style="visibility: hidden">{{ $t('home.powerRank') }}</div>
+            <div style="visibility: hidden">{{ menu.label }}</div>
           </div>
-          <div class="tab-text pointer">{{ $t('home.powerRank') }}</div>
+          <div class="tab-text pointer">{{ menu.label }}</div>
         </li>
         <!-- <div class="tab-mini-box" :class="{ active: curTab === 'active' }" @click="selectRank('active')">
         {{ $t('home.activeRank') }}
@@ -29,7 +29,8 @@
             <Rankings :index="scope.$index" :curPage="curPage" :pageSize="pageSize" />
           </template>
         </el-table-column>
-        <el-table-column prop="orgName" :show-overflow-tooltip="true" :label="$t('home.name')" min-width="120"> </el-table-column>
+        <el-table-column prop="orgName" :show-overflow-tooltip="true" :label="$t('home.name')" min-width="120">
+        </el-table-column>
         <el-table-column
           prop="identityId"
           :show-overflow-tooltip="true"
@@ -177,7 +178,6 @@ export default {
           pageSize: this.pageSize
         })
         .then(res => {
-          console.log('initActivityRank', res)
           if (res.code === 0) {
             this.tableData = res.data
             this.totalNum = res.totalRows
@@ -191,7 +191,6 @@ export default {
           pageSize: this.pageSize
         })
         .then(res => {
-          console.log('initPowerRank', res)
           if (res.code === 0) {
             this.tableData = res.data
             this.totalNum = res.totalRows

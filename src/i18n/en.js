@@ -12,7 +12,8 @@ export default {
     memory: 'MEMORY',
     bandWidth: 'BANDWIDTH',
     search: 'SEARCH',
-    rank: 'No.'
+    rank: 'No.',
+    noData:'No Data'
   },
   home: {
     hello: 'Hello',
@@ -32,8 +33,8 @@ export default {
     powerTrend: 'Computing Power Growth Trend',
     dataTrend: 'Data Amount Growth Trend',
     center: 'Computing Center & Data Center',
-    growth: 'growth power',
-    global: 'global power',
+    growth: 'Growth Power',
+    global: 'Global Power',
     computeCenter: 'Computing center',
     dataCenter: 'Data center',
     name: 'Name',

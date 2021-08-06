@@ -34,7 +34,6 @@ function walk(dir) {
                     reject(err)
                   }
                   const arr = data.match(/[^\x00-\x7F]+/g)
-                  // console.log(filePath)
                   arr && chineseData.push(...arr)
                   resolve()
                 })

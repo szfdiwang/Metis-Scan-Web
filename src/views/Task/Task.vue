@@ -114,7 +114,6 @@
 import dayjs from 'dayjs'
 import { formatDate, formatDates } from '../../utils/tiem'
 import { taskApi } from '../../api/index'
-console.log('taskApi', taskApi)
 export default {
   components: { formatDate, formatDates },
   data() {
@@ -190,7 +189,6 @@ export default {
       })
       this.listTask = res.data
       this.totalRows = res.totalRows
-      console.log('任务', res)
     },
     TaskDetail(value) {
       this.$router.push({
@@ -201,7 +199,6 @@ export default {
       })
     },
     async pickerChange(value) {
-      console.log(value)
       const res = await taskApi.getListTask({
         pageNo: this.curPage,
         pageSize: this.pageSize,
@@ -210,10 +207,8 @@ export default {
       })
       this.listTask = res.data
       this.totalRows = res.totalRows
-      console.log('时间搜索任务列表', res)
     },
     async selectChange(label) {
-      console.log('23456', label)
       if (label === '成功') {
         this.label = 'success'
       } else {
@@ -224,10 +219,8 @@ export default {
         pageSize: this.pageSize,
         status: this.label
       })
-      console.log(label)
       this.listTask = res.data
       this.totalRows = res.totalRows
-      console.log('状态搜索任务', res)
     },
     formatDate(time) {
       return formatDate(time, 'YYYY-MM-DD HH:mm:ss')

@@ -9,7 +9,7 @@
 
 <script>
 import { homeApi } from '@/api/index'
-import { changeSizeToGb } from '@/utils/utils'
+import { changeSizeToGb, changeSizeFn } from '@/utils/utils'
 export default {
   components: {},
   data() {
@@ -25,7 +25,6 @@ export default {
   computed: {},
   watch: {
     '$i18n.locale'(newValue) {
-      console.log('切换了文字, 触发图标切换')
       // 不需要重新设置配置项，只需要手动触发一下setOption()
       this.option && this.dataChart.setOption(this.option)
     }
@@ -95,9 +94,9 @@ export default {
           ]
         },
         grid: {
-          left: 35,
-          top: 25,
-          right: 0,
+          left: 65,
+          top: 30,
+          right: 65,
           bottom: 75
         },
         xAxis: {
@@ -109,22 +108,55 @@ export default {
           boundaryGap: true,
           data: this.timeList // 固定的 当前天数向前推进30天
         },
-        yAxis: {
-          axisLabel: {
-            fontSize: 12,
-            color: '#DEE9FF'
+        yAxis: [
+          {
+            name: `${this.$t('home.global')}`,
+            nameTextStyle: {
+              color: '',
+              fontSize: 12
+            },
+            axisLabel: {
+              fontSize: 12,
+              color: '#DEE9FF',
+              formatter: params => changeSizeFn(params)
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#14153B',
+                width: 1
+              }
+            },
+
+            type: 'value',
+            scale: true
           },
-          splitLine: {
-            lineStyle: {
-              color: '#14153B',
-              width: 1
-            }
-          },
-          type: 'value'
-        },
+          {
+            name: `${this.$t('home.growth')}`,
+            nameTextStyle: {
+              color: '',
+              fontSize: 12
+            },
+            axisLabel: {
+              fontSize: 12,
+              color: '#DEE9FF',
+              formatter: params => changeSizeFn(params)
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#14153B',
+                width: 1
+              }
+            },
+
+            type: 'value',
+            scale: true
+          }
+        ],
         series: [
           {
+            name: 'global',
             data: this.totalData,
+            yAxisIndex: 0,
             type: 'line',
             lineStyle: {
               color: '#2A6EE6'
@@ -150,13 +182,11 @@ export default {
                   color: '#0B22FF'
                 }
               ]),
-              opacity: 0.2
+              opacity: 0.1
             },
             smooth: true,
-            name: 'global',
             label: {
               formatter: params => {
-                console.log('params========>', params)
                 return this.$t(`home.${params}`)
               }
             }
@@ -164,6 +194,7 @@ export default {
           {
             name: 'growth',
             data: this.growthData,
+            yAxisIndex: 1,
             type: 'bar',
             itemStyle: {
               color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [

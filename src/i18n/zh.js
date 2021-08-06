@@ -12,7 +12,8 @@ export default {
     memory: '内存',
     bandWidth: '带宽',
     search: '搜索',
-    rank: 'No.'
+    rank: 'No.',
+    noData:'暂无数据'
   },
   home: {
     hello: '你好',

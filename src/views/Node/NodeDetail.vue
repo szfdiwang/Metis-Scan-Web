@@ -125,7 +125,7 @@
               v-if="taskList.length < 1"
               style="text-align: center; margin-top: 180px; color: #413e3e; font-size: 20px"
             >
-              暂 无 数 据 。。。。
+              <el-empty :description="$t('common.noData')"></el-empty>
             </div>
             <div class="rankingTd" v-for="(item, index) in taskList" :key="index">
               <div style="width: 1.74rem" class="rankingTdImg">
@@ -192,7 +192,6 @@ import dayjs from 'dayjs'
 import { formatDate, formatDates } from '../../utils/tiem'
 import BasicAreaChart from './components/BasicAreaChart.vue'
 import { dataApi, nodeApi, taskApi } from '../../api/index'
-console.log('dataApi', dataApi, nodeApi)
 export default {
   components: { BasicAreaChart, formatDate, formatDates },
   data() {
@@ -248,7 +247,6 @@ export default {
       this.getListTask()
     },
     handleClick(tab) {
-      console.log('标签', tab.label)
       this.name = tab.name
       this.index = tab.index
     },
@@ -268,8 +266,6 @@ export default {
           deatil: '3'
         }
       })
-      // window.localStorage.setItem('metaDataId', value)
-      console.log(value, '标识111111111111')
     },
     async getOrgInfo() {
       const res = await dataApi.getListDataFileBy({
@@ -277,10 +273,8 @@ export default {
         pageNo: this.curPage,
         pageSize: this.pageSize
       })
-      console.log('本地', localStorage.getItem('id'))
       this.DataList = res.data
       this.totalRows = res.totalRows
-      console.log('元数据', this.totalRows)
     },
     async getListTask() {
       const res = await taskApi.getListTaskBy({
@@ -291,7 +285,6 @@ export default {
       this.id = localStorage.getItem('id')
       this.taskList = res.data
       this.totalRowss = res.totalRows
-      console.log('任务', res)
     },
     tabClick(value) {},
     formatDate(time) {

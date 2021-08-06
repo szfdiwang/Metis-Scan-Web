@@ -74,7 +74,6 @@
 </template>
 <script>
 import { dataApi } from '../../api/index'
-console.log('dataApi', dataApi)
 export default {
   data() {
     return {
@@ -97,7 +96,6 @@ export default {
           deatil: '3'
         }
       })
-      console.log('打印', value)
     },
     handleCurrentChange(page) {
       this.curPage = page
@@ -114,7 +112,6 @@ export default {
       })
       this.DataList = res.data
       this.totalRows = res.totalRows
-      console.log('shuju', res)
     }
   }
 }

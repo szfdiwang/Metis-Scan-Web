@@ -185,7 +185,6 @@
 <script>
 import { taskApi } from '../api/index'
 import { formatDate, formatDates } from '../utils/tiem'
-console.log('taskApi', taskApi)
 export default {
   data() {
     return {
@@ -238,8 +237,6 @@ export default {
       this.taskPowerprovider = res.data.taskPowerProviderList
       this.taskDataProviderList = res.data.taskDataProviderList
       this.taskAlgoProvider = res.data.taskAlgoProvider
-      console.log('算法提供方', this.taskAlgoProvider)
-      console.log('任务详情', res)
     },
     // 任务页面跳转
     async getTasks() {
@@ -252,15 +249,12 @@ export default {
       this.taskPowerprovider = res.data.taskPowerProviderList
       this.taskDataProviderList = res.data.taskDataProviderList
       this.taskAlgoProvider = res.data.taskAlgoProvider
-      console.log('算法提供方', this.taskAlgoProvider)
-      console.log('任务详情', res)
     },
     async getlog() {
       const res = await taskApi.getListTaskLog({
         taskId: this.Id
       })
       this.logList = res.data
-      console.log('日志', res)
     },
     async getlogs() {
       const res = await taskApi.getListTaskLog({

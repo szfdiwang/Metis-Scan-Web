@@ -9,6 +9,7 @@
 
 <script>
 import { homeApi } from '@/api/index'
+import { changeSizeFn } from '@/utils/utils'
 export default {
   components: {},
   data() {
@@ -40,7 +41,6 @@ export default {
       const startDate = this.$day(new Date()).subtract(30, 'day').format('YYYY-MM-DD')
       const res = await homeApi.getPowerTrend({ startDate, days: 30 })
       // TODO: 两个y轴数据
-      console.log('power', res)
       if (res.code !== 0) return
       this.growthData = res.data.dailyBandwidth
       this.totalData = res.data.totalBandwidth
@@ -55,7 +55,6 @@ export default {
           itemHeight: 5,
           itemWidth: 30,
           formatter: params => {
-            console.log('formatter params', params)
             return this.$t(`home.${params}`)
           },
           data: [
@@ -88,9 +87,9 @@ export default {
           ]
         },
         grid: {
-          left: 55,
-          top: 25,
-          right: 0,
+          left: 65,
+          top: 30,
+          right: 65,
           bottom: 75
         },
         xAxis: {
@@ -102,24 +101,45 @@ export default {
           boundaryGap: true,
           data: this.timeList
         },
-        yAxis: {
-          axisLabel: {
-            fontSize: 12,
-            color: '#DEE9FF'
+        yAxis: [
+          {
+            name: `${this.$t('home.global')}`,
+            axisLabel: {
+              fontSize: 12,
+              color: '#DEE9FF',
+              formatter: params => changeSizeFn(params)
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#14153B',
+                width: 1
+              }
+            },
+            type: 'value',
+            scale: true
           },
-          splitLine: {
-            lineStyle: {
-              color: '#14153B',
-              width: 1
-            }
-          },
-          type: 'value',
-          scale: true
-        },
+          {
+            name: `${this.$t('home.growth')}`,
+            axisLabel: {
+              fontSize: 12,
+              color: '#DEE9FF',
+              formatter: params => changeSizeFn(params)
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#14153B',
+                width: 1
+              }
+            },
+            type: 'value',
+            scale: true
+          }
+        ],
         series: [
           {
             data: this.totalData,
             type: 'line',
+            yAxisIndex: 0,
             lineStyle: {
               color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
@@ -143,7 +163,7 @@ export default {
                   color: '#AE0BFF'
                 }
               ]),
-              opacity: 0
+              opacity: 0.1
             },
             smooth: true,
             name: 'growth',
@@ -156,6 +176,7 @@ export default {
           {
             name: 'global',
             data: this.growthData,
+            yAxisIndex: 1,
             type: 'bar',
             itemStyle: {
               color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
