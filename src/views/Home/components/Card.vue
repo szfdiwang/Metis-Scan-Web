@@ -41,7 +41,7 @@ export default {
     taskCount: { type: Number, default: 0 },
     usedDataFileSize: { type: Number, default: 0 }, // 使用数据量
     powerServerCount: { type: Number, default: 0 },
-    dataServerCount: { type: Number, default: 0 }
+    totalOrgCount: { type: Number, default: 0 }
   },
   computed: {
     cardListUp() {
@@ -51,7 +51,7 @@ export default {
           name: 'nodeNum',
           label: this.$t('home.nodeNum'),
           desc: this.$t('home.nodeNumDesc'),
-          value: this.dataServerCount
+          value: this.totalOrgCount
         },
         {
           id: 2,
@@ -65,7 +65,7 @@ export default {
           name: 'completedTask',
           label: this.$t('home.completedTask'),
           desc: this.$t('home.completedTaskDesc'),
-          value: this.partnerCount
+          value: this.taskCount
         }
       ]
     },
@@ -91,7 +91,7 @@ export default {
           name: 'totalTask',
           label: this.$t('home.totalTask'),
           desc: this.$t('home.totalTaskDesc'),
-          value: this.taskCount
+          value: this.partnerCount
         }
       ]
     }

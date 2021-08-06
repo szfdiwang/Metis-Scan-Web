@@ -8,7 +8,7 @@
         >{{ $t('node.PARTICIPATINGNODESINTHEWHOLENETWORK') }}
       </div>
     </div>
-    <div style="padding: 0px 1.1rem" class="ImgBox">
+    <div style="padding: 0px 1.1rem">
       <div class="ranking">
         <div class="rankingTh">
           <div style="width: 1.73rem">
@@ -182,7 +182,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .nodeBox {
-  width: 1920px;
   position: relative;
   .imgBox {
     display: flex;
@@ -206,8 +205,10 @@ export default {
     }
   }
   .ranking {
-    padding: 0.2rem 0.2rem;
+    padding: 30px 0.2rem;
     position: relative;
+    min-height: 200px;
+    font-size: 0.14rem;
     .rankingTh {
       display: flex;
       height: 0.16rem;
@@ -239,6 +240,8 @@ export default {
     }
   }
   .Pagination {
+    position: absolute;
+    bottom: 0;
     display: flex;
     justify-content: space-between;
     .el-pagination {

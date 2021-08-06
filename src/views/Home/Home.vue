@@ -37,7 +37,7 @@
       :taskCount="taskCount"
       :usedDataFileSize="usedDataFileSize"
       :powerServerCount="powerServerCount"
-      :dataServerCount="dataServerCount"
+      :totalOrgCount="totalOrgCount"
     />
     <Map />
     <BottomTable :totalBandWidth="bandWidth" />
@@ -64,6 +64,7 @@ export default {
       memory: 0,
       bandWidth: 0,
       partnerCount: 0,
+      totalOrgCount: 0,
       dataFileSize: 0,
       taskCount: 0,
       usedDataFileSize: 0,
@@ -87,12 +88,14 @@ export default {
           this.cpu = res.data.totalCore || 0
           this.bandWidth = res.data.totalBandwidth || 0
 
-          this.partnerCount = res.data.partnerCount || 0
-          this.dataFileSize = res.data.dataFileSize || 0
-          this.taskCount = res.data.taskCount || 0
-          this.usedDataFileSize = res.data.usedDataFileSize || 0
-          this.powerServerCount = res.data.powerServerCount || 0
-          this.dataServerCount = res.data.dataServerCount || 0
+          this.partnerCount = res.data.partnerCount || 0 // 参与方总数
+          this.dataFileSize = res.data.dataFileSize || 0 // 上传数据量
+
+          this.usedDataFileSize = res.data.usedDataFileSize || 0 // 使用数据大小
+          this.powerServerCount = res.data.powerOrgCount || 0 // 提供算立方总数
+          this.dataServerCount = res.data.dataServerCount || 0 // 总人次
+          this.totalOrgCount = res.data.totalOrgCount || 0 // 总人次
+          this.taskCount = res.data.taskCount || 0 // 总完成任务 总数
         }
       })
     }

@@ -13,7 +13,7 @@
       <div class="ranking">
         <div class="rankingTh" style="height: 0.16rem; line-height: 0.16rem">
           <div style="width: 1.6rem">
-            <div style="margin-left: 0.3rem; width: 0.32rem; height: 0.16rem; text-align: center; line-height: 0.16rem">
+            <div style="margin-left: 0.3rem">
               {{ $t('data.No') }}
             </div>
           </div>
@@ -150,6 +150,7 @@ export default {
   .ranking {
     position: relative;
     padding: 12px 0;
+    font-size: 0.14rem;
     .rankingTh {
       margin: 0rem 0.2rem;
       display: flex;

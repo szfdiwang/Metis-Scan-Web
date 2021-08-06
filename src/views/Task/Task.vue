@@ -7,9 +7,7 @@
     </div>
     <div class="selectItem">
       <div style="display: flex; line-height: 0.4rem; text-align: center">
-        <div style="width: 0.66rem; height: 0.16rem; line-height: 0.16rem; margin-top: 0.13rem">
-          {{ $t('task.StatusItem') }}:
-        </div>
+        <div>{{ $t('task.StatusItem') }}:</div>
         <el-select
           v-model="value"
           :placeholder="$t('task.pleaseChoose')"
@@ -23,9 +21,7 @@
         </el-select>
       </div>
       <div style="display: flex; line-height: 0.4rem; text-align: center; margin-left: 0.2rem">
-        <div style="width: 0.66rem; height: 0.16rem; line-height: 0.16rem; margin-top: 0.13rem">
-          {{ $t('task.TimeSpan') }}:
-        </div>
+        <div>{{ $t('task.TimeSpan') }}:</div>
         <el-date-picker
           v-model="value1"
           type="datetimerange"
@@ -385,6 +381,7 @@ export default {
   .ranking {
     position: relative;
     padding: 0.12rem 0px;
+    font-size: 0.14rem;
     .rankingTh {
       margin: 0rem 0.2rem;
       display: flex;
