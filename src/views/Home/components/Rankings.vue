@@ -16,6 +16,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     index: {
@@ -32,7 +33,7 @@ export default {
     }
   },
   computed: {
-    curIndex: function() {
+    curIndex: function () {
       return (this.curPage - 1) * this.pageSize + this.index + 1
     }
   }

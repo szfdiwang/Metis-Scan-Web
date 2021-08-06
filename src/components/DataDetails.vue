@@ -96,7 +96,6 @@
 
 <script>
 import { dataApi } from '../api/index'
-console.log('dataApi', dataApi)
 export default {
   data() {
     return {

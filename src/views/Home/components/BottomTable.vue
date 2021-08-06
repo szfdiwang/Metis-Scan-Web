@@ -46,11 +46,11 @@
               </div>
               <div>
                 <span> {{ $t('common.memory') }}</span
-                >&nbsp;:&nbsp;<span>{{ scope.row.memory }}</span>
+                >&nbsp;:&nbsp;<span>{{ changeSizeFn(scope.row.memory) }}</span>
               </div>
               <div>
                 <span> {{ $t('common.bandWidth') }}</span
-                >&nbsp;:&nbsp;<span>{{ scope.row.bandwidth }}</span>
+                >&nbsp;:&nbsp;<span>{{ `${changeSizeFn(scope.row.bandwidth)}P/S` }}</span>
               </div>
             </div>
           </template>
@@ -100,6 +100,7 @@
 <script>
 import { homeApi } from '@/api/index'
 import Rankings from './Rankings'
+import { changeSizeFn } from '@/utils/utils'
 export default {
   components: {
     Rankings
@@ -140,6 +141,7 @@ export default {
     this.curTab === 'power' ? this.initPowerRank() : this.initActivityRank()
   },
   methods: {
+    changeSizeFn,
     handleCurrentChange(page) {
       this.curPage = page
       this.curTab === 'power' ? this.initPowerRank() : this.initActivityRank()

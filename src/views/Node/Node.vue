@@ -31,7 +31,7 @@
           </div>
           <div style="width: 2.5rem">
             <div>{{ item.orgName }}</div>
-            <div id="id" class="icoFontlist" >{{ item.identityId }}</div>
+            <div id="id" class="icoFontlist">{{ item.identityId }}</div>
           </div>
           <div style="width: 5rem" class="power">
             <div style="width: 2rem">
@@ -256,18 +256,18 @@ export default {
       }
     }
   }
-  /deep/ .el-select el-select--mini {
+  ::v-deep .el-select el-select--mini {
     margin-left: 16rem;
   }
   #id {
     width: 1.4rem;
     font-size: 0.12rem;
     padding-top: 0.14rem;
-    white-space:nowrap; 
-  	overflow: hidden;    	
-  	text-overflow: ellipsis;	
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  
+
   .hot {
     width: 2rem;
     display: flex;
