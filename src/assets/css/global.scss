@@ -29,8 +29,23 @@
 }
 
 .clip-border {
-  background-image: url(../img/home/left-top.svg), url(../img/home/right-top.svg),
-    url(../img/home/right-bottom.svg), url(../img/home/left-bottom.svg);
-  background-position: left top, right top, right bottom, left bottom;
-  background-repeat: no-repeat;
+    background-image: url(../img/home/left-top.svg), url(../img/home/right-top.svg), url(../img/home/right-bottom.svg),
+        url(../img/home/left-bottom.svg);
+    background-position: left top, right top, right bottom, left bottom;
+    background-repeat: no-repeat;
+}
+
+.success {
+    color: #5bc49f;
+}
+
+.failed {
+    color: #f24b4b;
+}
+
+.longText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 20px;
 }

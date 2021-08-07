@@ -41,11 +41,11 @@
               </div>
               <div style="display: flex; margin: 0.08rem 0">
                 <span style="width: 0.65rem">{{ $t('node.Memory') }} :</span>
-                <span style="width: 1rem">{{ item.dynamicFields.remainMemory }} MB</span>
+                <span style="width: 1rem">{{ changeSizeFn(item.dynamicFields.remainMemory) }}</span>
               </div>
               <div style="display: flex">
                 <span style="width: 0.7rem"> {{ $t('node.Bandwidth') }} :</span>
-                <span style="width: 1.2rem">{{ item.dynamicFields.remainBandwidth }} Mbps</span>
+                <span style="width: 1.2rem">{{ changeSizeFn(item.dynamicFields.remainBandwidth) }}P/S</span>
               </div>
             </div>
             <div>
@@ -53,7 +53,7 @@
                 <div>
                   {{ $t('node.Remaining') }}:<span style="margin-left: 0.1rem"
                     >{{
-                      item.dynamicFields.totalCore / item.dynamicFields.remainCore === NaN
+                      isNaN(item.dynamicFields.totalCore / item.dynamicFields.remainCore)
                         ? 0
                         : item.dynamicFields.totalCore / item.dynamicFields.remainCore
                     }}
@@ -63,7 +63,7 @@
                 <div style="margin: 0.08rem 0">
                   {{ $t('node.Remaining') }}:<span style="margin-left: 0.1rem"
                     >{{
-                      [item.dynamicFields.totalMemory / item.dynamicFields] === NaN
+                      isNaN(item.dynamicFields.totalMemory / item.dynamicFields)
                         ? 0
                         : item.dynamicFields.totalMemory / item.dynamicFields
                     }}%</span
@@ -133,6 +133,7 @@
 </template>
 <script>
 import { nodeApi, dataApi } from '../../api/index'
+import { changeSizeFn } from '@/utils/utils'
 export default {
   data() {
     return {
@@ -149,6 +150,7 @@ export default {
     this.getListOrgInfo()
   },
   methods: {
+    changeSizeFn,
     handleCurrentChange(page) {
       this.curPage = page
       this.isShow = false

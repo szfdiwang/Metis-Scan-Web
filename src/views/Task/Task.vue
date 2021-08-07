@@ -15,9 +15,9 @@
           @visible-change="seleOpen"
           :popper-append-to-body="false"
         >
-          <el-option :label="$t('task.All')" :value="$t('task.All')"></el-option>
-          <el-option :label="$t('task.success')" :value="$t('task.success')"></el-option>
-          <el-option :label="$t('task.failed')" :value="$t('task.failed')"></el-option>
+          <el-option :label="$t('task.All')" value=""></el-option>
+          <el-option :label="$t('task.success')" value="success"></el-option>
+          <el-option :label="$t('task.failed')" value="failed"></el-option>
         </el-select>
       </div>
       <div style="display: flex; line-height: 0.4rem; text-align: center; margin-left: 0.2rem">
@@ -64,15 +64,17 @@
             {{ item.taskName }}
           </div>
           <div style="width: 2.2rem">
-            <div>{{ item.id }}</div>
+            <el-tooltip effect="dark" :content="item.id" placement="top-start">
+              <p class="longText">{{ item.id }}</p>
+            </el-tooltip>
           </div>
           <div style="width: 2.38rem">{{ item.dynamicFields.sponsorName }}</div>
           <div style="width: 2rem">
-            <span style="color: #5bc49f">{{ $t('task.success') }}</span>
-            <span v-if="item.status === 'Failed'" style="color: #f24b4b">{{ item.status }}</span>
+            <span v-if="item.status === 'failed'" style="color: #f24b4b">{{ $t('task.failed') }}</span>
+            <span v-else style="color: #5bc49f">{{ $t('task.success') }}</span>
           </div>
-          <div style="width: 2.4rem">{{ formatDate(item.createAt) }}</div>
-          <div style="width: 1rem">{{ formatDates(getTimeStamp(item.endAt) - getTimeStamp(item.createAt)) }}</div>
+          <div style="width: 2.4rem">{{ dayjs(item.createAt).format('YYYY-MM-DD HH:mm:ss') }}</div>
+          <div style="width: 1rem">{{ dayjs(dayjs(item.endAt).diff(item.createAt)).format('HH:mm:ss') }}</div>
           <div
             style="
               color: #fec43e;
@@ -108,10 +110,9 @@
 </template>
 <script>
 import dayjs from 'dayjs'
-import { formatDate, formatDates } from '../../utils/tiem'
 import { taskApi } from '../../api/index'
+
 export default {
-  components: { formatDate, formatDates },
   data() {
     return {
       value: '',
@@ -169,6 +170,7 @@ export default {
     }
   },
   methods: {
+    dayjs,
     seleOpen() {},
     handleCurrentChange(page) {
       this.curPage = page
@@ -217,17 +219,6 @@ export default {
       })
       this.listTask = res.data
       this.totalRows = res.totalRows
-    },
-    formatDate(time) {
-      return formatDate(time, 'YYYY-MM-DD HH:mm:ss')
-    },
-    getTimeStamp(str) {
-      var date = new Date(str)
-      // 可以准确精确到毫秒
-      return date.getTime(date)
-    },
-    formatDates(time) {
-      return formatDate(time, 'HH:mm:ss')
     }
   }
 }

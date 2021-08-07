@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import TaskDetail from '../../components/TaskDeta.vue'
+import TaskDetail from '../../components/TaskDetail.vue'
 export default {
   components: { TaskDetail },
   data() {

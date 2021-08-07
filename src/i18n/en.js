@@ -59,7 +59,7 @@ export default {
     Remaining: 'Remaining',
     Detail: 'View details',
     metadata: 'Metadata',
-    Tasks: 'Tasks',
+    task: 'Tasks',
     Size: ' Size',
     Columns: 'Columns',
     Rows: 'Rows',

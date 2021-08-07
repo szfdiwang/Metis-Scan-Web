@@ -59,7 +59,7 @@ export default {
     Remaining: '剩余',
     Detail: '查看详情',
     metadata: '元数据',
-    Tasks: '任务',
+    task: '任务',
     Size: '数据大小',
     Columns: '字段数量',
     Rows: '条数',

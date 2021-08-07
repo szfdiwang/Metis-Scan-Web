@@ -1,7 +1,7 @@
 <template>
-  <div class="TakDetail">
-    <div class="TakDetailTop">
-      <div class="picBox" @click="comment">
+  <div class="TaskDetail">
+    <div class="TaskDetailTop">
+      <div class="picBox" @click="back">
         <img src="../assets/img/node/3.icon1.svg" alt="" class="pic" />
       </div>
       <div class="bank">XXXBANK</div>
@@ -11,18 +11,22 @@
       <div class="stepper">
         <div class="ste">
           <div class="ste1">
-            <div style="width: 2rem; margin: 0.2rem 0 0 -0.4rem">{{ formatDate(taskList.createAt) }}</div>
+            <div style="width: 2rem; margin: 0.2rem 0 0 -0.4rem">
+              {{ dayjs(taskList.createAt).format('YYYY-MM-DD HH:mm:ss') }}
+            </div>
             <div style="width: 1rem; margin: -0.1rem 0 0 -0.3rem">
               {{ $t('task.TaskStarted') }}
             </div>
           </div>
           <div class="ste2">
             <div style="margin: 0.1rem 0 0 2.5rem">
-              Time spent : {{ formatDates(getTimeStamp(taskList.createAt) - getTimeStamp(taskList.startAt)) }}
+              Time spent : {{ dayjs(dayjs(taskList.createAt).diff(taskList.startAt)).format('HH:mm:ss') }}
             </div>
           </div>
           <div class="ste3">
-            <div style="width: 2rem; margin: 0.2rem 0 0 -0.4rem">{{ formatDate(taskList.startAt) }}</div>
+            <div style="width: 2rem; margin: 0.2rem 0 0 -0.4rem">
+              {{ dayjs(taskList.startAt).format('YYYY-MM-DD HH:mm:ss') }}
+            </div>
             <div style="width: 1.9rem; margin: -0.1rem 0 0 -0.8rem; color: #5bc49f">
               <div style="text-align: center">
                 {{ $t('task.ComputationSucceeded') }}
@@ -37,17 +41,17 @@
       </div>
     </div>
     <div class="content" v-if="isShow">
-      <div v-if="isShow">
+      <div>
         <div class="participants">
           <div class="text">{{ $t('task.taskSponsor') }}</div>
         </div>
         <div class="participantsData">
           <div>
-            <span style="margin-left: 1.3rem">{{ $t('task.Name') }}</span>
+            <span style="margin-left: 1.2rem">{{ $t('task.Name') }}</span>
             <span style="margin-left: 2.66rem">{{ $t('task.Id') }}</span>
           </div>
           <div class="td">
-            <span style="margin-left: 1.3rem">{{ sponsor.orgName }}</span>
+            <span style="margin-left: 1.2rem">{{ sponsor.orgName }}</span>
             <span style="margin-left: 2.05rem"> {{ sponsor.identityId }}</span>
           </div>
         </div>
@@ -56,7 +60,7 @@
             <div class="text">{{ $t('task.ResultReceiver') }}</div>
           </div>
           <div class="ResultReceiverTh">
-            <div style="width: 1.22rem">
+            <div style="width: 1.2rem">
               <span style="padding-left: 0.2rem">{{ $t('task.No') }}</span>
             </div>
             <div style="width: 3.1rem">{{ $t('task.Name') }}</div>
@@ -71,16 +75,16 @@
           </div>
         </div>
         <!-- 算法提供方 -->
-        <div class="participants"  style="margin-top:0.4rem ;">
+        <div class="participants" style="margin-top: 0.4rem">
           <div class="text">{{ $t('task.AlgorithmProvider') }}</div>
         </div>
         <div class="participantsData">
           <div>
-            <span style="margin-left: 1.3rem">{{ $t('task.Name') }}</span>
+            <span style="margin-left: 1.2rem">{{ $t('task.Name') }}</span>
             <span style="margin-left: 2.66rem">{{ $t('task.Id') }}</span>
           </div>
           <div class="td">
-            <span style="margin-left: 1.3rem">{{ taskAlgoProvider.dynamicFields.orgName }}</span>
+            <span style="margin-left: 1.2rem">{{ taskAlgoProvider.dynamicFields.orgName }}</span>
             <span style="margin-left: 2.05rem"> {{ this.taskAlgoProvider.identityId }}</span>
           </div>
         </div>
@@ -107,7 +111,7 @@
             </div>
             <div style="width: 3.12rem">{{ item.dynamicFields.orgName }}</div>
             <div style="width: 4.21rem">{{ item.identityId }}</div>
-            <div style="width: 3rem" class="taskId">
+            <div class="taskId">
               <div>{{ item.dynamicFields.resourceName }}</div>
               <div style="margin-left: 0.2rem">
                 ID: <span style="margin-left: 0.1rem">{{ item.taskId }}</span>
@@ -117,7 +121,7 @@
         </div>
       </div>
       <!-- 2 -->
-      <div class="Data" style="margin-top: 0.1rem" v-if="isShow">
+      <div class="Data" style="margin-top: 0.1rem">
         <div class="dataPic">
           <div class="text">{{ $t('task.PROVIDERS') }}</div>
         </div>
@@ -141,8 +145,8 @@
           <div style="width: 4.21rem">{{ item.identityId }}</div>
           <div style="width: 7rem" class="data">
             <span>CPU ：{{ item.usedCore }}</span>
-            <span style="margin: 0px 0.5rem">{{ $t('node.Memory') }} ：{{ item.usedMemory }}</span>
-            <span>{{ $t('node.Bandwidth') }} ： {{ item.usedBandwidth }}</span>
+            <span style="margin: 0px 0.5rem">{{ $t('node.Memory') }} ：{{ changeSizeFn(item.usedMemory) }}</span>
+            <span>{{ $t('node.Bandwidth') }} ： {{ `${changeSizeFn(item.usedBandwidth)}P/S` }}</span>
           </div>
         </div>
       </div>
@@ -152,7 +156,7 @@
       <img src="../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
     </div>
     <!-- 日志板块 -->
-    <div class="TaskLog" v-if="show">
+    <div class="TaskLog" v-if="!isShow">
       <div class="TaskLogTh">
         <div style="width: 2rem">
           <span style="margin-left: 30px">{{ $t('node.No') }}</span>
@@ -172,7 +176,7 @@
         </div>
         <div style="width: 3.12rem">{{ item.eventType }}</div>
         <div style="width: 3.6rem">{{ item.dynamicFields.orgName }}</div>
-        <div style="width: 3.6rem">{{ formatDate(item.eventAt) }}</div>
+        <div style="width: 3.6rem">{{ dayjs(item.eventAt).format('YYYY-MM-DD HH:mm:ss') }}</div>
         <div>{{ item.eventContent }}</div>
       </div>
       <img src="../assets/img/node/border/1.svg" alt="" class="borderBtmRight" />
@@ -184,7 +188,8 @@
 </template>
 <script>
 import { taskApi } from '../api/index'
-import { formatDate, formatDates } from '../utils/tiem'
+import { changeSizeFn, thousandMark } from '../utils/utils'
+import dayjs from 'dayjs'
 export default {
   data() {
     return {
@@ -218,7 +223,10 @@ export default {
     }
   },
   methods: {
-    comment() {
+    dayjs,
+    changeSizeFn,
+    thousandMark,
+    back() {
       this.$router.go(-1)
     },
     log() {
@@ -261,27 +269,16 @@ export default {
         taskId: this.id
       })
       this.logList = res.data
-    },
-    formatDate(time) {
-      return formatDate(time, 'YYYY-MM-DD HH:mm:ss')
-    },
-    getTimeStamp(str) {
-      var date = new Date(str)
-      // 可以准确精确到毫秒
-      return date.getTime(date)
-    },
-    formatDates(time) {
-      return formatDate(time, 'HH:mm:ss')
     }
   }
 }
 </script>
 <style  lang='scss' scoped>
-.TakDetail {
+.TaskDetail {
   padding: 0 1.1rem;
   line-height: 0.42rem;
   margin-bottom: 0.5rem;
-  .TakDetailTop {
+  .TaskDetailTop {
     height: 0.42rem;
     display: flex;
     margin-top: 0.3rem;
@@ -337,10 +334,11 @@ export default {
     margin: 0 0.2rem;
     width: 2.69rem;
     height: 0.4rem;
-    background: url('../assets/img/node/btn.svg');
+    background: url('../assets/img/node/btn.svg') no-repeat;
+    background-size: 100% 100%;
     .text {
       text-align: center;
-      line-height: 0.4rem;
+      // line-height: 0.4rem;
     }
   }
   .participantsData {
@@ -358,10 +356,11 @@ export default {
     .dataPic {
       width: 2.69rem;
       height: 0.4rem;
-      background: url('../assets/img/node/btn.svg');
+      background: url('../assets/img/node/btn.svg') no-repeat;
+      background-size: 100% 100%;
       .text {
         text-align: center;
-        line-height: 40px;
+        // line-height: 40px;
       }
     }
     .precedence {

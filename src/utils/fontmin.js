@@ -12,6 +12,9 @@ const excludeDir = ['node_modules', '.nuxt', '.git', '.svn', 'config']
 // const includeDir = [ 'src', 'i18n',]
 const chineseData = []
 const fileExtReg = new RegExp(`\\.(${ext.replace(/\,/g, '|')})$`, 'i')
+
+
+
 // const fontmin = new Fontmin().src(fontSrc).use(Fontmin.otf2ttf()).dest(fontDest) // otf2ttf
 
 function walk(dir) {
@@ -47,6 +50,9 @@ function walk(dir) {
     })
   })
 }
+
+fs.stat()
+
 
 const fontmin = new Fontmin().src(fontSrc).dest(fontDest)
 

@@ -18,17 +18,17 @@
         </div>
         <div style="display: flex; margin-left: 1.16rem; height: 0.16rem; line-height: 0.16rem">
           <div style="width: 1.5rem">{{ $t('data.INFORMATIONOFFIFLDS') }}:</div>
-          <div>{{ dataList.rows }}</div>
+          <div>{{ thousandMark(dataList.rows) }}</div>
         </div>
       </div>
       <div style="display: flex; margin: 0.1rem 0; height: 0.16rem; line-height: 0.16rem">
         <div style="display: flex">
           <div style="width: 1.3rem">{{ $t('data.Size0fData') }}:</div>
-          <div style="margin-left: 0.45rem; width: 2rem">{{ (dataList.size / 1024).toFixed(2) }} GB</div>
+          <div style="margin-left: 0.45rem; width: 2rem">{{ changeSizeFn(dataList.size) }}</div>
         </div>
         <div style="display: flex; margin-left: 2.16rem">
           <div style="width: 1rem">{{ $t('data.NumberOfData') }} :</div>
-          <div style="margin-left: 0.52rem">{{ dataList.columns }}</div>
+          <div style="margin-left: 0.52rem">{{ thousandMark(dataList.columns) }}</div>
         </div>
       </div>
     </div>
@@ -48,9 +48,9 @@
             <div style="width: 0.5rem; margin-left: 0.3rem">{{ $t('node.No') }}</div>
             <div style="width: 4rem; margin-left: 0.55rem">{{ $t('data.FieldName') }}</div>
           </div>
-          <div style="width: 5.4rem; display: flex;text-align: center;" v-if="metaList.length > 10">
-            <div style="width: 0.5rem; margin-left: 0.3rem;">{{ $t('node.No') }}</div>
-            <div style="width: 2rem;">{{ $t('data.FieldName') }}</div>
+          <div style="width: 5.4rem; display: flex; text-align: center" v-if="metaList.length > 10">
+            <div style="width: 0.5rem; margin-left: 0.3rem">{{ $t('node.No') }}</div>
+            <div style="width: 2rem">{{ $t('data.FieldName') }}</div>
           </div>
           <div style="width: 5.4rem; display: flex; margin-left: 2.8rem" v-if="metaList.length == 10">
             <div style="width: 0.5rem; margin-left: 0.4rem">{{ $t('node.No') }}</div>
@@ -96,6 +96,7 @@
 
 <script>
 import { dataApi } from '../api/index'
+import { changeSizeFn, thousandMark } from '@/utils/utils'
 export default {
   data() {
     return {
@@ -124,6 +125,8 @@ export default {
     }
   },
   methods: {
+    changeSizeFn,
+    thousandMark,
     handleCurrentChange(page) {
       this.curPage = page
       if ((this.id = this.$route.query.metaDataId)) {
@@ -236,7 +239,7 @@ export default {
     display: flex;
   }
   .rankingList {
-   height: 3.5rem;
+    height: 3.5rem;
     padding: 0px 0.1rem;
     display: flex;
     flex-direction: column;

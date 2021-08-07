@@ -1,16 +1,9 @@
 <template>
-  <div>
-    <data-details></data-details>
-  </div>
+  <data-details></data-details>
 </template>
 <script>
 import DataDetails from '../../components/DataDetails.vue'
 export default {
-  components: { DataDetails },
-  data() {
-    return {
-      
-    }
-  },
+  components: { DataDetails }
 }
 </script>

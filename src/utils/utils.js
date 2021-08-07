@@ -11,7 +11,7 @@ export const changeSizeFn = (input) => {
     } else { // 其他转化成GB
         size = `${(input / (1024 * 1024 * 1024)).toFixed(2)} GB`
     }
-    return isZeroEnd(size)
+    return size
 }
 
 // TODO 转换单位 MB GB 

@@ -37,7 +37,7 @@
           </div>
           <div style="width: 3.8rem">{{ item.identityId }}</div>
           <div style="width: 2.5rem">{{ item.dynamicFields.orgName }}</div>
-          <div style="width: 2.42rem">{{ (item.size / 1024 / 1024).toFixed(2) }}MB</div>
+          <div style="width: 2.42rem">{{ changeSizeFn(item.size) }}</div>
           <div style="width: 0.9rem">{{ item.dynamicFields.taskCount }}</div>
           <div
             style="
@@ -74,6 +74,7 @@
 </template>
 <script>
 import { dataApi } from '../../api/index'
+import { changeSizeFn } from '@/utils/utils'
 export default {
   data() {
     return {
@@ -88,6 +89,7 @@ export default {
     this.getListData()
   },
   methods: {
+    changeSizeFn,
     DataMeat(value) {
       this.$router.push({
         path: '/data/DataDetail',

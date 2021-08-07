@@ -6,7 +6,7 @@
         <img src="../../assets/img/node/3.icon1.svg" alt="" class="pic" />
       </div>
       <div class="bank">XXXBANK</div>
-      <div class="Identifier">Identifier：{{ this.id }}</div>
+      <div class="Identifier">Identifier：{{ id }}</div>
     </div>
     <div style="text-align: center" class="title">
       <div class="NumberTasks">
@@ -18,182 +18,176 @@
       <img src="../../assets/img/node/nodeborder/border4.svg" class="bottomLeft" alt="" />
     </div>
     <div style="padding: 0px 1.11rem">
-      <basic-area-chart :id="this.id"></basic-area-chart>
+      <basic-area-chart :id="id"></basic-area-chart>
     </div>
     <div class="tab" style="padding: 0px 1.11rem">
-      <div class="data">{{ $t('node.metadata') }}</div>
-      <div class="task">
-        <div class="text">{{ $t('node.Tasks') }}</div>
-      </div>
-      <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane name="first" label="元数据">
-          <div slot="label" :class="{ active: index == '0' }" class="Metadatayy" style="font-size: 0px">
-            {{ $t('node.metadata') }}：100
+      <ul class="tab-box">
+        <li v-for="tab in tabList" :key="tab.name" class="tab-item-box pointer" @click="handleClick(tab)">
+          <div class="tab-wrapper-box pointer" :class="{ active: tab.name === activeName }"></div>
+          <p class="tab-text-box pointer">{{ $t(`node.${tab.label}`) }}</p>
+        </li>
+      </ul>
+      <div v-if="activeName === 'metadata'" class="content" style="padding: 0.1rem 0.2rem">
+        <div class="ranking">
+          <div class="rankingTh">
+            <div style="width: 1.44rem">
+              <span style="margin-left: 0.3rem">{{ $t('data.No') }}</span>
+            </div>
+            <div style="width: 2.98rem">{{ $t('data.NameIdentifier') }}</div>
+            <div style="width: 2.65rem">{{ $t('node.Size') }}</div>
+            <div style="width: 2.57rem">{{ $t('node.Columns') }}</div>
+            <div style="width: 2.62rem">{{ $t('node.Rows') }}</div>
+            <div style="width: 1rem">{{ $t('data.ParticipatedTasks') }}</div>
+            <div></div>
           </div>
-          <div class="conent" style="padding: 0.1rem 0.2rem">
-            <div class="ranking">
-              <div class="rankingTh">
-                <div style="width: 1.44rem">
-                  <span style="margin-left: 0.3rem">{{ $t('data.No') }}</span>
-                </div>
-                <div style="width: 2.98rem">{{ $t('data.NameIdentifier') }}</div>
-                <div style="width: 2.65rem">{{ $t('node.Size') }}</div>
-                <div style="width: 2.57rem">{{ $t('node.Columns') }}</div>
-                <div style="width: 2.62rem">{{ $t('node.Rows') }}</div>
-                <div style="width: 1rem">{{ $t('data.ParticipatedTasks') }}</div>
-                <div></div>
+        </div>
+        <div class="rankingTd" v-for="(item, index) in DataList" :key="index">
+          <div style="width: 1.44rem" class="rankingTdImg">
+            <div id="xh">
+              <div class="order">
+                <div class="num">{{ (curPage - 1) * pageSize + index + 1 }}</div>
               </div>
             </div>
-            <div class="rankingTd" v-for="(item, index) in DataList" :key="index">
-              <div style="width: 1.44rem" class="rankingTdImg">
-                <div id="xh">
-                  <div class="order">
-                    <div class="num">{{ (curPage - 1) * pageSize + index + 1 }}</div>
-                  </div>
-                </div>
-              </div>
-              <div style="width: 3rem">
-                <div>{{ item.resourceName }}</div>
-                <div
-                  style="
-                    font-size: 0.12rem;
-                    margin-top: 0.14rem;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    width: 1.3rem;
-                  "
-                >
-                  {{ item.metaDataId }}
-                </div>
-              </div>
-              <template>
-                <div style="width: 2.7rem">{{ (item.size / 1024 / 1024).toFixed(2) }}MB</div>
-              </template>
-              <div style="width: 2.54rem">{{ item.columns }}</div>
-              <div style="width: 2.62rem">{{ item.rows }}</div>
-              <div style="width: 0.9rem">{{ item.dynamicFields.taskCount }}</div>
-              <div
-                style="
-                  color: #fec43e;
-                  cursor: pointer;
-                  width: 2.8rem;
-                  height: 100%;
-                  line-height: 0.94rem;
-                  text-align: center;
-                "
-                @click="MetaData(item.metaDataId)"
-              >
-                {{ $t('node.Detail') }}
-              </div>
-            </div>
-            <div class="Pagination">
-              <el-pagination
-                background
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="curPage"
-                :page-size="pageSize"
-                layout="total, prev, pager, next"
-                :total="totalRows"
-              >
-              </el-pagination>
-            </div>
-            <img src="../../assets/img/node/border/1.svg" alt="" class="borderBottomRight" />
-            <img src="../../assets/img/node/border/2.svg" alt="" class="borderTopRight" />
-            <img src="../../assets/img/node/border/3.svg" alt="" class="borderBottomLeft" />
-            <img src="../../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
           </div>
-        </el-tab-pane>
-        <el-tab-pane name="second" label="任务" stretch="true" @tab-click="tabClick">
-          <div slot="label" :class="{ active: index == '1' }" style="font-size: 0">{{ $t('node.Tasks') }}：100</div>
-          <div class="conent" style="padding: 0.1rem 0.2rem">
-            <div class="ranking">
-              <div class="rankingTh">
-                <div style="width: 1.74rem">
-                  <span style="margin-left: 0.3rem">{{ $t('task.No') }}</span>
-                </div>
-                <div style="width: 2.6rem">{{ $t('data.NameIdentifier') }}</div>
-                <div style="width: 2.6rem">{{ $t('task.Capacity') }}</div>
-                <div style="width: 2.24rem">{{ $t('task.Status') }}</div>
-                <div style="width: 2.82rem">{{ $t('task.StartTime') }}</div>
-                <div style="width: 1rem">{{ $t('task.TimeSpent') }}</div>
-                <div style="width: 2.8rem"></div>
-              </div>
-            </div>
+          <div style="width: 3rem">
+            <div>{{ item.resourceName }}</div>
             <div
-              v-if="taskList.length < 1"
-              style="text-align: center; margin-top: 180px; color: #413e3e; font-size: 20px"
+              style="
+                font-size: 0.12rem;
+                margin-top: 0.14rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 1.3rem;
+              "
             >
-              <el-empty :description="$t('common.noData')"></el-empty>
+              {{ item.metaDataId }}
             </div>
-            <div class="rankingTd" v-for="(item, index) in taskList" :key="index">
-              <div style="width: 1.74rem" class="rankingTdImg">
-                <div id="xh">
-                  <div class="order">
-                    <div class="num">{{ (curPages - 1) * pageSizes + index + 1 }}</div>
-                  </div>
-                </div>
-              </div>
-              <div style="width: 2.6rem">
-                <div>{{ item.taskName }}</div>
-                <div style="font: size 0.12rem; margin-top: 0.14rem">
-                  ID: <span style="margin-left: 0.05rem">{{ item.id }}</span>
-                </div>
-              </div>
-              <div style="width: 2.6rem">
-                <template>
-                  <div v-if="item.dynamicFields.taskSponsor === 1">{{ $t('task.taskSponsor') }}</div>
-                  <div v-if="item.dynamicFields.dataProvider === 1">{{ $t('task.DataProvider') }}</div>
-                  <div v-if="item.dynamicFields.powerProvider === 1">{{ $t('task.powerProvider') }}</div>
-                </template>
-              </div>
-              <div style="width: 2.24rem; color: #5bc49f">{{ item.status }}</div>
-              <div style="width: 2.82rem">{{ formatDate(item.createAt) }}</div>
-              <div style="width: 1.1rem">{{ formatDates(getTimeStamp(item.startAt) - getTimeStamp(item.endAt)) }}</div>
-              <div
-                style="
-                  color: #fec43e;
-                  cursor: pointer;
-                  width: 2.8rem;
-                  height: 100%;
-                  line-height: 0.94rem;
-                  text-align: center;
-                "
-                @click="TaskDetail(item.id)"
-              >
-                {{ $t('node.Detail') }}
-              </div>
-            </div>
-            <div class="Pagination" v-if="taskList.length > 1">
-              <el-pagination
-                background
-                @size-change="handleSizeChanges"
-                @current-change="handleCurrentChanges"
-                :current-page="curPages"
-                :page-size="pageSizes"
-                layout="total, prev, pager, next"
-                :total="totalRowss"
-              >
-              </el-pagination>
-            </div>
-            <img src="../../assets/img/node/border/1.svg" alt="" class="borderBottomRight" />
-            <img src="../../assets/img/node/border/2.svg" alt="" class="borderTopRight" />
-            <img src="../../assets/img/node/border/3.svg" alt="" class="borderBottomLeft" />
-            <img src="../../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
           </div>
-        </el-tab-pane>
-      </el-tabs>
+          <template>
+            <div style="width: 2.7rem">{{ changeSizeFn(item.size) }}</div>
+          </template>
+          <div style="width: 2.54rem">{{ thousandMark(item.columns) }}</div>
+          <div style="width: 2.62rem">{{ thousandMark(item.rows) }}</div>
+          <div style="width: 0.9rem">{{ thousandMark(item.dynamicFields.taskCount) }}</div>
+          <div
+            style="
+              color: #fec43e;
+              cursor: pointer;
+              width: 2.8rem;
+              height: 100%;
+              line-height: 0.94rem;
+              text-align: center;
+            "
+            @click="MetaData(item.metaDataId)"
+          >
+            {{ $t('node.Detail') }}
+          </div>
+        </div>
+        <div class="Pagination">
+          <el-pagination
+            background
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="curPage"
+            :page-size="pageSize"
+            layout="total, prev, pager, next"
+            :total="totalRows"
+          >
+          </el-pagination>
+        </div>
+        <img src="../../assets/img/node/border/1.svg" alt="" class="borderBottomRight" />
+        <img src="../../assets/img/node/border/2.svg" alt="" class="borderTopRight" />
+        <img src="../../assets/img/node/border/3.svg" alt="" class="borderBottomLeft" />
+        <img src="../../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
+      </div>
+      <div v-else class="content" style="padding: 0.1rem 0.2rem">
+        <div class="ranking">
+          <div class="rankingTh">
+            <div style="width: 1.74rem">
+              <span style="margin-left: 0.3rem">{{ $t('task.No') }}</span>
+            </div>
+            <div style="width: 2.6rem">{{ $t('data.NameIdentifier') }}</div>
+            <div style="width: 2.6rem">{{ $t('task.Capacity') }}</div>
+            <div style="width: 2.24rem">{{ $t('task.Status') }}</div>
+            <div style="width: 2.82rem">{{ $t('task.StartTime') }}</div>
+            <div style="width: 1rem">{{ $t('task.TimeSpent') }}</div>
+            <div style="width: 2.8rem"></div>
+          </div>
+        </div>
+        <!-- <div v-if="taskList.length < 1" style="text-align: center; margin-top: 180px; color: #413e3e; font-size: 20px">
+          <el-empty :description="$t('common.noData')"></el-empty>
+        </div> -->
+        <div class="rankingTd" v-for="(item, index) in taskList" :key="index">
+          <div style="width: 1.74rem" class="rankingTdImg">
+            <div id="xh">
+              <div class="order">
+                <div class="num">{{ (curPages - 1) * pageSizes + index + 1 }}</div>
+              </div>
+            </div>
+          </div>
+          <div style="width: 2.6rem">
+            <div>{{ item.taskName }}</div>
+            <div style="font: size 0.12rem; margin-top: 0.14rem">
+              ID: <span style="margin-left: 0.05rem">{{ item.id }}</span>
+            </div>
+          </div>
+          <div style="width: 2.6rem">
+            <template>
+              <div v-if="item.dynamicFields.taskSponsor === 1">{{ $t('task.taskSponsor') }}</div>
+              <div v-if="item.dynamicFields.dataProvider === 1">{{ $t('task.DataProvider') }}</div>
+              <div v-if="item.dynamicFields.powerProvider === 1">{{ $t('task.powerProvider') }}</div>
+            </template>
+          </div>
+          <div style="width: 2.24rem">
+            <div :class="{ success: item.status === 'success', failed: item.status === 'failed' }">
+              <span>{{ $t(`task.${item.status}`) }}</span>
+            </div>
+          </div>
+          <div style="width: 2.82rem">{{ dayjs(item.createAt).format('YYYY-MM-DD HH:mm:ss') }}</div>
+          <div style="width: 1.1rem">{{ dayjs(dayjs(item.endAt).diff(item.createAt)).format('HH:mm:ss') }}</div>
+          <div
+            style="
+              color: #fec43e;
+              cursor: pointer;
+              width: 2.8rem;
+              height: 100%;
+              line-height: 0.94rem;
+              text-align: center;
+            "
+            @click="TaskDetail(item.id)"
+          >
+            {{ $t('node.Detail') }}
+          </div>
+        </div>
+        <div class="Pagination" v-if="taskList.length > 1">
+          <el-pagination
+            background
+            @size-change="handleSizeChanges"
+            @current-change="handleCurrentChanges"
+            :current-page="curPages"
+            :page-size="pageSizes"
+            layout="total, prev, pager, next"
+            :total="totalRowss"
+          >
+          </el-pagination>
+        </div>
+        <img src="../../assets/img/node/border/1.svg" alt="" class="borderBottomRight" />
+        <img src="../../assets/img/node/border/2.svg" alt="" class="borderTopRight" />
+        <img src="../../assets/img/node/border/3.svg" alt="" class="borderBottomLeft" />
+        <img src="../../assets/img/node/border/4.svg" alt="" class="borderTopLeft" />
+      </div>
     </div>
   </div>
 </template>
 <script>
-import dayjs from 'dayjs'
 import { formatDate, formatDates } from '../../utils/tiem'
 import BasicAreaChart from './components/BasicAreaChart.vue'
-import { dataApi, nodeApi, taskApi } from '../../api/index'
+import { dataApi, taskApi } from '../../api/index'
+import { changeSizeFn, thousandMark } from '@/utils/utils'
+import dayjs from 'dayjs'
 export default {
-  components: { BasicAreaChart, formatDate, formatDates },
+  components: { BasicAreaChart },
   data() {
     return {
       curPage: 1,
@@ -204,7 +198,7 @@ export default {
       pageSizes: 5,
       totalRowss: 10,
       index: '0',
-      activeName: 'first',
+      activeName: 'metadata',
       DataList: [],
       id: '',
       taskList: [],
@@ -212,7 +206,19 @@ export default {
       isShow: true,
       show: true,
       name: '',
-      date: ''
+      date: '',
+      tabList: [
+        {
+          id: 0,
+          name: 'metadata',
+          label: 'metadata'
+        },
+        {
+          id: 1,
+          name: 'task',
+          label: 'task'
+        }
+      ]
     }
   },
   created() {
@@ -221,6 +227,9 @@ export default {
     this.getListTask()
   },
   methods: {
+    dayjs,
+    changeSizeFn,
+    thousandMark,
     handleSizeChange(size) {
       this.pageSize = size
       this.getOrgInfo()
@@ -247,8 +256,7 @@ export default {
       this.getListTask()
     },
     handleClick(tab) {
-      this.name = tab.name
-      this.index = tab.index
+      this.activeName = tab.name
     },
     TaskDetail(value) {
       this.$router.push({
@@ -286,18 +294,7 @@ export default {
       this.taskList = res.data
       this.totalRowss = res.totalRows
     },
-    tabClick(value) {},
-    formatDate(time) {
-      return formatDate(time, 'YYYY-MM-DD HH:mm:ss')
-    },
-    getTimeStamp(str) {
-      var date = new Date(str)
-      // 可以准确精确到毫秒
-      return date.getTime(date)
-    },
-    formatDates(time) {
-      return formatDate(time, 'HH:mm:ss')
-    }
+    tabClick(value) {}
   }
 }
 </script>
@@ -374,6 +371,9 @@ export default {
       margin-left: 0.3rem;
     }
   }
+  .content {
+    position: relative;
+  }
   .rankingTh {
     display: flex;
     height: 0.16rem;
@@ -401,30 +401,8 @@ export default {
       }
     }
   }
-  /deep/ .el-tabs__active-bar {
-    background-color: transparent;
-  }
   /deep/ ::after {
     display: none;
-  }
-  /deep/ #tab-first {
-    margin: 0px 0.1rem 0px 0.4rem;
-    width: 2.31rem;
-    height: 0.4rem;
-    text-align: center;
-    color: #eee;
-    background: #11175d;
-    transform: rotateZ(10deg) skew(-10deg, -10deg);
-  }
-  /deep/ #tab-second {
-    width: 2.31rem;
-    height: 0.42rem;
-    text-align: center;
-    position: absolute;
-    top: 0px;
-    color: #eee;
-    background: #11175d;
-    transform: rotateZ(10deg) skew(-10deg, -10deg);
   }
 }
 .data {
@@ -432,10 +410,6 @@ export default {
   top: 3.66rem;
   left: 2.1rem;
   z-index: 999;
-}
-/deep/.el-tabs__item,
-.is-top {
-  position: relative;
 }
 .task {
   position: absolute;
@@ -446,9 +420,6 @@ export default {
   .text {
     line-height: 0.38rem;
   }
-}
-/deep/ .el-tabs__item {
-  padding: 0px;
 }
 .Pagination {
   display: flex;
@@ -509,12 +480,46 @@ export default {
   top: 0;
   left: 0;
 }
-/deep/ .el-tabs__nav-scroll {
-  margin-left: -0.3rem !important;
-  padding-bottom: 0.1rem;
-}
 /deep/ .el-pagination__total {
   height: 0.28rem;
   width: 0.45rem;
+}
+
+.tab-box {
+  display: flex;
+  margin-bottom: 0.3rem;
+  .tab-item-box {
+    width: 2rem;
+    height: 40px;
+    position: relative;
+    margin-right: 10px;
+    &:hover .tab-wrapper-box {
+      background-color: #3954ff;
+    }
+    .tab-wrapper-box {
+      width: 100%;
+      height: 100%;
+      background: #11175d;
+      transform: rotateZ(10deg) skew(-10deg, -10deg);
+      line-height: 40px;
+      border-radius: 4px;
+      text-align: center;
+      position: relative;
+      &.active {
+        background-color: #3954ff;
+      }
+    }
+    .tab-text-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: BebasNeueBold, PuHuiTiMedium;
+      font-size: 14px;
+      color: #ffffff;
+      letter-spacing: 0;
+      font-weight: 500;
+    }
+  }
 }
 </style>
