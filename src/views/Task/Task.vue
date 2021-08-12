@@ -74,7 +74,9 @@
             <span v-else style="color: #5bc49f">{{ $t('task.success') }}</span>
           </div>
           <div style="width: 2.4rem">{{ dayjs(item.createAt).format('YYYY-MM-DD HH:mm:ss') }}</div>
-          <div style="width: 1rem">{{ dayjs(dayjs(item.endAt).diff(item.createAt)).format('HH:mm:ss') }}</div>
+          <div style="width: 1rem">
+            {{ formatDuring(dayjs(item.endAt).valueOf() - dayjs(item.createAt).valueOf()) }}
+          </div>
           <div
             style="
               color: #fec43e;
@@ -111,6 +113,7 @@
 <script>
 import dayjs from 'dayjs'
 import { taskApi } from '../../api/index'
+import { formatDuring } from '../../utils/utils'
 
 export default {
   data() {
@@ -171,6 +174,7 @@ export default {
   },
   methods: {
     dayjs,
+    formatDuring,
     seleOpen() {},
     handleCurrentChange(page) {
       this.curPage = page

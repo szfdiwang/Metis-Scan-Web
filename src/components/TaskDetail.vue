@@ -20,7 +20,7 @@
           </div>
           <div class="ste2">
             <div style="margin: 0.1rem 0 0 2.5rem">
-              Time spent : {{ dayjs(dayjs(taskList.createAt).diff(taskList.startAt)).format('HH:mm:ss') }}
+              Time spent : {{ formatDuring(dayjs(taskList.endAt).valueOf() - dayjs(taskList.createAt).valueOf()) }}
             </div>
           </div>
           <div class="ste3">
@@ -188,7 +188,7 @@
 </template>
 <script>
 import { taskApi } from '../api/index'
-import { changeSizeFn, thousandMark } from '../utils/utils'
+import { changeSizeFn, thousandMark, formatDuring } from '../utils/utils'
 import dayjs from 'dayjs'
 export default {
   data() {
@@ -226,6 +226,7 @@ export default {
     dayjs,
     changeSizeFn,
     thousandMark,
+    formatDuring,
     back() {
       this.$router.go(-1)
     },

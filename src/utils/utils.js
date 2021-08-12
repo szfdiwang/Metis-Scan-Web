@@ -1,6 +1,6 @@
 // TODO 转换单位 MB GB 
 export const changeSizeFn = (input) => {
-    if(input === undefined || input === null || input === '') return `0.00 B` 
+    if (input === undefined || input === null || input === '') return `0.00 B`
     let size = ''
     if (input < 0.1 * 1024) { // 小于0.1KB，则转化成B
         size = `${input.toFixed(2)} B`
@@ -30,7 +30,8 @@ export const changeSizeFnWithPlus = (input) => {
 }
 
 export const thousandMark = (input) => {
-    return input.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
+    if(input) return input.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
+    return
 }
 
 export const changeSizeToMb = (input) => {
@@ -66,4 +67,20 @@ export const changeSizeWithMarkFn = (input) => {
         size = `${thousandMark((input / (1024 * 1024 * 1024)).toFixed(2))}GB`
     }
     return isZeroEnd(size)
+}
+
+// 通过时间戳计算耗时
+
+const _isZero = (time) => {
+    if (time.toString().length < 2) {
+        return `0${time}`
+    }
+    return time
+}
+
+export const formatDuring = time => {
+    const hours = parseInt(`${time / (1000 * 60 * 60)}`, 10)
+    const minutes = parseInt(`${(time % (1000 * 60 * 60)) / (1000 * 60)}`, 10)
+    const seconds = parseInt(`${(time % (1000 * 60)) / 1000}`, 10)
+    return `${_isZero(hours)}:${_isZero(minutes)}:${_isZero(seconds)}`
 }

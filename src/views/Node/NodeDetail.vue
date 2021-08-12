@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="rankingTd" v-for="(item, index) in DataList" :key="index">
-          <div style="width: 1.44rem" class="rankingTdImg">
+          <div style="width: 1.44rem" class="rankingTdImg longText">
             <div id="xh">
               <div class="order">
                 <div class="num">{{ (curPage - 1) * pageSize + index + 1 }}</div>
@@ -128,9 +128,11 @@
           </div>
           <div style="width: 2.6rem">
             <div>{{ item.taskName }}</div>
-            <div style="font: size 0.12rem; margin-top: 0.14rem">
-              ID: <span style="margin-left: 0.05rem">{{ item.id }}</span>
-            </div>
+            <el-tooltip :content="item.id" placement="top-start" effect="dark">
+              <div style="font: size 0.12rem; margin-top: 0.14rem" class="longText">
+                ID: <span style="margin-left: 0.05rem">{{ item.id }}</span>
+              </div>
+            </el-tooltip>
           </div>
           <div style="width: 2.6rem">
             <template>
@@ -145,7 +147,9 @@
             </div>
           </div>
           <div style="width: 2.82rem">{{ dayjs(item.createAt).format('YYYY-MM-DD HH:mm:ss') }}</div>
-          <div style="width: 1.1rem">{{ dayjs(dayjs(item.endAt).diff(item.createAt)).format('HH:mm:ss') }}</div>
+          <div style="width: 1.1rem">
+            {{ formatDuring(dayjs(item.endAt).valueOf() - dayjs(item.createAt).valueOf()) }}
+          </div>
           <div
             style="
               color: #fec43e;
@@ -181,10 +185,9 @@
   </div>
 </template>
 <script>
-import { formatDate, formatDates } from '../../utils/tiem'
 import BasicAreaChart from './components/BasicAreaChart.vue'
 import { dataApi, taskApi } from '../../api/index'
-import { changeSizeFn, thousandMark } from '@/utils/utils'
+import { changeSizeFn, thousandMark, formatDuring } from '@/utils/utils'
 import dayjs from 'dayjs'
 export default {
   components: { BasicAreaChart },
@@ -230,6 +233,7 @@ export default {
     dayjs,
     changeSizeFn,
     thousandMark,
+    formatDuring,
     handleSizeChange(size) {
       this.pageSize = size
       this.getOrgInfo()
