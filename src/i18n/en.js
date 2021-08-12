@@ -130,9 +130,9 @@ export default {
     All: 'All',
     success: 'success',
     failed: 'failed',
-    AlgorithmProvider: 'Algorithm provider'
-
-
+    AlgorithmProvider: 'Algorithm provider',
+    resultConsumer:"Result Consumer",
+    resultProducer:"Result Producer"
   },
   log: {
     EventType: 'Event type',

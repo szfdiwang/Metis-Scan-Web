@@ -84,7 +84,7 @@
             <span style="margin-left: 2.66rem">{{ $t('task.Id') }}</span>
           </div>
           <div class="td">
-            <span style="margin-left: 1.2rem">{{ taskAlgoProvider.dynamicFields.orgName }}</span>
+            <span style="margin-left: 1.2rem">{{ this.taskAlgoProvider.dynamicFields.orgName }}</span>
             <span style="margin-left: 2.05rem"> {{ this.taskAlgoProvider.identityId }}</span>
           </div>
         </div>

@@ -139,6 +139,9 @@
               <div v-if="item.dynamicFields.taskSponsor === 1">{{ $t('task.taskSponsor') }}</div>
               <div v-if="item.dynamicFields.dataProvider === 1">{{ $t('task.DataProvider') }}</div>
               <div v-if="item.dynamicFields.powerProvider === 1">{{ $t('task.powerProvider') }}</div>
+              <div v-if="item.dynamicFields.resultConsumer === 1">{{ $t('task.resultConsumer') }}</div>
+              <div v-if="item.dynamicFields.resultProducer === 1">{{ $t('task.resultProducer') }}</div>
+              <!-- TODO: 新增 -->
             </template>
           </div>
           <div style="width: 2.24rem">

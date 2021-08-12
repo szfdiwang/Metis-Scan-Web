@@ -129,8 +129,9 @@ export default {
     All: '全部',
     success: '成功',
     failed: '失败',
-    AlgorithmProvider: '算法提供方'
-
+    AlgorithmProvider: '算法提供方',
+    resultConsumer:"结果消费者",
+    resultProducer:"结果产生者"
   },
   log: {
     EventType: '事件类型',

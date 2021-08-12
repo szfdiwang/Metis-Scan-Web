@@ -79,7 +79,7 @@
             </div>
           </div>
           <div style="width: 2.04rem">{{ item.accumulativeDataFileCount }}</div>
-          <div style="width: 2.02rem">{{ item.accumulativePowerTaskCount + item.accumulativeDataTaskCount }}</div>
+          <div style="width: 2.02rem">{{ item.totalTask }}</div>
           <div>
             <div class="hot" style="width: 1rem">
               <div class="hotBox">
