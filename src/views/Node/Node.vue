@@ -79,7 +79,7 @@
             </div>
           </div>
           <div style="width: 2.04rem">{{ item.accumulativeDataFileCount }}</div>
-          <div style="width: 2.02rem">{{ item.totalTask }}</div>
+          <div style="width: 2.02rem">{{ item.dynamicFields.totalTask }}</div>
           <div>
             <div class="hot" style="width: 1rem">
               <div class="hotBox">
@@ -112,7 +112,7 @@
             <span style="margin-left: 1rem">{{ $t('node.Detail') }}</span>
           </div>
         </div>
-        <div class="Pagination">
+        <div class="Pagination" v-if="data.length > 0">
           <el-pagination
             background
             @current-change="handleCurrentChange"

@@ -45,7 +45,7 @@ export default {
       this.dataChart = this.$echarts.init(chartDom)
       const res = await taskApi.getOrgTaskTrend({
         identityId: localStorage.getItem('id'),
-        startDate: this.$day(new Date()).subtract(20, 'day').format('YYYY-MM-DD'),
+        startDate: this.$day(new Date()).subtract(6, 'day').format('YYYY-MM-DD'),
         days: 6
       })
       this.newArray = res.data.map(item => {
@@ -56,6 +56,12 @@ export default {
       })
       this.option = {
         color: ['#2A6EE6', 'red'],
+        grid: {
+          left: 30,
+          right: 30,
+          top: 30,
+          bottom: 30
+        },
         legend: {
           bottom: 20,
           itemGap: 40,
@@ -88,12 +94,6 @@ export default {
             }
           ]
         },
-        grid: {
-          left: 35,
-          top: 25,
-          right: 35,
-          bottom: 95
-        },
         xAxis: {
           boundaryGap: false,
           axisLabel: {
@@ -112,7 +112,9 @@ export default {
             color: '#DEE9FF'
           },
           type: 'value',
-          splitLine: false,
+          splitLine: true,
+          boundaryGap: true,
+          splitNumber:2,
           //realtimeSort: true,
           //splitLine:{show:false},
           minInterval: 1 //设置坐标轴分割显示成整数

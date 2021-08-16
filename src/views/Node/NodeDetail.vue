@@ -37,7 +37,7 @@
             <div style="width: 2.65rem">{{ $t('node.Size') }}</div>
             <div style="width: 2.57rem">{{ $t('node.Columns') }}</div>
             <div style="width: 2.62rem">{{ $t('node.Rows') }}</div>
-            <div style="width: 1rem">{{ $t('data.ParticipatedTasks') }}</div>
+            <div>{{ $t('data.ParticipatedTasks') }}</div>
             <div></div>
           </div>
         </div>
@@ -84,7 +84,7 @@
             {{ $t('node.Detail') }}
           </div>
         </div>
-        <div class="Pagination">
+        <div class="Pagination" v-if="DataList.length > 0">
           <el-pagination
             background
             @size-change="handleSizeChange"
@@ -380,6 +380,8 @@ export default {
   }
   .content {
     position: relative;
+    min-height: 100px;
+    font-size: 0.14rem;
   }
   .rankingTh {
     display: flex;
@@ -495,6 +497,7 @@ export default {
 .tab-box {
   display: flex;
   margin-bottom: 0.3rem;
+  font-size: 0.14rem;
   .tab-item-box {
     width: 2rem;
     height: 40px;

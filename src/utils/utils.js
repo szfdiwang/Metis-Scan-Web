@@ -30,8 +30,8 @@ export const changeSizeFnWithPlus = (input) => {
 }
 
 export const thousandMark = (input) => {
-    if(input) return input.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
-    return
+    if(input === 0 || input === undefined || input === null) return '0'
+     return input.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
 }
 
 export const changeSizeToMb = (input) => {

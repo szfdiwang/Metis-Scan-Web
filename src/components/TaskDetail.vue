@@ -114,7 +114,7 @@
             <div class="taskId">
               <div>{{ item.dynamicFields.resourceName }}</div>
               <div style="margin-left: 0.2rem">
-                ID: <span style="margin-left: 0.1rem">{{ item.taskId }}</span>
+                ID: <span style="margin-left: 0.1rem">{{ item.metaDataId }}</span>
               </div>
             </div>
           </div>
@@ -279,6 +279,7 @@ export default {
   padding: 0 1.1rem;
   line-height: 0.42rem;
   margin-bottom: 0.5rem;
+  font-size: 0.14rem;
   .TaskDetailTop {
     height: 0.42rem;
     display: flex;

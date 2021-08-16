@@ -91,7 +91,7 @@
             <span style="margin-left: -0.4rem"> {{ $t('node.Detail') }}</span>
           </div>
         </div>
-        <div class="Pagination">
+        <div class="Pagination" v-if="listTask.length > 0">
           <el-pagination
             background
             @current-change="handleCurrentChange"

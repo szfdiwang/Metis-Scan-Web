@@ -53,7 +53,7 @@
             {{ $t('node.Detail') }}
           </div>
         </div>
-        <div class="Pagination">
+        <div class="Pagination" v-if="DataList.length > 0">
           <el-pagination
             background
             @current-change="handleCurrentChange"

@@ -181,6 +181,7 @@ export default {
   background-color: #3954ff !important;
 }
 .metaData {
+  font-size: 0.14rem;
   padding: 0px 1.1rem;
   .metaDataTop {
     height: 0.42rem;
@@ -254,7 +255,7 @@ export default {
       margin: 0.05rem 0.1rem 0.05rem 0;
       line-height: 0.4rem;
       font-family: PingFangSC-Regular;
-      font-size: 14px;
+      font-size: 0.14rem;
     }
   }
   #xh {
@@ -302,7 +303,6 @@ export default {
 .content {
   position: absolute;
   padding: 0.2rem 0.1rem;
-  width: 1700px;
 }
 .borderBottomRight {
   position: absolute;
