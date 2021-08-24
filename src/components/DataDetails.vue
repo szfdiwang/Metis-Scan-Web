@@ -5,7 +5,7 @@
       <div class="picBox" @click="comment">
         <img src="../assets/img/node/3.icon1.svg" alt="" class="pic" />
       </div>
-      <div class="bank">XXXBANK</div>
+      <div class="bank">{{ curName }}</div>
       <div class="Identifier">ID：{{ this.id || this.Id }}</div>
     </div>
     <div class="tableData">
@@ -122,6 +122,11 @@ export default {
     } else {
       this.getFiles()
       this.getMetas()
+    }
+  },
+  computed: {
+    curName: function () {
+      return this.$route.query.name
     }
   },
   methods: {

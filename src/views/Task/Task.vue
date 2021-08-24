@@ -86,7 +86,7 @@
               line-height: 0.4rem;
               text-align: center;
             "
-            @click="TaskDetail(item.id)"
+            @click="TaskDetail(item)"
           >
             <span style="margin-left: -0.4rem"> {{ $t('node.Detail') }}</span>
           </div>
@@ -196,7 +196,8 @@ export default {
       this.$router.push({
         path: '/task/TaskDetail',
         query: {
-          identId: value
+          identId: value.id,
+          name: value.taskName
         }
       })
     },

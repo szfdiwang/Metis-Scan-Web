@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <task-detail></task-detail>
-  </div>
+  <task-detail></task-detail>
 </template>
 <script>
 import TaskDetail from '../../components/TaskDetail.vue'

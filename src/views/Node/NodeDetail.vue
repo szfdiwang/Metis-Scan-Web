@@ -5,7 +5,7 @@
       <div class="picBox" @click="$router.push('/node/index')">
         <img src="../../assets/img/node/3.icon1.svg" alt="" class="pic" />
       </div>
-      <div class="bank">XXXBANK</div>
+      <div class="bank">{{ curName }}</div>
       <div class="Identifier">Identifier：{{ id }}</div>
     </div>
     <div style="text-align: center" class="title">
@@ -79,7 +79,7 @@
               line-height: 0.94rem;
               text-align: center;
             "
-            @click="MetaData(item.metaDataId)"
+            @click="MetaData(item)"
           >
             {{ $t('node.Detail') }}
           </div>
@@ -162,7 +162,7 @@
               line-height: 0.94rem;
               text-align: center;
             "
-            @click="TaskDetail(item.id)"
+            @click="TaskDetail(item)"
           >
             {{ $t('node.Detail') }}
           </div>
@@ -232,6 +232,11 @@ export default {
     this.getOrgInfo()
     this.getListTask()
   },
+  computed: {
+    curName: function () {
+      return this.$route.query.name
+    }
+  },
   methods: {
     dayjs,
     changeSizeFn,
@@ -269,7 +274,8 @@ export default {
       this.$router.push({
         path: '/node/TaskDetail',
         query: {
-          id: value
+          id: value.id,
+          name: value.taskName
         }
       })
     },
@@ -277,8 +283,8 @@ export default {
       this.$router.push({
         path: '/node/MetaData',
         query: {
-          metaDataId: value,
-          deatil: '3'
+          metaDataId: value.metaDataId,
+          name: value.resourceName
         }
       })
     },

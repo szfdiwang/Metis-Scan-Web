@@ -107,7 +107,7 @@
               line-height: 0.94rem;
               margin-left: 0.3rem;
             "
-            @click="Detail(item.identityId)"
+            @click="Detail(item)"
           >
             <span style="margin-left: 1rem">{{ $t('node.Detail') }}</span>
           </div>
@@ -174,10 +174,11 @@ export default {
       this.$router.push({
         path: 'nodeDetail',
         query: {
-          identityId: value
+          identityId: value.identityId,
+          name: value.orgName
         }
       })
-      window.localStorage.setItem('id', value)
+      window.localStorage.setItem('id', value.identityId)
     }
   }
 }

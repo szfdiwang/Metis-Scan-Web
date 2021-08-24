@@ -35,6 +35,8 @@ export default {
     center: 'Computing Center & Data Center',
     growth: 'Growth Power',
     global: 'Global Power',
+    dataGrowth: 'Growth Data',
+    dataGlobal: 'Global Data',
     computeCenter: 'Computing center',
     dataCenter: 'Data center',
     name: 'Name',

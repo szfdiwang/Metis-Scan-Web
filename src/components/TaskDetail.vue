@@ -4,7 +4,7 @@
       <div class="picBox" @click="back">
         <img src="../assets/img/node/3.icon1.svg" alt="" class="pic" />
       </div>
-      <div class="bank">XXXBANK</div>
+      <div class="bank">{{ curName }}</div>
       <div class="Identifier">Identifier：{{ this.id || this.Id }}</div>
     </div>
     <div class="steps">
@@ -220,6 +220,11 @@ export default {
       this.getlogs()
     } else {
       this.getlog()
+    }
+  },
+  computed: {
+    curName: function () {
+      return this.$route.query.name
     }
   },
   methods: {

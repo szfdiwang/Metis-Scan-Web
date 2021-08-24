@@ -48,7 +48,7 @@
               line-height: 0.4rem;
               text-align: center;
             "
-            @click="DataMeat(item.metaDataId)"
+            @click="DataMeat(item)"
           >
             {{ $t('node.Detail') }}
           </div>
@@ -94,8 +94,8 @@ export default {
       this.$router.push({
         path: '/data/DataDetail',
         query: {
-          metaId: value,
-          deatil: '3'
+          metaId: value.metaDataId,
+          name: value.resourceName
         }
       })
     },

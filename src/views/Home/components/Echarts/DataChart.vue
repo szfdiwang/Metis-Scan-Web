@@ -66,7 +66,7 @@ export default {
           },
           data: [
             {
-              name: 'growth',
+              name: 'dataGrowth',
               icon: 'rect',
               itemStyle: {
                 borderWidth: 100
@@ -79,7 +79,7 @@ export default {
               }
             },
             {
-              name: 'global',
+              name: 'dataGlobal',
               icon: 'rect',
               itemStyle: {
                 borderWidth: 100
@@ -110,7 +110,7 @@ export default {
         },
         yAxis: [
           {
-            name: `${this.$t('home.global')}`,
+            name: `${this.$t('home.dataGlobal')}`,
             nameTextStyle: {
               color: '',
               fontSize: 12
@@ -131,7 +131,7 @@ export default {
             scale: true
           },
           {
-            name: `${this.$t('home.growth')}`,
+            name: `${this.$t('home.dataGrowth')}`,
             nameTextStyle: {
               color: '',
               fontSize: 12
@@ -154,7 +154,7 @@ export default {
         ],
         series: [
           {
-            name: 'global',
+            name: 'dataGlobal',
             data: this.totalData,
             yAxisIndex: 0,
             type: 'line',
@@ -192,7 +192,7 @@ export default {
             }
           },
           {
-            name: 'growth',
+            name: 'dataGrowth',
             data: this.growthData,
             yAxisIndex: 1,
             type: 'bar',

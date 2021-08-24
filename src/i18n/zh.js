@@ -35,6 +35,8 @@ export default {
     center: '计算中心与数据中心',
     growth: '增长算力',
     global: '全网算力',
+    dataGrowth: '增长数据',
+    dataGlobal: '全网数据',
     computeCenter: '计算中心',
     dataCenter: '数据中心',
     name: '姓名',
