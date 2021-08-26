@@ -42,8 +42,8 @@ export default {
       const res = await homeApi.getPowerTrend({ startDate, days: 30 })
       // TODO: 两个y轴数据
       if (res.code !== 0) return
-      this.growthData = res.data.dailyBandwidth
-      this.totalData = res.data.totalBandwidth
+      this.growthData = res.data.dailyMemory
+      this.totalData = res.data.totalMemory
       this.timeList = res.data.updateAt.map(day => {
         return this.$day(day).format('MM.DD')
       })

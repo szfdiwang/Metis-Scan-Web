@@ -49,8 +49,8 @@ export default {
       const startDate = this.$day(new Date()).subtract(30, 'day').format('YYYY-MM-DD')
       const res = await homeApi.getDataTrend({ startDate, days: 30 })
       // TODO: this.growthData this.totalData 两个趋势
-      this.growthData = res.data.dailySize.map(size => changeSizeToGb(size))
-      this.totalData = res.data.totalSize.map(size => changeSizeToGb(size))
+      this.growthData = res.data.dailySize // .map(size => changeSizeFn(size))
+      this.totalData = res.data.totalSize //.map(size => changeSizeFn(size))
       this.timeList = res.data.updateAt.map(day => {
         return this.$day(day).format('MM.DD')
       })

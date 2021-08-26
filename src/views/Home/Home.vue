@@ -40,7 +40,7 @@
       :totalOrgCount="totalOrgCount"
     />
     <Map />
-    <BottomTable :totalBandWidth="bandWidth" />
+    <BottomTable :totalMemory="memory" />
   </div>
 </template>
 

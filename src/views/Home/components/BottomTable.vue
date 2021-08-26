@@ -57,7 +57,7 @@
         </el-table-column>
         <el-table-column prop="powerRatio" :label="$t('home.powerRatio')" min-width="100">
           <template slot-scope="scope">
-            <span> {{ getRatio(scope.row.bandwidth) }} </span>
+            <span> {{ getRatio(scope.row.memory) }} </span>
           </template>
         </el-table-column>
         <!-- <el-table-column prop="activeDegree" :label="$t('home.activeDegree')">
@@ -106,7 +106,7 @@ export default {
     Rankings
   },
   props: {
-    totalBandWidth: {
+    totalMemory: {
       type: Number,
       default: 0
     }
@@ -163,8 +163,9 @@ export default {
       return [1, 0.7, 0.6, 0.5, 0.4, 0.3][count]
     },
 
-    getRatio(bandWidth) {
-      return `${((bandWidth / this.totalBandWidth) * 100).toFixed(2)}%`
+    getRatio(memo) {
+      console.log('!!!!!!!!!', memo)
+      return `${((memo / this.totalMemory) * 100).toFixed(2)}%`
     },
 
     selectRank(type) {
